@@ -1,7 +1,9 @@
 'use client';
 import styled, { ThemeProvider } from 'styled-components';
 import { useState, useEffect } from 'react';
-import { theme } from '@/app/theme'; 
+import { theme } from '@/app/theme';
+import { db } from '@/app/firebaseConfig'; // Importa a configuração do Firebase
+import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore'; // Importa funções do Firestore
 
 import Header from "@/app/components/Header";
 import DashboardRotator from "@/app/components/DashboardRotator";
@@ -9,40 +11,39 @@ import AniversariantesWidget from "@/app/components/AniversariantesWidget";
 import KpiWidget from "@/app/components/KpiWidget";
 import ComunicadosWidget from "@/app/components/ComunicadosWidget";
 import BirthdayOverlay from "@/app/components/BirthdayOverlay";
-import Admin from "@/app/components/Admin"; // --- CORREÇÃO ADICIONADA AQUI ---
+import Admin from "@/app/components/Admin";
 import { links, funcionarios } from '@/app/data';
 
 // --- Styled Components ---
 const MainContainer = styled.main`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  grid-template-rows: 100vh;
   width: 100vw;
   height: 100vh;
   padding: 8px;
+  gap: 8px;
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
 
-  /* --- CORREÇÃO DE RESPONSIVIDADE ADICIONADA AQUI --- */
   @media (max-width: 1200px) {
+    display: flex;
     flex-direction: column;
-    height: auto; /* Permite que a página cresça verticalmente */
-    overflow-y: auto; /* Adiciona scroll se necessário */
+    height: auto;
+    overflow-y: auto;
   }
 `;
 
 const MainColumn = styled.div`
-  width: 70%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-right: 8px;
   box-sizing: border-box;
 
   @media (max-width: 1200px) {
     width: 100%;
     height: auto;
-    padding-right: 0;
-    margin-bottom: 8px;
   }
 `;
 
@@ -51,12 +52,11 @@ const DashboardWrapper = styled.div`
   flex-grow: 1;
 
   @media (max-width: 1200px) {
-    height: 60vh; /* Define uma altura mínima para o dashboard em telas menores */
+    height: 60vh;
   }
 `;
 
 const Sidebar = styled.div`
-  width: 30%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -69,7 +69,7 @@ const Sidebar = styled.div`
   }
 `;
 
-// --- DADOS INICIAIS (sem alterações) ---
+// --- Dados Iniciais (apenas como fallback) ---
 const initialKpis = [
   { titulo: "Clientes Ativos", valor: "1.245", cor: "#4ade80" },
   { titulo: "Tickets Abertos", valor: "27", cor: "#facc15" },
@@ -85,14 +85,41 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [aniversarianteHoje, setAniversarianteHoje] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
-  const [kpis, setKpis] = useState(initialKpis);
-  const [comunicados, setComunicados] = useState(initialComunicados);
+  const [kpis, setKpis] = useState([]);
+  const [comunicados, setComunicados] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
-  
-  // Rotação do Dashboard (sem alterações)
+
+  // Efeito para carregar dados do Firestore em tempo real
   useEffect(() => {
-    if (isPaused) return; 
+    const docRef = doc(db, 'paineis', 'dados');
+    const unsubscribe = onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setKpis(data.kpis || initialKpis);
+        setComunicados(data.comunicados || initialComunicados);
+      } else {
+        // Se o documento não existir no Firebase, cria com os dados iniciais
+        setDoc(docRef, { kpis: initialKpis, comunicados: initialComunicados });
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Funções para SALVAR os dados no Firestore
+  const saveKpis = async (newKpis) => {
+    const docRef = doc(db, 'paineis', 'dados');
+    await updateDoc(docRef, { kpis: newKpis });
+  };
+
+  const saveComunicados = async (newComunicados) => {
+    const docRef = doc(db, 'paineis', 'dados');
+    await updateDoc(docRef, { comunicados: newComunicados });
+  };
+
+  // Rotação do Dashboard
+  useEffect(() => {
+    if (isPaused) return;
     const rotationTimer = setInterval(() => {
       if (!aniversarianteHoje) {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % links.length);
@@ -101,7 +128,7 @@ export default function Home() {
     return () => clearInterval(rotationTimer);
   }, [aniversarianteHoje, isPaused]);
 
-  // Checagem de Aniversário (sem alterações)
+  // Checagem de Aniversário
   useEffect(() => {
     const checkBirthday = () => {
       const agora = new Date();
@@ -124,19 +151,18 @@ export default function Home() {
     return () => clearInterval(checkInterval);
   }, []);
 
-  // Recarregamento da Página (sem alterações)
+  // Recarregamento da Página
   useEffect(() => {
     const refreshInterval = setInterval(() => {
       window.location.reload();
-    }, 1800000); 
+    }, 1800000); // 30 minutos
 
     return () => clearInterval(refreshInterval);
   }, []);
 
-
   const handleSelectPanel = (index) => {
     setCurrentIndex(index);
-    setIsPaused(true); 
+    setIsPaused(true);
   };
 
   const handleTogglePause = () => {
@@ -169,17 +195,17 @@ export default function Home() {
           <ComunicadosWidget comunicados={comunicados} />
         </Sidebar>
 
-        <Admin 
+        <Admin
           showLogin={showLogin}
           setShowLogin={setShowLogin}
           loggedInUser={loggedInUser}
           setLoggedInUser={setLoggedInUser}
           kpis={kpis}
-          setKpis={setKpis}
+          setKpis={saveKpis}
           comunicados={comunicados}
-          setComunicados={setComunicados}
+          setComunicados={saveComunicados}
         />
-        
+
         <BirthdayOverlay
           aniversariante={aniversarianteHoje}
           onMusicEnd={() => setAniversarianteHoje(null)}
