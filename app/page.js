@@ -2,9 +2,10 @@
 import styled, { ThemeProvider } from 'styled-components';
 import { useState, useEffect } from 'react';
 import { theme } from '@/app/theme';
-import { db } from '@/app/firebaseConfig'; // Importa a configuração do Firebase
-import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore'; // Importa funções do Firestore
+import { db } from '@/app/firebaseConfig';
+import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
 
+// ... (todas as outras importações e styled-components)
 import Header from "@/app/components/Header";
 import DashboardRotator from "@/app/components/DashboardRotator";
 import AniversariantesWidget from "@/app/components/AniversariantesWidget";
@@ -14,7 +15,6 @@ import BirthdayOverlay from "@/app/components/BirthdayOverlay";
 import Admin from "@/app/components/Admin";
 import { links, funcionarios } from '@/app/data';
 
-// --- Styled Components ---
 const MainContainer = styled.main`
   display: grid;
   grid-template-columns: 1fr 350px;
@@ -68,8 +68,6 @@ const Sidebar = styled.div`
     height: auto;
   }
 `;
-
-// --- Dados Iniciais (apenas como fallback) ---
 const initialKpis = [
   { titulo: "Clientes Ativos", valor: "1.245", cor: "#4ade80" },
   { titulo: "Tickets Abertos", valor: "27", cor: "#facc15" },
@@ -81,16 +79,16 @@ const initialComunicados = [
   { id: 2, tipo: 'META', texto: 'Parabéns à equipe de Suporte por atingir a meta de satisfação!' }
 ];
 
+
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [aniversarianteHoje, setAniversarianteHoje] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
-  const [kpis, setKpis] = useState([]);
-  const [comunicados, setComunicados] = useState([]);
+  const [kpis, setKpis] = useState(initialKpis); // Inicia com os dados padrão para evitar tela vazia
+  const [comunicados, setComunicados] = useState(initialComunicados); // Inicia com os dados padrão
   const [showLogin, setShowLogin] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
-  // Efeito para carregar dados do Firestore em tempo real
   useEffect(() => {
     const docRef = doc(db, 'paineis', 'dados');
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
@@ -99,24 +97,37 @@ export default function Home() {
         setKpis(data.kpis || initialKpis);
         setComunicados(data.comunicados || initialComunicados);
       } else {
-        // Se o documento não existir no Firebase, cria com os dados iniciais
-        setDoc(docRef, { kpis: initialKpis, comunicados: initialComunicados });
+        console.log("Documento não encontrado no Firebase. Criando com dados iniciais...");
+        setDoc(docRef, { kpis: initialKpis, comunicados: initialComunicados })
+          .catch(error => console.error("Erro ao criar documento:", error));
       }
+    }, (error) => {
+        console.error("Erro no listener do Firestore:", error);
     });
     return () => unsubscribe();
   }, []);
 
-  // Funções para SALVAR os dados no Firestore
   const saveKpis = async (newKpis) => {
-    const docRef = doc(db, 'paineis', 'dados');
-    await updateDoc(docRef, { kpis: newKpis });
+    try {
+      const docRef = doc(db, 'paineis', 'dados');
+      await updateDoc(docRef, { kpis: newKpis });
+      console.log("KPIs salvos com sucesso!");
+    } catch (error) {
+      console.error("Erro ao salvar KPIs:", error);
+    }
   };
 
   const saveComunicados = async (newComunicados) => {
-    const docRef = doc(db, 'paineis', 'dados');
-    await updateDoc(docRef, { comunicados: newComunicados });
+    try {
+      const docRef = doc(db, 'paineis', 'dados');
+      await updateDoc(docRef, { comunicados: newComunicados });
+      console.log("Comunicados salvos com sucesso!");
+    } catch (error) {
+      console.error("Erro ao salvar Comunicados:", error);
+    }
   };
 
+  // ... (O resto do arquivo continua exatamente o mesmo)
   // Rotação do Dashboard
   useEffect(() => {
     if (isPaused) return;

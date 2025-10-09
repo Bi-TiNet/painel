@@ -7,12 +7,12 @@
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
-      apiKey: "***************************************",
-      authDomain: "***************************************",
-      projectId: "***************************************",
-      storageBucket: "***************************************",
-      messagingSenderId: "***************************************",
-      appId: "***************************************"
+    apiKey: "AIzaSyCg0QN8RTNU-L9RWe9eXCBnZxjBAvsfJ0g",
+    authDomain: "painel-tinettec-6d015.firebaseapp.com",
+    projectId: "painel-tinettec-6d015",
+    storageBucket: "painel-tinettec-6d015.firebasestorage.app",
+    messagingSenderId: "766608115757",
+    appId: "1:766608115757:web:d70516e7e1f71cad9010a4"
     };
 
     // Initialize Firebase
