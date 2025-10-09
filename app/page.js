@@ -5,7 +5,7 @@ import { theme } from '@/app/theme';
 import { db } from '@/app/firebaseConfig';
 import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
 
-// ... (todas as outras importações e styled-components)
+// ... (todas as outras importações)
 import Header from "@/app/components/Header";
 import DashboardRotator from "@/app/components/DashboardRotator";
 import AniversariantesWidget from "@/app/components/AniversariantesWidget";
@@ -17,7 +17,8 @@ import { links, funcionarios } from '@/app/data';
 
 const MainContainer = styled.main`
   display: grid;
-  grid-template-columns: 1fr 350px;
+  /* MUDANÇA PRINCIPAL AQUI */
+  grid-template-columns: minmax(0, 1fr) 350px; /* Coluna principal flexível, barra lateral fixa */
   grid-template-rows: 100vh;
   width: 100vw;
   height: 100vh;
@@ -26,12 +27,13 @@ const MainContainer = styled.main`
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
+  overflow: hidden; /* Impede barras de rolagem no nível da página */
 
   @media (max-width: 1200px) {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 1fr; /* Em telas menores, uma única coluna */
+    grid-template-rows: auto; /* Altura automática */
     height: auto;
-    overflow-y: auto;
+    overflow-y: auto; /* Permite rolar a página inteira se necessário */
   }
 `;
 
@@ -40,9 +42,9 @@ const MainColumn = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  min-width: 0; /* Impede que o conteúdo interno force a coluna a ser maior */
 
   @media (max-width: 1200px) {
-    width: 100%;
     height: auto;
   }
 `;
@@ -50,6 +52,7 @@ const MainColumn = styled.div`
 const DashboardWrapper = styled.div`
   width: 100%;
   flex-grow: 1;
+  min-height: 0; /* Garante que o iframe possa encolher corretamente */
 
   @media (max-width: 1200px) {
     height: 60vh;
@@ -68,6 +71,7 @@ const Sidebar = styled.div`
     height: auto;
   }
 `;
+
 const initialKpis = [
   { titulo: "Clientes Ativos", valor: "1.245", cor: "#4ade80" },
   { titulo: "Tickets Abertos", valor: "27", cor: "#facc15" },
@@ -84,8 +88,8 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [aniversarianteHoje, setAniversarianteHoje] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
-  const [kpis, setKpis] = useState(initialKpis); // Inicia com os dados padrão para evitar tela vazia
-  const [comunicados, setComunicados] = useState(initialComunicados); // Inicia com os dados padrão
+  const [kpis, setKpis] = useState(initialKpis);
+  const [comunicados, setComunicados] = useState(initialComunicados);
   const [showLogin, setShowLogin] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
@@ -127,7 +131,6 @@ export default function Home() {
     }
   };
 
-  // ... (O resto do arquivo continua exatamente o mesmo)
   // Rotação do Dashboard
   useEffect(() => {
     if (isPaused) return;
