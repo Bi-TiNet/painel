@@ -9,6 +9,7 @@ import AniversariantesWidget from "@/app/components/AniversariantesWidget";
 import KpiWidget from "@/app/components/KpiWidget";
 import ComunicadosWidget from "@/app/components/ComunicadosWidget";
 import BirthdayOverlay from "@/app/components/BirthdayOverlay";
+import Admin from "@/app/components/Admin"; // --- CORREÇÃO ADICIONADA AQUI ---
 import { links, funcionarios } from '@/app/data';
 
 // --- Styled Components ---
