@@ -16,7 +16,7 @@ import { links, funcionarios } from '@/app/data';
 
 const MainContainer = styled.main`
   display: grid;
-  grid-template-columns: 1fr 35%;
+  grid-template-columns: 1fr 35%; /* Coluna principal flexível, barra lateral com 35% */
   grid-template-rows: 100vh;
   width: 100vw;
   height: 100vh;
@@ -42,20 +42,20 @@ const MainColumn = styled.div`
   gap: 1rem;
   box-sizing: border-box;
   min-width: 0;
-  min-height: 0;
+  min-height: 0; /* Essencial para o flexbox funcionar corretamente em altura */
 `;
 
 const DashboardWrapper = styled.div`
   width: 100%;
-  flex: 1;
-  min-height: 0;
+  flex: 1; /* Ocupa a maior parte do espaço */
+  min-height: 0; /* Permite que o iframe encolha */
   border-radius: 8px;
   overflow: hidden;
 `;
 
 const KpiWrapper = styled.div`
   width: 100%;
-  height: 25%;
+  height: 25%; /* Altura fixa para a seção de KPIs */
 `;
 
 const Sidebar = styled.div`
@@ -84,11 +84,11 @@ export default function Home() {
   const [isPaused, setIsPaused] = useState(false);
   const [kpis, setKpis] = useState(initialKpis);
   const [comunicados, setComunicados] = useState(initialComunicados);
-  const [showAdmin, setShowAdmin] = useState(false); // Controla a visibilidade do modal/painel
+  const [showAdmin, setShowAdmin] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
+  // Efeito para login persistente
   useEffect(() => {
-    // Verifica se há um usuário logado no localStorage ao carregar a página
     const user = localStorage.getItem('loggedInUser');
     if (user) {
       setLoggedInUser(user);
@@ -100,8 +100,11 @@ export default function Home() {
         const data = docSnap.data();
         setKpis(data.kpis || initialKpis);
         setComunicados(data.comunicados || initialComunicados);
+      } else {
+        setDoc(docRef, { kpis: initialKpis, comunicados: initialComunicados });
       }
     });
+
     return () => unsubscribe();
   }, []);
 
@@ -113,13 +116,46 @@ export default function Home() {
   const handleLogout = () => {
     localStorage.removeItem('loggedInUser');
     setLoggedInUser(null);
-    setShowAdmin(false); // Fecha o painel admin ao deslogar
+    setShowAdmin(false);
+  };
+  
+  const saveKpis = async (newKpis) => {
+    try {
+      const docRef = doc(db, 'paineis', 'dados');
+      await updateDoc(docRef, { kpis: newKpis });
+    } catch (error) {
+      console.error("Erro ao salvar KPIs:", error);
+    }
   };
 
-  const saveKpis = async (newKpis) => { /* ... */ };
-  const saveComunicados = async (newComunicados) => { /* ... */ };
+  const saveComunicados = async (newComunicados) => {
+    try {
+      const docRef = doc(db, 'paineis', 'dados');
+      await updateDoc(docRef, { comunicados: newComunicados });
+    } catch (error) {
+      console.error("Erro ao salvar Comunicados:", error);
+    }
+  };
 
-  // ... (outros useEffects e handlers)
+  useEffect(() => {
+    if (isPaused) return;
+    const rotationTimer = setInterval(() => {
+      if (!aniversarianteHoje) {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % links.length);
+      }
+    }, 25000);
+    return () => clearInterval(rotationTimer);
+  }, [aniversarianteHoje, isPaused, links.length]);
+
+  useEffect(() => {
+    const checkBirthday = () => {
+      const agora = new Date();
+      // ... (lógica de aniversário)
+    };
+    checkBirthday();
+    const interval = setInterval(checkBirthday, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   const currentDashboard = links[currentIndex];
   const tituloPainel = currentDashboard ? currentDashboard.nome : "Carregando...";
@@ -156,7 +192,6 @@ export default function Home() {
             loggedInUser={loggedInUser}
             onLoginSuccess={handleLoginSuccess}
             onClose={() => setShowAdmin(false)}
-            onLogout={handleLogout}
             kpis={kpis}
             setKpis={saveKpis}
             comunicados={comunicados}

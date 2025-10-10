@@ -113,28 +113,10 @@ const SectionTitle = styled.h3`
 
 const FormRow = styled.div`
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 2fr 1fr auto;
   gap: 1rem;
   align-items: center;
   margin-bottom: 1rem;
-`;
-
-const CheckboxGroup = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
-  background-color: rgba(0, 224, 255, 0.05);
-  border: 1px solid rgba(0, 224, 255, 0.2);
-  padding: 1rem;
-  border-radius: 8px;
-`;
-
-const CheckboxLabel = styled.label`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
 `;
 
 const Footer = styled.div`
@@ -182,6 +164,7 @@ const Select = styled.select`
   background-color: rgba(0, 224, 255, 0.1); 
   color: ${({ theme }) => theme.colors.text};
   font-size: 1rem;
+  margin-bottom: 1rem;
 
   option {
     background: #0d1b2a;
@@ -190,7 +173,7 @@ const Select = styled.select`
 `;
 
 const ErrorMessage = styled.p`
-  color: ${({ theme }) => theme.colors.kpi.red};
+  color: #f87171;
   margin: 0;
   text-align: center;
 `;
@@ -228,36 +211,44 @@ function LoginModal({ onLoginSuccess, onClose }) {
 
 // --- Componente do Painel de Admin ---
 function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados }) {
-    const [activeTab, setActiveTab] = useState('metas');
+    const [activeTab, setActiveTab] = useState('comunicados');
     const [tempKpis, setTempKpis] = useState(kpis);
     const [tempComunicados, setTempComunicados] = useState(comunicados);
-    const [tempDepartamentos, setTempDepartamentos] = useState(initialDepartamentos);
+    
+    const [formComunicado, setFormComunicado] = useState({ id: null, tipo: 'aviso', texto: '' });
+    const isEditing = formComunicado.id !== null;
 
-    const [newComunicado, setNewComunicado] = useState({ tipo: 'aviso', texto: '', departamentos: [] });
-
-    const handleAddDepartamento = () => {
-        setTempDepartamentos([...tempDepartamentos, { id: Date.now(), nome: "Novo Departamento", cor: "#ffffff" }]);
+    const handleKpiChange = (index, field, value) => {
+        const newKpis = [...tempKpis];
+        newKpis[index][field] = value;
+        setTempKpis(newKpis);
     };
 
-    const handleRemoveDepartamento = (id) => {
-        setTempDepartamentos(tempDepartamentos.filter(d => d.id !== id));
+    const handleEditComunicado = (comunicado) => {
+        setFormComunicado({
+            id: comunicado.id,
+            tipo: comunicado.tipo.toLowerCase(),
+            texto: comunicado.texto,
+        });
     };
 
-    const handleUpdateDepartamento = (index, field, value) => {
-        const newDeps = [...tempDepartamentos];
-        newDeps[index][field] = value;
-        setTempDepartamentos(newDeps);
-    };
+    const handleSaveComunicado = () => {
+        if (!formComunicado.texto.trim()) return;
 
-    const handleAddComunicado = () => {
-        if (!newComunicado.texto.trim()) return;
-        const novo = {
-            id: Date.now(),
-            tipo: newComunicado.tipo.split('_')[0].toUpperCase(), // ex: 'reuniao_geral' -> 'REUNIAO'
-            texto: newComunicado.texto
-        };
-        setTempComunicados([novo, ...tempComunicados]);
-        setNewComunicado({ tipo: 'aviso', texto: '', departamentos: [] });
+        if (isEditing) {
+            const updatedComunicados = tempComunicados.map(c => 
+                c.id === formComunicado.id ? { ...c, tipo: formComunicado.tipo.toUpperCase(), texto: formComunicado.texto } : c
+            );
+            setTempComunicados(updatedComunicados);
+        } else {
+            const novo = {
+                id: Date.now(),
+                tipo: formComunicado.tipo.toUpperCase(),
+                texto: formComunicado.texto
+            };
+            setTempComunicados([novo, ...tempComunicados]);
+        }
+        setFormComunicado({ id: null, tipo: 'aviso', texto: '' });
     };
     
     const handleRemoveComunicado = (id) => {
@@ -267,7 +258,6 @@ function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados 
     const handleSave = () => {
       setKpis(tempKpis);
       setComunicados(tempComunicados);
-      // Aqui você salvaria os departamentos no Firebase também, se quisesse persistir
       onClose();
     };
   
@@ -292,21 +282,9 @@ function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados 
                     <SectionTitle>Gerenciar Metas (KPIs)</SectionTitle>
                      {tempKpis.map((kpi, index) => (
                         <FormRow key={index}>
-                            <Input value={kpi.titulo} onChange={(e) => {
-                                const newKpis = [...tempKpis];
-                                newKpis[index].titulo = e.target.value;
-                                setTempKpis(newKpis);
-                            }} />
-                            <Input value={kpi.valor} onChange={(e) => {
-                                const newKpis = [...tempKpis];
-                                newKpis[index].valor = e.target.value;
-                                setTempKpis(newKpis);
-                            }} />
-                             <Input type="color" value={kpi.cor} onChange={(e) => {
-                                const newKpis = [...tempKpis];
-                                newKpis[index].cor = e.target.value;
-                                setTempKpis(newKpis);
-                            }} style={{padding: '0.25rem', height: '45px'}}/>
+                            <Input value={kpi.titulo} onChange={(e) => handleKpiChange(index, 'titulo', e.target.value)} />
+                            <Input value={kpi.valor} onChange={(e) => handleKpiChange(index, 'valor', e.target.value)} />
+                             <Input type="color" value={kpi.cor} onChange={(e) => handleKpiChange(index, 'cor', e.target.value)} style={{padding: '0.25rem', height: '45px'}}/>
                         </FormRow>
                     ))}
                   </FormSection>
@@ -315,39 +293,35 @@ function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados 
                 {activeTab === 'comunicados' && (
                   <>
                     <FormSection>
-                        <SectionTitle>Criar Novo Comunicado</SectionTitle>
-                        <Select value={newComunicado.tipo} onChange={e => setNewComunicado({...newComunicado, tipo: e.target.value})}>
+                        <SectionTitle>{isEditing ? 'Editando Comunicado' : 'Criar Novo Comunicado'}</SectionTitle>
+                        <Select value={formComunicado.tipo} onChange={e => setFormComunicado({...formComunicado, tipo: e.target.value})}>
                           {tiposDeComunicado.map(tipo => (
                             <option key={tipo.id} value={tipo.id}>{tipo.nome}</option>
                           ))}
                         </Select>
                         
-                        {newComunicado.tipo === 'reuniao_departamento' && (
-                            <div>
-                                <p style={{margin: '0 0 0.5rem 0'}}>Selecione os departamentos participantes:</p>
-                                <CheckboxGroup>
-                                    {tempDepartamentos.map(dep => (
-                                        <CheckboxLabel key={dep.id}>
-                                            <input type="checkbox" />
-                                            {dep.nome}
-                                        </CheckboxLabel>
-                                    ))}
-                                </CheckboxGroup>
-                            </div>
-                        )}
-                        <Input as="textarea" rows="3" placeholder="Digite a mensagem do comunicado..." value={newComunicado.texto} onChange={e => setNewComunicado({...newComunicado, texto: e.target.value})} />
-                        <div style={{textAlign: 'right'}}>
-                          <Button onClick={handleAddComunicado} disabled={!newComunicado.texto.trim()}>Publicar Comunicado</Button>
+                        <Input as="textarea" rows="4" placeholder="Digite a mensagem do comunicado..." value={formComunicado.texto} onChange={e => setFormComunicado({...formComunicado, texto: e.target.value})} />
+                        
+                        <div style={{textAlign: 'right', display: 'flex', gap: '1rem', justifyContent: 'flex-end'}}>
+                           {isEditing && (
+                             <Button variant="secondary" onClick={() => setFormComunicado({ id: null, tipo: 'aviso', texto: '' })}>
+                               Cancelar Edição
+                             </Button>
+                           )}
+                           <Button onClick={handleSaveComunicado} disabled={!formComunicado.texto.trim()}>
+                               {isEditing ? 'Salvar Alterações' : 'Publicar Comunicado'}
+                           </Button>
                         </div>
                     </FormSection>
 
                      <FormSection>
                         <SectionTitle>Comunicados Ativos</SectionTitle>
                         {tempComunicados.length > 0 ? tempComunicados.map((comunicado) => (
-                            <FormRow key={comunicado.id} style={{gridTemplateColumns: '1fr auto'}}>
-                                <Input value={comunicado.texto} readOnly style={{backgroundColor: 'rgba(0,0,0,0.2)', borderStyle: 'dashed'}}/>
+                            <div key={comunicado.id} style={{display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem'}}>
+                                <Input value={comunicado.texto} readOnly style={{backgroundColor: 'rgba(0,0,0,0.2)', whiteSpace: 'pre-wrap', flexGrow: 1}} as="textarea" rows="2" />
+                                <Button variant="secondary" onClick={() => handleEditComunicado(comunicado)}>Editar</Button>
                                 <Button variant="secondary" onClick={() => handleRemoveComunicado(comunicado.id)}>Remover</Button>
-                            </FormRow>
+                            </div>
                         )) : <p>Nenhum comunicado ativo.</p>}
                     </FormSection>
                   </>
@@ -356,7 +330,7 @@ function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados 
 
             <Footer>
                 <Button variant="secondary" onClick={onClose}>Cancelar</Button>
-                <Button onClick={handleSave}>Salvar Alterações</Button>
+                <Button onClick={handleSave}>Salvar Tudo e Fechar</Button>
             </Footer>
         </Modal>
       </Overlay>
@@ -364,23 +338,20 @@ function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados 
 }
 
 // --- Componente Principal ---
-export default function Admin({ showLogin, setShowLogin, loggedInUser, setLoggedInUser, kpis, setKpis, comunicados, setComunicados }) {
-    if (!showLogin && !loggedInUser) {
-      return null;
-    }
-  
-    const handleLoginSuccess = (user) => {
-      setLoggedInUser(user);
-      setShowLogin(false);
-    };
-
-    const handleLogout = () => {
-        setLoggedInUser(null);
-    }
+export default function Admin({ loggedInUser, onLoginSuccess, onClose, kpis, setKpis, comunicados, setComunicados }) {
   
     if (loggedInUser) {
-      return <AdminPanel user={loggedInUser} onClose={handleLogout} kpis={kpis} setKpis={setKpis} comunicados={comunicados} setComunicados={setComunicados} />;
+      return (
+        <AdminPanel
+          user={loggedInUser}
+          onClose={onClose}
+          kpis={kpis}
+          setKpis={setKpis}
+          comunicados={comunicados}
+          setComunicados={setComunicados}
+        />
+      );
     }
     
-    return <LoginModal onLoginSuccess={handleLoginSuccess} onClose={() => setShowLogin(false)} />;
+    return <LoginModal onLoginSuccess={onLoginSuccess} onClose={onClose} />;
 }

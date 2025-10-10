@@ -52,8 +52,8 @@ export const departamentos = [
 ];
 
 export const tiposDeComunicado = [
-    { id: 'reuniao_geral', nome: "Reunião Mensal Geral" },
-    { id: 'reuniao_departamento', nome: "Reunião de Departamento" },
-    { id: 'parabenizacao', nome: "Parabenização por Meta" },
-    { id: 'aviso', nome: "Aviso Geral" },
+    { id: 'aviso', nome: "Aviso Geral", cor: "#3b82f6" }, // Azul
+    { id: 'reuniao', nome: "Reunião", cor: "#f97316" }, // Laranja
+    { id: 'meta', nome: "Parabenização por Meta", cor: "#22c55e" }, // Verde
+    { id: 'evento', nome: "Evento", cor: "#8b5cf6" }, // Roxo
 ];

@@ -60,8 +60,33 @@ const ControlButton = styled.button`
   }
 `;
 
-const DropdownMenu = styled.div` /* ... */ `;
-const DropdownItem = styled.a` /* ... */ `;
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: ${({ theme }) => theme.colors.surface};
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  margin-top: 8px;
+  padding: 8px;
+  z-index: 10;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+`;
+
+const DropdownItem = styled.a`
+  display: block;
+  white-space: nowrap;
+  color: ${({ theme }) => theme.colors.text};
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.background};
+  }
+`;
+
 
 export default function Header({ titulo, isPaused, onTogglePause, onSelectPanel, panels, loggedInUser, onAdminClick, onLogout }) {
     const [hora, setHora] = useState('');
