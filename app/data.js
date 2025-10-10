@@ -45,15 +45,41 @@ export const adminUsers = [
 ];
 
 export const departamentos = [
-    { id: 1, nome: "Comercial", cor: "#3b82f6" },
-    { id: 2, nome: "Financeiro", cor: "#22c55e" },
-    { id: 3, nome: "Equipe Técnica", cor: "#f97316" },
-    { id: 4, nome: "Suporte Técnico", cor: "#8b5cf6" },
+    { id: 'geral', nome: "Geral (Todos)", cor: "#9ca3af" }, // Cinza
+    { id: 'adm', nome: "ADM", cor: "#eab308" }, // Amarelo
+    { id: 'comercial', nome: "Comercial", cor: "#3b82f6" }, // Azul
+    { id: 'financeiro', nome: "Financeiro", cor: "#22c55e" }, // Verde
+    { id: 'suporte', nome: "Suporte Técnico", cor: "#f97316" }, // Laranja
+    { id: 'equipe', nome: "Equipe Técnica", cor: "#8b5cf6" }, // Roxo
 ];
 
 export const tiposDeComunicado = [
-    { id: 'aviso', nome: "Aviso Geral", cor: "#3b82f6" }, // Azul
-    { id: 'reuniao', nome: "Reunião", cor: "#f97316" }, // Laranja
-    { id: 'meta', nome: "Parabenização por Meta", cor: "#22c55e" }, // Verde
-    { id: 'evento', nome: "Evento", cor: "#8b5cf6" }, // Roxo
+    { id: 'aviso', nome: "Aviso Geral", cor: "#3b82f6" },
+    { id: 'reuniao', nome: "Reunião", cor: "#f97316" },
+    { id: 'meta', nome: "Parabenização por Meta", cor: "#22c55e" },
+    { id: 'evento', nome: "Evento", cor: "#8b5cf6" },
+];
+
+export const initialKpis = [
+  { id: 1, departamento: "Comercial", nome: "Novo Contrato", valor: "90" },
+  { id: 2, departamento: "Suporte Técnico", nome: "Avaliação", valor: "4.70" },
+  { id: 3, departamento: "Comercial", nome: "Upgrade", valor: "25" },
+  { id: 4, departamento: "Equipe Técnica", nome: "OS", valor: "300" },
+];
+
+export const initialComunicados = [
+  { 
+    id: 1, 
+    tipo: 'AVISO', 
+    texto: 'Escala Final de Semana:\nSábado de Manhã - Rafael e Edvanildo\nSáb tarde e Dom - Edmilson e Josenilson\nNOC: Folga: Jean e Matheus',
+    autor: 'Diretoria',
+    departamentos: ['Geral (Todos)']
+  },
+  { 
+    id: 2, 
+    tipo: 'REUNIAO', 
+    texto: 'Reunião geral de alinhamento amanhã às 10:00.',
+    autor: 'Carlos Júnior',
+    departamentos: ['Geral (Todos)']
+  }
 ];
