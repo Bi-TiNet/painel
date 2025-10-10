@@ -1,15 +1,15 @@
 'use client';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { adminUsers } from '@/app/data';
+import { adminUsers, departamentos as initialDepartamentos, tiposDeComunicado } from '@/app/data';
 
 // --- Styled Components ---
 
 const Overlay = styled.div`
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
   z-index: 50;
   display: flex;
   justify-content: center;
@@ -23,7 +23,8 @@ const Modal = styled.div`
   border-radius: 12px;
   padding: 2rem;
   width: 100%;
-  max-width: 600px;
+  max-width: 900px; /* Aumentado */
+  max-height: 90vh;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
@@ -31,7 +32,7 @@ const Modal = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1.75rem; /* Aumentado */
   font-weight: 700;
   color: ${({ theme }) => theme.colors.primary};
   margin: 0;
@@ -48,7 +49,6 @@ const Select = styled.select`
   color: ${({ theme }) => theme.colors.text};
   font-size: 1rem;
 
-  /* CORREÇÃO APLICADA AQUI */
   option {
     background: #0d1b2a;
     color: ${({ theme }) => theme.colors.text};
@@ -70,8 +70,8 @@ const Button = styled.button`
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
   border: none;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme, variant }) => variant === 'secondary' ? 'rgba(255, 255, 255, 0.1)' : theme.colors.primary};
+  color: ${({ theme, variant }) => variant === 'secondary' ? theme.colors.text : theme.colors.background};
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -91,13 +91,40 @@ const ErrorMessage = styled.p`
 const FormSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem; /* Aumentado */
 `;
 
 const FormRow = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr auto;
   gap: 1rem;
+  align-items: center;
+`;
+
+const TabContainer = styled.div`
+  display: flex;
+  border-bottom: 1px solid rgba(0, 224, 255, 0.2);
+  margin-bottom: 1.5rem;
+`;
+
+const TabButton = styled.button`
+  padding: 1rem 1.5rem;
+  border: none;
+  background-color: transparent;
+  color: ${({ theme, active }) => active ? theme.colors.primary : theme.colors.textSecondary};
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid ${({ theme, active }) => active ? theme.colors.primary : 'transparent'};
+  transition: all 0.2s;
+`;
+
+const ContentArea = styled.div`
+  overflow-y: auto;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 `;
 
 // --- Componente de Login ---
@@ -133,9 +160,11 @@ function LoginModal({ onLoginSuccess, onClose }) {
 
 // --- Componente do Painel de Admin ---
 function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados }) {
+    const [activeTab, setActiveTab] = useState('metas');
     const [tempKpis, setTempKpis] = useState([...kpis]);
     const [tempComunicados, setTempComunicados] = useState([...comunicados]);
-  
+    const [departamentos, setDepartamentos] = useState(initialDepartamentos);
+
     const handleKpiChange = (index, field, value) => {
       const newKpis = [...tempKpis];
       newKpis[index][field] = value;
@@ -151,30 +180,68 @@ function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados 
     const handleSave = () => {
       setKpis(tempKpis);
       setComunicados(tempComunicados);
-      onClose(); // Fecha o modal após salvar
+      // Aqui você também salvaria os departamentos, se necessário
+      onClose();
     };
   
     return (
       <Overlay onClick={onClose}>
         <Modal onClick={e => e.stopPropagation()}>
           <Title>Painel de Configuração (Bem-vindo, {user})</Title>
-  
-          <FormSection>
-            <h3>Editar Metas (KPIs)</h3>
-            {tempKpis.map((kpi, index) => (
-              <FormRow key={index}>
-                <Input value={kpi.titulo} onChange={(e) => handleKpiChange(index, 'titulo', e.target.value)} />
-                <Input value={kpi.valor} onChange={(e) => handleKpiChange(index, 'valor', e.target.value)} />
-              </FormRow>
-            ))}
-          </FormSection>
           
-          <FormSection>
-            <h3>Editar Comunicados</h3>
-            {tempComunicados.map((comunicado, index) => (
-                <Input key={comunicado.id} value={comunicado.texto} onChange={(e) => handleComunicadoChange(index, e.target.value)} />
-            ))}
-          </FormSection>
+          <TabContainer>
+            <TabButton active={activeTab === 'metas'} onClick={() => setActiveTab('metas')}>Metas (KPIs)</TabButton>
+            <TabButton active={activeTab === 'comunicados'} onClick={() => setActiveTab('comunicados')}>Comunicados</TabButton>
+          </TabContainer>
+
+          <ContentArea>
+            {activeTab === 'metas' && (
+              <FormSection>
+                <h3>Departamentos e Metas</h3>
+                {departamentos.map((dep, index) => (
+                  <div key={dep.id}>
+                    <FormRow>
+                      <Input value={dep.nome} onChange={(e) => {
+                        const newDeps = [...departamentos];
+                        newDeps[index].nome = e.target.value;
+                        setDepartamentos(newDeps);
+                      }} />
+                      <Input type="color" value={dep.cor} onChange={(e) => {
+                        const newDeps = [...departamentos];
+                        newDeps[index].cor = e.target.value;
+                        setDepartamentos(newDeps);
+                      }} />
+                      <Button variant="secondary">Remover</Button>
+                    </FormRow>
+                  </div>
+                ))}
+                <Button>Adicionar Departamento</Button>
+              </FormSection>
+            )}
+
+            {activeTab === 'comunicados' && (
+              <FormSection>
+                <h3>Gerenciar Comunicados</h3>
+                <Select>
+                  {tiposDeComunicado.map(tipo => (
+                    <option key={tipo.id} value={tipo.id}>{tipo.nome}</option>
+                  ))}
+                </Select>
+                {/* Lógica condicional para mostrar opções de reunião, etc. */}
+                <Input placeholder="Texto do comunicado..." />
+                <Button>Adicionar Comunicado</Button>
+                
+                <hr style={{border: '1px solid rgba(0, 224, 255, 0.2)', margin: '1rem 0'}} />
+
+                {tempComunicados.map((comunicado, index) => (
+                    <FormRow key={comunicado.id}>
+                        <Input value={comunicado.texto} onChange={(e) => handleComunicadoChange(index, e.target.value)} />
+                        <Button variant="secondary">Remover</Button>
+                    </FormRow>
+                ))}
+              </FormSection>
+            )}
+          </ContentArea>
   
           <Button onClick={handleSave}>Salvar e Fechar</Button>
         </Modal>
@@ -190,7 +257,7 @@ export default function Admin({ showLogin, setShowLogin, loggedInUser, setLogged
   
     const handleLoginSuccess = (user) => {
       setLoggedInUser(user);
-      setShowLogin(false); // Esconde o modal de login e mostra o painel
+      setShowLogin(false);
     };
 
     const handleLogout = () => {
@@ -202,5 +269,4 @@ export default function Admin({ showLogin, setShowLogin, loggedInUser, setLogged
     }
     
     return <LoginModal onLoginSuccess={handleLoginSuccess} onClose={() => setShowLogin(false)} />;
-  }
-
+}

@@ -43,3 +43,17 @@ export const adminUsers = [
     { user: 'Daniele França', pass: 'DFTinet@2025' },
     { user: 'Carlos Júnior', pass: 'DCjr@2806' },
 ];
+
+export const departamentos = [
+    { id: 1, nome: "Comercial", cor: "#3b82f6" },
+    { id: 2, nome: "Financeiro", cor: "#22c55e" },
+    { id: 3, nome: "Equipe Técnica", cor: "#f97316" },
+    { id: 4, nome: "Suporte Técnico", cor: "#8b5cf6" },
+];
+
+export const tiposDeComunicado = [
+    { id: 'reuniao_geral', nome: "Reunião Mensal Geral" },
+    { id: 'reuniao_departamento', nome: "Reunião de Departamento" },
+    { id: 'parabenizacao', nome: "Parabenização por Meta" },
+    { id: 'aviso', nome: "Aviso Geral" },
+];

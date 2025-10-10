@@ -17,8 +17,7 @@ import { links, funcionarios } from '@/app/data';
 
 const MainContainer = styled.main`
   display: grid;
-  /* MUDANÇA PRINCIPAL AQUI */
-  grid-template-columns: minmax(0, 1fr) 350px; /* Coluna principal flexível, barra lateral fixa */
+  grid-template-columns: minmax(0, 1fr) 380px; /* Aumentei a largura da barra lateral */
   grid-template-rows: 100vh;
   width: 100vw;
   height: 100vh;
@@ -27,13 +26,13 @@ const MainContainer = styled.main`
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
-  overflow: hidden; /* Impede barras de rolagem no nível da página */
+  overflow: hidden;
 
-  @media (max-width: 1200px) {
-    grid-template-columns: 1fr; /* Em telas menores, uma única coluna */
-    grid-template-rows: auto; /* Altura automática */
+  @media (max-width: 1366px) { /* Ajuste para telas menores */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
     height: auto;
-    overflow-y: auto; /* Permite rolar a página inteira se necessário */
+    overflow-y: auto;
   }
 `;
 
@@ -42,9 +41,9 @@ const MainColumn = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  min-width: 0; /* Impede que o conteúdo interno force a coluna a ser maior */
+  min-width: 0;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1366px) {
     height: auto;
   }
 `;
@@ -52,10 +51,10 @@ const MainColumn = styled.div`
 const DashboardWrapper = styled.div`
   width: 100%;
   flex-grow: 1;
-  min-height: 0; /* Garante que o iframe possa encolher corretamente */
+  min-height: 0;
 
-  @media (max-width: 1200px) {
-    height: 60vh;
+  @media (max-width: 1366px) {
+    height: 70vh; /* Aumenta a altura em telas menores */
   }
 `;
 
@@ -65,10 +64,25 @@ const Sidebar = styled.div`
   flex-direction: column;
   gap: 8px;
   box-sizing: border-box;
+  overflow-y: auto; /* Permite rolagem se o conteúdo for maior */
 
-  @media (max-width: 1200px) {
+  /* Estilização da barra de rolagem */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.primary};
+    border-radius: 3px;
+  }
+
+  @media (max-width: 1366px) {
     width: 100%;
     height: auto;
+    overflow-y: visible;
   }
 `;
 
@@ -228,4 +242,3 @@ export default function Home() {
     </ThemeProvider>
   );
 }
-

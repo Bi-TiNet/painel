@@ -2,60 +2,50 @@
 import styled from 'styled-components';
 
 const WidgetContainer = styled.div`
-  height: 33.33%;
-  background-color: ${({ theme }) => theme.colors.surface};
-  border-radius: 8px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+    height: 33.33%;
+    background-color: ${({ theme }) => theme.colors.surface};
+    border-radius: 0.5rem;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
 `;
-
 const Title = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.primary};
-  margin-bottom: 12px;
-  border-bottom: 2px solid rgba(0, 224, 255, 0.3);
-  padding-bottom: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: ${({ theme }) => theme.colors.primary};
+    margin-bottom: 1rem;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.primary}50;
+    padding-bottom: 0.8rem;
 `;
-
 const KpiGrid = styled.div`
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 `;
-
-const KpiRow = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
 const Card = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
-  padding: 12px;
-  border-radius: 8px;
-  flex: 1;
-  transition: transform 0.2s;
-  &:hover {
-    transform: translateY(-4px);
-  }
+  padding: 0.8rem;
+  border-radius: 0.375rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
-
 const CardTitle = styled.p`
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: ${({ theme }) => theme.colors.textSecondary};
   margin: 0;
-  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
-
 const CardValue = styled.p`
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin: 0;
   color: ${props => props.color || props.theme.colors.text};
+  line-height: 1.2;
 `;
 
 function KpiCard({ titulo, valor, cor }) {
@@ -68,28 +58,15 @@ function KpiCard({ titulo, valor, cor }) {
 }
 
 export default function KpiWidget({ kpis }) {
-  // Garante que o componente não quebre se os kpis não forem carregados
-  if (!kpis || kpis.length < 4) {
-    return (
-        <WidgetContainer>
-            <Title>📊 Indicadores Chave</Title>
-            <p>Carregando dados...</p>
-        </WidgetContainer>
-    );
-  }
+  const displayKpis = Array.isArray(kpis) ? kpis : [];
 
   return (
     <WidgetContainer>
       <Title>📊 Metas</Title>
       <KpiGrid>
-        <KpiRow>
-          <KpiCard titulo={kpis[0].titulo} valor={kpis[0].valor} cor={kpis[0].cor} />
-          <KpiCard titulo={kpis[1].titulo} valor={kpis[1].valor} cor={kpis[1].cor} />
-        </KpiRow>
-        <KpiRow>
-          <KpiCard titulo={kpis[2].titulo} valor={kpis[2].valor} cor={kpis[2].cor} />
-          <KpiCard titulo={kpis[3].titulo} valor={kpis[3].valor} cor={kpis[3].cor} />
-        </KpiRow>
+        {displayKpis.map((kpi, index) => (
+          <KpiCard key={index} titulo={kpi.titulo} valor={kpi.valor} cor={kpi.cor} />
+        ))}
       </KpiGrid>
     </WidgetContainer>
   );
