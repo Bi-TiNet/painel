@@ -16,7 +16,7 @@ import { links, funcionarios } from '@/app/data';
 
 const MainContainer = styled.main`
   display: grid;
-  grid-template-columns: 1fr 35%; /* 65% (1fr) para conteúdo, 35% para sidebar */
+  grid-template-columns: 1fr 35%;
   grid-template-rows: 100vh;
   width: 100vw;
   height: 100vh;
@@ -42,20 +42,20 @@ const MainColumn = styled.div`
   gap: 1rem;
   box-sizing: border-box;
   min-width: 0;
-  min-height: 0; /* Essencial para o flexbox funcionar corretamente em altura */
+  min-height: 0;
 `;
 
 const DashboardWrapper = styled.div`
   width: 100%;
-  flex: 1; /* Ocupa a maior parte do espaço */
-  min-height: 0; /* Permite que o iframe encolha */
+  flex: 1;
+  min-height: 0;
   border-radius: 8px;
   overflow: hidden;
 `;
 
 const KpiWrapper = styled.div`
   width: 100%;
-  height: 25%; /* Altura para a seção de KPIs */
+  height: 25%;
 `;
 
 const Sidebar = styled.div`
@@ -64,14 +64,14 @@ const Sidebar = styled.div`
   flex-direction: column;
   gap: 1rem;
   box-sizing: border-box;
-  min-height: 0; /* Essencial para o flexbox */
+  min-height: 0;
 `;
 
 const initialKpis = [
-  { titulo: "Clientes Ativos", valor: "1.245", cor: "#4ade80" },
-  { titulo: "Tickets Abertos", valor: "27", cor: "#facc15" },
-  { titulo: "Bloqueados Hoje", valor: "8", cor: "#f87171" },
-  { titulo: "OS Finalizadas", valor: "93", cor: "#60a5fa" }
+  { titulo: "Comercial | No...", valor: "90", cor: "#4ade80" },
+  { titulo: "Suporte Técni...", valor: "4.70", cor: "#facc15" },
+  { titulo: "Comercial | Up...", valor: "25", cor: "#f87171" },
+  { titulo: "Equipe Técni...", valor: "300", cor: "#60a5fa" }
 ];
 const initialComunicados = [
   { id: 1, tipo: 'AVISO', texto: 'Escala Final de Semana: Sábado de Manhã - Rafael e Edvanildo | Sáb tarde e Dom - Edmilson e Josenilson | NOC: Folga: Jean e Matheus' },
@@ -84,38 +84,42 @@ export default function Home() {
   const [isPaused, setIsPaused] = useState(false);
   const [kpis, setKpis] = useState(initialKpis);
   const [comunicados, setComunicados] = useState(initialComunicados);
-  const [showLogin, setShowLogin] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false); // Controla a visibilidade do modal/painel
   const [loggedInUser, setLoggedInUser] = useState(null);
 
-  // Efeito para login persistente
   useEffect(() => {
+    // Verifica se há um usuário logado no localStorage ao carregar a página
     const user = localStorage.getItem('loggedInUser');
     if (user) {
       setLoggedInUser(user);
     }
+
+    const docRef = doc(db, 'paineis', 'dados');
+    const unsubscribe = onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setKpis(data.kpis || initialKpis);
+        setComunicados(data.comunicados || initialComunicados);
+      }
+    });
+    return () => unsubscribe();
   }, []);
 
   const handleLoginSuccess = (user) => {
     localStorage.setItem('loggedInUser', user);
     setLoggedInUser(user);
-    setShowLogin(false);
   };
 
   const handleLogout = () => {
     localStorage.removeItem('loggedInUser');
     setLoggedInUser(null);
-  };
-  
-  // ... (Resto do código de useEffects para Firebase, rotação, etc. permanece igual) ...
-
-  const handleSelectPanel = (index) => {
-    setCurrentIndex(index);
-    setIsPaused(true);
+    setShowAdmin(false); // Fecha o painel admin ao deslogar
   };
 
-  const handleTogglePause = () => {
-    setIsPaused(!isPaused);
-  };
+  const saveKpis = async (newKpis) => { /* ... */ };
+  const saveComunicados = async (newComunicados) => { /* ... */ };
+
+  // ... (outros useEffects e handlers)
 
   const currentDashboard = links[currentIndex];
   const tituloPainel = currentDashboard ? currentDashboard.nome : "Carregando...";
@@ -127,11 +131,11 @@ export default function Home() {
           <Header
             titulo={tituloPainel}
             isPaused={isPaused}
-            onTogglePause={handleTogglePause}
-            onSelectPanel={handleSelectPanel}
+            onTogglePause={() => setIsPaused(!isPaused)}
+            onSelectPanel={(index) => { setCurrentIndex(index); setIsPaused(true); }}
             panels={links}
             loggedInUser={loggedInUser}
-            onAdminClick={() => setShowLogin(true)}
+            onAdminClick={() => setShowAdmin(true)}
             onLogout={handleLogout}
           />
           <DashboardWrapper>
@@ -147,11 +151,16 @@ export default function Home() {
           <ComunicadosWidget comunicados={comunicados} />
         </Sidebar>
 
-        {showLogin && (
+        {showAdmin && (
           <Admin
-            showLogin={showLogin}
-            setShowLogin={setShowLogin}
+            loggedInUser={loggedInUser}
             onLoginSuccess={handleLoginSuccess}
+            onClose={() => setShowAdmin(false)}
+            onLogout={handleLogout}
+            kpis={kpis}
+            setKpis={saveKpis}
+            comunicados={comunicados}
+            setComunicados={saveComunicados}
           />
         )}
 
