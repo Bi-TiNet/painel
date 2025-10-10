@@ -20,24 +20,158 @@ const Overlay = styled.div`
 const Modal = styled.div`
   background: #0d1b2a; 
   border: 1px solid rgba(0, 224, 255, 0.4); 
-  border-radius: 12px;
-  padding: 2rem;
+  border-radius: 16px;
+  padding: 2.5rem;
   width: 100%;
-  max-width: 900px; /* Aumentado */
-  max-height: 90vh;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-width: 950px;
+  height: 90vh;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
+`;
+
+const LoginModalContainer = styled(Modal)`
+  height: auto;
+  max-width: 400px;
   gap: 1.5rem;
 `;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 224, 255, 0.2);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+`;
+
 const Title = styled.h2`
-  font-size: 1.75rem; /* Aumentado */
+  font-size: 1.75rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.primary};
   margin: 0;
-  border-bottom: 1px solid rgba(0, 224, 255, 0.2);
-  padding-bottom: 1rem;
+`;
+
+const WelcomeMessage = styled.span`
+  font-size: 1rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+const TabContainer = styled.div`
+  display: flex;
+  margin-bottom: 1.5rem;
+`;
+
+const TabButton = styled.button`
+  padding: 0.8rem 1.5rem;
+  border: none;
+  background-color: transparent;
+  color: ${({ theme, active }) => active ? theme.colors.primary : theme.colors.textSecondary};
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 3px solid ${({ theme, active }) => active ? theme.colors.primary : 'transparent'};
+  transition: all 0.2s;
+  margin-right: 1rem;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const ContentArea = styled.div`
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 1.5rem;
+  margin-right: -1.5rem;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.primary};
+    border-radius: 4px;
+  }
+`;
+
+const FormSection = styled.div`
+  margin-bottom: 2.5rem;
+`;
+
+const SectionTitle = styled.h3`
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.75rem;
+`;
+
+const FormRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+`;
+
+const CheckboxGroup = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  background-color: rgba(0, 224, 255, 0.05);
+  border: 1px solid rgba(0, 224, 255, 0.2);
+  padding: 1rem;
+  border-radius: 8px;
+`;
+
+const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  border-top: 1px solid rgba(0, 224, 255, 0.2);
+  padding-top: 1.5rem;
+  margin-top: auto;
+`;
+
+const Button = styled.button`
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  border: none;
+  background-color: ${({ theme, variant, disabled }) => disabled ? '#555' : (variant === 'secondary' ? 'rgba(255, 255, 255, 0.1)' : theme.colors.primary)};
+  color: ${({ theme, variant, disabled }) => disabled ? '#999' : (variant === 'secondary' ? theme.colors.text : theme.colors.background)};
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  transition: all 0.2s;
+
+  &:hover {
+    opacity: ${props => props.disabled ? 1 : 0.85};
+    transform: ${props => props.disabled ? 'none' : 'translateY(-2px)'};
+  }
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 224, 255, 0.4); 
+  background-color: rgba(0, 224, 255, 0.1); 
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 1rem;
+  box-sizing: border-box;
 `;
 
 const Select = styled.select`
@@ -55,76 +189,10 @@ const Select = styled.select`
   }
 `;
 
-const Input = styled.input`
-  width: 100%;
-  padding: 0.75rem;
-  border-radius: 6px;
-  border: 1px solid rgba(0, 224, 255, 0.4); 
-  background-color: rgba(0, 224, 255, 0.1); 
-  color: ${({ theme }) => theme.colors.text};
-  font-size: 1rem;
-  box-sizing: border-box;
-`;
-
-const Button = styled.button`
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  border: none;
-  background-color: ${({ theme, variant }) => variant === 'secondary' ? 'rgba(255, 255, 255, 0.1)' : theme.colors.primary};
-  color: ${({ theme, variant }) => variant === 'secondary' ? theme.colors.text : theme.colors.background};
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.2s;
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
 const ErrorMessage = styled.p`
   color: ${({ theme }) => theme.colors.kpi.red};
   margin: 0;
   text-align: center;
-`;
-
-const FormSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem; /* Aumentado */
-`;
-
-const FormRow = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: 1rem;
-  align-items: center;
-`;
-
-const TabContainer = styled.div`
-  display: flex;
-  border-bottom: 1px solid rgba(0, 224, 255, 0.2);
-  margin-bottom: 1.5rem;
-`;
-
-const TabButton = styled.button`
-  padding: 1rem 1.5rem;
-  border: none;
-  background-color: transparent;
-  color: ${({ theme, active }) => active ? theme.colors.primary : theme.colors.textSecondary};
-  font-size: 1.125rem;
-  font-weight: 600;
-  cursor: pointer;
-  border-bottom: 2px solid ${({ theme, active }) => active ? theme.colors.primary : 'transparent'};
-  transition: all 0.2s;
-`;
-
-const ContentArea = styled.div`
-  overflow-y: auto;
-  padding-right: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
 `;
 
 // --- Componente de Login ---
@@ -144,7 +212,7 @@ function LoginModal({ onLoginSuccess, onClose }) {
 
   return (
     <Overlay onClick={onClose}>
-      <Modal onClick={e => e.stopPropagation()}>
+      <LoginModalContainer onClick={e => e.stopPropagation()}>
         <Title>Login Administrativo</Title>
         <Select value={selectedUser} onChange={e => setSelectedUser(e.target.value)}>
           {adminUsers.map(u => <option key={u.user} value={u.user}>{u.user}</option>)}
@@ -152,7 +220,7 @@ function LoginModal({ onLoginSuccess, onClose }) {
         <Input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Senha" />
         <Button onClick={handleLogin}>Entrar</Button>
         {error && <ErrorMessage>{error}</ErrorMessage>}
-      </Modal>
+      </LoginModalContainer>
     </Overlay>
   );
 }
@@ -161,93 +229,139 @@ function LoginModal({ onLoginSuccess, onClose }) {
 // --- Componente do Painel de Admin ---
 function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados }) {
     const [activeTab, setActiveTab] = useState('metas');
-    const [tempKpis, setTempKpis] = useState([...kpis]);
-    const [tempComunicados, setTempComunicados] = useState([...comunicados]);
-    const [departamentos, setDepartamentos] = useState(initialDepartamentos);
+    const [tempKpis, setTempKpis] = useState(kpis);
+    const [tempComunicados, setTempComunicados] = useState(comunicados);
+    const [tempDepartamentos, setTempDepartamentos] = useState(initialDepartamentos);
 
-    const handleKpiChange = (index, field, value) => {
-      const newKpis = [...tempKpis];
-      newKpis[index][field] = value;
-      setTempKpis(newKpis);
+    const [newComunicado, setNewComunicado] = useState({ tipo: 'aviso', texto: '', departamentos: [] });
+
+    const handleAddDepartamento = () => {
+        setTempDepartamentos([...tempDepartamentos, { id: Date.now(), nome: "Novo Departamento", cor: "#ffffff" }]);
     };
-  
-    const handleComunicadoChange = (index, value) => {
-        const newComunicados = [...tempComunicados];
-        newComunicados[index].texto = value;
-        setTempComunicados(newComunicados);
+
+    const handleRemoveDepartamento = (id) => {
+        setTempDepartamentos(tempDepartamentos.filter(d => d.id !== id));
+    };
+
+    const handleUpdateDepartamento = (index, field, value) => {
+        const newDeps = [...tempDepartamentos];
+        newDeps[index][field] = value;
+        setTempDepartamentos(newDeps);
+    };
+
+    const handleAddComunicado = () => {
+        if (!newComunicado.texto.trim()) return;
+        const novo = {
+            id: Date.now(),
+            tipo: newComunicado.tipo.split('_')[0].toUpperCase(), // ex: 'reuniao_geral' -> 'REUNIAO'
+            texto: newComunicado.texto
+        };
+        setTempComunicados([novo, ...tempComunicados]);
+        setNewComunicado({ tipo: 'aviso', texto: '', departamentos: [] });
+    };
+    
+    const handleRemoveComunicado = (id) => {
+        setTempComunicados(tempComunicados.filter(c => c.id !== id));
     };
 
     const handleSave = () => {
       setKpis(tempKpis);
       setComunicados(tempComunicados);
-      // Aqui você também salvaria os departamentos, se necessário
+      // Aqui você salvaria os departamentos no Firebase também, se quisesse persistir
       onClose();
     };
   
     return (
       <Overlay onClick={onClose}>
         <Modal onClick={e => e.stopPropagation()}>
-          <Title>Painel de Configuração (Bem-vindo, {user})</Title>
-          
-          <TabContainer>
-            <TabButton active={activeTab === 'metas'} onClick={() => setActiveTab('metas')}>Metas (KPIs)</TabButton>
-            <TabButton active={activeTab === 'comunicados'} onClick={() => setActiveTab('comunicados')}>Comunicados</TabButton>
-          </TabContainer>
+            <Header>
+                <div>
+                    <Title>Painel de Configuração</Title>
+                    <WelcomeMessage>Bem-vindo, {user}</WelcomeMessage>
+                </div>
+            </Header>
 
-          <ContentArea>
-            {activeTab === 'metas' && (
-              <FormSection>
-                <h3>Departamentos e Metas</h3>
-                {departamentos.map((dep, index) => (
-                  <div key={dep.id}>
-                    <FormRow>
-                      <Input value={dep.nome} onChange={(e) => {
-                        const newDeps = [...departamentos];
-                        newDeps[index].nome = e.target.value;
-                        setDepartamentos(newDeps);
-                      }} />
-                      <Input type="color" value={dep.cor} onChange={(e) => {
-                        const newDeps = [...departamentos];
-                        newDeps[index].cor = e.target.value;
-                        setDepartamentos(newDeps);
-                      }} />
-                      <Button variant="secondary">Remover</Button>
-                    </FormRow>
-                  </div>
-                ))}
-                <Button>Adicionar Departamento</Button>
-              </FormSection>
-            )}
+            <TabContainer>
+                <TabButton active={activeTab === 'metas'} onClick={() => setActiveTab('metas')}>Metas</TabButton>
+                <TabButton active={activeTab === 'comunicados'} onClick={() => setActiveTab('comunicados')}>Comunicados</TabButton>
+            </TabContainer>
 
-            {activeTab === 'comunicados' && (
-              <FormSection>
-                <h3>Gerenciar Comunicados</h3>
-                <Select>
-                  {tiposDeComunicado.map(tipo => (
-                    <option key={tipo.id} value={tipo.id}>{tipo.nome}</option>
-                  ))}
-                </Select>
-                {/* Lógica condicional para mostrar opções de reunião, etc. */}
-                <Input placeholder="Texto do comunicado..." />
-                <Button>Adicionar Comunicado</Button>
-                
-                <hr style={{border: '1px solid rgba(0, 224, 255, 0.2)', margin: '1rem 0'}} />
+            <ContentArea>
+                {activeTab === 'metas' && (
+                  <FormSection>
+                    <SectionTitle>Gerenciar Metas (KPIs)</SectionTitle>
+                     {tempKpis.map((kpi, index) => (
+                        <FormRow key={index}>
+                            <Input value={kpi.titulo} onChange={(e) => {
+                                const newKpis = [...tempKpis];
+                                newKpis[index].titulo = e.target.value;
+                                setTempKpis(newKpis);
+                            }} />
+                            <Input value={kpi.valor} onChange={(e) => {
+                                const newKpis = [...tempKpis];
+                                newKpis[index].valor = e.target.value;
+                                setTempKpis(newKpis);
+                            }} />
+                             <Input type="color" value={kpi.cor} onChange={(e) => {
+                                const newKpis = [...tempKpis];
+                                newKpis[index].cor = e.target.value;
+                                setTempKpis(newKpis);
+                            }} style={{padding: '0.25rem', height: '45px'}}/>
+                        </FormRow>
+                    ))}
+                  </FormSection>
+                )}
 
-                {tempComunicados.map((comunicado, index) => (
-                    <FormRow key={comunicado.id}>
-                        <Input value={comunicado.texto} onChange={(e) => handleComunicadoChange(index, e.target.value)} />
-                        <Button variant="secondary">Remover</Button>
-                    </FormRow>
-                ))}
-              </FormSection>
-            )}
-          </ContentArea>
-  
-          <Button onClick={handleSave}>Salvar e Fechar</Button>
+                {activeTab === 'comunicados' && (
+                  <>
+                    <FormSection>
+                        <SectionTitle>Criar Novo Comunicado</SectionTitle>
+                        <Select value={newComunicado.tipo} onChange={e => setNewComunicado({...newComunicado, tipo: e.target.value})}>
+                          {tiposDeComunicado.map(tipo => (
+                            <option key={tipo.id} value={tipo.id}>{tipo.nome}</option>
+                          ))}
+                        </Select>
+                        
+                        {newComunicado.tipo === 'reuniao_departamento' && (
+                            <div>
+                                <p style={{margin: '0 0 0.5rem 0'}}>Selecione os departamentos participantes:</p>
+                                <CheckboxGroup>
+                                    {tempDepartamentos.map(dep => (
+                                        <CheckboxLabel key={dep.id}>
+                                            <input type="checkbox" />
+                                            {dep.nome}
+                                        </CheckboxLabel>
+                                    ))}
+                                </CheckboxGroup>
+                            </div>
+                        )}
+                        <Input as="textarea" rows="3" placeholder="Digite a mensagem do comunicado..." value={newComunicado.texto} onChange={e => setNewComunicado({...newComunicado, texto: e.target.value})} />
+                        <div style={{textAlign: 'right'}}>
+                          <Button onClick={handleAddComunicado} disabled={!newComunicado.texto.trim()}>Publicar Comunicado</Button>
+                        </div>
+                    </FormSection>
+
+                     <FormSection>
+                        <SectionTitle>Comunicados Ativos</SectionTitle>
+                        {tempComunicados.length > 0 ? tempComunicados.map((comunicado) => (
+                            <FormRow key={comunicado.id} style={{gridTemplateColumns: '1fr auto'}}>
+                                <Input value={comunicado.texto} readOnly style={{backgroundColor: 'rgba(0,0,0,0.2)', borderStyle: 'dashed'}}/>
+                                <Button variant="secondary" onClick={() => handleRemoveComunicado(comunicado.id)}>Remover</Button>
+                            </FormRow>
+                        )) : <p>Nenhum comunicado ativo.</p>}
+                    </FormSection>
+                  </>
+                )}
+            </ContentArea>
+
+            <Footer>
+                <Button variant="secondary" onClick={onClose}>Cancelar</Button>
+                <Button onClick={handleSave}>Salvar Alterações</Button>
+            </Footer>
         </Modal>
       </Overlay>
     );
-  }
+}
 
 // --- Componente Principal ---
 export default function Admin({ showLogin, setShowLogin, loggedInUser, setLoggedInUser, kpis, setKpis, comunicados, setComunicados }) {

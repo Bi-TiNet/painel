@@ -1,3 +1,4 @@
+// app/layout.js
 'use client';
 import StyledComponentsRegistry from '@/lib/registry';
 import GlobalStyles from './components/GlobalStyles'; // Importa os estilos globais
