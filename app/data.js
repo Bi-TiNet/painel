@@ -32,6 +32,7 @@ export const funcionarios = [
     { nome: "Josenilson", dia: 14, mes: 10, foto: "/fotos/josenilson.jpg" },
     { nome: "Diego França", dia: 4, mes: 11, foto: "/fotos/diego_frança.png" },
     { nome: "Roberth Davino", dia: 11, mes: 11, foto: "/fotos/roberth.jpg" },
+    { nome: "Jackson Araújo", dia: 16, mes: 11, foto: "/fotos/jackson.jpg" },
     { nome: "Gisele São Miguel", dia: 18, mes: 11, foto: "/fotos/gisele.jpg" },
     { nome: "Matheus Santos", dia: 21, mes: 11, foto: "/fotos/matheus_santos.jpg" },
     { nome: "Edmilson Silva", dia: 4, mes: 12, foto: "/fotos/edmilson_silva.jpg" }
