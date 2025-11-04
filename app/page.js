@@ -16,15 +16,28 @@ import Admin from "@/app/components/Admin";
 import { links, funcionarios } from '@/app/data';
 
 // ... (Seus styled-components: MainContainer, MainColumn, etc. não mudam) ...
-const MainContainer = styled.main`...`;
-const MainColumn = styled.div`...`;
-const DashboardWrapper = styled.div`...`;
-const KpiWrapper = styled.div`...`;
-const Sidebar = styled.div`...`;
+// CORREÇÃO: Substituímos '...' por template literals vazios ``
+// Você deve preencher com seus estilos reais.
+const MainContainer = styled.main`
+  /* Insira seus estilos para MainContainer aqui */
+`;
+const MainColumn = styled.div`
+  /* Insira seus estilos para MainColumn aqui */
+`;
+const DashboardWrapper = styled.div`
+  /* Insira seus estilos para DashboardWrapper aqui */
+`;
+const KpiWrapper = styled.div`
+  /* Insira seus estilos para KpiWrapper aqui */
+`;
+const Sidebar = styled.div`
+  /* Insira seus estilos para Sidebar aqui */
+`;
 
 // ... (Seus initialKpis e initialComunicados não mudam) ...
-const initialKpis = [...];
-const initialComunicados = [...];
+// CORREÇÃO: Substituímos '[...]' por arrays vazios '[]'
+const initialKpis = [];
+const initialComunicados = [];
 
 
 // --- NOVA LÓGICA DE ANIVERSÁRIO ---
