@@ -12,61 +12,82 @@ import KpiWidget from "@/app/components/KpiWidget";
 import ComunicadosWidget from "@/app/components/ComunicadosWidget";
 import BirthdayOverlay from "@/app/components/BirthdayOverlay";
 import Admin from "@/app/components/Admin";
-// Importamos 'funcionarios' do seu data.js
 import { links, funcionarios } from '@/app/data';
 
-// ... (Seus styled-components: MainContainer, MainColumn, etc. não mudam) ...
-// CORREÇÃO: Substituímos '...' por template literals vazios ``
-// Você deve preencher com seus estilos reais.
 const MainContainer = styled.main`
-  /* Insira seus estilos para MainContainer aqui */
+  display: grid;
+  grid-template-columns: 1fr 35%; /* Coluna principal flexível, barra lateral com 35% */
+  grid-template-rows: 100vh;
+  width: 100vw;
+  height: 100vh;
+  padding: 1rem;
+  gap: 1rem;
+  box-sizing: border-box;
+  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text};
+  overflow: hidden;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+    overflow-y: auto;
+  }
 `;
+
 const MainColumn = styled.div`
-  /* Insira seus estilos para MainColumn aqui */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0; /* Essencial para o flexbox funcionar corretamente em altura */
 `;
+
 const DashboardWrapper = styled.div`
-  /* Insira seus estilos para DashboardWrapper aqui */
+  width: 100%;
+  flex: 1; /* Ocupa a maior parte do espaço */
+  min-height: 0; /* Permite que o iframe encolha */
+  border-radius: 8px;
+  overflow: hidden;
 `;
+
 const KpiWrapper = styled.div`
-  /* Insira seus estilos para KpiWrapper aqui */
+  width: 100%;
+  height: 25%; /* Altura fixa para a seção de KPIs */
 `;
+
 const Sidebar = styled.div`
-  /* Insira seus estilos para Sidebar aqui */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-sizing: border-box;
+  min-height: 0;
 `;
 
-// ... (Seus initialKpis e initialComunicados não mudam) ...
-// CORREÇÃO: Substituímos '[...]' por arrays vazios '[]'
-const initialKpis = [];
-const initialComunicados = [];
-
-
-// --- NOVA LÓGICA DE ANIVERSÁRIO ---
-
-// 1. Defina os horários e músicas
-const birthdaySongs = [
-  { time: '11:00', path: '/singles/padrao.mp3' },
-  { time: '15:00', path: '/singles/padrao.mp3' }
+const initialKpis = [
+  { titulo: "Comercial | No...", valor: "90", cor: "#4ade80" },
+  { titulo: "Suporte Técni...", valor: "4.70", cor: "#facc15" },
+  { titulo: "Comercial | Up...", valor: "25", cor: "#f87171" },
+  { titulo: "Equipe Técni...", valor: "300", cor: "#60a5fa" }
 ];
-
-// 2. Log para não tocar a música mais de uma vez
-let musicPlayLog = {};
-// --- FIM DA NOVA LÓGICA ---
-
+const initialComunicados = [
+  { id: 1, tipo: 'AVISO', texto: 'Escala Final de Semana: Sábado de Manhã - Rafael e Edvanildo | Sáb tarde e Dom - Edmilson e Josenilson | NOC: Folga: Jean e Matheus' },
+  { id: 2, tipo: 'EVENTO', texto: 'Reunião geral de alinhamento amanhã, 10 de outubro às 10:00.' }
+];
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  // O estado 'aniversarianteHoje' será usado para mostrar o overlay
-  const [aniversarianteHoje, setAniversarianteHoje] = useState(null); 
-  // NOVO ESTADO: Controla qual música tocar
-  const [musicaParaTocar, setMusicaParaTocar] = useState(null);
-
+  const [aniversarianteHoje, setAniversarianteHoje] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const [kpis, setKpis] = useState(initialKpis);
   const [comunicados, setComunicados] = useState(initialComunicados);
   const [showAdmin, setShowAdmin] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
-  // Efeito para login persistente e Firebase (não muda)
+  // Efeito para login persistente
   useEffect(() => {
     const user = localStorage.getItem('loggedInUser');
     if (user) {
@@ -87,7 +108,6 @@ export default function Home() {
     return () => unsubscribe();
   }, []);
 
-  // Funções de Admin e Firebase (não mudam)
   const handleLoginSuccess = (user) => {
     localStorage.setItem('loggedInUser', user);
     setLoggedInUser(user);
@@ -100,7 +120,6 @@ export default function Home() {
   };
   
   const saveKpis = async (newKpis) => {
-    // ... (lógica de salvar kpis) ...
     try {
       const docRef = doc(db, 'paineis', 'dados');
       await updateDoc(docRef, { kpis: newKpis });
@@ -110,8 +129,7 @@ export default function Home() {
   };
 
   const saveComunicados = async (newComunicados) => {
-    // ... (lógica de salvar comunicados) ...
-     try {
+    try {
       const docRef = doc(db, 'paineis', 'dados');
       await updateDoc(docRef, { comunicados: newComunicados });
     } catch (error) {
@@ -119,72 +137,25 @@ export default function Home() {
     }
   };
 
-  // useEffect da rotação (não muda)
   useEffect(() => {
     if (isPaused) return;
     const rotationTimer = setInterval(() => {
-      // Verificamos 'aniversarianteHoje' do estado
-      if (!aniversarianteHoje) { 
+      if (!aniversarianteHoje) {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % links.length);
       }
     }, 25000);
     return () => clearInterval(rotationTimer);
   }, [aniversarianteHoje, isPaused, links.length]);
 
-  // --- useEffect DE ANIVERSÁRIO (SUBSTITUÍDO) ---
-  // Substituímos o useEffect 'checkBirthday' por este:
   useEffect(() => {
-    const checkBirthdayMusic = () => {
-      const now = new Date();
-      const todayKey = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
-      const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-
-      // 1. Reseta o log se for um novo dia
-      if (!musicPlayLog[todayKey]) {
-        musicPlayLog = { [todayKey]: [] };
-        console.log("Novo dia! Resetando log de músicas.");
-      }
-
-      // 2. Encontra aniversariantes do dia
-      const diaAtual = now.getDate();
-      const mesAtual = now.getMonth() + 1;
-      // Usamos 'dia' e 'mes' como definido no seu data.js
-      const aniversariantesHoje = funcionarios.filter(f => f.dia === diaAtual && f.mes === mesAtual);
-
-      if (aniversariantesHoje.length === 0) {
-        return; // Ninguém faz aniversário hoje
-      }
-
-      const aniversariante = aniversariantesHoje[0]; // Pega o primeiro
-
-      // 3. Verifica se é hora de tocar
-      const songToPlay = birthdaySongs.find(song => song.time === currentTime);
-
-      if (songToPlay && !musicPlayLog[todayKey].includes(songToPlay.time)) {
-        console.log(`Hora de tocar! ${currentTime} para ${aniversariante.nome}`);
-        
-        // Marca como tocado
-        musicPlayLog[todayKey].push(songToPlay.time);
-        
-        // ATIVA O OVERLAY!
-        setAniversarianteHoje(aniversariante);
-        setMusicaParaTocar(songToPlay.path);
-      }
+    const checkBirthday = () => {
+      const agora = new Date();
+      // ... (lógica de aniversário)
     };
-
-    // 4. Roda o verificador a cada 60 segundos
-    const intervalId = setInterval(checkBirthdayMusic, 60000);
-    
-    // 5. Limpa o intervalo
-    return () => clearInterval(intervalId);
-  }, []); // Roda apenas uma vez na montagem
-
-  // ATUALIZADO: Função para fechar o overlay
-  const handleMusicEnd = () => {
-    console.log("Música terminou, fechando overlay.");
-    setAniversarianteHoje(null);
-    setMusicaParaTocar(null);
-  };
+    checkBirthday();
+    const interval = setInterval(checkBirthday, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   const currentDashboard = links[currentIndex];
   const tituloPainel = currentDashboard ? currentDashboard.nome : "Carregando...";
@@ -228,14 +199,10 @@ export default function Home() {
           />
         )}
 
-        {/* ATUALIZADO: Renderização condicional e props corretas */}
-        {aniversarianteHoje && (
-          <BirthdayOverlay
-            aniversariante={aniversarianteHoje}
-            musicaSrc={musicaParaTocar}
-            onMusicEnd={handleMusicEnd}
-          />
-        )}
+        <BirthdayOverlay
+          aniversariante={aniversarianteHoje}
+          onMusicEnd={() => setAniversarianteHoje(null)}
+        />
       </MainContainer>
     </ThemeProvider>
   );

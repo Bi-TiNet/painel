@@ -2,9 +2,8 @@
 'use client';
 import styled, { keyframes } from 'styled-components';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react'; 
+import { useEffect, useRef } from 'react';
 
-// ... (Seus styled-components: Overlay, Panel, Title, etc. não mudam) ...
 const Overlay = styled.div`
   position: fixed;
   inset: 0;
@@ -44,31 +43,21 @@ const Subtitle = styled.p`
   color: #d1d5db; /* gray-300 */
 `;
 
-// ATUALIZADO: A assinatura agora recebe 'musicaSrc'
-export default function BirthdayOverlay({ aniversariante, musicaSrc, onMusicEnd }) {
+export default function BirthdayOverlay({ aniversariante, onMusicEnd }) {
   const audioRef = useRef(null);
 
-  // --- useEffect TOTALMENTE SUBSTITUÍDO ---
-  // Removemos toda a lógica de 'setInterval' e 'new Date()' daqui.
-  // Este useEffect agora só toca a música quando o componente aparece.
   useEffect(() => {
-    if (aniversariante && audioRef.current && musicaSrc) {
-      console.log("Overlay apareceu, tentando tocar:", musicaSrc);
-      
-      // Define o src aqui para garantir que é o correto
-      audioRef.current.src = musicaSrc;
-
+    if (aniversariante && audioRef.current) {
       audioRef.current.play().catch(error => {
-        // Se o autoplay for bloqueado pelo navegador
-        console.error("Erro ao tocar música (autoplay bloqueado?):", error);
-        // Chama onMusicEnd() para não travar a tela
+        console.error("Erro ao tocar música:", error);
         onMusicEnd();
       });
     }
-  }, [aniversariante, musicaSrc, onMusicEnd]); // Depende das props
+  }, [aniversariante, onMusicEnd]);
 
-  // A verificação 'if (!aniversariante)' foi removida
-  // porque o 'page.js' agora controla a renderização.
+  if (!aniversariante) {
+    return null;
+  }
 
   return (
     <Overlay>
@@ -86,8 +75,7 @@ export default function BirthdayOverlay({ aniversariante, musicaSrc, onMusicEnd 
       </Panel>
       <audio
         ref={audioRef}
-        // ATUALIZADO: O src agora vem das props
-        src={musicaSrc} 
+        src="/singles/padrao.mp3"
         onEnded={onMusicEnd}
       />
     </Overlay>
