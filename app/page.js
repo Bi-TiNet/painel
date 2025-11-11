@@ -147,15 +147,42 @@ export default function Home() {
     return () => clearInterval(rotationTimer);
   }, [aniversarianteHoje, isPaused, links.length]);
 
+  // --- LÓGICA DE ANIVERSÁRIO CORRIGIDA ---
   useEffect(() => {
+    // Função que verifica o aniversário e o horário
     const checkBirthday = () => {
       const agora = new Date();
-      // ... (lógica de aniversário)
+      const diaAtual = agora.getDate();
+      const mesAtual = agora.getMonth() + 1;
+      const hora = agora.getHours();
+      const minuto = agora.getMinutes();
+
+      // 1. VERIFICA O HORÁRIO
+      // Define os horários desejados para tocar
+      const eHoraDeTocar = (hora === 10 && minuto === 30) || (hora === 15 && minuto === 30);
+
+      // 2. VERIFICA O ANIVERSARIANTE
+      // Encontra o aniversariante do dia na sua lista de dados
+      const aniversarianteDoDia = funcionarios.find(
+        (f) => f.dia === diaAtual && f.mes === mesAtual
+      );
+
+      // 3. TOCA A MÚSICA SE AMBAS CONDIÇÕES FOREM VERDADEIRAS
+      // Só ativa o overlay se for a hora certa E se houver um aniversariante
+      if (eHoraDeTocar && aniversarianteDoDia) {
+        setAniversarianteHoje(aniversarianteDoDia);
+      }
     };
-    checkBirthday();
-    const interval = setInterval(checkBirthday, 60000);
+    
+    // 4. VERIFICA A CADA MINUTO
+    // Mantém o intervalo de 60 segundos para "pegar" o minuto exato
+    const interval = setInterval(checkBirthday, 60000); 
+
+    // Limpa o intervalo ao desmontar o componente
     return () => clearInterval(interval);
-  }, []);
+    
+  }, []); // O array de dependências vazio está correto
+  // --- FIM DA LÓGICA DE ANIVERSÁRIO ---
 
   const currentDashboard = links[currentIndex];
   const tituloPainel = currentDashboard ? currentDashboard.nome : "Carregando...";
