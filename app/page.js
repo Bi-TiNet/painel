@@ -86,6 +86,14 @@ export default function Home() {
   const [comunicados, setComunicados] = useState(initialComunicados);
   const [showAdmin, setShowAdmin] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
+  
+  // --- NOVO ESTADO PARA CONTROLE ---
+  // Guarda o dia e se já tocou de manhã ou à tarde
+  const [playTracker, setPlayTracker] = useState({
+    dia: new Date().getDate(),
+    manha: false,
+    tarde: false,
+  });
 
   // Efeito para login persistente
   useEffect(() => {
@@ -147,9 +155,8 @@ export default function Home() {
     return () => clearInterval(rotationTimer);
   }, [aniversarianteHoje, isPaused, links.length]);
 
-  // --- LÓGICA DE ANIVERSÁRIO CORRIGIDA ---
+  // --- LÓGICA DE ANIVERSÁRIO CORRIGIDA E ROBUSTA ---
   useEffect(() => {
-    // Função que verifica o aniversário e o horário
     const checkBirthday = () => {
       const agora = new Date();
       const diaAtual = agora.getDate();
@@ -157,31 +164,51 @@ export default function Home() {
       const hora = agora.getHours();
       const minuto = agora.getMinutes();
 
-      // 1. VERIFICA O HORÁRIO
-      // Define os horários desejados para tocar
-      const eHoraDeTocar = (hora === 10 && minuto === 30) || (hora === 15 && minuto === 30);
+      // 1. Reinicia o rastreador se for um novo dia
+      if (diaAtual !== playTracker.dia) {
+        setPlayTracker({ dia: diaAtual, manha: false, tarde: false });
+        return; // Sai e espera a próxima verificação
+      }
 
-      // 2. VERIFICA O ANIVERSARIANTE
-      // Encontra o aniversariante do dia na sua lista de dados
+      // 2. Procura pelo aniversariante
       const aniversarianteDoDia = funcionarios.find(
         (f) => f.dia === diaAtual && f.mes === mesAtual
       );
 
-      // 3. TOCA A MÚSICA SE AMBAS CONDIÇÕES FOREM VERDADEIRAS
-      // Só ativa o overlay se for a hora certa E se houver um aniversariante
-      if (eHoraDeTocar && aniversarianteDoDia) {
+      // Se não tem aniversariante, não faz nada
+      if (!aniversarianteDoDia) {
+        return;
+      }
+      
+      // Se a música já estiver tocando, não faz nada
+      if (aniversarianteHoje) {
+        return;
+      }
+
+      // 3. Define as janelas de horário
+      // Janela da manhã: 10:30 até 10:59
+      const eJanelaManha = (hora === 10 && minuto >= 30);
+      // Janela da tarde: 15:30 até 15:59
+      const eJanelaTarde = (hora === 15 && minuto >= 30);
+
+      // 4. Toca a música (apenas uma vez por janela)
+      if (eJanelaManha && !playTracker.manha) {
+        setPlayTracker((prev) => ({ ...prev, manha: true }));
+        setAniversarianteHoje(aniversarianteDoDia);
+      } else if (eJanelaTarde && !playTracker.tarde) {
+        setPlayTracker((prev) => ({ ...prev, tarde: true }));
         setAniversarianteHoje(aniversarianteDoDia);
       }
     };
-    
-    // 4. VERIFICA A CADA MINUTO
-    // Mantém o intervalo de 60 segundos para "pegar" o minuto exato
-    const interval = setInterval(checkBirthday, 60000); 
 
-    // Limpa o intervalo ao desmontar o componente
+    // Roda a verificação a cada 30 segundos para garantir que pegamos a janela
+    const interval = setInterval(checkBirthday, 30000); 
+
+    // Limpa o intervalo
     return () => clearInterval(interval);
     
-  }, []); // O array de dependências vazio está correto
+  // Adiciona 'playTracker' e 'aniversarianteHoje' às dependências
+  }, [playTracker, aniversarianteHoje]); 
   // --- FIM DA LÓGICA DE ANIVERSÁRIO ---
 
   const currentDashboard = links[currentIndex];
