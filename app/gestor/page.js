@@ -4,6 +4,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Script from 'next/script'; // Importado para os ícones
 import './style.css'; // Importa o CSS que você copiou
 
 // Dados do seu script.js
@@ -65,7 +66,7 @@ export default function GestorPage() {
   const reportWrapperRef = useRef(null);
   const btnFullscreenRef = useRef(null);
   
-  // --- PASSO 4: SEGURANÇA ---
+  // --- SEGURANÇA ---
   // Verifica se o usuário está logado (pelo localStorage)
   useEffect(() => {
     const user = localStorage.getItem('loggedInUser');
@@ -117,126 +118,143 @@ export default function GestorPage() {
 
   // JSX que recria o index.html
   return (
-    <div className="app-container">
-      <aside className="sidebar">
-        <div className="logo-area">
-          {/* Usamos o Image do Next.js para otimização */}
-          <Image src="/logo ti.net.png" alt="Logo" width={120} height={40} />
-        </div>
+    <>
+      {/* Carrega os ícones (Phosphor) nesta página */}
+      <Script src="https://unpkg.com/@phosphor-icons/web" />
+      
+      <div className="app-container">
+        <aside className="sidebar">
+          <div className="logo-area">
+            {/* Usamos o Image do Next.js para otimização */}
+            <Image src="/logo ti.net.png" alt="Logo" width={120} height={40} priority />
+          </div>
 
-        <nav className="menu-nav">
-          {database.map((menuItem, menuIndex) => (
-            <div 
-              key={menuIndex} 
-              className={`main-menu-group ${activeMenu === menuIndex ? 'active' : ''}`}
-            >
-              <button 
-                className="main-menu-title" 
-                onClick={() => setActiveMenu(activeMenu === menuIndex ? null : menuIndex)}
+          <nav className="menu-nav">
+            {database.map((menuItem, menuIndex) => (
+              <div 
+                key={menuIndex} 
+                className={`main-menu-group ${activeMenu === menuIndex ? 'active' : ''}`}
               >
-                {menuItem.menu}
-                <i className="ph ph-caret-down"></i>
-              </button>
+                <button 
+                  className="main-menu-title" 
+                  onClick={() => setActiveMenu(activeMenu === menuIndex ? null : menuIndex)}
+                >
+                  {menuItem.menu}
+                  <i className="ph ph-caret-down"></i>
+                </button>
 
-              <div className="dept-container">
-                {menuItem.departamentos.map((dept, deptIndex) => (
-                  <div 
-                    key={deptIndex}
-                    className={`dept-group ${activeDept === `${menuIndex}-${deptIndex}` ? 'active' : ''}`}
-                  >
-                    <button 
-                      className="dept-title"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const id = `${menuIndex}-${deptIndex}`;
-                        setActiveDept(activeDept === id ? null : id);
-                      }}
+                <div className="dept-container">
+                  {menuItem.departamentos.map((dept, deptIndex) => (
+                    <div 
+                      key={deptIndex}
+                      className={`dept-group ${activeDept === `${menuIndex}-${deptIndex}` ? 'active' : ''}`}
                     >
-                      {dept.departamento}
-                      <i className="ph ph-caret-down"></i>
-                    </button>
+                      <button 
+                        className="dept-title"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const id = `${menuIndex}-${deptIndex}`;
+                          setActiveDept(activeDept === id ? null : id);
+                        }}
+                      >
+                        {dept.departamento}
+                        <i className="ph ph-caret-down"></i>
+                      </button>
 
-                    <div className="report-list">
-                      {dept.relatorios.map((relatorio, relIndex) => (
-                        <button
-                          key={relIndex}
-                          className={`report-btn ${selectedReport?.url === relatorio.url ? 'active' : ''}`}
-                          onClick={() => loadReport(relatorio, dept.departamento)}
-                        >
-                          {relatorio.nome}
-                        </button>
-                      ))}
+                      <div className="report-list">
+                        {dept.relatorios.map((relatorio, relIndex) => (
+                          <button
+                            key={relIndex}
+                            className={`report-btn ${selectedReport?.url === relatorio.url ? 'active' : ''}`}
+                            onClick={() => loadReport(relatorio, dept.departamento)}
+                          >
+                            {relatorio.nome}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </nav>
+            ))}
+          </nav>
 
-        <div className="sidebar-footer">
-          <p>© 2025 TI.Net</p>
-        </div>
-      </aside>
-
-      <main className="content-area">
-        <header className="top-header">
-          <div className="header-title">
-            <h1 id="page-title">
-              {selectedReport ? selectedReport.nome : 'Bem-vindo'}
-            </h1>
-            <span id="page-subtitle">
-              {selectedReport ? `Departamento: ${selectedReport.departamentoNome}` : 'Selecione um relatório no menu lateral'}
-            </span>
+          <div className="sidebar-footer">
+            <p>© 2025 TI.Net</p>
           </div>
+        </aside>
 
-          <div className="header-actions">
-            <button 
-              id="btn-fullscreen" 
-              className="action-btn" 
-              title="Tela Cheia"
-              ref={btnFullscreenRef}
-              onClick={handleFullscreen}
-            >
-              <i className="ph ph-arrows-out"></i> Expandir
-            </button>
+        <main className="content-area">
+          <header className="top-header">
+            <div className="header-title">
+              <h1 id="page-title">
+                {selectedReport ? selectedReport.nome : 'Bem-vindo'}
+              </h1>
+              <span id="page-subtitle">
+                {selectedReport ? `Departamento: ${selectedReport.departamentoNome}` : 'Selecione um relatório no menu lateral'}
+              </span>
+            </div>
+
+            <div className="header-actions">
+              
+              {/* --- BOTÃO VOLTAR ADICIONADO --- */}
+              <button
+                id="btn-back"
+                className="action-btn"
+                title="Voltar ao Painel"
+                onClick={() => router.push('/')} // Ação de voltar para a home
+              >
+                <i className="ph ph-arrow-left"></i> Voltar
+              </button>
+              {/* --- FIM DO BOTÃO VOLTAR --- */}
+
+              <button 
+                id="btn-fullscreen" 
+                className="action-btn" 
+                title="Tela Cheia"
+                ref={btnFullscreenRef}
+                onClick={handleFullscreen}
+              >
+                <i className="ph ph-arrows-out"></i> Expandir
+              </button>
+            </div>
+          </header>
+
+          <div className="report-container" ref={reportWrapperRef}>
+            
+            {/* Estado Vazio (Inicial) */}
+            {!selectedReport && (
+              <div id="empty-state" className="empty-state">
+                <i className="ph ph-chart-bar"></i>
+                <h3>Selecione um departamento</h3>
+                <p>Navegue pelo menu lateral para visualizar os indicadores.</p>
+              </div>
+            )}
+
+            {/* Iframe (só mostra se tiver um relatório) */}
+            {selectedReport && (
+              <iframe
+                id="main-frame"
+                className="powerbi-frame"
+                src={selectedReport.url}
+                onLoad={() => setIsLoading(false)} // Esconde o spinner quando carrega
+                frameBorder="0"
+                allowFullScreen={true}
+                style={{ display: 'block' }} // Mostra o iframe
+              ></iframe>
+            )}
+
+            {/* Loading */}
+            {isLoading && (
+              <div id="loading-spinner" className="loading-overlay" style={{ display: 'flex' }}>
+                <div className="spinner"></div>
+                <p>Carregando dados...</p>
+              </div>
+            )}
+
           </div>
-        </header>
-
-        <div className="report-container" ref={reportWrapperRef}>
-          
-          {/* Estado Vazio (Inicial) */}
-          {!selectedReport && (
-            <div id="empty-state" className="empty-state">
-              <i className="ph ph-chart-bar"></i>
-              <h3>Selecione um departamento</h3>
-              <p>Navegue pelo menu lateral para visualizar os indicadores.</p>
-            </div>
-          )}
-
-          {/* Iframe (só mostra se tiver um relatório) */}
-          {selectedReport && (
-            <iframe
-              id="main-frame"
-              className="powerbi-frame"
-              src={selectedReport.url}
-              onLoad={() => setIsLoading(false)} // Esconde o spinner quando carrega
-              frameBorder="0"
-              allowFullScreen={true}
-              style={{ display: 'block' }} // Mostra o iframe
-            ></iframe>
-          )}
-
-          {/* Loading */}
-          {isLoading && (
-            <div id="loading-spinner" className="loading-overlay" style={{ display: 'flex' }}>
-              <div className="spinner"></div>
-              <p>Carregando dados...</p>
-            </div>
-          )}
-
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
