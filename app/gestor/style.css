@@ -1,4 +1,4 @@
-/* style.css */
+/* app/gestor/style.css */
 :root {
     --bg-dark: #061633;       /* Fundo principal */
     --bg-sidebar: #041025;    /* Fundo do menu (mais escuro) */
@@ -212,6 +212,7 @@ body {
     text-align: center;
     font-size: 0.75rem;
     color: rgba(255,255,255,0.2);
+    margin-top: auto; /* Garante que o footer fique na base */
 }
 
 /* --- ÁREA DE CONTEÚDO --- */
@@ -329,4 +330,34 @@ body {
 
 .report-container:fullscreen .powerbi-frame {
     border-radius: 0;
+}
+
+/* --- NOVOS ESTILOS PARA O BOTÃO VOLTAR --- */
+.footer-back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background-color: var(--bg-hover);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 12px;
+    margin-bottom: 15px; /* Espaço antes do copyright */
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.footer-back-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: rgba(0, 224, 255, 0.05);
+}
+
+.footer-back-btn i {
+    font-size: 1.1rem;
 }

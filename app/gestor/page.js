@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Script from 'next/script'; // Importado para os ícones
-import './style.css'; // Importa o CSS que você copiou
+import './style.css'; // Importa o CSS
 
 // Dados do seu script.js
 const database = [
@@ -58,32 +58,24 @@ export default function GestorPage() {
   const [selectedReport, setSelectedReport] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   
-  // Estados para controlar os menus accordion
-  const [activeMenu, setActiveMenu] = useState(0); // Abre o primeiro menu por padrão
+  const [activeMenu, setActiveMenu] = useState(0); 
   const [activeDept, setActiveDept] = useState(null);
 
-  // Referências para o DOM (para tela cheia)
   const reportWrapperRef = useRef(null);
   const btnFullscreenRef = useRef(null);
   
-  // --- SEGURANÇA ---
-  // Verifica se o usuário está logado (pelo localStorage)
   useEffect(() => {
     const user = localStorage.getItem('loggedInUser');
     if (!user) {
-      // Se não estiver logado, volta para a página principal
       router.push('/');
     }
   }, [router]);
 
-  // Função para carregar o relatório
   const loadReport = (relatorio, departamentoNome) => {
     setIsLoading(true);
     setSelectedReport({ ...relatorio, departamentoNome });
-    // O iframe 'onload' vai esconder o spinner
   };
 
-  // Função para controlar a tela cheia
   const handleFullscreen = () => {
     const wrapper = reportWrapperRef.current;
     const btn = btnFullscreenRef.current;
@@ -99,7 +91,6 @@ export default function GestorPage() {
     }
   };
 
-  // Monitorar mudança de tela cheia para resetar ícone
   useEffect(() => {
     const onFullscreenChange = () => {
       const btn = btnFullscreenRef.current;
@@ -116,16 +107,13 @@ export default function GestorPage() {
     return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
   }, []);
 
-  // JSX que recria o index.html
   return (
     <>
-      {/* Carrega os ícones (Phosphor) nesta página */}
       <Script src="https://unpkg.com/@phosphor-icons/web" />
       
       <div className="app-container">
         <aside className="sidebar">
           <div className="logo-area">
-            {/* Usamos o Image do Next.js para otimização */}
             <Image src="/logo ti.net.png" alt="Logo" width={120} height={40} priority />
           </div>
 
@@ -179,7 +167,16 @@ export default function GestorPage() {
             ))}
           </nav>
 
+          {/* --- BOTÃO MOVIDO PARA O RODAPÉ --- */}
           <div className="sidebar-footer">
+            <button
+              id="btn-back"
+              className="footer-back-btn" // Classe CSS nova
+              title="Voltar ao Painel"
+              onClick={() => router.push('/')} // Ação de voltar para a home
+            >
+              <i className="ph ph-arrow-left"></i> Voltar ao Painel
+            </button>
             <p>© 2025 TI.Net</p>
           </div>
         </aside>
@@ -197,16 +194,7 @@ export default function GestorPage() {
 
             <div className="header-actions">
               
-              {/* --- BOTÃO VOLTAR ADICIONADO --- */}
-              <button
-                id="btn-back"
-                className="action-btn"
-                title="Voltar ao Painel"
-                onClick={() => router.push('/')} // Ação de voltar para a home
-              >
-                <i className="ph ph-arrow-left"></i> Voltar
-              </button>
-              {/* --- FIM DO BOTÃO VOLTAR --- */}
+              {/* --- BOTÃO "VOLTAR" REMOVIDO DAQUI --- */}
 
               <button 
                 id="btn-fullscreen" 
@@ -222,7 +210,6 @@ export default function GestorPage() {
 
           <div className="report-container" ref={reportWrapperRef}>
             
-            {/* Estado Vazio (Inicial) */}
             {!selectedReport && (
               <div id="empty-state" className="empty-state">
                 <i className="ph ph-chart-bar"></i>
@@ -231,20 +218,18 @@ export default function GestorPage() {
               </div>
             )}
 
-            {/* Iframe (só mostra se tiver um relatório) */}
             {selectedReport && (
               <iframe
                 id="main-frame"
                 className="powerbi-frame"
                 src={selectedReport.url}
-                onLoad={() => setIsLoading(false)} // Esconde o spinner quando carrega
+                onLoad={() => setIsLoading(false)} 
                 frameBorder="0"
                 allowFullScreen={true}
-                style={{ display: 'block' }} // Mostra o iframe
+                style={{ display: 'block' }}
               ></iframe>
             )}
 
-            {/* Loading */}
             {isLoading && (
               <div id="loading-spinner" className="loading-overlay" style={{ display: 'flex' }}>
                 <div className="spinner"></div>
