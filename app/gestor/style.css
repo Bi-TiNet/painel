@@ -1,0 +1,332 @@
+/* style.css */
+:root {
+    --bg-dark: #061633;       /* Fundo principal */
+    --bg-sidebar: #041025;    /* Fundo do menu (mais escuro) */
+    --bg-hover: #0a2350;      /* Hover nos itens */
+    --accent: #00e0ff;        /* Ciano (destaque) */
+    --text-main: #ffffff;
+    --text-muted: #8da4c7;
+    --border-color: #1e3a6e;
+    --sidebar-width: 280px;
+    --header-height: 80px;
+    --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* LAYOUT GERAL */
+.app-container {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    z-index: 10;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+}
+
+.logo-area {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo-area img {
+    max-height: 40px;
+    max-width: 100%;
+}
+
+.menu-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 15px;
+}
+
+/* --- NOVO: Nível 1 (Menus Principais) --- */
+.main-menu-group {
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.main-menu-title {
+    width: 100%;
+    background-color: var(--bg-sidebar);
+    border: none;
+    color: var(--text-main);
+    padding: 16px 15px;
+    text-align: left;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 6px;
+    transition: var(--transition);
+}
+
+.main-menu-title:hover {
+    background-color: var(--bg-hover);
+}
+
+.main-menu-title i { /* Ícone da seta */
+    transition: transform 0.3s ease;
+    font-size: 1rem;
+}
+
+.main-menu-group.active > .main-menu-title {
+    color: var(--accent);
+    background-color: var(--bg-hover);
+}
+
+.main-menu-group.active > .main-menu-title i {
+    transform: rotate(180deg);
+}
+
+/* Container dos Departamentos (nível 2) */
+.dept-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background-color: rgba(0,0,0,0.15);
+    padding: 0px 8px 8px 8px;
+    border-radius: 0 0 8px 8px;
+}
+
+.main-menu-group.active > .dept-container {
+    max-height: 1000px; /* Altura grande */
+}
+
+/* Itens do Menu (Nível 2 - Departamentos) */
+.dept-group {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    border-bottom: none;
+}
+
+.dept-title {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 10px 12px;
+    text-align: left;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: rgba(255,255,255,0.03);
+}
+
+.dept-title:hover {
+    background-color: rgba(255,255,255,0.08);
+    color: var(--text-main);
+}
+
+.dept-title i { /* Ícone da seta */
+    transition: transform 0.3s ease;
+}
+
+.dept-group.active .dept-title {
+    color: var(--accent);
+}
+
+.dept-group.active .dept-title i {
+    transform: rotate(180deg);
+}
+
+/* Lista de Relatórios (Nível 3) */
+.report-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    padding-left: 15px; /* Mais indentação */
+}
+
+.dept-group.active .report-list {
+    max-height: 500px; /* Altura arbitrária grande o suficiente */
+}
+
+.report-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 10px 15px;
+    padding-left: 20px;
+    margin: 2px 0;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.report-btn:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+    padding-left: 25px;
+}
+
+.report-btn.active {
+    background-color: var(--accent);
+    color: #000; /* Contraste no fundo claro */
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(0, 224, 255, 0.4);
+}
+
+.sidebar-footer {
+    padding: 20px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.2);
+}
+
+/* --- ÁREA DE CONTEÚDO --- */
+.content-area {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-dark);
+    position: relative;
+}
+
+.top-header {
+    height: var(--header-height);
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-dark); /* Pode diferenciar se quiser */
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-title h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.header-title span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.action-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: rgba(0, 224, 255, 0.05);
+}
+
+/* --- CONTAINER DO IFRAME --- */
+.report-container {
+    flex: 1;
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.powerbi-frame {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background-color: #fff; /* Evita fundo transparente enquanto carrega */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: none; /* Escondido até carregar algo */
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    opacity: 0.3;
+}
+
+/* Spinner de Loading */
+.loading-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(6, 22, 51, 0.9);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- MODO TELA CHEIA --- */
+/* Quando o container entra em fullscreen, ajustamos o padding */
+.report-container:fullscreen {
+    padding: 0;
+    background-color: var(--bg-dark);
+}
+
+.report-container:fullscreen .powerbi-frame {
+    border-radius: 0;
+}

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { adminUsers, departamentos, tiposDeComunicado } from '@/app/data';
+import { useRouter } from 'next/navigation';
 
 // --- Styled Components ---
 
@@ -268,6 +269,12 @@ function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados 
     const [activeTab, setActiveTab] = useState('metas');
     const [tempKpis, setTempKpis] = useState(kpis);
     const [tempComunicados, setTempComunicados] = useState(comunicados);
+    const router = useRouter();
+
+    const handleGoToGestor = () => {
+    onClose(); // Fecha o modal
+    router.push('/gestor'); // Redireciona para a nova página
+  };
     
     const [newKpi, setNewKpi] = useState({ departamento: departamentos[0].nome, nome: '', valor: '' });
     
@@ -426,6 +433,11 @@ function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados 
                 </ContentArea>
 
                 <Footer>
+                    {/* V--- BOTÃO ADICIONADO ---V */}
+                    <Button variant="secondary" onClick={handleGoToGestor}>
+                        Acessar Portal do Gestor
+                    </Button>
+                    {/* A--- BOTÃO ADICIONADO ---A */}
                     <Button variant="secondary" onClick={onClose}>Cancelar</Button>
                     <Button onClick={handleSave}>Salvar Tudo e Fechar</Button>
                 </Footer>
