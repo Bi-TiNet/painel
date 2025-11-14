@@ -41,9 +41,9 @@ const database = [
       {
         departamento: "Contratos",
         relatorios: [
-            { nome: "Vendas Geral", url: "" },
-            { nome: "Reduzidos", url: "" },
-            { nome: "Bloqueados", url: "" }
+            { nome: "Painel Geral", url: "https://app.powerbi.com/reportEmbed?reportId=dfe63e38-3a6f-433d-bfce-0fdf04386092&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
+            { nome: "Ativados e Cancelados", url: "https://app.powerbi.com/reportEmbed?reportId=55d69b11-78f5-425b-a9ac-e5a6b6b75d13&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
+            { nome: "Valores ativados e Cancelados", url: "https://app.powerbi.com/reportEmbed?reportId=8fde1737-4aba-4b22-8cbf-89ad1b1c8249&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" }
         ]
       }
     ]
