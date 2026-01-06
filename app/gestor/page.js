@@ -25,13 +25,12 @@ const database = [
         relatorios: [
             { nome: "Painel de Técnicos", url: "https://app.powerbi.com/reportEmbed?reportId=e71d279f-c612-4c46-b89b-7da1a1d2759c&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
             { nome: "Suporte Técnico", url: "https://app.powerbi.com/reportEmbed?reportId=28dcc1da-2fbf-4d2b-9dfc-2321c215096e&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
-            { nome: "Pesquisa de Satisfação", url: "https://app.powerbi.com/reportEmbed?reportId=fabe23fd-6717-4e86-8546-061be11850d5&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" }
         ]
       },
       {
         departamento: "Ferramentas Externas",
         relatorios: [
-            { nome: "WOW Chat", url: "https://app.powerbi.com/view?r=eyJrIjoiOWZlNGI5ODItOWZkNC00MGRmLTk4N2YtYmE0OTkxOGQxMWU1IiwidCI6IjhiNDkxZGJmLTU4ZTEtNGNkNS05OGQ3LTEyYjY4ZWNkNDEzNCJ9&navContentPaneEnabled=false&filterPaneEnabled=false" }
+            { nome: "Pesquisa de Satisfação", url: "https://app.powerbi.com/reportEmbed?reportId=fabe23fd-6717-4e86-8546-061be11850d5&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" }
         ]
       }
     ]
