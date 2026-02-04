@@ -21,7 +21,7 @@ export const funcionarios = [
     { nome: "Lucas Oliveira", dia: 20, mes: 5, foto: "/fotos/lucas_oliveira.jpg" },
     { nome: "Joyce Pinna", dia: 23, mes: 5, foto: "/fotos/joyce.jpg" },
     { nome: "Dalila Meira", dia: 9, mes: 6, foto: "/fotos/dalila.jpg" },
-    { nome: "Tainan Sales", dia: 24, mes: 6, foto: "/fotos/dalila.jpg" },
+    { nome: "Tainan Sales", dia: 24, mes: 6, foto: "/fotos/tainan.jpg" },
     { nome: "Edvanildo Rodrigues", dia: 14, mes: 6, foto: "/fotos/edvanildo.jpg" },
     { nome: "Jefersson Abade", dia: 19, mes: 7, foto: "/fotos/jefersson.jpg" },
     { nome: "Daniele França", dia: 20, mes: 7, foto: "/fotos/daniele_frança.jpg" },
