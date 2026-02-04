@@ -11,6 +11,7 @@ export const links = [
 
 export const funcionarios = [
     { nome: "Nathalia Gama", dia: 8, mes: 1, foto: "/fotos/nathalia.jpg" },
+    { nome: "Wellen Catharine", dia: 19, mes: 2, foto: "/fotos/wellen.jpg" },
     { nome: "Quezia Ribeiro", dia: 24, mes: 2, foto: "/fotos/quezia.jpg" },
     { nome: "Taiane Lima", dia: 8, mes: 3, foto: "/fotos/taiane.jpg" },
     { nome: "Vagner Garcia", dia: 11, mes: 3, foto: "/fotos/vagner.jpg" },
@@ -20,10 +21,12 @@ export const funcionarios = [
     { nome: "Lucas Oliveira", dia: 20, mes: 5, foto: "/fotos/lucas_oliveira.jpg" },
     { nome: "Joyce Pinna", dia: 23, mes: 5, foto: "/fotos/joyce.jpg" },
     { nome: "Dalila Meira", dia: 9, mes: 6, foto: "/fotos/dalila.jpg" },
+    { nome: "Tainan Sales", dia: 24, mes: 6, foto: "/fotos/dalila.jpg" },
     { nome: "Edvanildo Rodrigues", dia: 14, mes: 6, foto: "/fotos/edvanildo.jpg" },
     { nome: "Jefersson Abade", dia: 19, mes: 7, foto: "/fotos/jefersson.jpg" },
     { nome: "Daniele França", dia: 20, mes: 7, foto: "/fotos/daniele_frança.jpg" },
     { nome: "Carlos Júnior", dia: 30, mes: 7, foto: "/fotos/carlos.jpg" },
+    { nome: "Emily Rebeca", dia: 1, mes: 8, foto: "/fotos/emily.png" },
     { nome: "Valdete", dia: 6, mes: 8, foto: "/fotos/valdete.jpg" },
     { nome: "Gabriel Ferreira", dia: 8, mes: 8, foto: "/fotos/gabriel_ferreira.jpg" },
     { nome: "Leandro Roberto", dia: 17, mes: 8, foto: "/fotos/leandro.jpg" },
