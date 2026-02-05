@@ -1,12 +1,12 @@
 // app/data.js
 
 export const links = [
-    { nome: "Comercial", url: "https://app.powerbi.com/reportEmbed?reportId=0d1ef2a2-5887-408f-84d8-a46d411a1bdc&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&fullscreen=true" },
-    { nome: "Reduzidos", url: "https://app.powerbi.com/reportEmbed?reportId=f64af684-ac51-4ece-87f5-b63379e59acf&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&fullscreen=true" },
-    { nome: "Bloqueados", url: "https://app.powerbi.com/reportEmbed?reportId=af9c50de-33ce-4281-93dd-d86d61c94e60&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&fullscreen=true" },
-    { nome: "Técnicos", url: "https://app.powerbi.com/reportEmbed?reportId=e71d279f-c612-4c46-b89b-7da1a1d2759c&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&fullscreen=true" },
-    { nome: "Suporte Técnico", url: "https://app.powerbi.com/reportEmbed?reportId=28dcc1da-2fbf-4d2b-9dfc-2321c215096e&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&fullscreen=true" },
-    { nome: "Pesquisa de Satisfação", url: "https://app.powerbi.com/reportEmbed?reportId=fabe23fd-6717-4e86-8546-061be11850d5&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&fullscreen=true" },
+    { nome: "Comercial", url: "https://app.powerbi.com/view?r=eyJrIjoiZmY5N2IzZTQtZjA4NS00ZWY2LTllOTItNTg1ZTgyZTE4NmViIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+    { nome: "Reduzidos", url: "https://app.powerbi.com/view?r=eyJrIjoiZWNhODJiZTItNjQ5Mi00NGYzLTlkNzQtYmFhOTU1ODcxMzk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+    { nome: "Bloqueados", url: "https://app.powerbi.com/view?r=eyJrIjoiODA1ODg5NDMtYzBjNy00NTZiLThiOGUtNDZlYTgyM2M3MmZiIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+    { nome: "Técnicos", url: "https://app.powerbi.com/view?r=eyJrIjoiNDJjMWNmM2UtODEyMy00ZDUzLTkzOTMtN2U0OTExYzZlN2Y1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+    { nome: "Suporte Técnico", url: "https://app.powerbi.com/view?r=eyJrIjoiMGExOTAzMWMtMzBlNC00YzgyLTlkZGQtMWY3NTE1Mzc4MTk2IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+    { nome: "Pesquisa de Satisfação", url: "https://app.powerbi.com/view?r=eyJrIjoiNzdkZWQyM2EtZTljOC00NjI5LTllYmQtOTkwOTgzZGYyNTk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
 ];
 
 export const funcionarios = [

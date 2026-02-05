@@ -15,23 +15,23 @@ const database = [
       {
         departamento: "Comercial & Financeiro",
         relatorios: [
-            { nome: "Vendas Geral", url: "https://app.powerbi.com/reportEmbed?reportId=0d1ef2a2-5887-408f-84d8-a46d411a1bdc&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
-            { nome: "Reduzidos", url: "https://app.powerbi.com/reportEmbed?reportId=f64af684-ac51-4ece-87f5-b63379e59acf&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
-            { nome: "Bloqueados", url: "https://app.powerbi.com/reportEmbed?reportId=af9c50de-33ce-4281-93dd-d86d61c94e60&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" }
-        ]
+            { nome: "Vendas Geral", url: "https://app.powerbi.com/view?r=eyJrIjoiZmY5N2IzZTQtZjA4NS00ZWY2LTllOTItNTg1ZTgyZTE4NmViIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+            { nome: "Reduzidos", url: "https://app.powerbi.com/view?r=eyJrIjoiZWNhODJiZTItNjQ5Mi00NGYzLTlkNzQtYmFhOTU1ODcxMzk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+            { nome: "Bloqueados", url: "https://app.powerbi.com/view?r=eyJrIjoiODA1ODg5NDMtYzBjNy00NTZiLThiOGUtNDZlYTgyM2M3MmZiIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+          ]
       },
       {
         departamento: "Técnico & Suporte",
         relatorios: [
-            { nome: "Painel de Técnicos", url: "https://app.powerbi.com/reportEmbed?reportId=e71d279f-c612-4c46-b89b-7da1a1d2759c&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
-            { nome: "Suporte Técnico", url: "https://app.powerbi.com/reportEmbed?reportId=28dcc1da-2fbf-4d2b-9dfc-2321c215096e&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
-        ]
+            { nome: "Técnicos", url: "https://app.powerbi.com/view?r=eyJrIjoiNDJjMWNmM2UtODEyMy00ZDUzLTkzOTMtN2U0OTExYzZlN2Y1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+            { nome: "Suporte Técnico", url: "https://app.powerbi.com/view?r=eyJrIjoiMGExOTAzMWMtMzBlNC00YzgyLTlkZGQtMWY3NTE1Mzc4MTk2IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+            ]
       },
       {
         departamento: "Ferramentas Externas",
         relatorios: [
-            { nome: "Pesquisa de Satisfação", url: "https://app.powerbi.com/reportEmbed?reportId=fabe23fd-6717-4e86-8546-061be11850d5&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" }
-        ]
+            { nome: "Pesquisa de Satisfação", url: "https://app.powerbi.com/view?r=eyJrIjoiNzdkZWQyM2EtZTljOC00NjI5LTllYmQtOTkwOTgzZGYyNTk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+            ]
       }
     ]
   },
@@ -41,10 +41,10 @@ const database = [
       {
         departamento: "Contratos",
         relatorios: [
-            { nome: "Painel Geral", url: "https://app.powerbi.com/reportEmbed?reportId=dfe63e38-3a6f-433d-bfce-0fdf04386092&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
-            { nome: "Ativados e Cancelados", url: "https://app.powerbi.com/reportEmbed?reportId=55d69b11-78f5-425b-a9ac-e5a6b6b75d13&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
-            { nome: "Saldo Contratos", url: "https://app.powerbi.com/reportEmbed?reportId=d447051c-dc26-4fa8-bd5d-ab048097cfa4&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" },
-            { nome: "Valores ativados e cancelados", url: "https://app.powerbi.com/reportEmbed?reportId=8fde1737-4aba-4b22-8cbf-89ad1b1c8249&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false" }
+            { nome: "Painel Geral", url: "https://app.powerbi.com/view?r=eyJrIjoiNzBmZmRmYWMtNmE0ZC00YWI5LWE4YWUtNDAwYzc1NWVjMTc0IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+            { nome: "Ativados e Cancelados", url: "https://app.powerbi.com/view?r=eyJrIjoiNjE5NjI0MWMtNWMxNi00ZGZlLWI3ODAtMDI2NjdiMGM1YzY5IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+            { nome: "Saldo Contratos", url: "https://app.powerbi.com/view?r=eyJrIjoiNmExN2NlNjMtNTFiMS00YWU5LTkzOWEtZGI0NzRiNTJhM2Y2IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+            { nome: "Valores ativados e cancelados", url: "https://app.powerbi.com/view?r=eyJrIjoiZTk0OGQ5NzAtN2FmYy00MTU5LThiMzAtYTgxZTlkMWRjYzU4IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" }
         ]
       }
     ]
