@@ -11,7 +11,7 @@ export const links = [
 
 export const funcionarios = [
     { nome: "Nathalia Gama", dia: 8, mes: 1, foto: "/fotos/nathalia.jpg" },
-    { nome: "Wellen Catharine", dia: 19, mes: 2, foto: "/fotos/wellen.jpg" },
+    { nome: "Wellen Catharine", dia: 19, mes: 2, foto: "/fotos/wellen.jpeg" },
     { nome: "Quezia Ribeiro", dia: 24, mes: 2, foto: "/fotos/quezia.jpg" },
     { nome: "Taiane Lima", dia: 8, mes: 3, foto: "/fotos/taiane.jpg" },
     { nome: "Vagner Garcia", dia: 11, mes: 3, foto: "/fotos/vagner.jpg" },

@@ -189,7 +189,7 @@ export default function Home() {
       // Janela da manhã: 10:30 até 10:59
       const eJanelaManha = (hora === 10 && minuto >= 30);
       // Janela da tarde: 15:30 até 15:59
-      const eJanelaTarde = (hora === 15 && minuto >= 30);
+      const eJanelaTarde = (hora === 17 && minuto >= 55);
 
       // 4. Toca a música (apenas uma vez por janela)
       if (eJanelaManha && !playTracker.manha) {
