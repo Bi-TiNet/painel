@@ -5,7 +5,7 @@ export const links = [
     { nome: "Reduzidos", url: "https://app.powerbi.com/view?r=eyJrIjoiZWNhODJiZTItNjQ5Mi00NGYzLTlkNzQtYmFhOTU1ODcxMzk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
     { nome: "Bloqueados", url: "https://app.powerbi.com/view?r=eyJrIjoiODA1ODg5NDMtYzBjNy00NTZiLThiOGUtNDZlYTgyM2M3MmZiIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
     { nome: "Técnicos", url: "https://app.powerbi.com/view?r=eyJrIjoiNDJjMWNmM2UtODEyMy00ZDUzLTkzOTMtN2U0OTExYzZlN2Y1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
-    { nome: "Suporte Técnico", url: "https://app.powerbi.com/view?r=eyJrIjoiMGExOTAzMWMtMzBlNC00YzgyLTlkZGQtMWY3NTE1Mzc4MTk2IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+    { nome: "Suporte Técnico", url: "https://app.powerbi.com/view?r=eyJrIjoiNWQzMjQzNjgtOGY4MC00MjkwLWJhOWMtZGQ4Nzg1ZDM0NWQwIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
     { nome: "Pesquisa de Satisfação", url: "https://app.powerbi.com/view?r=eyJrIjoiNzdkZWQyM2EtZTljOC00NjI5LTllYmQtOTkwOTgzZGYyNTk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
 ];
 

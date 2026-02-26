@@ -24,7 +24,7 @@ const database = [
         departamento: "Técnico & Suporte",
         relatorios: [
             { nome: "Técnicos", url: "https://app.powerbi.com/view?r=eyJrIjoiNDJjMWNmM2UtODEyMy00ZDUzLTkzOTMtN2U0OTExYzZlN2Y1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
-            { nome: "Suporte Técnico", url: "https://app.powerbi.com/view?r=eyJrIjoiMGExOTAzMWMtMzBlNC00YzgyLTlkZGQtMWY3NTE1Mzc4MTk2IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+            { nome: "Suporte Técnico", url: "https://app.powerbi.com/view?r=eyJrIjoiNWQzMjQzNjgtOGY4MC00MjkwLWJhOWMtZGQ4Nzg1ZDM0NWQwIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
             ]
       },
       {
