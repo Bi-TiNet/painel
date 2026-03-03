@@ -8,8 +8,6 @@ import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
 import Header from "@/app/components/Header";
 import DashboardRotator from "@/app/components/DashboardRotator";
 import AniversariantesWidget from "@/app/components/AniversariantesWidget";
-import KpiWidget from "@/app/components/KpiWidget";
-import ComunicadosWidget from "@/app/components/ComunicadosWidget";
 import BirthdayOverlay from "@/app/components/BirthdayOverlay";
 import Admin from "@/app/components/Admin";
 import { links, funcionarios } from '@/app/data';
@@ -17,7 +15,10 @@ import { links, funcionarios } from '@/app/data';
 const MainContainer = styled.main`
   display: grid;
   grid-template-columns: 1fr 35%; /* Coluna principal flexível, barra lateral com 35% */
-  grid-template-rows: 100vh;
+  
+  /* A MÁGICA ACONTECE AQUI: Mudamos de 100vh para 1fr */
+  grid-template-rows: 1fr; 
+  
   width: 100vw;
   height: 100vh;
   padding: 1rem;
@@ -80,7 +81,7 @@ const initialComunicados = [
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [aniversarianteHoje, setAniversarianteHoje] = useState(null);
+  const [aniversariantesHoje, setAniversariantesHoje] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const [kpis, setKpis] = useState(initialKpis);
   const [comunicados, setComunicados] = useState(initialComunicados);
@@ -117,8 +118,10 @@ export default function Home() {
   }, []);
 
   const handleLoginSuccess = (user) => {
-    localStorage.setItem('loggedInUser', user);
     setLoggedInUser(user);
+    localStorage.setItem('loggedInUser', user); 
+    setShowAdmin(false); 
+    window.location.href = '/gestor'; 
   };
 
   const handleLogout = () => {
@@ -148,14 +151,14 @@ export default function Home() {
   useEffect(() => {
     if (isPaused) return;
     const rotationTimer = setInterval(() => {
-      if (!aniversarianteHoje) {
+      if (!aniversariantesHoje) {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % links.length);
       }
     }, 25000);
     return () => clearInterval(rotationTimer);
-  }, [aniversarianteHoje, isPaused, links.length]);
+  }, [aniversariantesHoje, isPaused, links.length]);
 
-  // --- LÓGICA DE ANIVERSÁRIO CORRIGIDA E ROBUSTA ---
+// --- LÓGICA DE ANIVERSÁRIO CORRIGIDA E ROBUSTA ---
   useEffect(() => {
     const checkBirthday = () => {
       const agora = new Date();
@@ -167,48 +170,42 @@ export default function Home() {
       // 1. Reinicia o rastreador se for um novo dia
       if (diaAtual !== playTracker.dia) {
         setPlayTracker({ dia: diaAtual, manha: false, tarde: false });
-        return; // Sai e espera a próxima verificação
+        return; 
       }
 
-      // 2. Procura pelo aniversariante
-      const aniversarianteDoDia = funcionarios.find(
+      // 2. Procura pelos aniversariantes (AGORA USA FILTER PARA PEGAR TODOS)
+      const aniversariantesDoDia = funcionarios.filter(
         (f) => f.dia === diaAtual && f.mes === mesAtual
       );
 
-      // Se não tem aniversariante, não faz nada
-      if (!aniversarianteDoDia) {
+      // Se não tem ninguém fazendo aniversário hoje, não faz nada
+      if (aniversariantesDoDia.length === 0) {
         return;
       }
       
-      // Se a música já estiver tocando, não faz nada
-      if (aniversarianteHoje) {
+      // Se a tela de festa já estiver aberta, não faz nada
+      if (aniversariantesHoje) {
         return;
       }
 
       // 3. Define as janelas de horário
-      // Janela da manhã: 10:30 até 10:59
-      const eJanelaManha = (hora === 10 && minuto >= 30);
-      // Janela da tarde: 15:30 até 15:59
-      const eJanelaTarde = (hora === 17 && minuto >= 55);
+      const eJanelaManha = (hora === 8 && minuto >= 30);
+      const eJanelaTarde = (hora === 17 && minuto >= 30);
 
-      // 4. Toca a música (apenas uma vez por janela)
+      // 4. Aciona a tela e a música (apenas uma vez por janela)
       if (eJanelaManha && !playTracker.manha) {
         setPlayTracker((prev) => ({ ...prev, manha: true }));
-        setAniversarianteHoje(aniversarianteDoDia);
+        setAniversariantesHoje(aniversariantesDoDia); // <-- Mudei aqui
       } else if (eJanelaTarde && !playTracker.tarde) {
         setPlayTracker((prev) => ({ ...prev, tarde: true }));
-        setAniversarianteHoje(aniversarianteDoDia);
+        setAniversariantesHoje(aniversariantesDoDia); // <-- Mudei aqui
       }
     };
 
-    // Roda a verificação a cada 30 segundos para garantir que pegamos a janela
     const interval = setInterval(checkBirthday, 30000); 
-
-    // Limpa o intervalo
     return () => clearInterval(interval);
     
-  // Adiciona 'playTracker' e 'aniversarianteHoje' às dependências
-  }, [playTracker, aniversarianteHoje]); 
+  }, [playTracker, aniversariantesHoje]); // <-- Mudei aqui
   // --- FIM DA LÓGICA DE ANIVERSÁRIO ---
 
   const currentDashboard = links[currentIndex];
@@ -225,20 +222,16 @@ export default function Home() {
             onSelectPanel={(index) => { setCurrentIndex(index); setIsPaused(true); }}
             panels={links}
             loggedInUser={loggedInUser}
-            onAdminClick={() => setShowAdmin(true)}
+            onGestorClick={() => setShowAdmin(true)}
             onLogout={handleLogout}
           />
           <DashboardWrapper>
             <DashboardRotator dashboard={currentDashboard} />
           </DashboardWrapper>
-          <KpiWrapper>
-            <KpiWidget kpis={kpis} />
-          </KpiWrapper>
         </MainColumn>
 
         <Sidebar>
           <AniversariantesWidget />
-          <ComunicadosWidget comunicados={comunicados} />
         </Sidebar>
 
         {showAdmin && (
@@ -254,8 +247,8 @@ export default function Home() {
         )}
 
         <BirthdayOverlay
-          aniversariante={aniversarianteHoje}
-          onMusicEnd={() => setAniversarianteHoje(null)}
+          aniversariantes={aniversariantesHoje}
+          onClose={() => setAniversariantesHoje(null)}
         />
       </MainContainer>
     </ThemeProvider>

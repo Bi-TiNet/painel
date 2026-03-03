@@ -67,7 +67,7 @@ const TabButton = styled.button`
   padding: 0.8rem 1.5rem;
   border: none;
   background-color: transparent;
-  color: ${({ theme, active }) => active ? theme.colors.primary : theme.colors.textSecondary};
+  color: ${({ theme, $active }) => $active ? theme.colors.primary : theme.colors.textSecondary};
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
@@ -346,8 +346,8 @@ function AdminPanel({ user, onClose, kpis, setKpis, comunicados, setComunicados 
                 </Header>
 
                 <TabContainer>
-                    <TabButton active={activeTab === 'metas'} onClick={() => setActiveTab('metas')}>Metas</TabButton>
-                    <TabButton active={activeTab === 'comunicados'} onClick={() => setActiveTab('comunicados')}>Comunicados</TabButton>
+                    <TabButton $active={activeTab === 'metas'} onClick={() => setActiveTab('metas')}>Metas</TabButton>
+                    <TabButton $active={activeTab === 'comunicados'} onClick={() => setActiveTab('comunicados')}>Comunicados</TabButton>
                 </TabContainer>
 
                 <ContentArea>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -88,9 +89,11 @@ const DropdownItem = styled.a`
 `;
 
 
-export default function Header({ titulo, isPaused, onTogglePause, onSelectPanel, panels, loggedInUser, onAdminClick, onLogout }) {
+// Atualize os parâmetros da função do Header:
+export default function Header({ titulo, isPaused, onTogglePause, onSelectPanel, panels, loggedInUser, onGestorClick, onLogout }) {
     const [hora, setHora] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
+    const router = useRouter(); // <-- Instancie o router
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -100,6 +103,15 @@ export default function Header({ titulo, isPaused, onTogglePause, onSelectPanel,
         return () => clearInterval(timer);
     }, []);
 
+    // Função que lida com o clique no Painel do Gestor
+    const handleGestorRedirect = () => {
+        if (loggedInUser) {
+            router.push('/gestor'); // Se tiver logado, vai direto
+        } else {
+            onGestorClick(); // Se não, aciona o modal de login na Home
+        }
+    };
+
     return (
         <HeaderContainer>
             <LogoContainer>
@@ -108,8 +120,9 @@ export default function Header({ titulo, isPaused, onTogglePause, onSelectPanel,
             </LogoContainer>
 
             <ControlsContainer>
-                <ControlButton onClick={onAdminClick}>
-                  Admin
+                {/* Alterado botão de Admin para Gestor */}
+                <ControlButton onClick={handleGestorRedirect}>
+                  Painel do Gestor
                 </ControlButton>
 
                 {loggedInUser && (
