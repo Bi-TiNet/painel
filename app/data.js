@@ -41,7 +41,7 @@ export const funcionarios = [
 // ADICIONE ESTA PARTE AO SEU ARQUIVO
 export const adminUsers = [
     { user: 'Diego França', pass: 'DFti@2025' },
-    { user: 'Daniele França', pass: 'DFTinet@2025' },
+    { user: 'Daniele França', pass: 'DFtinet@2025' },
     { user: 'Carlos Júnior', pass: 'DCjr@2806' },
 ];
 
