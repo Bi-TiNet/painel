@@ -745,26 +745,32 @@
                 const orderB = b.order !== undefined ? b.order : b.id_original;
                 return orderA - orderB;
             }).forEach(task => {
-
-                if (!isGestor && !isTopLevel) {
-                    if (task.authorId !== currentUser.uid && task.responsibleId !== currentUser.uid) {
-                        return; // Esconde o card
+                
+                // 1. REGRA DE PERTENCIMENTO: 
+                // Colaboradores e Gestores comuns só veem o card se forem o RESPONSÁVEL.
+                // (Isso remove o card do quadro de quem criou, a menos que ele seja o próprio Carlos ou Diego)
+                if (!isTopLevel && !isCarlos && !isDiego) {
+                    if (task.responsibleId !== currentUser.uid) {
+                        return; // Se não é o responsável, o card some do quadro dele
                     }
                 }
-                // VERIFICAÇÃO DE ISOLAMENTO DIEGO E DANI
-                // Identifica se a tarefa pertence ao Diego ou à Daniele (como autor ou responsável)
-                const isDiegoTask = task.authorId === DIEGO_UID || task.responsibleId === DIEGO_UID;
-                const isDanieleTask = (task.authorName && task.authorName.toLowerCase().includes('daniele')) || (task.responsibleName && task.responsibleName.toLowerCase().includes('daniele'));
-                
-                // Se a tarefa for do Diego, e quem está a ver não é Diego nem a gestão/Carlos, ESCONDE
-                if (isDiegoTask && !isDiego && !isCarlos) return;
-                // Se a tarefa for da Daniele, e quem está a ver não é a Daniele nem a gestão/Carlos, ESCONDE
-                if (isDanieleTask && !isDaniele && !isCarlos) return;
 
-                // FILTRO DE USUÁRIO DA GESTÃO
+                // 2. REGRA DA DANIELE: Vê todo mundo, EXCETO as tarefas do Diego
+                if (isDaniele) {
+                    const isDiegoTask = task.authorId === DIEGO_UID || task.responsibleId === DIEGO_UID || 
+                                        (task.authorName && task.authorName.toLowerCase().includes('diego')) || 
+                                        (task.responsibleName && task.responsibleName.toLowerCase().includes('diego'));
+                    if (isDiegoTask) return; 
+                }
+
+                // Carlos e Diego continuam vendo tudo (Autorias e Responsabilidades de todos)
+                
+                // FILTRO DE USUÁRIO (Opcional: mantém o filtro funcionando para você)
                 if (currentFilter !== 'all') {
                     if (task.responsibleId !== currentFilter && task.authorId !== currentFilter) return;
                 }
+                
+                // ... restante do código de renderização do card
 
                 // REGRA 2: Sigilo Absoluto
                 if (task.isConfidential) {
