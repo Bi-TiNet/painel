@@ -746,24 +746,28 @@
                 return orderA - orderB;
             }).forEach(task => {
                 
-                // 🛑 REGRA DE OURO: O CARD SÓ EXISTE NO QUADRO DO RESPONSÁVEL
-                // Independente de quem criou (Carlos, Diego, Dani ou Colaborador),
-                // o card só aparece se o usuário logado for o RESPONSÁVEL.
-                if (task.responsibleId !== currentUser.uid) {
-                    
-                    // EXCEÇÃO PARA GESTÃO: Se um filtro de usuário estiver ativo, 
-                    // permitimos ver os cards do responsável selecionado no filtro.
-                    if ((isGestor || isTopLevel) && currentFilter !== 'all') {
-                        if (task.responsibleId !== currentFilter) {
-                            return; // Não é o cara do filtro, esconde.
-                        }
-                    } else {
-                        // Se não tem filtro ativo ou não é gestor, e não é o responsável, esconde.
-                        return; 
+                // 1. DEFINIÇÃO DA VISÃO BASE
+                // Se o filtro estiver em "all" (Todos), o usuário só vê o que é RESPONSÁVEL.
+                // Se um filtro de usuário específico estiver ativo, mostra as tarefas desse usuário.
+                
+                let deveExibir = false;
+
+                if (currentFilter === 'all') {
+                    // Visão padrão do quadro: Apenas o que eu tenho que fazer
+                    if (task.responsibleId === currentUser.uid) {
+                        deveExibir = true;
+                    }
+                } else {
+                    // Visão de Filtro: Apenas o que o usuário selecionado tem que fazer
+                    if (task.responsibleId === currentFilter) {
+                        deveExibir = true;
                     }
                 }
 
-                // 2. REGRA DA DANIELE: Mesmo no filtro, ela não vê nada do Diego
+                // Se não passou na prova da responsabilidade ou do filtro, esconde.
+                if (!deveExibir) return;
+
+                // 2. REGRA DA DANIELE: Mesmo filtrando, ela nunca vê o Diego
                 if (isDaniele) {
                     const isDiegoTask = task.authorId === DIEGO_UID || task.responsibleId === DIEGO_UID || 
                                         (task.authorName && task.authorName.toLowerCase().includes('diego')) || 
@@ -771,16 +775,14 @@
                     if (isDiegoTask) return; 
                 }
 
-                // REGRA DE SIGILO ABSOLUTO
+                // 3. REGRA DE SIGILO ABSOLUTO
                 if (task.isConfidential) {
                     const isResponsibleNow = task.responsibleId === currentUser.uid;
-                    // Só vê sigiloso se for o responsável ou se for Carlos/Diego/Dani
+                    // Só vê sigiloso se for o responsável ou se for Gestão Suprema (Carlos, Diego, Dani)
                     if (!isResponsibleNow && !isTopLevel) return;
                 }
                 
-                // ... restante do código de montagem do card (status, badges, etc)
-                
-                // ... restante do código de montagem do card
+                // ... restante do código (status, montagem do HTML do card, etc)
 
                 const status = cols[task.status] ? task.status : 'A Fazer';
                 counts[status]++;
