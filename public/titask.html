@@ -419,19 +419,23 @@
 
             systemUsers.forEach(u => {
                 const lowerName = (u.displayName || '').toLowerCase();
-                const lowerEmail = (u.email || '').toLowerCase();
                 
-                // Identificar Diego e Daniele para NÃO aparecerem nas listas públicas
-                const isSpecialBoardAdmin = u.id === DIEGO_UID || lowerName.includes('diego') || lowerName.includes('daniele') || lowerEmail.includes('daniele');
+                // Identifica se o usuário da lista é o Diego
+                const isUserDiego = u.id === DIEGO_UID || lowerName.includes('diego');
                 
-                if (!isSpecialBoardAdmin) {
-                    filterEl.innerHTML += `<option value="${u.id}">${u.displayName}</option>`;
-                    respEl.innerHTML += `<option value="${u.id}">${u.displayName}</option>`;
+                // REGRA: Se quem estiver logado for a Daniele, o Diego não entra na lista dela
+                if (isDaniele && isUserDiego) {
+                    return; // Pula o Diego
+                }
+
+                // Todos os outros entram na lista de Filtro
+                filterEl.innerHTML += `<option value="${u.id}">${u.displayName}</option>`;
+                
+                // Adiciona na lista de Responsável (colocando o "(Eu)" no próprio usuário)
+                if (u.id === currentUser.uid) {
+                    respEl.innerHTML += `<option value="${u.id}">${u.displayName} (Eu)</option>`;
                 } else {
-                    // Mas se o utilizador logado for um deles, ele pode querer atribuir a tarefa a si próprio
-                    if (u.id === currentUser.uid) {
-                        respEl.innerHTML += `<option value="${u.id}">${u.displayName} (Eu)</option>`;
-                    }
+                    respEl.innerHTML += `<option value="${u.id}">${u.displayName}</option>`;
                 }
             });
         };
