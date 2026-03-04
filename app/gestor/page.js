@@ -49,7 +49,18 @@ const database = [
       }
     ]
   },
-  { menu: "Menu 3 (em breve)", departamentos: [] },
+  {
+    menu: "Ferramentas", 
+    departamentos: [
+      {
+        departamento: "Demandas e Tarefas",
+        relatorios: [
+            { nome: "Quadro Ti.Task", url: "/titask.html" }
+        ]
+      }
+    ] 
+  },
+
   { menu: "Menu 4 (em breve)", departamentos: [] },
   { menu: "Menu 5 (em breve)", departamentos: [] }
 ];

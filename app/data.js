@@ -11,6 +11,7 @@ export const links = [
 
 export const funcionarios = [
     { nome: "Nathalia Gama", dia: 8, mes: 1, foto: "/fotos/nathalia.jpg" },
+    { nome: "Ezequiel", dia: 17, mes: 1, foto: "/fotos/ezequiel.png" },
     { nome: "Wellen Catharine", dia: 19, mes: 2, foto: "/fotos/wellen.jpeg" },
     { nome: "Quezia Ribeiro", dia: 24, mes: 2, foto: "/fotos/quezia.jpg" },
     { nome: "Vagner Garcia", dia: 11, mes: 3, foto: "/fotos/vagner.jpg" },
@@ -21,6 +22,7 @@ export const funcionarios = [
     { nome: "Dalila Meira", dia: 9, mes: 6, foto: "/fotos/dalila.jpg" },
     { nome: "Tainan Sales", dia: 24, mes: 6, foto: "/fotos/tainan.jpeg" },
     { nome: "Edvanildo Rodrigues", dia: 14, mes: 6, foto: "/fotos/edvanildo.jpg" },
+    { nome: "George", dia: 10, mes: 7, foto: "/fotos/george.png" },
     { nome: "Daniele França", dia: 20, mes: 7, foto: "/fotos/daniele_frança.jpg" },
     { nome: "Carlos Júnior", dia: 30, mes: 7, foto: "/fotos/carlos.jpg" },
     { nome: "Emily Rebeca", dia: 1, mes: 8, foto: "/fotos/emily.png" },
