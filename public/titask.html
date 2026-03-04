@@ -1072,8 +1072,8 @@
                 document.getElementById('current-user-display').textContent = currentUser.name;
                 document.getElementById('edit-profile-name').value = currentUser.name;
                 
-                // Exibe o painel de criação e o filtro apenas para Gestores
-                if(isGestor) {
+                // Exibe o painel de criação e o filtro para Gestores e Gestão Suprema (Carlos, Diego e Dani)
+                if(isGestor || isTopLevel) {
                     document.getElementById('admin-section').style.display = 'block';
                     document.getElementById('user-filter').style.display = 'block';
                 } else {
