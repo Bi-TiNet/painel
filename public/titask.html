@@ -746,17 +746,24 @@
                 return orderA - orderB;
             }).forEach(task => {
                 
-                // 🛑 REGRA DE VISÃO EXCLUSIVA DO RESPONSÁVEL
-                // Se o usuário logado NÃO for Carlos e NÃO for Diego:
-                if (!isCarlos && !isDiego) {
-                    // Ele só pode ver o card se ele for o RESPONSÁVEL atual.
-                    // Se ele criou, mas não é o responsável, o card NÃO aparece para ele.
-                    if (task.responsibleId !== currentUser.uid) {
-                        return; // Esconde o card do quadro de quem criou (Autor)
+                // 🛑 REGRA DE OURO: O CARD SÓ EXISTE NO QUADRO DO RESPONSÁVEL
+                // Independente de quem criou (Carlos, Diego, Dani ou Colaborador),
+                // o card só aparece se o usuário logado for o RESPONSÁVEL.
+                if (task.responsibleId !== currentUser.uid) {
+                    
+                    // EXCEÇÃO PARA GESTÃO: Se um filtro de usuário estiver ativo, 
+                    // permitimos ver os cards do responsável selecionado no filtro.
+                    if ((isGestor || isTopLevel) && currentFilter !== 'all') {
+                        if (task.responsibleId !== currentFilter) {
+                            return; // Não é o cara do filtro, esconde.
+                        }
+                    } else {
+                        // Se não tem filtro ativo ou não é gestor, e não é o responsável, esconde.
+                        return; 
                     }
                 }
 
-                // REGRA DA DANIELE: Continua vendo tudo, exceto o Diego
+                // 2. REGRA DA DANIELE: Mesmo no filtro, ela não vê nada do Diego
                 if (isDaniele) {
                     const isDiegoTask = task.authorId === DIEGO_UID || task.responsibleId === DIEGO_UID || 
                                         (task.authorName && task.authorName.toLowerCase().includes('diego')) || 
@@ -764,19 +771,14 @@
                     if (isDiegoTask) return; 
                 }
 
-                // Carlos e Diego continuam com visão total (vêem cards criados e atribuídos)
-
-                // FILTRO DE USUÁRIO DA GESTÃO (Para quando você quiser filtrar por alguém específico)
-                if (currentFilter !== 'all') {
-                    if (task.responsibleId !== currentFilter && task.authorId !== currentFilter) return;
-                }
-
                 // REGRA DE SIGILO ABSOLUTO
                 if (task.isConfidential) {
-                    const isCreator = task.authorId === currentUser.uid;
                     const isResponsibleNow = task.responsibleId === currentUser.uid;
-                    if (!isCreator && !isResponsibleNow && !isTopLevel) return;
+                    // Só vê sigiloso se for o responsável ou se for Carlos/Diego/Dani
+                    if (!isResponsibleNow && !isTopLevel) return;
                 }
+                
+                // ... restante do código de montagem do card (status, badges, etc)
                 
                 // ... restante do código de montagem do card
 
