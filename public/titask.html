@@ -741,6 +741,12 @@
                 const orderB = b.order !== undefined ? b.order : b.id_original;
                 return orderA - orderB;
             }).forEach(task => {
+
+                if (!isGestor && !isTopLevel) {
+                    if (task.authorId !== currentUser.uid && task.responsibleId !== currentUser.uid) {
+                        return; // Esconde o card
+                    }
+                }
                 // VERIFICAÇÃO DE ISOLAMENTO DIEGO E DANI
                 // Identifica se a tarefa pertence ao Diego ou à Daniele (como autor ou responsável)
                 const isDiegoTask = task.authorId === DIEGO_UID || task.responsibleId === DIEGO_UID;
