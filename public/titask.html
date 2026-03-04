@@ -746,16 +746,17 @@
                 return orderA - orderB;
             }).forEach(task => {
                 
-                // 1. REGRA DE PERTENCIMENTO: 
-                // Colaboradores e Gestores comuns só veem o card se forem o RESPONSÁVEL.
-                // (Isso remove o card do quadro de quem criou, a menos que ele seja o próprio Carlos ou Diego)
-                if (!isTopLevel && !isCarlos && !isDiego) {
+                // 🛑 REGRA DE VISÃO EXCLUSIVA DO RESPONSÁVEL
+                // Se o usuário logado NÃO for Carlos e NÃO for Diego:
+                if (!isCarlos && !isDiego) {
+                    // Ele só pode ver o card se ele for o RESPONSÁVEL atual.
+                    // Se ele criou, mas não é o responsável, o card NÃO aparece para ele.
                     if (task.responsibleId !== currentUser.uid) {
-                        return; // Se não é o responsável, o card some do quadro dele
+                        return; // Esconde o card do quadro de quem criou (Autor)
                     }
                 }
 
-                // 2. REGRA DA DANIELE: Vê todo mundo, EXCETO as tarefas do Diego
+                // REGRA DA DANIELE: Continua vendo tudo, exceto o Diego
                 if (isDaniele) {
                     const isDiegoTask = task.authorId === DIEGO_UID || task.responsibleId === DIEGO_UID || 
                                         (task.authorName && task.authorName.toLowerCase().includes('diego')) || 
@@ -763,21 +764,21 @@
                     if (isDiegoTask) return; 
                 }
 
-                // Carlos e Diego continuam vendo tudo (Autorias e Responsabilidades de todos)
-                
-                // FILTRO DE USUÁRIO (Opcional: mantém o filtro funcionando para você)
+                // Carlos e Diego continuam com visão total (vêem cards criados e atribuídos)
+
+                // FILTRO DE USUÁRIO DA GESTÃO (Para quando você quiser filtrar por alguém específico)
                 if (currentFilter !== 'all') {
                     if (task.responsibleId !== currentFilter && task.authorId !== currentFilter) return;
                 }
-                
-                // ... restante do código de renderização do card
 
-                // REGRA 2: Sigilo Absoluto
+                // REGRA DE SIGILO ABSOLUTO
                 if (task.isConfidential) {
                     const isCreator = task.authorId === currentUser.uid;
                     const isResponsibleNow = task.responsibleId === currentUser.uid;
                     if (!isCreator && !isResponsibleNow && !isTopLevel) return;
                 }
+                
+                // ... restante do código de montagem do card
 
                 const status = cols[task.status] ? task.status : 'A Fazer';
                 counts[status]++;
