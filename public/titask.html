@@ -746,43 +746,49 @@
                 return orderA - orderB;
             }).forEach(task => {
                 
-                // 1. DEFINIÇÃO DA VISÃO BASE
-                // Se o filtro estiver em "all" (Todos), o usuário só vê o que é RESPONSÁVEL.
-                // Se um filtro de usuário específico estiver ativo, mostra as tarefas desse usuário.
-                
+                // 1. LÓGICA DE VISUALIZAÇÃO DO FILTRO
                 let deveExibir = false;
 
                 if (currentFilter === 'all') {
-                    // Visão padrão do quadro: Apenas o que eu tenho que fazer
-                    if (task.responsibleId === currentUser.uid) {
+                    // SELECIONADO: "TODOS OS FUNCIONÁRIOS"
+                    if (isGestor || isTopLevel) {
+                        // Gestão vê TUDO (respeitando a trava do Diego abaixo)
                         deveExibir = true;
+                    } else {
+                        // Colaborador comum só vê o que é dele
+                        if (task.responsibleId === currentUser.uid) deveExibir = true;
                     }
                 } else {
-                    // Visão de Filtro: Apenas o que o usuário selecionado tem que fazer
-                    if (task.responsibleId === currentFilter) {
-                        deveExibir = true;
-                    }
+                    // SELECIONADO: UM FUNCIONÁRIO ESPECÍFICO NO FILTRO
+                    if (task.responsibleId === currentFilter) deveExibir = true;
                 }
 
-                // Se não passou na prova da responsabilidade ou do filtro, esconde.
                 if (!deveExibir) return;
 
-                // 2. REGRA DA DANIELE: Mesmo filtrando, ela nunca vê o Diego
-                if (isDaniele) {
-                    const isDiegoTask = task.authorId === DIEGO_UID || task.responsibleId === DIEGO_UID || 
-                                        (task.authorName && task.authorName.toLowerCase().includes('diego')) || 
-                                        (task.responsibleName && task.responsibleName.toLowerCase().includes('diego'));
-                    if (isDiegoTask) return; 
+                // 2. TRAVA DE SEGURANÇA: O ISOLAMENTO DO DIEGO
+                // Se a tarefa for do Diego (Autor ou Responsável)
+                const isDiegoTask = task.authorId === DIEGO_UID || task.responsibleId === DIEGO_UID || 
+                                    (task.authorName && task.authorName.toLowerCase().includes('diego')) || 
+                                    (task.responsibleName && task.responsibleName.toLowerCase().includes('diego'));
+
+                if (isDiegoTask) {
+                    // Só exibe se: 1. Quem vê é o próprio Diego OU 2. Quem vê é o Carlos
+                    if (!isDiego && !isCarlos) return;
                 }
 
-                // 3. REGRA DE SIGILO ABSOLUTO
+                // 3. REGRA DA DANIELE (Mantém a restrição dela não ver o Diego, já coberta acima)
+                // Mas garantimos que ela veja todos os outros colaboradores quando em "all"
+                if (isDaniele && isDiegoTask) return;
+
+                // 4. REGRA DE SIGILO ABSOLUTO (Cards com cadeado)
                 if (task.isConfidential) {
                     const isResponsibleNow = task.responsibleId === currentUser.uid;
-                    // Só vê sigiloso se for o responsável ou se for Gestão Suprema (Carlos, Diego, Dani)
-                    if (!isResponsibleNow && !isTopLevel) return;
+                    const isCreator = task.authorId === currentUser.uid;
+                    // Só vê sigiloso se for o responsável, o criador ou Carlos/Diego/Dani
+                    if (!isResponsibleNow && !isCreator && !isTopLevel) return;
                 }
                 
-                // ... restante do código (status, montagem do HTML do card, etc)
+                // ... restante do código de montagem do card
 
                 const status = cols[task.status] ? task.status : 'A Fazer';
                 counts[status]++;
