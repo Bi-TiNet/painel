@@ -249,44 +249,41 @@
             <div class="flex justify-between items-center mb-4 border-b border-gray-700/50 pb-4">
                 <h2 class="text-2xl font-bold text-white flex items-center gap-2">
                     <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    Caixa de Entrada
+                    Correio Interno
                 </h2>
                 <div class="flex gap-2">
-                    <button onclick="showComposeMessage()" class="btn btn-primary btn-sm flex items-center gap-1"><span class="text-lg leading-none">+</span> Nova Mensagem</button>
+                    <button onclick="showComposeMessage()" class="btn btn-primary btn-sm flex items-center gap-1"><span class="text-lg leading-none">+</span> Nova Conversa</button>
                     <button onclick="closeModal('modal-messages')" class="text-gray-400 hover:text-white text-2xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
                 </div>
             </div>
 
             <div id="msg-list-view" class="h-[60vh] overflow-y-auto space-y-2 pr-2">
-                <p class="text-sm text-gray-500 italic text-center mt-10">Carregando mensagens...</p>
+                <p class="text-sm text-gray-500 italic text-center mt-10">Carregando conversas...</p>
             </div>
 
             <div id="msg-compose-view" class="hidden flex-col gap-4 h-[60vh]">
                 <div class="flex items-center gap-2">
                     <button onclick="showMessagesList()" class="text-gray-400 hover:text-white text-sm bg-gray-800 px-3 py-1.5 rounded flex items-center gap-1">← Voltar</button>
-                    <h3 class="text-white font-semibold" id="msg-compose-title">Nova Mensagem</h3>
+                    <h3 class="text-white font-semibold" id="msg-compose-title">Nova Conversa</h3>
                 </div>
                 <select id="msg-to" class="form-input text-sm"><option value="">Para (Selecione um utilizador)...</option></select>
-                <input type="text" id="msg-subject" class="form-input text-sm" placeholder="Assunto da mensagem...">
+                <input type="text" id="msg-subject" class="form-input text-sm" placeholder="Assunto da conversa...">
                 <textarea id="msg-body" class="form-input flex-1 resize-none text-sm" placeholder="Escreva a sua mensagem aqui..."></textarea>
-                <button id="btn-send-message" class="btn btn-primary w-full shadow-lg shadow-blue-500/20">Enviar Mensagem</button>
+                <button id="btn-send-message" class="btn btn-primary w-full shadow-lg shadow-blue-500/20">Iniciar Conversa</button>
             </div>
 
-            <div id="msg-read-view" class="hidden flex-col gap-4 h-[60vh]">
-                <div class="flex items-center gap-2">
-                    <button onclick="showMessagesList()" class="text-gray-400 hover:text-white text-sm bg-gray-800 px-3 py-1.5 rounded flex items-center gap-1">← Voltar</button>
+            <div id="msg-read-view" class="hidden flex-col h-[60vh]">
+                <div class="flex items-center gap-3 mb-4">
+                    <button onclick="showMessagesList()" class="text-gray-400 hover:text-white text-sm bg-gray-800 px-3 py-1.5 rounded flex items-center gap-1 shadow-md">← Voltar</button>
+                    <h3 id="msg-read-subject" class="text-lg font-bold text-white truncate flex-1">Assunto</h3>
                 </div>
-                <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
-                    <h3 id="msg-read-subject" class="text-lg font-bold text-white mb-2">Assunto</h3>
-                    <div class="flex justify-between items-center text-xs text-gray-400 border-b border-gray-700 pb-2 mb-3">
-                        <p>De: <span id="msg-read-from" class="font-semibold text-blue-300">Remetente</span></p>
-                        <p id="msg-read-date">Data</p>
+                <div class="bg-gray-800/50 p-3 rounded-lg border border-gray-700 flex flex-col flex-1 min-h-0">
+                    <div id="msg-read-history" class="overflow-y-auto flex-1 space-y-4 pr-2 mb-3">
+                        </div>
+                    <div class="flex gap-2 pt-3 border-t border-gray-700/50 mt-auto">
+                        <textarea id="msg-reply-body" class="form-input flex-1 resize-none text-sm h-12 py-2" placeholder="Digite sua resposta e continue a conversa..."></textarea>
+                        <button id="btn-send-reply" class="btn btn-primary px-5 font-bold shadow-lg shadow-blue-500/20">Enviar</button>
                     </div>
-                    <p id="msg-read-body" class="text-sm text-gray-200 whitespace-pre-wrap leading-relaxed overflow-y-auto max-h-[35vh]"></p>
-                </div>
-                <div class="flex gap-3 mt-auto">
-                    <button id="btn-reply-msg" class="btn btn-secondary flex-1">Responder</button>
-                    <button id="btn-forward-msg" class="btn btn-secondary flex-1">Encaminhar</button>
                 </div>
             </div>
         </div>
@@ -347,8 +344,7 @@
 
                     <div>
                         <h4 class="text-gray-500 text-[11px] uppercase tracking-wider mb-2 font-semibold">Responsável pela Tarefa</h4>
-                        <select id="task-responsible" class="form-input w-full font-medium text-sm text-blue-300 bg-blue-900/10 border-blue-800/50">
-                            </select>
+                        <select id="task-responsible" class="form-input w-full font-medium text-sm text-blue-300 bg-blue-900/10 border-blue-800/50"></select>
                     </div>
 
                     <div>
@@ -363,12 +359,8 @@
 
                     <div>
                         <h4 class="text-gray-500 text-[11px] uppercase tracking-wider mb-2 font-semibold">Estado Operacional</h4>
-                        <select id="task-status" class="form-input w-full font-medium text-sm">
-                            </select>
-                        
-                        <button id="btn-open-report" type="button" style="display: none;" class="btn btn-secondary w-full mt-3 text-xs flex items-center justify-center gap-2 bg-blue-900/30 text-blue-400 border border-blue-800/50 hover:bg-blue-800/50 transition-colors">
-                            📄 Gestão de Relatórios
-                        </button>
+                        <select id="task-status" class="form-input w-full font-medium text-sm"></select>
+                        <button id="btn-open-report" type="button" style="display: none;" class="btn btn-secondary w-full mt-3 text-xs flex items-center justify-center gap-2 bg-blue-900/30 text-blue-400 border border-blue-800/50 hover:bg-blue-800/50 transition-colors">📄 Gestão de Relatórios</button>
                     </div>
                     
                     <div>
@@ -441,7 +433,6 @@
                     </h4>
                     <div id="reports-history-list" class="space-y-4 flex-1 overflow-y-auto pr-2"></div>
                 </div>
-
                 <div id="new-report-section" class="bg-gray-800/40 p-5 rounded-xl border border-gray-700/50 h-[50vh] flex flex-col">
                     <h4 class="text-gray-400 font-semibold flex items-center gap-2 mb-3 uppercase tracking-wider text-xs text-blue-300">
                         + Adicionar Relatório
@@ -460,7 +451,7 @@
     <script type="module">
         import { initializeApp, getApp, getApps } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile, updatePassword } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-        import { getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, addDoc, deleteDoc, query, where, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+        import { getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, addDoc, deleteDoc, query, where, orderBy, onSnapshot, serverTimestamp, arrayUnion } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB2MmKGo3-cXdYJWbVme3kGdFlN81J9YsU",
@@ -474,11 +465,11 @@
 
         // VARIÁVEIS DE SESSÃO E PERMISSÃO
         let currentUser = null;
-        let isAdmin = false;         // Carlos
-        let isDiego = false;         // Diego (Gestão Admin)
-        let isDani = false;          // Daniele (Gestão)
-        let isSupervisor = false;    // Supervisor de Depto
-        let isColaborador = false;   // Colaborador Base
+        let isAdmin = false;         
+        let isDiego = false;         
+        let isDani = false;          
+        let isSupervisor = false;    
+        let isColaborador = false;   
         const DIEGO_UID = "Rp9xFMsa8Xc3wzzTiGYV5rSNE7x2"; 
 
         let unsubscribeRoadmap;
@@ -489,6 +480,7 @@
 
         let currentEditingTaskId = null;
         let currentReportTaskId = null;
+        let currentConversationId = null;
         let isDraggingCard = false;
         let loginTime = Date.now();
         
@@ -498,8 +490,26 @@
         // Cache global
         let systemUsers = [];
         let allTasks = [];
-        let allMessages = [];
+        let allConversations = [];
         let currentFilter = 'all';
+
+        // ÁUDIO DE NOTIFICAÇÃO (Som agudo, limpo e volume MÁXIMO 1.0)
+        const notificationSound = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
+        notificationSound.volume = 1.0;
+        
+        const playNotificationSound = () => {
+            notificationSound.currentTime = 0;
+            notificationSound.play().catch(e => console.log("Áudio bloqueado pelo navegador.", e));
+        };
+
+        const showNativeNotification = (title, body) => {
+            if (Notification.permission === "granted") {
+                new Notification(title, { 
+                    body: body, 
+                    icon: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>" 
+                });
+            }
+        };
 
         const labelColorMap = {
             'blue': 'bg-blue-500/20 text-blue-300 border-blue-500/30 hover:bg-blue-500/30',
@@ -527,12 +537,9 @@
 
         const closeModal = (modalId) => {
             document.getElementById(modalId).classList.remove('visible');
-            if (modalId === 'modal-task') { 
-                if (activeTaskUnsubComments) { activeTaskUnsubComments(); activeTaskUnsubComments = null; }
-            }
-            if (modalId === 'modal-report') {
-                if (activeTaskUnsubReports) { activeTaskUnsubReports(); activeTaskUnsubReports = null; }
-            }
+            if (modalId === 'modal-task' && activeTaskUnsubComments) { activeTaskUnsubComments(); activeTaskUnsubComments = null; }
+            if (modalId === 'modal-report' && activeTaskUnsubReports) { activeTaskUnsubReports(); activeTaskUnsubReports = null; }
+            if (modalId === 'modal-messages') { currentConversationId = null; }
         };
         window.closeModal = closeModal;
 
@@ -541,27 +548,21 @@
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = 'bg-gray-800 border-l-4 border-blue-500 p-4 rounded shadow-2xl text-white w-72 transform transition-all duration-300 translate-x-10 opacity-0';
-            toast.innerHTML = `<h5 class="font-bold text-sm text-blue-400">${title}</h5><p class="text-xs text-gray-300 mt-1">${message}</p>`;
+            toast.innerHTML = `<h5 class="font-bold text-sm text-blue-400">${title}</h5><p class="text-xs text-gray-300 mt-1 truncate">${message}</p>`;
             container.appendChild(toast);
             
             setTimeout(() => { toast.classList.remove('translate-x-10', 'opacity-0'); }, 10);
-            
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-x-10');
-                setTimeout(() => toast.remove(), 300);
-            }, 6000);
+            setTimeout(() => { toast.classList.add('opacity-0', 'translate-x-10'); setTimeout(() => toast.remove(), 300); }, 6000);
         };
 
-        // Formatação de Data Reutilizável
         const formatDateDetailed = (firebaseTimestamp) => {
             if (!firebaseTimestamp) return 'Data não registada';
-            const d = firebaseTimestamp.toDate();
+            const d = firebaseTimestamp.toDate ? firebaseTimestamp.toDate() : new Date(firebaseTimestamp);
             const day = String(d.getDate()).padStart(2, '0');
             const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-            const year = d.getFullYear();
             const hours = String(d.getHours()).padStart(2, '0');
             const minutes = String(d.getMinutes()).padStart(2, '0');
-            return `${day} ${months[d.getMonth()]} ${year}, às ${hours}:${minutes}`;
+            return `${day} ${months[d.getMonth()]} às ${hours}:${minutes}`;
         };
 
         // -----------------------------------------------------
@@ -571,9 +572,7 @@
             try {
                 const usersSnap = await getDocs(collection(db, "users"));
                 systemUsers = [];
-                usersSnap.forEach(doc => {
-                    systemUsers.push({ id: doc.id, ...doc.data() });
-                });
+                usersSnap.forEach(doc => { systemUsers.push({ id: doc.id, ...doc.data() }); });
                 updateUserDropdowns();
                 updateAdminEditUserDropdown();
                 updateMessageDropdown();
@@ -595,9 +594,7 @@
             if(!msgTo) return;
             msgTo.innerHTML = '<option value="">Para (Selecione um utilizador)...</option>';
             systemUsers.forEach(u => {
-                if(u.id !== currentUser.uid) {
-                    msgTo.innerHTML += `<option value="${u.id}">${u.displayName}</option>`;
-                }
+                if(u.id !== currentUser.uid) { msgTo.innerHTML += `<option value="${u.id}">${u.displayName}</option>`; }
             });
         };
 
@@ -621,28 +618,15 @@
             const newDept = document.getElementById('edit-user-dept').value;
             const feedback = document.getElementById('edit-user-feedback');
             
-            if(!userId) {
-                feedback.className = 'text-red-400 mt-2 text-sm';
-                feedback.textContent = 'Selecione um utilizador primeiro.';
-                return;
-            }
-
-            if ((newRole === 'supervisor' || newRole === 'colaborador') && !newDept) {
-                feedback.className = 'text-red-400 mt-2 text-sm';
-                feedback.textContent = 'Departamento é obrigatório para Supervisores e Colaboradores.';
-                return;
-            }
+            if(!userId) { feedback.className = 'text-red-400 mt-2 text-sm'; feedback.textContent = 'Selecione um utilizador primeiro.'; return; }
+            if ((newRole === 'supervisor' || newRole === 'colaborador') && !newDept) { feedback.className = 'text-red-400 mt-2 text-sm'; feedback.textContent = 'Departamento obrigatório para Sup/Colab.'; return; }
 
             showLoader(true);
             try {
                 await updateDoc(doc(db, "users", userId), { role: newRole, department: newDept });
-                feedback.className = 'text-green-400 mt-2 text-sm';
-                feedback.textContent = 'Permissões atualizadas com sucesso!';
+                feedback.className = 'text-green-400 mt-2 text-sm'; feedback.textContent = 'Permissões atualizadas com sucesso!';
                 await loadUsers();
-            } catch(error) {
-                feedback.className = 'text-red-400 mt-2 text-sm';
-                feedback.textContent = 'Erro ao atualizar dados.';
-            }
+            } catch(error) { feedback.className = 'text-red-400 mt-2 text-sm'; feedback.textContent = 'Erro ao atualizar dados.'; }
             showLoader(false);
         });
 
@@ -657,17 +641,13 @@
                 const isUserDiego = u.id === DIEGO_UID || u.role === 'gestao_admin';
                 const isUserSameDept = u.department === currentUser.department;
 
-                // --- FILTRO ---
                 if (!isAdmin && !isColaborador) { 
                     let allowFilter = false;
                     if (isSupervisor && isUserSameDept) allowFilter = true;
-                    else if (isDani) allowFilter = true; // Dani vê todos
-                    else if (isDiego) allowFilter = true;
-
+                    else if (isDani || isDiego) allowFilter = true;
                     if (allowFilter) filterEl.innerHTML += `<option value="${u.id}">${u.displayName}</option>`;
                 }
 
-                // --- DROP RESPONSÁVEL ---
                 let allowAssign = false;
                 if (isColaborador) {
                     if (u.id === currentUser.uid) allowAssign = true;
@@ -685,17 +665,11 @@
             });
         };
 
-        document.getElementById('user-filter').addEventListener('change', (e) => {
-            currentFilter = e.target.value;
-            renderRoadmap(allTasks); 
-        });
-
-        document.getElementById('task-status').addEventListener('change', (e) => {
-            document.getElementById('btn-open-report').style.display = (e.target.value === 'Concluído') ? 'flex' : 'none';
-        });
+        document.getElementById('user-filter').addEventListener('change', (e) => { currentFilter = e.target.value; renderRoadmap(allTasks); });
+        document.getElementById('task-status').addEventListener('change', (e) => { document.getElementById('btn-open-report').style.display = (e.target.value === 'Concluído') ? 'flex' : 'none'; });
 
         // -----------------------------------------------------
-        // GESTÃO DE MENSAGENS E NOTIFICAÇÕES
+        // GESTÃO DE CONVERSAS (MENSAGENS AGRUPADAS) E NOTIFICAÇÕES
         // -----------------------------------------------------
         window.openMessagesModal = () => {
             document.getElementById('modal-messages').classList.add('visible');
@@ -707,26 +681,27 @@
         };
 
         window.showMessagesList = () => {
+            currentConversationId = null;
             document.getElementById('msg-list-view').style.display = 'block';
             document.getElementById('msg-compose-view').style.display = 'none';
             document.getElementById('msg-read-view').style.display = 'none';
         };
 
         window.showComposeMessage = () => {
+            currentConversationId = null;
             document.getElementById('msg-list-view').style.display = 'none';
             document.getElementById('msg-compose-view').style.display = 'flex';
             document.getElementById('msg-read-view').style.display = 'none';
             document.getElementById('msg-to').value = '';
             document.getElementById('msg-subject').value = '';
             document.getElementById('msg-body').value = '';
-            document.getElementById('msg-compose-title').textContent = 'Nova Mensagem';
         };
 
         const setupMessagesAndNotifications = () => {
             if (unsubMessages) unsubMessages();
             if (unsubNotifications) unsubNotifications();
 
-            // NOTIFICAÇÕES
+            // NOTIFICAÇÕES (Tarefas e Alertas do Sistema)
             const qNotif = query(collection(db, "notifications"), where("userId", "==", currentUser.uid), orderBy("createdAt", "desc"));
             unsubNotifications = onSnapshot(qNotif, (snapshot) => {
                 const listEl = document.getElementById('notifications-list');
@@ -736,7 +711,9 @@
                     const data = change.doc.data();
                     if (change.type === "added" && data.createdAt) {
                         if (data.createdAt.toMillis() > loginTime && !data.read) {
-                            showToast("Nova Notificação", data.title);
+                            playNotificationSound();
+                            showToast("Notificação", data.title);
+                            showNativeNotification("Ti.Task", data.title);
                         }
                     }
                 });
@@ -768,18 +745,24 @@
                 badge.style.display = unreadCount > 0 ? 'block' : 'none';
             });
 
-            // MENSAGENS
-            const qMsg = query(collection(db, "messages"), where("receiverId", "==", currentUser.uid), orderBy("createdAt", "desc"));
-            unsubMessages = onSnapshot(qMsg, (snapshot) => {
+            // CONVERSAS (Encadeamento de Mensagens)
+            const qConv = query(collection(db, "conversations"), where("participants", "array-contains", currentUser.uid), orderBy("updatedAt", "desc"));
+            unsubMessages = onSnapshot(qConv, (snapshot) => {
                 const listEl = document.getElementById('msg-list-view');
                 let unreadCount = 0;
-                allMessages = [];
+                allConversations = [];
 
                 snapshot.docChanges().forEach((change) => {
                     const data = change.doc.data();
-                    if (change.type === "added" && data.createdAt) {
-                        if (data.createdAt.toMillis() > loginTime && !data.read) {
-                            showToast("Nova Mensagem", `De: ${data.senderName}`);
+                    if ((change.type === "added" || change.type === "modified") && data.updatedAt) {
+                        if (data.updatedAt.toMillis() > loginTime && !data.readBy[currentUser.uid]) {
+                            const lastMsg = data.messages[data.messages.length - 1];
+                            // Toca som se a última mensagem não for minha
+                            if (lastMsg && lastMsg.senderId !== currentUser.uid) {
+                                playNotificationSound();
+                                showToast("Nova Mensagem", `De: ${lastMsg.senderName}`);
+                                showNativeNotification(`Mensagem de ${lastMsg.senderName}`, data.subject);
+                            }
                         }
                     }
                 });
@@ -789,20 +772,31 @@
                 } else {
                     let html = '';
                     snapshot.forEach(docSnap => {
-                        const m = docSnap.data();
-                        allMessages.push({ id: docSnap.id, ...m });
-                        if (!m.read) unreadCount++;
+                        const conv = docSnap.data();
+                        allConversations.push({ id: docSnap.id, ...conv });
                         
-                        const bg = m.read ? 'bg-gray-800/80' : 'bg-gray-700/80 border-l-4 border-l-blue-500';
-                        const fwLabel = m.read ? 'font-medium' : 'font-bold text-white';
+                        const isUnread = !conv.readBy[currentUser.uid];
+                        if (isUnread) unreadCount++;
+                        
+                        // Quem está a conversar comigo?
+                        const otherUserId = conv.participants.find(id => id !== currentUser.uid);
+                        const otherUserName = conv.participantNames[otherUserId] || 'Usuário Removido';
+                        
+                        const bg = !isUnread ? 'bg-gray-800/80' : 'bg-gray-700/80 border-l-4 border-l-blue-500';
+                        const fwLabel = !isUnread ? 'font-medium text-gray-300' : 'font-bold text-white';
+                        const lastMsg = conv.messages[conv.messages.length - 1];
 
                         html += `
                         <div class="p-3 rounded-lg border border-gray-700 cursor-pointer hover:bg-gray-600 transition ${bg}" onclick="readMessage('${docSnap.id}')">
                             <div class="flex justify-between items-baseline mb-1">
-                                <span class="text-xs font-bold text-blue-400">${m.senderName}</span>
-                                <span class="text-[10px] text-gray-400">${formatDateDetailed(m.createdAt)}</span>
+                                <span class="text-xs font-bold text-blue-400">${otherUserName}</span>
+                                <span class="text-[10px] text-gray-400">${formatDateDetailed(conv.updatedAt)}</span>
                             </div>
-                            <p class="text-sm ${fwLabel} truncate">${m.subject || '(Sem Assunto)'}</p>
+                            <div class="flex justify-between items-center gap-2">
+                                <p class="text-sm ${fwLabel} truncate">${conv.subject || '(Sem Assunto)'}</p>
+                                ${isUnread ? '<span class="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>' : ''}
+                            </div>
+                            <p class="text-xs text-gray-500 truncate mt-1">${lastMsg ? lastMsg.body : 'Sem mensagens...'}</p>
                         </div>`;
                     });
                     listEl.innerHTML = html;
@@ -811,95 +805,147 @@
                 const badge = document.getElementById('badge-messages');
                 badge.textContent = unreadCount;
                 badge.style.display = unreadCount > 0 ? 'block' : 'none';
+
+                // Atualizar o chat aberto se eu estiver a vê-lo
+                if (currentConversationId && document.getElementById('msg-read-view').style.display === 'flex') {
+                    readMessage(currentConversationId);
+                }
             });
         };
 
         window.handleNotificationClick = async (notifId, linkType, linkId) => {
             try { await updateDoc(doc(db, "notifications", notifId), { read: true }); } catch(e){}
             closeModal('modal-notifications');
-            if (linkType === 'task' && linkId) {
-                openTaskModal(linkId);
-            } else if (linkType === 'message' && linkId) {
-                openMessagesModal();
-                readMessage(linkId);
-            }
+            if (linkType === 'task' && linkId) openTaskModal(linkId);
+            else if (linkType === 'message' && linkId) { openMessagesModal(); readMessage(linkId); }
         };
 
-        window.readMessage = async (msgId) => {
-            const msg = allMessages.find(m => m.id === msgId);
-            if(!msg) return;
+        window.readMessage = async (convId) => {
+            const conv = allConversations.find(m => m.id === convId);
+            if(!conv) return;
+
+            currentConversationId = convId;
 
             document.getElementById('msg-list-view').style.display = 'none';
             document.getElementById('msg-compose-view').style.display = 'none';
             document.getElementById('msg-read-view').style.display = 'flex';
 
-            document.getElementById('msg-read-subject').textContent = msg.subject || '(Sem Assunto)';
-            document.getElementById('msg-read-from').textContent = msg.senderName;
-            document.getElementById('msg-read-date').textContent = formatDateDetailed(msg.createdAt);
-            document.getElementById('msg-read-body').textContent = msg.body;
+            document.getElementById('msg-read-subject').textContent = conv.subject || '(Sem Assunto)';
 
-            // Marcar lida
-            if(!msg.read) {
-                try { await updateDoc(doc(db, "messages", msgId), { read: true }); } catch(e){}
+            const historyEl = document.getElementById('msg-read-history');
+            historyEl.innerHTML = conv.messages.map(msg => {
+                const isMe = msg.senderId === currentUser.uid;
+                const alignDiv = isMe ? 'justify-end' : 'justify-start';
+                const bgBubble = isMe ? 'bg-blue-600/30 border-blue-500/30' : 'bg-gray-700 border-gray-600';
+                const textColor = isMe ? 'text-blue-300' : 'text-amber-300';
+                
+                return `
+                    <div class="flex w-full ${alignDiv}">
+                        <div class="max-w-[85%] rounded-lg p-3 border ${bgBubble}">
+                            <div class="flex justify-between items-baseline gap-4 mb-1 border-b border-gray-600/30 pb-1">
+                                <span class="text-xs font-bold ${textColor}">${msg.senderName}</span>
+                                <span class="text-[9px] text-gray-400">${formatDateDetailed(msg.createdAt)}</span>
+                            </div>
+                            <p class="text-sm text-gray-100 whitespace-pre-wrap leading-relaxed text-left">${msg.body}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            historyEl.scrollTop = historyEl.scrollHeight; // Desce o scroll até ao fim
+
+            // Marcar como lida
+            if(!conv.readBy[currentUser.uid]) {
+                try { await updateDoc(doc(db, "conversations", convId), { [`readBy.${currentUser.uid}`]: true }); } catch(e){}
             }
-
-            // Configurar botões de ação
-            document.getElementById('btn-reply-msg').onclick = () => {
-                showComposeMessage();
-                document.getElementById('msg-compose-title').textContent = 'Responder Mensagem';
-                document.getElementById('msg-to').value = msg.senderId;
-                document.getElementById('msg-subject').value = `Re: ${msg.subject || 'Mensagem'}`;
-                document.getElementById('msg-body').value = `\n\n--- Em ${formatDateDetailed(msg.createdAt)}, ${msg.senderName} escreveu:\n${msg.body}`;
-                document.getElementById('msg-body').focus();
-            };
-
-            document.getElementById('btn-forward-msg').onclick = () => {
-                showComposeMessage();
-                document.getElementById('msg-compose-title').textContent = 'Encaminhar Mensagem';
-                document.getElementById('msg-subject').value = `Fwd: ${msg.subject || 'Mensagem'}`;
-                document.getElementById('msg-body').value = `\n\n--- Mensagem Encaminhada ---\nDe: ${msg.senderName}\nData: ${formatDateDetailed(msg.createdAt)}\nAssunto: ${msg.subject}\n\n${msg.body}`;
-            };
         };
 
+        // CRIAR NOVA CONVERSA
         document.getElementById('btn-send-message').addEventListener('click', async () => {
             const toId = document.getElementById('msg-to').value;
             const toName = document.getElementById('msg-to').options[document.getElementById('msg-to').selectedIndex]?.text;
-            const subject = document.getElementById('msg-subject').value.trim();
+            const subject = document.getElementById('msg-subject').value.trim() || '(Sem Assunto)';
             const body = document.getElementById('msg-body').value.trim();
 
             if(!toId || !body) { alert("Selecione um destinatário e digite a mensagem."); return; }
 
             showLoader(true);
             try {
-                const msgRef = await addDoc(collection(db, "messages"), {
-                    senderId: currentUser.uid,
-                    senderName: currentUser.name,
-                    receiverId: toId,
-                    receiverName: toName,
+                const convRef = await addDoc(collection(db, "conversations"), {
+                    participants: [currentUser.uid, toId],
+                    participantNames: { [currentUser.uid]: currentUser.name, [toId]: toName },
                     subject: subject,
-                    body: body,
-                    read: false,
-                    createdAt: serverTimestamp()
+                    messages: [{
+                        senderId: currentUser.uid,
+                        senderName: currentUser.name,
+                        body: body,
+                        createdAt: Date.now()
+                    }],
+                    updatedAt: serverTimestamp(),
+                    readBy: { [currentUser.uid]: true, [toId]: false }
                 });
 
                 await addDoc(collection(db, "notifications"), {
                     userId: toId,
-                    title: `Mensagem de ${currentUser.name}`,
-                    body: subject || 'Nova mensagem recebida.',
+                    title: `Nova Mensagem: ${subject}`,
+                    body: body.substring(0, 40) + '...',
                     linkType: 'message',
-                    linkId: msgRef.id,
+                    linkId: convRef.id,
                     read: false,
                     createdAt: serverTimestamp()
                 });
 
-                showToast("Sucesso", "Mensagem enviada com sucesso!");
+                showToast("Sucesso", "Conversa iniciada com sucesso!");
                 showMessagesList();
-            } catch(e) {
-                console.error(e);
-                alert("Erro ao enviar mensagem.");
-            }
+            } catch(e) { console.error(e); alert("Erro ao criar conversa."); }
             showLoader(false);
         });
+
+        // ENVIAR RESPOSTA NA MESMA CONVERSA
+        document.getElementById('btn-send-reply').addEventListener('click', async () => {
+            if(!currentConversationId) return;
+            const bodyEl = document.getElementById('msg-reply-body');
+            const body = bodyEl.value.trim();
+            if(!body) return;
+
+            const conv = allConversations.find(m => m.id === currentConversationId);
+            if(!conv) return;
+
+            const otherUserId = conv.participants.find(id => id !== currentUser.uid);
+
+            bodyEl.disabled = true; // Prevenir cliques duplos
+            try {
+                await updateDoc(doc(db, "conversations", currentConversationId), {
+                    messages: arrayUnion({
+                        senderId: currentUser.uid,
+                        senderName: currentUser.name,
+                        body: body,
+                        createdAt: Date.now()
+                    }),
+                    updatedAt: serverTimestamp(),
+                    [`readBy.${otherUserId}`]: false,
+                    [`readBy.${currentUser.uid}`]: true
+                });
+
+                await addDoc(collection(db, "notifications"), {
+                    userId: otherUserId,
+                    title: `Nova Resposta: ${conv.subject}`,
+                    body: body.substring(0, 40) + '...',
+                    linkType: 'message',
+                    linkId: currentConversationId,
+                    read: false,
+                    createdAt: serverTimestamp()
+                });
+
+                bodyEl.value = '';
+            } catch(e) {
+                console.error(e);
+                alert("Erro ao enviar resposta.");
+            }
+            bodyEl.disabled = false;
+            bodyEl.focus();
+        });
+
 
         // -----------------------------------------------------
         // GESTÃO DE RELATÓRIOS (AUDITÁVEIS)
@@ -974,18 +1020,10 @@
 
             showLoader(true);
             try {
-                const newReport = {
-                    text: text,
-                    authorName: currentUser.name,
-                    authorId: currentUser.uid,
-                    createdAt: serverTimestamp()
-                };
+                const newReport = { text: text, authorName: currentUser.name, authorId: currentUser.uid, createdAt: serverTimestamp() };
                 await addDoc(collection(db, `roadmapTasks/${currentReportTaskId}/reports`), newReport);
                 document.getElementById('report-new-text').value = '';
-            } catch (error) { 
-                console.error(error);
-                alert("Erro ao gravar o relatório."); 
-            }
+            } catch (error) { console.error(error); alert("Erro ao gravar o relatório."); }
             showLoader(false);
         });
 
@@ -1003,75 +1041,43 @@
             if (!respId) { alert('Selecione um responsável para a tarefa.'); return; }
 
             showLoader(true);
-            
             const taskData = {
-                title: title,
-                description: document.getElementById('task-desc').value,
-                status: document.getElementById('task-status').value,
-                priority: document.getElementById('task-priority').value,
-                prazoDate: document.getElementById('task-deadline').value, 
-                labels: currentTaskLabels, 
-                isConfidential: document.getElementById('task-confidential').checked,
-                responsibleId: respId,
-                responsibleName: respName,
-                updatedAt: serverTimestamp()
+                title: title, description: document.getElementById('task-desc').value, status: document.getElementById('task-status').value, priority: document.getElementById('task-priority').value, prazoDate: document.getElementById('task-deadline').value, labels: currentTaskLabels, isConfidential: document.getElementById('task-confidential').checked, responsibleId: respId, responsibleName: respName, updatedAt: serverTimestamp()
             };
 
             try {
                 let savedTaskId = currentEditingTaskId;
-
                 if (currentEditingTaskId) {
                     await updateDoc(doc(db, "roadmapTasks", currentEditingTaskId), taskData);
                 } else {
-                    taskData.createdAt = serverTimestamp();
-                    taskData.id_original = Date.now();
-                    taskData.order = Date.now();
-                    taskData.authorId = currentUser.uid;
-                    taskData.authorName = currentUser.name;
+                    taskData.createdAt = serverTimestamp(); taskData.id_original = Date.now(); taskData.order = Date.now(); taskData.authorId = currentUser.uid; taskData.authorName = currentUser.name;
                     const docRef = await addDoc(collection(db, "roadmapTasks"), taskData);
                     savedTaskId = docRef.id;
 
-                    // NOTIFICAÇÃO DE NOVA TAREFA (se não for para ele mesmo)
                     if (respId !== currentUser.uid) {
                         await addDoc(collection(db, "notifications"), {
-                            userId: respId,
-                            title: "Nova Demanda Atribuída",
-                            body: `${currentUser.name} atribuiu: ${title}`,
-                            linkType: 'task',
-                            linkId: savedTaskId,
-                            read: false,
-                            createdAt: serverTimestamp()
+                            userId: respId, title: "Nova Demanda Atribuída", body: `${currentUser.name} atribuiu: ${title}`, linkType: 'task', linkId: savedTaskId, read: false, createdAt: serverTimestamp()
                         });
                     }
                 }
                 closeModal('modal-task');
-            } catch (error) { 
-                console.error(error);
-                alert("Erro ao gravar dados."); 
-            }
+            } catch (error) { console.error(error); alert("Erro ao gravar dados."); }
             showLoader(false);
         };
 
         const deleteTask = async () => {
             if(!currentEditingTaskId || !confirm("Tem certeza que deseja excluir esta demanda definitivamente?")) return;
             showLoader(true);
-            try { await deleteDoc(doc(db, "roadmapTasks", currentEditingTaskId)); closeModal('modal-task'); } 
-            catch (e) { console.error(e); }
+            try { await deleteDoc(doc(db, "roadmapTasks", currentEditingTaskId)); closeModal('modal-task'); } catch (e) { console.error(e); }
             showLoader(false);
         };
 
         // -----------------------------------------------------
-        // RENDERIZAÇÃO E FILTRAGEM DO KANBAN
+        // RENDERIZAÇÃO DO KANBAN
         // -----------------------------------------------------
         const renderRoadmap = (tasks) => {
             allTasks = tasks; 
-            
-            const cols = { 
-                'A Fazer': document.getElementById('col-todo'), 
-                'Em Andamento': document.getElementById('col-doing'), 
-                'Contínuo': document.getElementById('col-continuous'), 
-                'Concluído': document.getElementById('col-done') 
-            };
+            const cols = { 'A Fazer': document.getElementById('col-todo'), 'Em Andamento': document.getElementById('col-doing'), 'Contínuo': document.getElementById('col-continuous'), 'Concluído': document.getElementById('col-done') };
             const counts = { 'A Fazer': 0, 'Em Andamento': 0, 'Contínuo': 0, 'Concluído': 0 };
             
             Object.values(cols).forEach(col => { if(col) col.innerHTML = ''; });
@@ -1081,40 +1087,24 @@
                 const orderB = b.order !== undefined ? b.order : b.id_original;
                 return orderA - orderB;
             }).forEach(task => {
-                
-                // --- REGRA 1: SIGILO RESTRITO ---
-                if (task.isConfidential) {
-                    const isCreator = task.authorId === currentUser.uid;
-                    const isResponsible = task.responsibleId === currentUser.uid;
-                    if (!isCreator && !isResponsible) return; 
-                }
+                if (task.isConfidential && task.authorId !== currentUser.uid && task.responsibleId !== currentUser.uid) return; 
 
-                // --- REGRA 2: FILTRAGEM DE VISÃO ---
                 let deveExibir = false;
-
                 if (currentFilter === 'all') {
                     if (isAdmin || isColaborador) {
-                        // Admin Carlos (Não tem filtro) e Colaborador vêem SÓ o próprio quadro
                         if (task.responsibleId === currentUser.uid) deveExibir = true;
                     } else if (isSupervisor) {
                         const respUser = systemUsers.find(u => u.id === task.responsibleId);
                         if (respUser && respUser.department === currentUser.department) deveExibir = true;
-                    } else {
-                        // Dani e Diego vêem tudo em 'all'
-                        deveExibir = true;
-                    }
+                    } else deveExibir = true;
                 } else {
                     if (task.responsibleId === currentFilter) deveExibir = true;
                 }
-
                 if (!deveExibir) return;
 
-                // --- REGRA 3: RESTRIÇÕES DA DANI ---
                 if (isDani) {
                     const isDiegoTask = task.authorId === DIEGO_UID || (task.authorName && task.authorName.toLowerCase().includes('diego'));
-                    if (isDiegoTask && task.isConfidential) {
-                        if (task.responsibleId !== currentUser.uid) return;
-                    }
+                    if (isDiegoTask && task.isConfidential && task.responsibleId !== currentUser.uid) return;
                 }
 
                 const status = cols[task.status] ? task.status : 'A Fazer';
@@ -1123,9 +1113,8 @@
                 let labelsHtml = '';
                 if (task.labels && task.labels.length > 0) {
                     labelsHtml = `<div class="flex flex-wrap gap-1.5 mb-3">` + task.labels.map(lbl => {
-                        const isString = typeof lbl === 'string';
-                        const text = isString ? lbl : lbl.text;
-                        const colorClass = isString ? labelColorMap['blue'] : (labelColorMap[lbl.color] || labelColorMap['blue']);
+                        const text = typeof lbl === 'string' ? lbl : lbl.text;
+                        const colorClass = typeof lbl === 'string' ? labelColorMap['blue'] : (labelColorMap[lbl.color] || labelColorMap['blue']);
                         return `<span class="tag ${colorClass}">${text}</span>`;
                     }).join('') + `</div>`;
                 }
@@ -1133,142 +1122,76 @@
                 const dateDisplay = task.prazoDate ? task.prazoDate.split('-').reverse().join('/') : '';
                 const orderValue = task.order !== undefined ? task.order : task.id_original;
                 const confidentialBadge = task.isConfidential ? `<span class="text-[10px] bg-red-900/50 text-red-300 px-1.5 py-0.5 rounded border border-red-800 flex items-center gap-1" title="Demanda Sigilosa">🔒 Sigiloso</span>` : '';
-                
                 const taskPriority = task.priority || 'Média';
                 const pColor = priorityColorsMap[taskPriority] || priorityColorsMap['Média'];
-                const priorityBadge = `<span class="text-[10px] ${pColor} px-1.5 py-0.5 rounded border flex items-center gap-1 font-semibold" title="Prioridade ${taskPriority}">${taskPriority}</span>`;
-                
+                const priorityBadge = `<span class="text-[10px] ${pColor} px-1.5 py-0.5 rounded border flex items-center gap-1 font-semibold">${taskPriority}</span>`;
                 const respText = task.responsibleName ? task.responsibleName : 'Sem responsável';
-                const respBadge = `<span class="text-[10px] text-gray-500 bg-gray-800/80 px-1.5 py-0.5 rounded border border-gray-700 flex items-center gap-1" title="Responsável da Tarefa">👤 ${respText}</span>`;
-
+                const respBadge = `<span class="text-[10px] text-gray-500 bg-gray-800/80 px-1.5 py-0.5 rounded border border-gray-700 flex items-center gap-1">👤 ${respText}</span>`;
                 const canDrag = task.responsibleId === currentUser.uid;
 
                 const cardHtml = `
                 <div class="kanban-card group" data-task-id="${task.id}" data-order="${orderValue}" draggable="${canDrag}" onclick="openTaskModal('${task.id}')">
                     ${labelsHtml}
-                    <h4 class="text-gray-100 font-semibold text-sm leading-tight mb-2">
-                        ${task.title}
-                    </h4>
+                    <h4 class="text-gray-100 font-semibold text-sm leading-tight mb-2">${task.title}</h4>
                     <p class="text-gray-400 text-xs mb-4 line-clamp-2">${task.description || 'Nenhuma descrição...'}</p>
                     <div class="flex flex-col gap-2 border-t border-gray-700/30 pt-3">
                         <div class="flex justify-between items-center flex-wrap gap-2">
-                            <div class="flex items-center gap-2">
-                                ${priorityBadge}
-                                ${dateDisplay ? `<span class="text-[10px] bg-gray-800 text-gray-300 px-1.5 py-0.5 rounded border border-gray-700 flex items-center gap-1">⏱️ ${dateDisplay}</span>` : ''}
-                            </div>
+                            <div class="flex items-center gap-2">${priorityBadge}${dateDisplay ? `<span class="text-[10px] bg-gray-800 text-gray-300 px-1.5 py-0.5 rounded border border-gray-700 flex items-center gap-1">⏱️ ${dateDisplay}</span>` : ''}</div>
                             ${confidentialBadge}
                         </div>
-                        <div class="flex justify-end mt-1">
-                            ${respBadge}
-                        </div>
+                        <div class="flex justify-end mt-1">${respBadge}</div>
                     </div>
                 </div>`;
-                
                 cols[status].innerHTML += cardHtml;
             });
 
-            document.getElementById('count-todo').textContent = counts['A Fazer'];
-            document.getElementById('count-doing').textContent = counts['Em Andamento'];
-            document.getElementById('count-continuous').textContent = counts['Contínuo'];
-            document.getElementById('count-done').textContent = counts['Concluído'];
+            document.getElementById('count-todo').textContent = counts['A Fazer']; document.getElementById('count-doing').textContent = counts['Em Andamento']; document.getElementById('count-continuous').textContent = counts['Contínuo']; document.getElementById('count-done').textContent = counts['Concluído'];
 
             const cards = document.querySelectorAll('.kanban-card');
             let draggedTaskId = null;
 
             cards.forEach(card => {
                 if (card.getAttribute('draggable') === 'false') return;
-
                 card.addEventListener('dragstart', (e) => {
-                    isDraggingCard = true;
-                    draggedTaskId = card.getAttribute('data-task-id');
-                    card.classList.add('dragging');
-                    e.dataTransfer.effectAllowed = 'move';
-                    e.dataTransfer.setData('text/plain', draggedTaskId);
+                    isDraggingCard = true; draggedTaskId = card.getAttribute('data-task-id'); card.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', draggedTaskId);
                 });
-
-                card.addEventListener('dragend', () => {
-                    card.classList.remove('dragging');
-                    draggedTaskId = null;
-                    document.querySelectorAll('.flex-1').forEach(el => el.classList.remove('bg-white/5'));
-                    setTimeout(() => isDraggingCard = false, 100); 
-                });
+                card.addEventListener('dragend', () => { card.classList.remove('dragging'); draggedTaskId = null; document.querySelectorAll('.flex-1').forEach(el => el.classList.remove('bg-white/5')); setTimeout(() => isDraggingCard = false, 100); });
             });
 
             const getDragAfterElement = (container, y) => {
-                const draggableElements = [...container.querySelectorAll('.kanban-card:not(.dragging)')];
-                return draggableElements.reduce((closest, child) => {
-                    const box = child.getBoundingClientRect();
-                    const offset = y - box.top - box.height / 2;
-                    if (offset < 0 && offset > closest.offset) {
-                        return { offset: offset, element: child };
-                    } else {
-                        return closest;
-                    }
+                return [...container.querySelectorAll('.kanban-card:not(.dragging)')].reduce((closest, child) => {
+                    const box = child.getBoundingClientRect(); const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) return { offset: offset, element: child }; else return closest;
                 }, { offset: Number.NEGATIVE_INFINITY }).element;
             };
 
-            const dropZones = [
-                { el: document.getElementById('col-todo'), status: 'A Fazer' },
-                { el: document.getElementById('col-doing'), status: 'Em Andamento' },
-                { el: document.getElementById('col-continuous'), status: 'Contínuo' },
-                { el: document.getElementById('col-done'), status: 'Concluído' }
-            ];
+            const dropZones = [{ el: document.getElementById('col-todo'), status: 'A Fazer' }, { el: document.getElementById('col-doing'), status: 'Em Andamento' }, { el: document.getElementById('col-continuous'), status: 'Contínuo' }, { el: document.getElementById('col-done'), status: 'Concluído' }];
 
             dropZones.forEach(zone => {
                 if (!zone.el) return;
-                
                 zone.el.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    e.dataTransfer.dropEffect = 'move';
-                    zone.el.classList.add('bg-white/5', 'rounded-lg');
-                    
+                    e.preventDefault(); e.dataTransfer.dropEffect = 'move'; zone.el.classList.add('bg-white/5', 'rounded-lg');
                     const draggable = document.querySelector('.dragging');
                     if (draggable) {
                         const afterElement = getDragAfterElement(zone.el, e.clientY);
-                        if (afterElement == null) {
-                            zone.el.appendChild(draggable);
-                        } else {
-                            zone.el.insertBefore(draggable, afterElement);
-                        }
+                        if (afterElement == null) zone.el.appendChild(draggable); else zone.el.insertBefore(draggable, afterElement);
                     }
                 });
-
-                zone.el.addEventListener('dragleave', (e) => {
-                    if (e.currentTarget.contains(e.relatedTarget)) return;
-                    zone.el.classList.remove('bg-white/5');
-                });
-
+                zone.el.addEventListener('dragleave', (e) => { if (e.currentTarget.contains(e.relatedTarget)) return; zone.el.classList.remove('bg-white/5'); });
                 zone.el.addEventListener('drop', async (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    zone.el.classList.remove('bg-white/5');
-                    
+                    e.preventDefault(); e.stopPropagation(); zone.el.classList.remove('bg-white/5');
                     const taskId = e.dataTransfer.getData('text/plain') || draggedTaskId;
                     const draggable = document.querySelector(`[data-task-id="${taskId}"]`);
-                    
                     if (taskId && draggable) {
                         const tData = allTasks.find(t => t.id === taskId);
-                        if (!tData || tData.responsibleId !== currentUser.uid) {
-                            alert("Apenas o responsável pode alterar o status da tarefa.");
-                            return;
-                        }
-
+                        if (!tData || tData.responsibleId !== currentUser.uid) { alert("Apenas o responsável pode alterar o status da tarefa."); return; }
                         showLoader(true);
                         try {
-                            let prev = draggable.previousElementSibling;
-                            let next = draggable.nextElementSibling;
-                            let prevOrder = prev ? parseFloat(prev.getAttribute('data-order')) : null;
-                            let nextOrder = next ? parseFloat(next.getAttribute('data-order')) : null;
-                            let newOrder;
-
+                            let prev = draggable.previousElementSibling, next = draggable.nextElementSibling, newOrder;
+                            let prevOrder = prev ? parseFloat(prev.getAttribute('data-order')) : null; let nextOrder = next ? parseFloat(next.getAttribute('data-order')) : null;
                             if (prevOrder === null && nextOrder === null) newOrder = Date.now();
-                            else if (prevOrder === null) newOrder = nextOrder - 10000;
-                            else if (nextOrder === null) newOrder = prevOrder + 10000;
-                            else newOrder = (prevOrder + nextOrder) / 2;
-
-                            await updateDoc(doc(db, "roadmapTasks", taskId), { 
-                                status: zone.status, order: newOrder, updatedAt: serverTimestamp() 
-                            });
+                            else if (prevOrder === null) newOrder = nextOrder - 10000; else if (nextOrder === null) newOrder = prevOrder + 10000; else newOrder = (prevOrder + nextOrder) / 2;
+                            await updateDoc(doc(db, "roadmapTasks", taskId), { status: zone.status, order: newOrder, updatedAt: serverTimestamp() });
                         } catch (error) { console.error("Erro ao mover:", error); }
                         showLoader(false);
                     }
@@ -1278,13 +1201,9 @@
 
         const setupFirestoreListeners = () => {
             if (unsubscribeRoadmap) unsubscribeRoadmap();
-            const tasksQuery = query(collection(db, "roadmapTasks")); 
-            unsubscribeRoadmap = onSnapshot(tasksQuery, (snapshot) => {
-                renderRoadmap(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-            });
+            unsubscribeRoadmap = onSnapshot(query(collection(db, "roadmapTasks")), (snapshot) => { renderRoadmap(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))); });
         };
 
-        // EVENTOS DE AUTENTICAÇÃO E INICIALIZAÇÃO
         document.getElementById('btn-save-task').addEventListener('click', saveTask);
         document.getElementById('btn-delete-task').addEventListener('click', deleteTask);
         
@@ -1298,29 +1217,20 @@
         onAuthStateChanged(auth, async (user) => {
             showLoader(true);
             if (user) {
+                if ("Notification" in window && Notification.permission !== "granted" && Notification.permission !== "denied") { Notification.requestPermission(); }
+
                 const userDoc = await getDoc(doc(db, "users", user.uid));
-                
                 let role = userDoc.exists() ? (userDoc.data().role || 'colaborador') : 'colaborador';
                 let dept = userDoc.exists() ? (userDoc.data().department || '') : '';
                 
                 const lowerName = (user.displayName || userDoc.data()?.displayName || user.email.split('@')[0]).toLowerCase();
                 const lowerEmail = user.email.toLowerCase();
 
-                // Força os Níveis Máximos
-                if (lowerEmail.includes('carlos') || lowerName.includes('carlos') || role === 'admin') {
-                    role = 'admin';
-                } else if (user.uid === DIEGO_UID || lowerName.includes('diego') || role === 'gestao_admin') {
-                    role = 'gestao_admin';
-                } else if (lowerEmail.includes('daniele') || lowerName.includes('daniele') || lowerName === 'dani' || role === 'gestao') {
-                    role = 'gestao';
-                }
+                if (lowerEmail.includes('carlos') || lowerName.includes('carlos') || role === 'admin') role = 'admin';
+                else if (user.uid === DIEGO_UID || lowerName.includes('diego') || role === 'gestao_admin') role = 'gestao_admin';
+                else if (lowerEmail.includes('daniele') || lowerName.includes('daniele') || lowerName === 'dani' || role === 'gestao') role = 'gestao';
 
-                isAdmin = role === 'admin';
-                isDiego = role === 'gestao_admin';
-                isDani = role === 'gestao';
-                isSupervisor = role === 'supervisor';
-                isColaborador = role === 'colaborador';
-                
+                isAdmin = role === 'admin'; isDiego = role === 'gestao_admin'; isDani = role === 'gestao'; isSupervisor = role === 'supervisor'; isColaborador = role === 'colaborador';
                 const displayName = user.displayName || userDoc.data()?.displayName || user.email.split('@')[0];
                 currentUser = { uid: user.uid, email: user.email, name: displayName, role: role, department: dept };
                 
@@ -1328,22 +1238,16 @@
                 document.getElementById('current-user-dept').textContent = dept ? `${role} | ${dept}` : role;
                 document.getElementById('edit-profile-name').value = currentUser.name;
                 
-                // VISIBILIDADE DE MENUS DE ADMINISTRAÇÃO E FILTRO
                 document.getElementById('admin-section').style.display = (isAdmin || isDiego || isDani) ? 'block' : 'none';
                 document.getElementById('super-admin-section').style.display = isAdmin ? 'block' : 'none';
                 document.getElementById('user-filter').style.display = (isAdmin || isColaborador) ? 'none' : 'block';
                 
                 loginTime = Date.now();
-                await loadUsers(); 
-                setupFirestoreListeners();
-                setupMessagesAndNotifications();
+                await loadUsers(); setupFirestoreListeners(); setupMessagesAndNotifications();
                 showView('roadmap-view');
             } else {
                 currentUser = null; isAdmin = false; isDiego = false; isDani = false; isSupervisor = false; isColaborador = false;
-                if (unsubscribeRoadmap) unsubscribeRoadmap();
-                if (activeTaskUnsubReports) activeTaskUnsubReports();
-                if (unsubNotifications) unsubNotifications();
-                if (unsubMessages) unsubMessages();
+                if (unsubscribeRoadmap) unsubscribeRoadmap(); if (activeTaskUnsubReports) activeTaskUnsubReports(); if (unsubNotifications) unsubNotifications(); if (unsubMessages) unsubMessages();
                 showView('login-view');
             }
             showLoader(false);
