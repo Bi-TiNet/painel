@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { theme } from '@/app/theme';
 import { db } from '@/app/firebaseConfig';
 import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
+import SecurityGate from "@/app/components/SecurityGate";
 
 import Header from "@/app/components/Header";
 import DashboardRotator from "@/app/components/DashboardRotator";
@@ -212,6 +213,7 @@ export default function Home() {
   const tituloPainel = currentDashboard ? currentDashboard.nome : "Carregando...";
 
   return (
+    <SecurityGate>
     <ThemeProvider theme={theme}>
       <MainContainer>
         <MainColumn>
@@ -252,5 +254,6 @@ export default function Home() {
         />
       </MainContainer>
     </ThemeProvider>
+    </SecurityGate>
   );
 }

@@ -4,6 +4,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import SecurityGate from "@/app/components/SecurityGate";
 import Script from 'next/script'; // Importado para os ícones
 import './style.css'; // Importa o CSS
 
@@ -120,6 +121,7 @@ export default function GestorPage() {
   }, []);
 
   return (
+    <SecurityGate>
     <>
       <Script src="https://unpkg.com/@phosphor-icons/web" />
       
@@ -253,5 +255,6 @@ export default function GestorPage() {
         </main>
       </div>
     </>
+    </SecurityGate>
   );
 }
