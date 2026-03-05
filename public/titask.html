@@ -102,11 +102,11 @@
                     </select>
 
                     <div class="flex items-center gap-4 mr-4 border-r border-gray-600 pr-4">
-                        <button onclick="openMessagesModal()" class="relative text-gray-400 hover:text-white transition" title="Mensagens Internas">
+                        <button onclick="window.openMessagesModal()" class="relative text-gray-400 hover:text-white transition" title="Mensagens Internas">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                             <span id="badge-messages" class="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
                         </button>
-                        <button onclick="openNotificationsModal()" class="relative text-gray-400 hover:text-white transition" title="Notificações">
+                        <button onclick="window.openNotificationsModal()" class="relative text-gray-400 hover:text-white transition" title="Notificações">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                             <span id="badge-notifications" class="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
                         </button>
@@ -118,10 +118,10 @@
                         <p id="current-user-dept" class="text-[10px] text-gray-500 uppercase"></p>
                     </div>
                     
-                    <button id="btn-new-task" onclick="openTaskModal()" class="btn btn-primary flex items-center gap-2">
+                    <button id="btn-new-task" onclick="window.openTaskModal()" class="btn btn-primary flex items-center gap-2">
                         <span class="text-xl leading-none">+</span> Criar
                     </button>
-                    <button onclick="showView('profile-view')" class="btn btn-secondary">Perfil</button>
+                    <button onclick="window.showView('profile-view')" class="btn btn-secondary">Perfil</button>
                     <button id="logout-btn" class="btn btn-danger">Sair</button>
                 </div>
             </header>
@@ -181,7 +181,7 @@
                         <input type="password" id="new-password-input" placeholder="Nova Senha" class="form-input">
                         <p id="password-change-feedback" class="mt-2 text-sm text-center"></p>
                         <div class="flex space-x-4 mt-4">
-                            <button onclick="showView('roadmap-view')" class="btn btn-secondary flex-1">Ir ao Kanban</button>
+                            <button onclick="window.showView('roadmap-view')" class="btn btn-secondary flex-1">Ir ao Kanban</button>
                             <button id="change-password-btn" class="btn btn-primary flex-1">Alterar Senha</button>
                         </div>
                     </div>
@@ -252,8 +252,9 @@
                     Correio Interno
                 </h2>
                 <div class="flex gap-2">
-                    <button onclick="showComposeMessage()" class="btn btn-primary btn-sm flex items-center gap-1"><span class="text-lg leading-none">+</span> Nova Conversa</button>
-                    <button onclick="closeModal('modal-messages')" class="text-gray-400 hover:text-white text-2xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
+                    <button onclick="window.markAllConversationsRead()" class="btn-sm btn-secondary bg-gray-700 hover:bg-gray-600 flex items-center gap-1" title="Marcar tudo como lido">✔️ Ler Todas</button>
+                    <button onclick="window.showComposeMessage()" class="btn btn-primary btn-sm flex items-center gap-1"><span class="text-lg leading-none">+</span> Nova Conversa</button>
+                    <button onclick="window.closeModal('modal-messages')" class="text-gray-400 hover:text-white text-2xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
                 </div>
             </div>
 
@@ -263,7 +264,7 @@
 
             <div id="msg-compose-view" class="hidden flex-col gap-4 h-[60vh]">
                 <div class="flex items-center gap-2">
-                    <button onclick="showMessagesList()" class="text-gray-400 hover:text-white text-sm bg-gray-800 px-3 py-1.5 rounded flex items-center gap-1">← Voltar</button>
+                    <button onclick="window.showMessagesList()" class="text-gray-400 hover:text-white text-sm bg-gray-800 px-3 py-1.5 rounded flex items-center gap-1">← Voltar</button>
                     <h3 class="text-white font-semibold" id="msg-compose-title">Nova Conversa</h3>
                 </div>
                 <select id="msg-to" class="form-input text-sm"><option value="">Para (Selecione um utilizador)...</option></select>
@@ -274,7 +275,7 @@
 
             <div id="msg-read-view" class="hidden flex-col h-[60vh]">
                 <div class="flex items-center gap-3 mb-4">
-                    <button onclick="showMessagesList()" class="text-gray-400 hover:text-white text-sm bg-gray-800 px-3 py-1.5 rounded flex items-center gap-1 shadow-md">← Voltar</button>
+                    <button onclick="window.showMessagesList()" class="text-gray-400 hover:text-white text-sm bg-gray-800 px-3 py-1.5 rounded flex items-center gap-1 shadow-md">← Voltar</button>
                     <h3 id="msg-read-subject" class="text-lg font-bold text-white truncate flex-1">Assunto</h3>
                 </div>
                 <div class="bg-gray-800/50 p-3 rounded-lg border border-gray-700 flex flex-col flex-1 min-h-0">
@@ -296,7 +297,10 @@
                     <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                     Notificações
                 </h2>
-                <button onclick="closeModal('modal-notifications')" class="text-gray-400 hover:text-white text-2xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
+                <div class="flex gap-2">
+                    <button onclick="window.clearAllNotifications()" class="btn-sm btn-secondary bg-gray-700 hover:bg-gray-600 flex items-center gap-1" title="Apagar todas as notificações">🗑️ Limpar Tudo</button>
+                    <button onclick="window.closeModal('modal-notifications')" class="text-gray-400 hover:text-white text-2xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
+                </div>
             </div>
             <div id="notifications-list" class="h-[50vh] overflow-y-auto space-y-2 pr-2">
                 <p class="text-sm text-gray-500 italic text-center mt-10">Sem notificações.</p>
@@ -311,7 +315,7 @@
                     <p class="text-xs text-gray-500 font-mono mb-1">REF: <span id="task-id-display">Nova Demanda</span></p>
                     <input type="text" id="task-title" class="bg-transparent text-white font-bold text-2xl w-full focus:outline-none focus:border-b border-blue-500 placeholder-gray-600" placeholder="Insira o título principal da demanda...">
                 </div>
-                <button onclick="closeModal('modal-task')" class="text-gray-400 hover:text-white text-3xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
+                <button onclick="window.closeModal('modal-task')" class="text-gray-400 hover:text-white text-3xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -422,7 +426,7 @@
                     <p class="text-xs text-blue-400 font-mono mb-1 font-semibold tracking-wider">GESTÃO DE RELATÓRIOS</p>
                     <h2 id="report-task-title" class="text-2xl font-bold text-white line-clamp-2">Carregando...</h2>
                 </div>
-                <button onclick="closeModal('modal-report')" class="text-gray-400 hover:text-white text-3xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
+                <button onclick="window.closeModal('modal-report')" class="text-gray-400 hover:text-white text-3xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -443,7 +447,7 @@
             </div>
 
             <div class="flex justify-end gap-3 pt-2">
-                <button onclick="closeModal('modal-report')" class="btn btn-secondary px-6">Fechar Visão</button>
+                <button onclick="window.closeModal('modal-report')" class="btn btn-secondary px-6">Fechar Visão</button>
             </div>
         </div>
     </div>
@@ -463,7 +467,6 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // VARIÁVEIS DE SESSÃO E PERMISSÃO
         let currentUser = null;
         let isAdmin = false;         
         let isDiego = false;         
@@ -487,13 +490,11 @@
         let currentTaskLabels = [];
         let selectedLabelColor = 'blue';
 
-        // Cache global
         let systemUsers = [];
         let allTasks = [];
         let allConversations = [];
         let currentFilter = 'all';
 
-        // ÁUDIO DE NOTIFICAÇÃO (Som agudo, limpo e volume MÁXIMO 1.0)
         const notificationSound = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
         notificationSound.volume = 1.0;
         
@@ -529,21 +530,19 @@
         };
 
         const showLoader = (show) => { document.getElementById('loader-overlay').style.display = show ? 'flex' : 'none'; };
-        const showView = (viewId) => {
+        
+        window.showView = (viewId) => {
             document.querySelectorAll('.page-view').forEach(v => { v.style.display = 'none'; });
             document.getElementById(viewId).style.display = viewId === 'login-view' || viewId === 'welcome-view' ? 'flex' : 'block';
         };
-        window.showView = showView;
 
-        const closeModal = (modalId) => {
+        window.closeModal = (modalId) => {
             document.getElementById(modalId).classList.remove('visible');
             if (modalId === 'modal-task' && activeTaskUnsubComments) { activeTaskUnsubComments(); activeTaskUnsubComments = null; }
             if (modalId === 'modal-report' && activeTaskUnsubReports) { activeTaskUnsubReports(); activeTaskUnsubReports = null; }
             if (modalId === 'modal-messages') { currentConversationId = null; }
         };
-        window.closeModal = closeModal;
 
-        // TOASTS
         window.showToast = (title, message) => {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
@@ -565,9 +564,6 @@
             return `${day} ${months[d.getMonth()]} às ${hours}:${minutes}`;
         };
 
-        // -----------------------------------------------------
-        // LÓGICA DE USUÁRIOS
-        // -----------------------------------------------------
         const loadUsers = async () => {
             try {
                 const usersSnap = await getDocs(collection(db, "users"));
@@ -668,12 +664,9 @@
         document.getElementById('user-filter').addEventListener('change', (e) => { currentFilter = e.target.value; renderRoadmap(allTasks); });
         document.getElementById('task-status').addEventListener('change', (e) => { document.getElementById('btn-open-report').style.display = (e.target.value === 'Concluído') ? 'flex' : 'none'; });
 
-        // -----------------------------------------------------
-        // GESTÃO DE CONVERSAS (MENSAGENS AGRUPADAS) E NOTIFICAÇÕES
-        // -----------------------------------------------------
         window.openMessagesModal = () => {
             document.getElementById('modal-messages').classList.add('visible');
-            showMessagesList();
+            window.showMessagesList();
         };
 
         window.openNotificationsModal = () => {
@@ -697,11 +690,46 @@
             document.getElementById('msg-body').value = '';
         };
 
+        window.clearAllNotifications = async () => {
+            if(!confirm("Tem certeza que deseja apagar todas as notificações?")) return;
+            showLoader(true);
+            try {
+                const qNotif = query(collection(db, "notifications"), where("userId", "==", currentUser.uid));
+                const snap = await getDocs(qNotif);
+                const deletePromises = snap.docs.map(d => deleteDoc(doc(db, "notifications", d.id)));
+                await Promise.all(deletePromises);
+                window.showToast("Sucesso", "Todas as notificações foram limpas.");
+            } catch(e) {
+                console.error(e);
+                alert("Erro ao limpar notificações.");
+            }
+            showLoader(false);
+        };
+
+        window.markAllConversationsRead = async () => {
+            showLoader(true);
+            try {
+                const unreadConvs = allConversations.filter(c => !c.readBy[currentUser.uid]);
+                if(unreadConvs.length === 0) {
+                    showLoader(false);
+                    return;
+                }
+                const updatePromises = unreadConvs.map(c => 
+                    updateDoc(doc(db, "conversations", c.id), { [`readBy.${currentUser.uid}`]: true })
+                );
+                await Promise.all(updatePromises);
+                window.showToast("Sucesso", "Todas as mensagens foram lidas.");
+            } catch(e) {
+                console.error(e);
+                alert("Erro ao marcar mensagens como lidas.");
+            }
+            showLoader(false);
+        };
+
         const setupMessagesAndNotifications = () => {
             if (unsubMessages) unsubMessages();
             if (unsubNotifications) unsubNotifications();
 
-            // NOTIFICAÇÕES (Tarefas e Alertas do Sistema)
             const qNotif = query(collection(db, "notifications"), where("userId", "==", currentUser.uid), orderBy("createdAt", "desc"));
             unsubNotifications = onSnapshot(qNotif, (snapshot) => {
                 const listEl = document.getElementById('notifications-list');
@@ -712,7 +740,7 @@
                     if (change.type === "added" && data.createdAt) {
                         if (data.createdAt.toMillis() > loginTime && !data.read) {
                             playNotificationSound();
-                            showToast("Notificação", data.title);
+                            window.showToast("Notificação", data.title);
                             showNativeNotification("Ti.Task", data.title);
                         }
                     }
@@ -729,7 +757,7 @@
                         const dot = n.read ? '' : '<span class="w-2 h-2 rounded-full bg-blue-500"></span>';
                         
                         html += `
-                        <div class="p-3 rounded-lg border border-gray-700 cursor-pointer hover:bg-gray-700 transition ${bg}" onclick="handleNotificationClick('${docSnap.id}', '${n.linkType}', '${n.linkId}')">
+                        <div class="p-3 rounded-lg border border-gray-700 cursor-pointer hover:bg-gray-700 transition ${bg}" onclick="window.handleNotificationClick('${docSnap.id}', '${n.linkType}', '${n.linkId}')">
                             <div class="flex justify-between items-start">
                                 <h4 class="text-sm font-bold text-gray-200 flex items-center gap-2">${dot} ${n.title}</h4>
                                 <span class="text-[10px] text-gray-500">${formatDateDetailed(n.createdAt)}</span>
@@ -745,7 +773,6 @@
                 badge.style.display = unreadCount > 0 ? 'block' : 'none';
             });
 
-            // CONVERSAS (Encadeamento de Mensagens)
             const qConv = query(collection(db, "conversations"), where("participants", "array-contains", currentUser.uid), orderBy("updatedAt", "desc"));
             unsubMessages = onSnapshot(qConv, (snapshot) => {
                 const listEl = document.getElementById('msg-list-view');
@@ -757,10 +784,9 @@
                     if ((change.type === "added" || change.type === "modified") && data.updatedAt) {
                         if (data.updatedAt.toMillis() > loginTime && !data.readBy[currentUser.uid]) {
                             const lastMsg = data.messages[data.messages.length - 1];
-                            // Toca som se a última mensagem não for minha
                             if (lastMsg && lastMsg.senderId !== currentUser.uid) {
                                 playNotificationSound();
-                                showToast("Nova Mensagem", `De: ${lastMsg.senderName}`);
+                                window.showToast("Nova Mensagem", `De: ${lastMsg.senderName}`);
                                 showNativeNotification(`Mensagem de ${lastMsg.senderName}`, data.subject);
                             }
                         }
@@ -778,7 +804,6 @@
                         const isUnread = !conv.readBy[currentUser.uid];
                         if (isUnread) unreadCount++;
                         
-                        // Quem está a conversar comigo?
                         const otherUserId = conv.participants.find(id => id !== currentUser.uid);
                         const otherUserName = conv.participantNames[otherUserId] || 'Usuário Removido';
                         
@@ -787,7 +812,7 @@
                         const lastMsg = conv.messages[conv.messages.length - 1];
 
                         html += `
-                        <div class="p-3 rounded-lg border border-gray-700 cursor-pointer hover:bg-gray-600 transition ${bg}" onclick="readMessage('${docSnap.id}')">
+                        <div class="p-3 rounded-lg border border-gray-700 cursor-pointer hover:bg-gray-600 transition ${bg}" onclick="window.readMessage('${docSnap.id}')">
                             <div class="flex justify-between items-baseline mb-1">
                                 <span class="text-xs font-bold text-blue-400">${otherUserName}</span>
                                 <span class="text-[10px] text-gray-400">${formatDateDetailed(conv.updatedAt)}</span>
@@ -806,18 +831,17 @@
                 badge.textContent = unreadCount;
                 badge.style.display = unreadCount > 0 ? 'block' : 'none';
 
-                // Atualizar o chat aberto se eu estiver a vê-lo
                 if (currentConversationId && document.getElementById('msg-read-view').style.display === 'flex') {
-                    readMessage(currentConversationId);
+                    window.readMessage(currentConversationId);
                 }
             });
         };
 
         window.handleNotificationClick = async (notifId, linkType, linkId) => {
             try { await updateDoc(doc(db, "notifications", notifId), { read: true }); } catch(e){}
-            closeModal('modal-notifications');
-            if (linkType === 'task' && linkId) openTaskModal(linkId);
-            else if (linkType === 'message' && linkId) { openMessagesModal(); readMessage(linkId); }
+            window.closeModal('modal-notifications');
+            if (linkType === 'task' && linkId) window.openTaskModal(linkId);
+            else if (linkType === 'message' && linkId) { window.openMessagesModal(); window.readMessage(linkId); }
         };
 
         window.readMessage = async (convId) => {
@@ -852,15 +876,13 @@
                 `;
             }).join('');
 
-            historyEl.scrollTop = historyEl.scrollHeight; // Desce o scroll até ao fim
+            historyEl.scrollTop = historyEl.scrollHeight; 
 
-            // Marcar como lida
             if(!conv.readBy[currentUser.uid]) {
                 try { await updateDoc(doc(db, "conversations", convId), { [`readBy.${currentUser.uid}`]: true }); } catch(e){}
             }
         };
 
-        // CRIAR NOVA CONVERSA
         document.getElementById('btn-send-message').addEventListener('click', async () => {
             const toId = document.getElementById('msg-to').value;
             const toName = document.getElementById('msg-to').options[document.getElementById('msg-to').selectedIndex]?.text;
@@ -895,13 +917,12 @@
                     createdAt: serverTimestamp()
                 });
 
-                showToast("Sucesso", "Conversa iniciada com sucesso!");
-                showMessagesList();
+                window.showToast("Sucesso", "Conversa iniciada com sucesso!");
+                window.showMessagesList();
             } catch(e) { console.error(e); alert("Erro ao criar conversa."); }
             showLoader(false);
         });
 
-        // ENVIAR RESPOSTA NA MESMA CONVERSA
         document.getElementById('btn-send-reply').addEventListener('click', async () => {
             if(!currentConversationId) return;
             const bodyEl = document.getElementById('msg-reply-body');
@@ -913,7 +934,7 @@
 
             const otherUserId = conv.participants.find(id => id !== currentUser.uid);
 
-            bodyEl.disabled = true; // Prevenir cliques duplos
+            bodyEl.disabled = true;
             try {
                 await updateDoc(doc(db, "conversations", currentConversationId), {
                     messages: arrayUnion({
@@ -938,22 +959,188 @@
                 });
 
                 bodyEl.value = '';
-            } catch(e) {
-                console.error(e);
-                alert("Erro ao enviar resposta.");
-            }
+            } catch(e) { console.error(e); alert("Erro ao enviar resposta."); }
             bodyEl.disabled = false;
             bodyEl.focus();
         });
 
+        document.getElementById('task-deadline-months').addEventListener('change', (e) => {
+            const months = parseInt(e.target.value);
+            if (months) {
+                const d = new Date(); d.setMonth(d.getMonth() + months);
+                const yyyy = d.getFullYear(); const mm = String(d.getMonth() + 1).padStart(2, '0'); const dd = String(d.getDate()).padStart(2, '0');
+                document.getElementById('task-deadline').value = `${yyyy}-${mm}-${dd}`;
+            }
+        });
 
-        // -----------------------------------------------------
-        // GESTÃO DE RELATÓRIOS (AUDITÁVEIS)
-        // -----------------------------------------------------
+        window.deleteComment = async (taskId, commentId) => {
+            if(!confirm("Tem a certeza que deseja apagar este comentário?")) return;
+            showLoader(true);
+            try { await deleteDoc(doc(db, "roadmapTasks", taskId, "comments", commentId)); } 
+            catch(e) { alert("Erro ao apagar: " + e.message); }
+            showLoader(false);
+        };
+
+        document.querySelectorAll('#color-picker div').forEach(swatch => {
+            swatch.addEventListener('click', (e) => {
+                document.querySelectorAll('#color-picker div').forEach(s => s.classList.remove('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-[#1e293b]'));
+                e.target.classList.add('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-[#1e293b]');
+                selectedLabelColor = e.target.getAttribute('data-color');
+            });
+        });
+
+        const renderModalLabels = () => {
+            const container = document.getElementById('task-labels-preview');
+            if (currentTaskLabels.length === 0) {
+                container.innerHTML = '<span class="text-[10px] text-gray-500 italic w-full text-center">Nenhuma etiqueta</span>';
+                return;
+            }
+            container.innerHTML = currentTaskLabels.map((lbl, index) => {
+                const colorClass = labelColorMap[lbl.color] || labelColorMap['blue'];
+                return `<span class="tag ${colorClass} transition-colors cursor-pointer" onclick="window.removeLabel(${index})" title="Clique para remover">
+                            ${lbl.text} <span class="text-[10px] font-bold opacity-70 ml-1 hover:opacity-100">&times;</span>
+                        </span>`;
+            }).join('');
+        };
+
+        window.removeLabel = (index) => { currentTaskLabels.splice(index, 1); renderModalLabels(); };
+
+        document.getElementById('btn-add-custom-label').addEventListener('click', () => {
+            const input = document.getElementById('new-label-name');
+            const text = input.value.trim();
+            if (text && !currentTaskLabels.some(l => l.text.toLowerCase() === text.toLowerCase())) {
+                currentTaskLabels.push({ text: text, color: selectedLabelColor });
+                renderModalLabels(); input.value = '';
+            }
+        });
+
+        document.getElementById('new-label-name').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') document.getElementById('btn-add-custom-label').click();
+        });
+
+        document.getElementById('btn-add-comment').addEventListener('click', async () => {
+            if (!currentEditingTaskId) return;
+            const input = document.getElementById('task-new-comment');
+            const text = input.value.trim();
+            if (text) {
+                await addDoc(collection(db, `roadmapTasks/${currentEditingTaskId}/comments`), {
+                    text: text, authorName: currentUser.name, authorId: currentUser.uid, createdAt: serverTimestamp()
+                });
+                input.value = '';
+            }
+        });
+
+        window.openTaskModal = async (taskId = null) => {
+            if (isDraggingCard) return; 
+            
+            currentEditingTaskId = taskId;
+            const modal = document.getElementById('modal-task');
+            
+            document.getElementById('task-title').value = '';
+            document.getElementById('task-desc').value = '';
+            document.getElementById('task-deadline-months').value = '';
+            document.getElementById('task-deadline').value = '';
+            document.getElementById('new-label-name').value = '';
+            document.getElementById('task-confidential').checked = false;
+            document.getElementById('task-id-display').textContent = taskId ? taskId.substring(0,8).toUpperCase() : 'Nova';
+            document.getElementById('task-priority').value = 'Média'; 
+            
+            if (isDani || isDiego) {
+                document.getElementById('confidential-section').style.display = 'block';
+            } else {
+                document.getElementById('confidential-section').style.display = 'none';
+            }
+            
+            const statusSelect = document.getElementById('task-status');
+            if (!taskId) {
+                statusSelect.innerHTML = `<option value="A Fazer">A Fazer</option><option value="Contínuo">Contínuo</option>`;
+                statusSelect.value = 'A Fazer';
+                document.getElementById('task-responsible').disabled = isColaborador; 
+                document.getElementById('task-responsible').value = currentUser.uid;
+            }
+
+            document.getElementById('btn-open-report').style.display = 'none';
+            document.getElementById('btn-delete-task').style.display = 'none';
+            document.getElementById('task-meta-info').style.display = 'none'; 
+
+            currentTaskLabels = []; 
+            renderModalLabels();
+
+            const commentsSection = document.getElementById('comments-section');
+
+            if (taskId) {
+                showLoader(true);
+                commentsSection.style.display = 'block';
+                statusSelect.innerHTML = `<option value="A Fazer">A Fazer</option><option value="Em Andamento">Em Andamento</option><option value="Contínuo">Contínuo</option><option value="Concluído">Concluído</option>`;
+                
+                try {
+                    const docSnap = await getDoc(doc(db, "roadmapTasks", taskId));
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        document.getElementById('task-title').value = data.title || '';
+                        document.getElementById('task-desc').value = data.description || '';
+                        document.getElementById('task-status').value = data.status || 'A Fazer';
+                        document.getElementById('task-priority').value = data.priority || 'Média';
+                        document.getElementById('task-deadline').value = data.prazoDate || data.prazo || '';
+                        document.getElementById('task-confidential').checked = data.isConfidential || false;
+                        document.getElementById('task-responsible').value = data.responsibleId || '';
+                        
+                        const amIResponsible = data.responsibleId === currentUser.uid;
+                        statusSelect.disabled = !amIResponsible;
+
+                        document.getElementById('task-meta-info').style.display = 'block';
+                        document.getElementById('meta-author').textContent = data.authorName || 'Desconhecido';
+                        document.getElementById('meta-date').textContent = formatDateDetailed(data.createdAt);
+
+                        if (isAdmin || isDiego || isDani || data.authorId === currentUser.uid) {
+                            document.getElementById('btn-delete-task').style.display = 'block';
+                        }
+
+                        if (data.status === 'Concluído') { document.getElementById('btn-open-report').style.display = 'flex'; }
+
+                        if (data.labels && Array.isArray(data.labels)) {
+                            currentTaskLabels = data.labels.map(lbl => {
+                                if (typeof lbl === 'string') return { text: lbl, color: 'blue' };
+                                return lbl;
+                            });
+                            renderModalLabels();
+                        }
+
+                        const commentsQuery = query(collection(db, `roadmapTasks/${taskId}/comments`), orderBy("createdAt", "asc"));
+                        activeTaskUnsubComments = onSnapshot(commentsQuery, (snapshot) => {
+                            const commentsList = document.getElementById('task-comments-list');
+                            if (snapshot.empty) {
+                                commentsList.innerHTML = '<p class="text-gray-500 text-sm text-center py-4 italic">Nenhum comentário registrado.</p>';
+                            } else {
+                                commentsList.innerHTML = snapshot.docs.map(cDoc => {
+                                    const c = cDoc.data();
+                                    const canDelete = isAdmin || isDiego || isDani || c.authorId === currentUser.uid;
+                                    const deleteBtn = canDelete ? `<button onclick="window.deleteComment('${taskId}', '${cDoc.id}')" class="text-red-400 hover:text-red-600 ml-3 text-lg leading-none transition-colors" title="Apagar Comentário">&times;</button>` : '';
+
+                                    return `<div class="bg-gray-800 p-3 rounded-lg border border-gray-700/50 mb-2">
+                                        <div class="flex justify-between items-baseline mb-1 border-b border-gray-700/50 pb-1">
+                                            <span class="text-xs font-bold text-blue-400">${c.authorName || 'Utilizador'}</span>
+                                            <div>${deleteBtn}</div>
+                                        </div>
+                                        <p class="text-sm text-gray-300 mt-1">${c.text}</p>
+                                    </div>`;
+                                }).join('');
+                                commentsList.scrollTop = commentsList.scrollHeight;
+                            }
+                        });
+                    }
+                } catch (e) { console.error(e); }
+                showLoader(false);
+            } else {
+                commentsSection.style.display = 'none';
+            }
+            modal.classList.add('visible');
+        };
+
         document.getElementById('btn-open-report').addEventListener('click', (e) => {
             e.preventDefault();
             if (!currentEditingTaskId) { alert("Grave a demanda primeiro para gerir relatórios."); return; }
-            openReportModal(currentEditingTaskId);
+            window.openReportModal(currentEditingTaskId);
         });
 
         window.openReportModal = async (taskId) => {
@@ -1027,9 +1214,6 @@
             showLoader(false);
         });
 
-        // -----------------------------------------------------
-        // LÓGICA DE TAREFAS (SALVAR/APAGAR)
-        // -----------------------------------------------------
         const saveTask = async () => {
             const title = document.getElementById('task-title').value.trim();
             if (!title) { alert('Título obrigatório.'); return; }
@@ -1060,7 +1244,7 @@
                         });
                     }
                 }
-                closeModal('modal-task');
+                window.closeModal('modal-task');
             } catch (error) { console.error(error); alert("Erro ao gravar dados."); }
             showLoader(false);
         };
@@ -1068,13 +1252,10 @@
         const deleteTask = async () => {
             if(!currentEditingTaskId || !confirm("Tem certeza que deseja excluir esta demanda definitivamente?")) return;
             showLoader(true);
-            try { await deleteDoc(doc(db, "roadmapTasks", currentEditingTaskId)); closeModal('modal-task'); } catch (e) { console.error(e); }
+            try { await deleteDoc(doc(db, "roadmapTasks", currentEditingTaskId)); window.closeModal('modal-task'); } catch (e) { console.error(e); }
             showLoader(false);
         };
 
-        // -----------------------------------------------------
-        // RENDERIZAÇÃO DO KANBAN
-        // -----------------------------------------------------
         const renderRoadmap = (tasks) => {
             allTasks = tasks; 
             const cols = { 'A Fazer': document.getElementById('col-todo'), 'Em Andamento': document.getElementById('col-doing'), 'Contínuo': document.getElementById('col-continuous'), 'Concluído': document.getElementById('col-done') };
@@ -1126,20 +1307,29 @@
                 const pColor = priorityColorsMap[taskPriority] || priorityColorsMap['Média'];
                 const priorityBadge = `<span class="text-[10px] ${pColor} px-1.5 py-0.5 rounded border flex items-center gap-1 font-semibold">${taskPriority}</span>`;
                 const respText = task.responsibleName ? task.responsibleName : 'Sem responsável';
-                const respBadge = `<span class="text-[10px] text-gray-500 bg-gray-800/80 px-1.5 py-0.5 rounded border border-gray-700 flex items-center gap-1">👤 ${respText}</span>`;
+                const respBadge = `<span class="text-[10px] text-gray-500 bg-gray-800/80 px-1.5 py-0.5 rounded border border-gray-700 flex items-center gap-1" title="Responsável (Executante)">👤 ${respText}</span>`;
                 const canDrag = task.responsibleId === currentUser.uid;
 
                 const cardHtml = `
-                <div class="kanban-card group" data-task-id="${task.id}" data-order="${orderValue}" draggable="${canDrag}" onclick="openTaskModal('${task.id}')">
+                <div class="kanban-card group" data-task-id="${task.id}" data-order="${orderValue}" draggable="${canDrag}" onclick="window.openTaskModal('${task.id}')">
                     ${labelsHtml}
                     <h4 class="text-gray-100 font-semibold text-sm leading-tight mb-2">${task.title}</h4>
-                    <p class="text-gray-400 text-xs mb-4 line-clamp-2">${task.description || 'Nenhuma descrição...'}</p>
-                    <div class="flex flex-col gap-2 border-t border-gray-700/30 pt-3">
+                    <p class="text-gray-400 text-xs mb-3 line-clamp-2">${task.description || 'Nenhuma descrição...'}</p>
+                    
+                    <div class="flex flex-col gap-2">
                         <div class="flex justify-between items-center flex-wrap gap-2">
                             <div class="flex items-center gap-2">${priorityBadge}${dateDisplay ? `<span class="text-[10px] bg-gray-800 text-gray-300 px-1.5 py-0.5 rounded border border-gray-700 flex items-center gap-1">⏱️ ${dateDisplay}</span>` : ''}</div>
                             ${confidentialBadge}
                         </div>
-                        <div class="flex justify-end mt-1">${respBadge}</div>
+                        
+                        <div class="flex justify-between items-center border-t border-gray-700/30 pt-2 mt-1">
+                            <div class="flex items-center gap-1 text-[10px] text-gray-500" title="Criador da Demanda">
+                                ✍️ <span class="truncate max-w-[90px] font-medium text-gray-400">${task.authorName || 'Desconhecido'}</span>
+                            </div>
+                            <div class="flex justify-end">
+                                ${respBadge}
+                            </div>
+                        </div>
                     </div>
                 </div>`;
                 cols[status].innerHTML += cardHtml;
@@ -1244,11 +1434,11 @@
                 
                 loginTime = Date.now();
                 await loadUsers(); setupFirestoreListeners(); setupMessagesAndNotifications();
-                showView('roadmap-view');
+                window.showView('roadmap-view');
             } else {
                 currentUser = null; isAdmin = false; isDiego = false; isDani = false; isSupervisor = false; isColaborador = false;
                 if (unsubscribeRoadmap) unsubscribeRoadmap(); if (activeTaskUnsubReports) activeTaskUnsubReports(); if (unsubNotifications) unsubNotifications(); if (unsubMessages) unsubMessages();
-                showView('login-view');
+                window.showView('login-view');
             }
             showLoader(false);
         });
