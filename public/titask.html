@@ -55,15 +55,23 @@
         .form-checkbox { appearance: none; background-color: #334155; margin: 0; font: inherit; color: currentColor; width: 1.15em; height: 1.15em; border: 1px solid #475569; border-radius: 0.25em; display: grid; place-content: center; }
         .form-checkbox::before { content: ""; width: 0.65em; height: 0.65em; transform: scale(0); transition: 120ms transform ease-in-out; box-shadow: inset 1em 1em #ef4444; background-color: #ef4444; transform-origin: center; clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); }
         .form-checkbox:checked::before { transform: scale(1); }
+
+        /* Estilo para Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
     </style>
 </head>
 <body>
 
     <div id="loader-overlay" class="loader-overlay"><div class="loader"></div></div>
 
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[9999] flex flex-col gap-3"></div>
+
     <div id="welcome-view" class="page-view welcome-view">
         <div class="welcome-logo-container">
-             <img src="assets/NEXUS_LOGO.png" alt="Logo Ti Net" class="welcome-logo" style="max-width: 300px; onerror="this.style.display='none'"/>
+             <img src="assets/NEXUS_LOGO.png" alt="Logo Ti Net" class="welcome-logo" style="max-width: 300px;" onerror="this.style.display='none'"/>
         </div>
         <h1 id="welcome-message" class="text-3xl font-bold text-white mt-8"></h1>
     </div>
@@ -93,14 +101,25 @@
                         <option value="all">Todos (Visão Geral)</option>
                     </select>
 
-                    <div class="text-right border-r border-gray-600 pr-4 hidden md:block">
+                    <div class="flex items-center gap-4 mr-4 border-r border-gray-600 pr-4">
+                        <button onclick="openMessagesModal()" class="relative text-gray-400 hover:text-white transition" title="Mensagens Internas">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <span id="badge-messages" class="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                        </button>
+                        <button onclick="openNotificationsModal()" class="relative text-gray-400 hover:text-white transition" title="Notificações">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            <span id="badge-notifications" class="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                        </button>
+                    </div>
+
+                    <div class="text-right hidden md:block">
                         <p class="text-xs text-gray-400">Logado como</p>
                         <p id="current-user-display" class="font-semibold text-white text-sm"></p>
                         <p id="current-user-dept" class="text-[10px] text-gray-500 uppercase"></p>
                     </div>
                     
                     <button id="btn-new-task" onclick="openTaskModal()" class="btn btn-primary flex items-center gap-2">
-                        <span class="text-xl leading-none">+</span> Criar Demanda
+                        <span class="text-xl leading-none">+</span> Criar
                     </button>
                     <button onclick="showView('profile-view')" class="btn btn-secondary">Perfil</button>
                     <button id="logout-btn" class="btn btn-danger">Sair</button>
@@ -223,6 +242,69 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <div id="modal-messages" class="modal">
+        <div class="modal-content max-w-3xl" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-4 border-b border-gray-700/50 pb-4">
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    Caixa de Entrada
+                </h2>
+                <div class="flex gap-2">
+                    <button onclick="showComposeMessage()" class="btn btn-primary btn-sm flex items-center gap-1"><span class="text-lg leading-none">+</span> Nova Mensagem</button>
+                    <button onclick="closeModal('modal-messages')" class="text-gray-400 hover:text-white text-2xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
+                </div>
+            </div>
+
+            <div id="msg-list-view" class="h-[60vh] overflow-y-auto space-y-2 pr-2">
+                <p class="text-sm text-gray-500 italic text-center mt-10">Carregando mensagens...</p>
+            </div>
+
+            <div id="msg-compose-view" class="hidden flex-col gap-4 h-[60vh]">
+                <div class="flex items-center gap-2">
+                    <button onclick="showMessagesList()" class="text-gray-400 hover:text-white text-sm bg-gray-800 px-3 py-1.5 rounded flex items-center gap-1">← Voltar</button>
+                    <h3 class="text-white font-semibold" id="msg-compose-title">Nova Mensagem</h3>
+                </div>
+                <select id="msg-to" class="form-input text-sm"><option value="">Para (Selecione um utilizador)...</option></select>
+                <input type="text" id="msg-subject" class="form-input text-sm" placeholder="Assunto da mensagem...">
+                <textarea id="msg-body" class="form-input flex-1 resize-none text-sm" placeholder="Escreva a sua mensagem aqui..."></textarea>
+                <button id="btn-send-message" class="btn btn-primary w-full shadow-lg shadow-blue-500/20">Enviar Mensagem</button>
+            </div>
+
+            <div id="msg-read-view" class="hidden flex-col gap-4 h-[60vh]">
+                <div class="flex items-center gap-2">
+                    <button onclick="showMessagesList()" class="text-gray-400 hover:text-white text-sm bg-gray-800 px-3 py-1.5 rounded flex items-center gap-1">← Voltar</button>
+                </div>
+                <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                    <h3 id="msg-read-subject" class="text-lg font-bold text-white mb-2">Assunto</h3>
+                    <div class="flex justify-between items-center text-xs text-gray-400 border-b border-gray-700 pb-2 mb-3">
+                        <p>De: <span id="msg-read-from" class="font-semibold text-blue-300">Remetente</span></p>
+                        <p id="msg-read-date">Data</p>
+                    </div>
+                    <p id="msg-read-body" class="text-sm text-gray-200 whitespace-pre-wrap leading-relaxed overflow-y-auto max-h-[35vh]"></p>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button id="btn-reply-msg" class="btn btn-secondary flex-1">Responder</button>
+                    <button id="btn-forward-msg" class="btn btn-secondary flex-1">Encaminhar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-notifications" class="modal">
+        <div class="modal-content max-w-lg" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-4 border-b border-gray-700/50 pb-4">
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                    <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    Notificações
+                </h2>
+                <button onclick="closeModal('modal-notifications')" class="text-gray-400 hover:text-white text-2xl leading-none bg-gray-800 rounded-lg px-2 py-1">&times;</button>
+            </div>
+            <div id="notifications-list" class="h-[50vh] overflow-y-auto space-y-2 pr-2">
+                <p class="text-sm text-gray-500 italic text-center mt-10">Sem notificações.</p>
+            </div>
+        </div>
     </div>
 
     <div id="modal-task" class="modal">
@@ -357,8 +439,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg> 
                         Histórico de Relatórios
                     </h4>
-                    <div id="reports-history-list" class="space-y-4 flex-1 overflow-y-auto pr-2">
-                        </div>
+                    <div id="reports-history-list" class="space-y-4 flex-1 overflow-y-auto pr-2"></div>
                 </div>
 
                 <div id="new-report-section" class="bg-gray-800/40 p-5 rounded-xl border border-gray-700/50 h-[50vh] flex flex-col">
@@ -379,7 +460,7 @@
     <script type="module">
         import { initializeApp, getApp, getApps } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile, updatePassword } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-        import { getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, addDoc, deleteDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+        import { getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, addDoc, deleteDoc, query, where, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB2MmKGo3-cXdYJWbVme3kGdFlN81J9YsU",
@@ -403,16 +484,21 @@
         let unsubscribeRoadmap;
         let activeTaskUnsubComments = null;
         let activeTaskUnsubReports = null;
+        let unsubNotifications = null;
+        let unsubMessages = null;
+
         let currentEditingTaskId = null;
         let currentReportTaskId = null;
         let isDraggingCard = false;
+        let loginTime = Date.now();
         
         let currentTaskLabels = [];
         let selectedLabelColor = 'blue';
 
-        // Cache de utilizadores e tarefas
+        // Cache global
         let systemUsers = [];
         let allTasks = [];
+        let allMessages = [];
         let currentFilter = 'all';
 
         const labelColorMap = {
@@ -450,6 +536,22 @@
         };
         window.closeModal = closeModal;
 
+        // TOASTS
+        window.showToast = (title, message) => {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-gray-800 border-l-4 border-blue-500 p-4 rounded shadow-2xl text-white w-72 transform transition-all duration-300 translate-x-10 opacity-0';
+            toast.innerHTML = `<h5 class="font-bold text-sm text-blue-400">${title}</h5><p class="text-xs text-gray-300 mt-1">${message}</p>`;
+            container.appendChild(toast);
+            
+            setTimeout(() => { toast.classList.remove('translate-x-10', 'opacity-0'); }, 10);
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-10');
+                setTimeout(() => toast.remove(), 300);
+            }, 6000);
+        };
+
         // Formatação de Data Reutilizável
         const formatDateDetailed = (firebaseTimestamp) => {
             if (!firebaseTimestamp) return 'Data não registada';
@@ -462,7 +564,9 @@
             return `${day} ${months[d.getMonth()]} ${year}, às ${hours}:${minutes}`;
         };
 
-        // Lógica de Carregamento de Utilizadores Globais
+        // -----------------------------------------------------
+        // LÓGICA DE USUÁRIOS
+        // -----------------------------------------------------
         const loadUsers = async () => {
             try {
                 const usersSnap = await getDocs(collection(db, "users"));
@@ -472,6 +576,7 @@
                 });
                 updateUserDropdowns();
                 updateAdminEditUserDropdown();
+                updateMessageDropdown();
             } catch(e) { console.error("Erro ao carregar usuários", e); }
         };
 
@@ -485,7 +590,17 @@
             });
         };
 
-        // ADMIN: Preencher dados ao selecionar usuário para edição
+        const updateMessageDropdown = () => {
+            const msgTo = document.getElementById('msg-to');
+            if(!msgTo) return;
+            msgTo.innerHTML = '<option value="">Para (Selecione um utilizador)...</option>';
+            systemUsers.forEach(u => {
+                if(u.id !== currentUser.uid) {
+                    msgTo.innerHTML += `<option value="${u.id}">${u.displayName}</option>`;
+                }
+            });
+        };
+
         document.getElementById('edit-user-select')?.addEventListener('change', (e) => {
             const userId = e.target.value;
             if(!userId) {
@@ -500,7 +615,6 @@
             }
         });
 
-        // ADMIN: Gravar edição de usuário
         document.getElementById('btn-update-user-role')?.addEventListener('click', async () => {
             const userId = document.getElementById('edit-user-select').value;
             const newRole = document.getElementById('edit-user-role').value;
@@ -521,15 +635,11 @@
 
             showLoader(true);
             try {
-                await updateDoc(doc(db, "users", userId), {
-                    role: newRole,
-                    department: newDept
-                });
+                await updateDoc(doc(db, "users", userId), { role: newRole, department: newDept });
                 feedback.className = 'text-green-400 mt-2 text-sm';
                 feedback.textContent = 'Permissões atualizadas com sucesso!';
-                await loadUsers(); // recarrega base local
+                await loadUsers();
             } catch(error) {
-                console.error(error);
                 feedback.className = 'text-red-400 mt-2 text-sm';
                 feedback.textContent = 'Erro ao atualizar dados.';
             }
@@ -547,40 +657,25 @@
                 const isUserDiego = u.id === DIEGO_UID || u.role === 'gestao_admin';
                 const isUserSameDept = u.department === currentUser.department;
 
-                // --- 1. LÓGICA DO FILTRO (Topo da Página) ---
-                if (!isAdmin && !isColaborador) { // Carlos e Colab não usam filtro
+                // --- FILTRO ---
+                if (!isAdmin && !isColaborador) { 
                     let allowFilter = false;
-                    
-                    if (isSupervisor) {
-                        if (isUserSameDept) allowFilter = true;
-                    } else if (isDani) {
-                        if (!isUserDiego) allowFilter = true; // Dani vê todos menos Diego
-                    } else if (isDiego) {
-                        allowFilter = true; // Diego vê todos
-                    }
+                    if (isSupervisor && isUserSameDept) allowFilter = true;
+                    else if (isDani) allowFilter = true; // Dani vê todos
+                    else if (isDiego) allowFilter = true;
 
-                    if (allowFilter) {
-                        filterEl.innerHTML += `<option value="${u.id}">${u.displayName}</option>`;
-                    }
+                    if (allowFilter) filterEl.innerHTML += `<option value="${u.id}">${u.displayName}</option>`;
                 }
 
-                // --- 2. LÓGICA DO DROP RESPONSÁVEL (Modal Tarefa) ---
+                // --- DROP RESPONSÁVEL ---
                 let allowAssign = false;
-
                 if (isColaborador) {
-                    // Colaborador SÓ pode atribuir a si mesmo
                     if (u.id === currentUser.uid) allowAssign = true;
                 } else if (isSupervisor) {
-                    // Supervisor SÓ pode atribuir a si mesmo ou a quem é do mesmo departamento
                     if (isUserSameDept || u.id === currentUser.uid) allowAssign = true;
                 } else if (isAdmin || isDani || isDiego) {
-                    // Diego, Dani, Admin podem atribuir a geral, MAS...
-                    // Regra Master: Ninguém (exceto Diego) atribui para Diego
-                    if (isUserDiego && !isDiego) {
-                        allowAssign = false; 
-                    } else {
-                        allowAssign = true;
-                    }
+                    if (isUserDiego && !isDiego) allowAssign = false; 
+                    else allowAssign = true;
                 }
 
                 if (allowAssign) {
@@ -592,11 +687,218 @@
 
         document.getElementById('user-filter').addEventListener('change', (e) => {
             currentFilter = e.target.value;
-            renderRoadmap(allTasks); // Re-renderiza com o filtro
+            renderRoadmap(allTasks); 
         });
 
         document.getElementById('task-status').addEventListener('change', (e) => {
             document.getElementById('btn-open-report').style.display = (e.target.value === 'Concluído') ? 'flex' : 'none';
+        });
+
+        // -----------------------------------------------------
+        // GESTÃO DE MENSAGENS E NOTIFICAÇÕES
+        // -----------------------------------------------------
+        window.openMessagesModal = () => {
+            document.getElementById('modal-messages').classList.add('visible');
+            showMessagesList();
+        };
+
+        window.openNotificationsModal = () => {
+            document.getElementById('modal-notifications').classList.add('visible');
+        };
+
+        window.showMessagesList = () => {
+            document.getElementById('msg-list-view').style.display = 'block';
+            document.getElementById('msg-compose-view').style.display = 'none';
+            document.getElementById('msg-read-view').style.display = 'none';
+        };
+
+        window.showComposeMessage = () => {
+            document.getElementById('msg-list-view').style.display = 'none';
+            document.getElementById('msg-compose-view').style.display = 'flex';
+            document.getElementById('msg-read-view').style.display = 'none';
+            document.getElementById('msg-to').value = '';
+            document.getElementById('msg-subject').value = '';
+            document.getElementById('msg-body').value = '';
+            document.getElementById('msg-compose-title').textContent = 'Nova Mensagem';
+        };
+
+        const setupMessagesAndNotifications = () => {
+            if (unsubMessages) unsubMessages();
+            if (unsubNotifications) unsubNotifications();
+
+            // NOTIFICAÇÕES
+            const qNotif = query(collection(db, "notifications"), where("userId", "==", currentUser.uid), orderBy("createdAt", "desc"));
+            unsubNotifications = onSnapshot(qNotif, (snapshot) => {
+                const listEl = document.getElementById('notifications-list');
+                let unreadCount = 0;
+                
+                snapshot.docChanges().forEach((change) => {
+                    const data = change.doc.data();
+                    if (change.type === "added" && data.createdAt) {
+                        if (data.createdAt.toMillis() > loginTime && !data.read) {
+                            showToast("Nova Notificação", data.title);
+                        }
+                    }
+                });
+
+                if (snapshot.empty) {
+                    listEl.innerHTML = '<p class="text-sm text-gray-500 italic text-center mt-10">Sem notificações.</p>';
+                } else {
+                    let html = '';
+                    snapshot.forEach(docSnap => {
+                        const n = docSnap.data();
+                        if (!n.read) unreadCount++;
+                        const bg = n.read ? 'bg-gray-800' : 'bg-blue-900/30 border-blue-500/50';
+                        const dot = n.read ? '' : '<span class="w-2 h-2 rounded-full bg-blue-500"></span>';
+                        
+                        html += `
+                        <div class="p-3 rounded-lg border border-gray-700 cursor-pointer hover:bg-gray-700 transition ${bg}" onclick="handleNotificationClick('${docSnap.id}', '${n.linkType}', '${n.linkId}')">
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-sm font-bold text-gray-200 flex items-center gap-2">${dot} ${n.title}</h4>
+                                <span class="text-[10px] text-gray-500">${formatDateDetailed(n.createdAt)}</span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">${n.body}</p>
+                        </div>`;
+                    });
+                    listEl.innerHTML = html;
+                }
+                
+                const badge = document.getElementById('badge-notifications');
+                badge.textContent = unreadCount;
+                badge.style.display = unreadCount > 0 ? 'block' : 'none';
+            });
+
+            // MENSAGENS
+            const qMsg = query(collection(db, "messages"), where("receiverId", "==", currentUser.uid), orderBy("createdAt", "desc"));
+            unsubMessages = onSnapshot(qMsg, (snapshot) => {
+                const listEl = document.getElementById('msg-list-view');
+                let unreadCount = 0;
+                allMessages = [];
+
+                snapshot.docChanges().forEach((change) => {
+                    const data = change.doc.data();
+                    if (change.type === "added" && data.createdAt) {
+                        if (data.createdAt.toMillis() > loginTime && !data.read) {
+                            showToast("Nova Mensagem", `De: ${data.senderName}`);
+                        }
+                    }
+                });
+
+                if (snapshot.empty) {
+                    listEl.innerHTML = '<p class="text-sm text-gray-500 italic text-center mt-10">Caixa de entrada vazia.</p>';
+                } else {
+                    let html = '';
+                    snapshot.forEach(docSnap => {
+                        const m = docSnap.data();
+                        allMessages.push({ id: docSnap.id, ...m });
+                        if (!m.read) unreadCount++;
+                        
+                        const bg = m.read ? 'bg-gray-800/80' : 'bg-gray-700/80 border-l-4 border-l-blue-500';
+                        const fwLabel = m.read ? 'font-medium' : 'font-bold text-white';
+
+                        html += `
+                        <div class="p-3 rounded-lg border border-gray-700 cursor-pointer hover:bg-gray-600 transition ${bg}" onclick="readMessage('${docSnap.id}')">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <span class="text-xs font-bold text-blue-400">${m.senderName}</span>
+                                <span class="text-[10px] text-gray-400">${formatDateDetailed(m.createdAt)}</span>
+                            </div>
+                            <p class="text-sm ${fwLabel} truncate">${m.subject || '(Sem Assunto)'}</p>
+                        </div>`;
+                    });
+                    listEl.innerHTML = html;
+                }
+                
+                const badge = document.getElementById('badge-messages');
+                badge.textContent = unreadCount;
+                badge.style.display = unreadCount > 0 ? 'block' : 'none';
+            });
+        };
+
+        window.handleNotificationClick = async (notifId, linkType, linkId) => {
+            try { await updateDoc(doc(db, "notifications", notifId), { read: true }); } catch(e){}
+            closeModal('modal-notifications');
+            if (linkType === 'task' && linkId) {
+                openTaskModal(linkId);
+            } else if (linkType === 'message' && linkId) {
+                openMessagesModal();
+                readMessage(linkId);
+            }
+        };
+
+        window.readMessage = async (msgId) => {
+            const msg = allMessages.find(m => m.id === msgId);
+            if(!msg) return;
+
+            document.getElementById('msg-list-view').style.display = 'none';
+            document.getElementById('msg-compose-view').style.display = 'none';
+            document.getElementById('msg-read-view').style.display = 'flex';
+
+            document.getElementById('msg-read-subject').textContent = msg.subject || '(Sem Assunto)';
+            document.getElementById('msg-read-from').textContent = msg.senderName;
+            document.getElementById('msg-read-date').textContent = formatDateDetailed(msg.createdAt);
+            document.getElementById('msg-read-body').textContent = msg.body;
+
+            // Marcar lida
+            if(!msg.read) {
+                try { await updateDoc(doc(db, "messages", msgId), { read: true }); } catch(e){}
+            }
+
+            // Configurar botões de ação
+            document.getElementById('btn-reply-msg').onclick = () => {
+                showComposeMessage();
+                document.getElementById('msg-compose-title').textContent = 'Responder Mensagem';
+                document.getElementById('msg-to').value = msg.senderId;
+                document.getElementById('msg-subject').value = `Re: ${msg.subject || 'Mensagem'}`;
+                document.getElementById('msg-body').value = `\n\n--- Em ${formatDateDetailed(msg.createdAt)}, ${msg.senderName} escreveu:\n${msg.body}`;
+                document.getElementById('msg-body').focus();
+            };
+
+            document.getElementById('btn-forward-msg').onclick = () => {
+                showComposeMessage();
+                document.getElementById('msg-compose-title').textContent = 'Encaminhar Mensagem';
+                document.getElementById('msg-subject').value = `Fwd: ${msg.subject || 'Mensagem'}`;
+                document.getElementById('msg-body').value = `\n\n--- Mensagem Encaminhada ---\nDe: ${msg.senderName}\nData: ${formatDateDetailed(msg.createdAt)}\nAssunto: ${msg.subject}\n\n${msg.body}`;
+            };
+        };
+
+        document.getElementById('btn-send-message').addEventListener('click', async () => {
+            const toId = document.getElementById('msg-to').value;
+            const toName = document.getElementById('msg-to').options[document.getElementById('msg-to').selectedIndex]?.text;
+            const subject = document.getElementById('msg-subject').value.trim();
+            const body = document.getElementById('msg-body').value.trim();
+
+            if(!toId || !body) { alert("Selecione um destinatário e digite a mensagem."); return; }
+
+            showLoader(true);
+            try {
+                const msgRef = await addDoc(collection(db, "messages"), {
+                    senderId: currentUser.uid,
+                    senderName: currentUser.name,
+                    receiverId: toId,
+                    receiverName: toName,
+                    subject: subject,
+                    body: body,
+                    read: false,
+                    createdAt: serverTimestamp()
+                });
+
+                await addDoc(collection(db, "notifications"), {
+                    userId: toId,
+                    title: `Mensagem de ${currentUser.name}`,
+                    body: subject || 'Nova mensagem recebida.',
+                    linkType: 'message',
+                    linkId: msgRef.id,
+                    read: false,
+                    createdAt: serverTimestamp()
+                });
+
+                showToast("Sucesso", "Mensagem enviada com sucesso!");
+                showMessagesList();
+            } catch(e) {
+                console.error(e);
+                alert("Erro ao enviar mensagem.");
+            }
+            showLoader(false);
         });
 
         // -----------------------------------------------------
@@ -622,13 +924,11 @@
             
             showLoader(true);
             try {
-                // Info Base
                 const taskSnap = await getDoc(doc(db, "roadmapTasks", taskId));
                 if (taskSnap.exists()) {
                     const data = taskSnap.data();
                     document.getElementById('report-task-title').textContent = data.title || "Sem Título";
                     
-                    // Bloqueio de inserção: Só o Responsável atual pode adicionar
                     if (data.responsibleId !== currentUser.uid) {
                         newTextEl.disabled = true;
                         newTextEl.placeholder = "Apenas o responsável pela tarefa pode adicionar relatórios.";
@@ -640,7 +940,6 @@
                     }
                 }
 
-                // Escuta de Relatórios Subcollection
                 const qReports = query(collection(db, `roadmapTasks/${taskId}/reports`), orderBy("createdAt", "asc"));
                 if (activeTaskUnsubReports) activeTaskUnsubReports();
                 
@@ -691,183 +990,8 @@
         });
 
         // -----------------------------------------------------
-        // LÓGICA DE DATAS, COMENTÁRIOS E ETIQUETAS
+        // LÓGICA DE TAREFAS (SALVAR/APAGAR)
         // -----------------------------------------------------
-        document.getElementById('task-deadline-months').addEventListener('change', (e) => {
-            const months = parseInt(e.target.value);
-            if (months) {
-                const d = new Date(); d.setMonth(d.getMonth() + months);
-                const yyyy = d.getFullYear(); const mm = String(d.getMonth() + 1).padStart(2, '0'); const dd = String(d.getDate()).padStart(2, '0');
-                document.getElementById('task-deadline').value = `${yyyy}-${mm}-${dd}`;
-            }
-        });
-
-        window.deleteComment = async (taskId, commentId) => {
-            if(!confirm("Tem a certeza que deseja apagar este comentário?")) return;
-            try {
-                showLoader(true);
-                await deleteDoc(doc(db, "roadmapTasks", taskId, "comments", commentId));
-                showLoader(false);
-            } catch(e) { showLoader(false); alert("Erro ao apagar. Motivo técnico: " + e.message); }
-        };
-
-        document.querySelectorAll('#color-picker div').forEach(swatch => {
-            swatch.addEventListener('click', (e) => {
-                document.querySelectorAll('#color-picker div').forEach(s => s.classList.remove('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-[#1e293b]'));
-                e.target.classList.add('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-[#1e293b]');
-                selectedLabelColor = e.target.getAttribute('data-color');
-            });
-        });
-
-        const renderModalLabels = () => {
-            const container = document.getElementById('task-labels-preview');
-            if (currentTaskLabels.length === 0) {
-                container.innerHTML = '<span class="text-[10px] text-gray-500 italic w-full text-center">Nenhuma etiqueta</span>';
-                return;
-            }
-            container.innerHTML = currentTaskLabels.map((lbl, index) => {
-                const colorClass = labelColorMap[lbl.color] || labelColorMap['blue'];
-                return `<span class="tag ${colorClass} transition-colors cursor-pointer" onclick="window.removeLabel(${index})" title="Clique para remover">
-                            ${lbl.text} <span class="text-[10px] font-bold opacity-70 ml-1 hover:opacity-100">&times;</span>
-                        </span>`;
-            }).join('');
-        };
-
-        window.removeLabel = (index) => { currentTaskLabels.splice(index, 1); renderModalLabels(); };
-
-        document.getElementById('btn-add-custom-label').addEventListener('click', () => {
-            const input = document.getElementById('new-label-name');
-            const text = input.value.trim();
-            if (text && !currentTaskLabels.some(l => l.text.toLowerCase() === text.toLowerCase())) {
-                currentTaskLabels.push({ text: text, color: selectedLabelColor });
-                renderModalLabels(); input.value = '';
-            }
-        });
-
-        document.getElementById('new-label-name').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') document.getElementById('btn-add-custom-label').click();
-        });
-
-        // -----------------------------------------------------
-        // ABERTURA DO MODAL DA TAREFA
-        // -----------------------------------------------------
-        window.openTaskModal = async (taskId = null) => {
-            if (isDraggingCard) return; 
-            
-            currentEditingTaskId = taskId;
-            const modal = document.getElementById('modal-task');
-            
-            // Resets
-            document.getElementById('task-title').value = '';
-            document.getElementById('task-desc').value = '';
-            document.getElementById('task-deadline-months').value = '';
-            document.getElementById('task-deadline').value = '';
-            document.getElementById('new-label-name').value = '';
-            document.getElementById('task-confidential').checked = false;
-            document.getElementById('task-id-display').textContent = taskId ? taskId.substring(0,8).toUpperCase() : 'Nova';
-            document.getElementById('task-priority').value = 'Média'; 
-            
-            // Controle Inicial de Sigilo (SÓ DANI OU DIEGO)
-            if (isDani || isDiego) {
-                document.getElementById('confidential-section').style.display = 'block';
-            } else {
-                document.getElementById('confidential-section').style.display = 'none';
-            }
-            
-            // Controle de Status na Criação (Só A Fazer / Contínuo)
-            const statusSelect = document.getElementById('task-status');
-            if (!taskId) {
-                statusSelect.innerHTML = `<option value="A Fazer">A Fazer</option><option value="Contínuo">Contínuo</option>`;
-                statusSelect.value = 'A Fazer';
-                // Bloqueia alterar responsável se for colaborador
-                document.getElementById('task-responsible').disabled = isColaborador; 
-                document.getElementById('task-responsible').value = currentUser.uid;
-            }
-
-            document.getElementById('btn-open-report').style.display = 'none';
-            document.getElementById('btn-delete-task').style.display = 'none';
-            document.getElementById('task-meta-info').style.display = 'none'; 
-
-            currentTaskLabels = []; 
-            renderModalLabels();
-
-            const commentsSection = document.getElementById('comments-section');
-
-            if (taskId) {
-                showLoader(true);
-                commentsSection.style.display = 'block';
-                
-                // Restaura Status Completos
-                statusSelect.innerHTML = `<option value="A Fazer">A Fazer</option><option value="Em Andamento">Em Andamento</option><option value="Contínuo">Contínuo</option><option value="Concluído">Concluído</option>`;
-                
-                try {
-                    const docSnap = await getDoc(doc(db, "roadmapTasks", taskId));
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        document.getElementById('task-title').value = data.title || '';
-                        document.getElementById('task-desc').value = data.description || '';
-                        document.getElementById('task-status').value = data.status || 'A Fazer';
-                        document.getElementById('task-priority').value = data.priority || 'Média';
-                        document.getElementById('task-deadline').value = data.prazoDate || data.prazo || '';
-                        document.getElementById('task-confidential').checked = data.isConfidential || false;
-                        document.getElementById('task-responsible').value = data.responsibleId || '';
-                        
-                        // Proteção Master: Apenas o Responsável pode mudar status
-                        const amIResponsible = data.responsibleId === currentUser.uid;
-                        statusSelect.disabled = !amIResponsible;
-
-                        // Exibe Meta Info
-                        document.getElementById('task-meta-info').style.display = 'block';
-                        document.getElementById('meta-author').textContent = data.authorName || 'Desconhecido';
-                        document.getElementById('meta-date').textContent = formatDateDetailed(data.createdAt);
-
-                        // Apagar só se for Gestão Master ou o criador original
-                        if (isAdmin || isDiego || isDani || data.authorId === currentUser.uid) {
-                            document.getElementById('btn-delete-task').style.display = 'block';
-                        }
-
-                        if (data.status === 'Concluído') { document.getElementById('btn-open-report').style.display = 'flex'; }
-
-                        if (data.labels && Array.isArray(data.labels)) {
-                            currentTaskLabels = data.labels.map(lbl => {
-                                if (typeof lbl === 'string') return { text: lbl, color: 'blue' };
-                                return lbl;
-                            });
-                            renderModalLabels();
-                        }
-
-                        const commentsQuery = query(collection(db, `roadmapTasks/${taskId}/comments`), orderBy("createdAt", "asc"));
-                        activeTaskUnsubComments = onSnapshot(commentsQuery, (snapshot) => {
-                            const commentsList = document.getElementById('task-comments-list');
-                            if (snapshot.empty) {
-                                commentsList.innerHTML = '<p class="text-gray-500 text-sm text-center py-4 italic">Nenhum comentário registrado.</p>';
-                            } else {
-                                commentsList.innerHTML = snapshot.docs.map(cDoc => {
-                                    const c = cDoc.data();
-                                    const canDelete = isAdmin || isDiego || isDani || c.authorId === currentUser.uid;
-                                    const deleteBtn = canDelete ? `<button onclick="deleteComment('${taskId}', '${cDoc.id}')" class="text-red-400 hover:text-red-600 ml-3 text-lg leading-none transition-colors" title="Apagar Comentário">&times;</button>` : '';
-
-                                    return `<div class="bg-gray-800 p-3 rounded-lg border border-gray-700/50 mb-2">
-                                        <div class="flex justify-between items-baseline mb-1 border-b border-gray-700/50 pb-1">
-                                            <span class="text-xs font-bold text-blue-400">${c.authorName || 'Utilizador'}</span>
-                                            <div>${deleteBtn}</div>
-                                        </div>
-                                        <p class="text-sm text-gray-300 mt-1">${c.text}</p>
-                                    </div>`;
-                                }).join('');
-                                commentsList.scrollTop = commentsList.scrollHeight;
-                            }
-                        });
-                    }
-                } catch (e) { console.error(e); }
-                showLoader(false);
-            } else {
-                commentsSection.style.display = 'none';
-            }
-            
-            modal.classList.add('visible');
-        };
-
         const saveTask = async () => {
             const title = document.getElementById('task-title').value.trim();
             if (!title) { alert('Título obrigatório.'); return; }
@@ -894,6 +1018,8 @@
             };
 
             try {
+                let savedTaskId = currentEditingTaskId;
+
                 if (currentEditingTaskId) {
                     await updateDoc(doc(db, "roadmapTasks", currentEditingTaskId), taskData);
                 } else {
@@ -902,7 +1028,21 @@
                     taskData.order = Date.now();
                     taskData.authorId = currentUser.uid;
                     taskData.authorName = currentUser.name;
-                    await addDoc(collection(db, "roadmapTasks"), taskData);
+                    const docRef = await addDoc(collection(db, "roadmapTasks"), taskData);
+                    savedTaskId = docRef.id;
+
+                    // NOTIFICAÇÃO DE NOVA TAREFA (se não for para ele mesmo)
+                    if (respId !== currentUser.uid) {
+                        await addDoc(collection(db, "notifications"), {
+                            userId: respId,
+                            title: "Nova Demanda Atribuída",
+                            body: `${currentUser.name} atribuiu: ${title}`,
+                            linkType: 'task',
+                            linkId: savedTaskId,
+                            read: false,
+                            createdAt: serverTimestamp()
+                        });
+                    }
                 }
                 closeModal('modal-task');
             } catch (error) { 
@@ -942,11 +1082,10 @@
                 return orderA - orderB;
             }).forEach(task => {
                 
-                // --- REGRA 1: SIGILO RESTRITO (Impede acesso de qualquer um) ---
+                // --- REGRA 1: SIGILO RESTRITO ---
                 if (task.isConfidential) {
                     const isCreator = task.authorId === currentUser.uid;
                     const isResponsible = task.responsibleId === currentUser.uid;
-                    // Se não for o criador nem o responsável, ABORTA a renderização do card imediatamente.
                     if (!isCreator && !isResponsible) return; 
                 }
 
@@ -958,7 +1097,6 @@
                         // Admin Carlos (Não tem filtro) e Colaborador vêem SÓ o próprio quadro
                         if (task.responsibleId === currentUser.uid) deveExibir = true;
                     } else if (isSupervisor) {
-                        // Supervisor: Vê todo o próprio departamento
                         const respUser = systemUsers.find(u => u.id === task.responsibleId);
                         if (respUser && respUser.department === currentUser.department) deveExibir = true;
                     } else {
@@ -966,17 +1104,17 @@
                         deveExibir = true;
                     }
                 } else {
-                    // Tem alguém específico selecionado no filtro
                     if (task.responsibleId === currentFilter) deveExibir = true;
                 }
 
                 if (!deveExibir) return;
 
-                // --- REGRA 3: RESTRIÇÕES DO DIEGO ---
-                // Se a tarefa envolve o Diego, a Dani não pode ver
+                // --- REGRA 3: RESTRIÇÕES DA DANI ---
                 if (isDani) {
-                    const isDiegoTask = task.authorId === DIEGO_UID || task.responsibleId === DIEGO_UID || task.authorName.toLowerCase().includes('diego') || task.responsibleName.toLowerCase().includes('diego');
-                    if (isDiegoTask) return;
+                    const isDiegoTask = task.authorId === DIEGO_UID || (task.authorName && task.authorName.toLowerCase().includes('diego'));
+                    if (isDiegoTask && task.isConfidential) {
+                        if (task.responsibleId !== currentUser.uid) return;
+                    }
                 }
 
                 const status = cols[task.status] ? task.status : 'A Fazer';
@@ -1003,7 +1141,6 @@
                 const respText = task.responsibleName ? task.responsibleName : 'Sem responsável';
                 const respBadge = `<span class="text-[10px] text-gray-500 bg-gray-800/80 px-1.5 py-0.5 rounded border border-gray-700 flex items-center gap-1" title="Responsável da Tarefa">👤 ${respText}</span>`;
 
-                // Habilita drag and drop apenas se for o responsável
                 const canDrag = task.responsibleId === currentUser.uid;
 
                 const cardHtml = `
@@ -1110,7 +1247,6 @@
                     const draggable = document.querySelector(`[data-task-id="${taskId}"]`);
                     
                     if (taskId && draggable) {
-                        // Validação de segurança final no drop
                         const tData = allTasks.find(t => t.id === taskId);
                         if (!tData || tData.responsibleId !== currentUser.uid) {
                             alert("Apenas o responsável pode alterar o status da tarefa.");
@@ -1121,25 +1257,17 @@
                         try {
                             let prev = draggable.previousElementSibling;
                             let next = draggable.nextElementSibling;
-                            
                             let prevOrder = prev ? parseFloat(prev.getAttribute('data-order')) : null;
                             let nextOrder = next ? parseFloat(next.getAttribute('data-order')) : null;
                             let newOrder;
 
-                            if (prevOrder === null && nextOrder === null) {
-                                newOrder = Date.now();
-                            } else if (prevOrder === null) {
-                                newOrder = nextOrder - 10000;
-                            } else if (nextOrder === null) {
-                                newOrder = prevOrder + 10000;
-                            } else {
-                                newOrder = (prevOrder + nextOrder) / 2;
-                            }
+                            if (prevOrder === null && nextOrder === null) newOrder = Date.now();
+                            else if (prevOrder === null) newOrder = nextOrder - 10000;
+                            else if (nextOrder === null) newOrder = prevOrder + 10000;
+                            else newOrder = (prevOrder + nextOrder) / 2;
 
                             await updateDoc(doc(db, "roadmapTasks", taskId), { 
-                                status: zone.status,
-                                order: newOrder,
-                                updatedAt: serverTimestamp() 
+                                status: zone.status, order: newOrder, updatedAt: serverTimestamp() 
                             });
                         } catch (error) { console.error("Erro ao mover:", error); }
                         showLoader(false);
@@ -1156,130 +1284,10 @@
             });
         };
 
-        // -----------------------------------------------------
-        // GESTÃO DE PERFIS (LOGIN E DEFINIÇÕES)
-        // -----------------------------------------------------
+        // EVENTOS DE AUTENTICAÇÃO E INICIALIZAÇÃO
         document.getElementById('btn-save-task').addEventListener('click', saveTask);
         document.getElementById('btn-delete-task').addEventListener('click', deleteTask);
         
-        document.getElementById('btn-add-comment').addEventListener('click', async () => {
-            if (!currentEditingTaskId) return;
-            const input = document.getElementById('task-new-comment');
-            const text = input.value.trim();
-            if (text) {
-                await addDoc(collection(db, `roadmapTasks/${currentEditingTaskId}/comments`), {
-                    text: text, authorName: currentUser.name, authorId: currentUser.uid, createdAt: serverTimestamp()
-                });
-                input.value = '';
-            }
-        });
-
-        document.getElementById('update-profile-btn')?.addEventListener('click', async () => {
-            if (!auth.currentUser) return;
-            const newName = document.getElementById('edit-profile-name').value.trim();
-            const feedbackP = document.getElementById('profile-update-feedback');
-            feedbackP.textContent = '';
-            
-            if (!newName) {
-                feedbackP.className = 'text-red-400 mt-2 text-sm text-center';
-                feedbackP.textContent = 'O nome não pode estar vazio.';
-                return;
-            }
-            showLoader(true);
-            try {
-                await updateProfile(auth.currentUser, { displayName: newName });
-                await updateDoc(doc(db, "users", currentUser.uid), { displayName: newName });
-                
-                currentUser.name = newName;
-                document.getElementById('current-user-display').textContent = newName;
-                
-                feedbackP.className = 'text-green-400 mt-2 text-sm text-center';
-                feedbackP.textContent = 'Nome atualizado com sucesso!';
-                loadUsers(); 
-            } catch (error) {
-                feedbackP.className = 'text-red-400 mt-2 text-sm text-center';
-                feedbackP.textContent = 'Erro ao atualizar o nome.';
-            }
-            showLoader(false);
-        });
-
-        document.getElementById('change-password-btn')?.addEventListener('click', async () => {
-            if (!auth.currentUser) return;
-            const newPassword = document.getElementById('new-password-input').value;
-            const feedbackP = document.getElementById('password-change-feedback');
-            feedbackP.textContent = '';
-             if (newPassword.length < 6) {
-                feedbackP.className = 'text-red-400 mt-2 text-sm text-center';
-                feedbackP.textContent = 'A nova senha deve ter no mínimo 6 caracteres.';
-                return;
-            }
-            try {
-                await updatePassword(auth.currentUser, newPassword);
-                feedbackP.className = 'text-green-400 mt-2 text-sm text-center';
-                feedbackP.textContent = 'Senha alterada com sucesso!';
-                document.getElementById('new-password-input').value = '';
-            } catch (error) {
-                feedbackP.className = 'text-red-400 mt-2 text-sm text-center';
-                feedbackP.textContent = 'Erro ao alterar a senha. Faça logout e login novamente.';
-            }
-        });
-
-        // REGISTO DE UTILIZADOR (Admin, Diego, Dani)
-        document.getElementById('admin-signup-btn')?.addEventListener('click', async () => {
-            const name = document.getElementById('admin-signup-name').value;
-            const email = document.getElementById('admin-signup-email').value;
-            const password = document.getElementById('admin-signup-password').value;
-            const roleInput = document.getElementById('admin-signup-role').value;
-            const deptInput = document.getElementById('admin-signup-dept').value;
-            const feedbackP = document.getElementById('admin-signup-feedback');
-            feedbackP.textContent = '';
-            
-            if (!name || !email || password.length < 6) {
-                feedbackP.className = 'text-red-400 mt-2 text-sm';
-                feedbackP.textContent = 'Preencha todos os campos corretamente (senha mín. 6 caracteres).';
-                return;
-            }
-
-            if ((roleInput === 'supervisor' || roleInput === 'colaborador') && !deptInput) {
-                feedbackP.className = 'text-red-400 mt-2 text-sm';
-                feedbackP.textContent = 'O Departamento é obrigatório para Supervisores e Colaboradores.';
-                return;
-            }
-
-            showLoader(true);
-            try {
-                const tempAppName = `secondary-signup-${Date.now()}`;
-                const secondaryApp = initializeApp(firebaseConfig, tempAppName);
-                const secondaryAuth = getAuth(secondaryApp);
-                const userCredential = await createUserWithEmailAndPassword(secondaryAuth, email, password);
-                await updateProfile(userCredential.user, { displayName: name });
-                
-                await setDoc(doc(db, "users", userCredential.user.uid), { 
-                    role: roleInput, 
-                    department: deptInput,
-                    displayName: name, 
-                    email: email, 
-                    uid: userCredential.user.uid 
-                });
-
-                feedbackP.className = 'text-green-400 mt-2 text-sm';
-                feedbackP.textContent = `Utilizador "${name}" registado com sucesso!`;
-                
-                document.getElementById('admin-signup-name').value = '';
-                document.getElementById('admin-signup-email').value = '';
-                document.getElementById('admin-signup-password').value = '';
-                document.getElementById('admin-signup-dept').value = '';
-                
-                await signOut(secondaryAuth);
-                loadUsers(); 
-            } catch (error) {
-                console.error("Erro ao criar utilizador:", error);
-                feedbackP.className = 'text-red-400 mt-2 text-sm';
-                feedbackP.textContent = 'Erro ao registar. O email pode já estar em uso.';
-            }
-            showLoader(false);
-        });
-
         document.getElementById('login-btn')?.addEventListener('click', async () => {
             showLoader(true);
             try { await signInWithEmailAndPassword(auth, document.getElementById('login-email').value, document.getElementById('login-password').value); } 
@@ -1292,14 +1300,13 @@
             if (user) {
                 const userDoc = await getDoc(doc(db, "users", user.uid));
                 
-                // Validação Híbrida de Permissões (Lê a BD mas garante hardcode das patentes)
                 let role = userDoc.exists() ? (userDoc.data().role || 'colaborador') : 'colaborador';
                 let dept = userDoc.exists() ? (userDoc.data().department || '') : '';
                 
                 const lowerName = (user.displayName || userDoc.data()?.displayName || user.email.split('@')[0]).toLowerCase();
                 const lowerEmail = user.email.toLowerCase();
 
-                // Força os Níveis Máximos de forma inquebrável
+                // Força os Níveis Máximos
                 if (lowerEmail.includes('carlos') || lowerName.includes('carlos') || role === 'admin') {
                     role = 'admin';
                 } else if (user.uid === DIEGO_UID || lowerName.includes('diego') || role === 'gestao_admin') {
@@ -1308,7 +1315,6 @@
                     role = 'gestao';
                 }
 
-                // Distribui flags
                 isAdmin = role === 'admin';
                 isDiego = role === 'gestao_admin';
                 isDani = role === 'gestao';
@@ -1322,37 +1328,22 @@
                 document.getElementById('current-user-dept').textContent = dept ? `${role} | ${dept}` : role;
                 document.getElementById('edit-profile-name').value = currentUser.name;
                 
-                // --- VISIBILIDADE DE MENUS DE ADMINISTRAÇÃO E FILTRO ---
-                if(isAdmin || isDiego || isDani) {
-                    document.getElementById('admin-section').style.display = 'block';
-                } else {
-                    document.getElementById('admin-section').style.display = 'none';
-                }
-
-                if (isAdmin) {
-                    document.getElementById('super-admin-section').style.display = 'block';
-                } else {
-                    document.getElementById('super-admin-section').style.display = 'none';
-                }
-
-                if (isAdmin || isColaborador) {
-                    document.getElementById('user-filter').style.display = 'none';
-                } else {
-                    document.getElementById('user-filter').style.display = 'block';
-                }
+                // VISIBILIDADE DE MENUS DE ADMINISTRAÇÃO E FILTRO
+                document.getElementById('admin-section').style.display = (isAdmin || isDiego || isDani) ? 'block' : 'none';
+                document.getElementById('super-admin-section').style.display = isAdmin ? 'block' : 'none';
+                document.getElementById('user-filter').style.display = (isAdmin || isColaborador) ? 'none' : 'block';
                 
+                loginTime = Date.now();
                 await loadUsers(); 
                 setupFirestoreListeners();
+                setupMessagesAndNotifications();
                 showView('roadmap-view');
             } else {
-                currentUser = null;
-                isAdmin = false;
-                isDiego = false;
-                isDani = false;
-                isSupervisor = false;
-                isColaborador = false;
+                currentUser = null; isAdmin = false; isDiego = false; isDani = false; isSupervisor = false; isColaborador = false;
                 if (unsubscribeRoadmap) unsubscribeRoadmap();
                 if (activeTaskUnsubReports) activeTaskUnsubReports();
+                if (unsubNotifications) unsubNotifications();
+                if (unsubMessages) unsubMessages();
                 showView('login-view');
             }
             showLoader(false);
