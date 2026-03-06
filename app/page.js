@@ -49,10 +49,9 @@ const MainColumn = styled.div`
 
 const DashboardWrapper = styled.div`
   width: 100%;
-  flex: 1; /* Ocupa a maior parte do espaço */
-  min-height: 0; /* Permite que o iframe encolha */
-  border-radius: 8px;
-  overflow: hidden;
+  height: 100%; /* Garante que ele preencha a altura da coluna */
+  flex: 1; /* Se a sua MainColumn for um display: flex */
+  overflow: hidden; /* Evita que crie barra de rolagem no site */
 `;
 
 const KpiWrapper = styled.div`
