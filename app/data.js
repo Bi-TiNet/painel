@@ -5,7 +5,7 @@ export const links = [
     { nome: "Reduzidos", url: "https://app.powerbi.com/view?r=eyJrIjoiZWNhODJiZTItNjQ5Mi00NGYzLTlkNzQtYmFhOTU1ODcxMzk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
     { nome: "Bloqueados", url: "https://app.powerbi.com/view?r=eyJrIjoiODA1ODg5NDMtYzBjNy00NTZiLThiOGUtNDZlYTgyM2M3MmZiIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
     { nome: "Técnicos", url: "https://app.powerbi.com/reportEmbed?reportId=0bdcd5ff-d7ca-485b-8835-25f76df41ca5&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&pageView=fitToPage" },
-    { nome: "Suporte Técnico", url: "https://app.powerbi.com/view?r=eyJrIjoiNWQzMjQzNjgtOGY4MC00MjkwLWJhOWMtZGQ4Nzg1ZDM0NWQwIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+    { nome: "Suporte Técnico", url: "https://app.powerbi.com/reportEmbed?reportId=df01705b-a8f5-4857-a5b2-94bd60236654&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&pageView=fitToPage" },
     { nome: "Pesquisa de Satisfação", url: "https://app.powerbi.com/view?r=eyJrIjoiNzdkZWQyM2EtZTljOC00NjI5LTllYmQtOTkwOTgzZGYyNTk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
 ];
 
