@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apresentação: Ranking de Desempenho Operacional</title>
+    <title>Ranking de Desempenho: Suporte Técnico</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,13 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], }
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: {
+                        brand: {
+                            500: '#6366f1', // Indigo customizado para diferenciar do time de campo
+                            600: '#4f46e5',
+                        }
+                    }
                 }
             }
         }
@@ -34,51 +40,51 @@
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-200 h-screen w-screen flex flex-col items-center justify-center overflow-hidden antialiased selection:bg-blue-500 selection:text-white">
+<body class="bg-slate-900 text-slate-200 h-screen w-screen flex flex-col items-center justify-center overflow-hidden antialiased selection:bg-brand-500 selection:text-white">
 
     <div class="w-full max-w-6xl h-[95vh] md:h-[85vh] bg-slate-800 rounded-2xl shadow-2xl flex flex-col relative overflow-hidden border border-slate-700 mx-2 md:mx-4">
         
         <div class="w-full h-1.5 bg-slate-700">
-            <div id="progressBar" class="h-full bg-blue-500 transition-all duration-500 ease-out w-0"></div>
+            <div id="progressBar" class="h-full bg-brand-500 transition-all duration-500 ease-out w-0"></div>
         </div>
 
         <div id="slides-container" class="flex-1 relative overflow-hidden flex flex-col">
             
             <div class="slide flex flex-col items-center justify-center text-center p-6 md:p-12 h-full slide-fade">
-                <div class="bg-blue-500/10 p-6 rounded-full mb-8 ring-1 ring-blue-500/30">
-                    <i class="fas fa-chart-line text-6xl md:text-7xl text-blue-400"></i>
+                <div class="bg-brand-500/10 p-6 rounded-full mb-8 ring-1 ring-brand-500/30">
+                    <i class="fas fa-headset text-6xl md:text-7xl text-brand-400"></i>
                 </div>
                 <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight max-w-4xl">
                     Relatório de Atualização: <br>
-                    <span class="text-blue-400">Painel e Ranking de Desempenho Operacional</span>
+                    <span class="text-brand-400">Painel e Ranking do Suporte Técnico</span>
                 </h1>
                 <p class="text-lg md:text-xl text-slate-400 max-w-3xl leading-relaxed font-light">
-                    O novo dashboard funciona como um raio-x do departamento, refletindo com precisão a produtividade das equipes, a excelência no atendimento e a eficiência na recuperação de ativos.
+                    Uma central de inteligência para elevar a governança operacional. Refletindo com precisão a eficiência, a qualidade da comunicação, a agilidade e o perfil comercial da nossa equipe.
                 </p>
             </div>
 
             <div class="slide hidden flex-col p-6 md:p-12 h-full overflow-y-auto hide-scrollbar slide-fade">
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                    <i class="fas fa-bullseye text-blue-400"></i> Objetivos Principais
+                    <i class="fas fa-bullseye text-brand-400"></i> Objetivos Principais
                 </h2>
-                <p class="text-base md:text-lg text-slate-400 mb-8">Nossos três pilares para elevar o nível da gestão operacional:</p>
+                <p class="text-base md:text-lg text-slate-400 mb-8">Nossos pilares para reestruturar o atendimento interno:</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div class="bg-slate-700/40 p-6 md:p-8 rounded-xl border-l-4 border-blue-500 hover:bg-slate-700/60 transition duration-300">
-                        <i class="fas fa-eye text-3xl text-blue-400 mb-4"></i>
-                        <h3 class="text-xl font-semibold text-white mb-2">Visibilidade Estratégica</h3>
-                        <p class="text-slate-300 text-sm md:text-base leading-relaxed">Acompanhamento detalhado e individualizado do desempenho das nossas 6 equipes de campo.</p>
+                        <i class="fas fa-search-plus text-3xl text-blue-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-white mb-2">Visão Macro e Micro</h3>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed">Consolidar dados gerais do departamento enquanto monitoramos cirurgicamente o desempenho individual dos nossos 4 atendentes.</p>
                     </div>
                     <div class="bg-slate-700/40 p-6 md:p-8 rounded-xl border-l-4 border-emerald-500 hover:bg-slate-700/60 transition duration-300">
-                        <i class="fas fa-filter text-3xl text-emerald-400 mb-4"></i>
-                        <h3 class="text-xl font-semibold text-white mb-2">Qualificação da Demanda</h3>
-                        <p class="text-slate-300 text-sm md:text-base leading-relaxed">Segmentar visualmente a natureza dos chamados (Suporte vs Instalação).</p>
+                        <i class="fas fa-user-tag text-3xl text-emerald-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-white mb-2">Mapeamento de Perfil</h3>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed">Ir além de "quem atende mais". Mensurar quem resolve rápido (TMA), quem converte menos em OS e quem tem perfil de retenção/vendas.</p>
                     </div>
                     <div class="bg-slate-700/40 p-6 md:p-8 rounded-xl border-l-4 border-amber-500 hover:bg-slate-700/60 transition duration-300 md:col-span-2">
                         <div class="flex flex-col md:flex-row gap-6 items-start md:items-center">
-                            <i class="fas fa-balance-scale text-4xl text-amber-400"></i>
+                            <i class="fas fa-trophy text-4xl text-amber-400"></i>
                             <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Atuação Balanceada</h3>
-                                <p class="text-slate-300 text-sm md:text-base leading-relaxed">Implementar um sistema de metas que exija uma postura completa, equilibrando volume de entregas e qualidade de atendimento.</p>
+                                <h3 class="text-xl font-semibold text-white mb-2">Engajamento e Meritocracia</h3>
+                                <p class="text-slate-300 text-sm md:text-base leading-relaxed">Criar um ambiente de gamificação saudável com o destaque do "Líder do Período", balizado por um sistema que exige equilíbrio entre volume, qualidade e proatividade.</p>
                             </div>
                         </div>
                     </div>
@@ -87,64 +93,81 @@
 
             <div class="slide hidden flex-col p-6 md:p-12 h-full overflow-y-auto hide-scrollbar slide-fade">
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                    <i class="fas fa-columns text-blue-400"></i> Alterações e Implementações Visuais
+                    <i class="fas fa-desktop text-brand-400"></i> Alterações e Implementações Visuais
                 </h2>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
-                    <div class="lg:col-span-1 flex flex-col gap-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+                    <div class="flex flex-col gap-4">
                         <div class="bg-slate-700/30 p-5 rounded-xl border border-slate-600">
-                            <i class="fas fa-tachometer-alt text-2xl text-blue-400 mb-3"></i>
-                            <h3 class="text-lg font-semibold text-white mb-2">Novos KPIs</h3>
-                            <p class="text-sm text-slate-300">Visão imediata do fluxo diário (Manutenções, Retiradas, Upgrades).</p>
+                            <i class="fas fa-chart-pie text-2xl text-blue-400 mb-2"></i>
+                            <h3 class="text-lg font-semibold text-white mb-1">Quadro de Dados Gerais</h3>
+                            <p class="text-sm text-slate-300">Cabeçalho estratégico com o volume macro, TMA geral e a saúde da satisfação do departamento.</p>
                         </div>
                         <div class="bg-slate-700/30 p-5 rounded-xl border border-slate-600">
-                            <i class="fas fa-layer-group text-2xl text-indigo-400 mb-3"></i>
-                            <h3 class="text-lg font-semibold text-white mb-2">Segmentação de OS</h3>
-                            <p class="text-sm text-slate-300">Separação clara entre problemas de rede (Suporte) e serviços de infra (Instalação).</p>
+                            <i class="fas fa-chart-line text-2xl text-emerald-400 mb-2"></i>
+                            <h3 class="text-lg font-semibold text-white mb-1">Evolução Histórica</h3>
+                            <p class="text-sm text-slate-300">Gráfico de barras da média geral mês a mês para identificar tendências de melhora na qualidade.</p>
+                        </div>
+                        <div class="bg-gradient-to-r from-amber-500/20 to-amber-600/10 p-5 rounded-xl border border-amber-500/50">
+                            <i class="fas fa-crown text-2xl text-amber-400 mb-2"></i>
+                            <h3 class="text-lg font-semibold text-amber-400 mb-1">Líder do Período</h3>
+                            <p class="text-sm text-slate-300">Espaço nobre para reconhecer visualmente o colaborador com a maior pontuação global.</p>
                         </div>
                     </div>
-                    <div class="lg:col-span-2 bg-gradient-to-br from-slate-800 to-slate-700 p-8 rounded-xl border border-amber-500/30 shadow-lg relative overflow-hidden flex flex-col justify-center">
-                        <div class="absolute -right-10 -top-10 opacity-10"><i class="fas fa-star text-9xl text-amber-400"></i></div>
-                        <i class="fas fa-id-card text-4xl text-amber-400 mb-4"></i>
-                        <h3 class="text-2xl font-bold text-white mb-3">Cartões de Avaliação por Equipe</h3>
-                        <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-4">
-                            Cada equipe possui agora um cartão exclusivo exibindo sua <strong class="text-amber-300">Média de Avaliação geral</strong>, complementado pela distribuição exata das notas recebidas (1 a 5 estrelas).
-                        </p>
+                    <div class="bg-gradient-to-br from-slate-800 to-slate-700 p-6 md:p-8 rounded-xl border border-brand-500/30 shadow-lg relative overflow-hidden">
+                        <i class="fas fa-id-card text-4xl text-brand-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-4">Cartões Individuais (Os 3 Pilares)</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-cogs text-slate-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block">Operacional</strong>
+                                    <span class="text-sm text-slate-300">Qtd. de Atendimentos, TMA, Qtd. de OS abertas e % de Conversão em OS (Resolução na linha).</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-star text-amber-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block">Qualidade</strong>
+                                    <span class="text-sm text-slate-300">Média de Avaliação, Total de Avaliações e o ranking de distribuição (1 a 5 estrelas).</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-rocket text-purple-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block">Estratégico</strong>
+                                    <span class="text-sm text-slate-300">Ligações Proativas e Total de Indicações (Upgrades), evidenciando esforço além da receptividade.</span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
             <div class="slide hidden flex-col p-6 md:p-12 h-full overflow-y-auto hide-scrollbar slide-fade">
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                    <i class="fas fa-balance-scale-right text-blue-400"></i> A Nova Metodologia de Pontuação
+                    <i class="fas fa-balance-scale text-brand-400"></i> Metodologia e Dinâmica dos Pesos
                 </h2>
-                <p class="text-base md:text-lg text-slate-400 mb-8">A nota final é calculada por meio de uma média ponderada (Meta = 100 pontos):</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="flex bg-slate-700/40 rounded-xl overflow-hidden border border-slate-600">
-                        <div class="bg-red-500 w-3 md:w-4 flex-shrink-0"></div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-bold text-white flex items-center gap-2 mb-2"><i class="fas fa-heart text-red-400"></i> Qualidade (Meta: 45pts)</h3>
-                            <p class="text-sm text-slate-300">Prioridade absoluta. Compara a média obtida a uma nota de excelência predefinida (4.7).</p>
+                <p class="text-base md:text-lg text-slate-400 mb-8">A nota final não é uma soma simples. Os pesos moldam o comportamento ideal do atendente:</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex flex-col bg-slate-700/40 rounded-xl overflow-hidden border border-slate-600 h-full">
+                        <div class="bg-red-500 h-2 w-full"></div>
+                        <div class="p-6 flex-1">
+                            <h3 class="text-xl font-bold text-white flex items-center gap-2 mb-3"><i class="fas fa-heart text-red-400"></i> Qualidade (40%)</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">A maior fatia da nota. O cliente precisa desligar sentindo que seu problema foi tratado com excelência. Termômetro de cordialidade e resolução (Meta: 4.7).</p>
                         </div>
                     </div>
-                    <div class="flex bg-slate-700/40 rounded-xl overflow-hidden border border-slate-600">
-                        <div class="bg-blue-500 w-3 md:w-4 flex-shrink-0"></div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-bold text-white flex items-center gap-2 mb-2"><i class="fas fa-stopwatch text-blue-400"></i> Produtividade (Meta: 35pts)</h3>
-                            <p class="text-sm text-slate-300">O sistema calcula a meta decimal exata: (Total de OS do Depto / 6 equipes) com desconto de 15%.</p>
+                    <div class="flex flex-col bg-slate-700/40 rounded-xl overflow-hidden border border-slate-600 h-full">
+                        <div class="bg-blue-500 h-2 w-full"></div>
+                        <div class="p-6 flex-1">
+                            <h3 class="text-xl font-bold text-white flex items-center gap-2 mb-3"><i class="fas fa-headset text-blue-400"></i> Produtividade (35%)</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">Foco na fluidez. Manter um bom ritmo e TMA saudável. A meta é a média teórica (Total do Depto / 4) com margem de desconto de 15%.</p>
                         </div>
                     </div>
-                    <div class="flex bg-slate-700/40 rounded-xl overflow-hidden border border-slate-600">
-                        <div class="bg-purple-500 w-3 md:w-4 flex-shrink-0"></div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-bold text-white flex items-center gap-2 mb-2"><i class="fas fa-comments text-purple-400"></i> Engajamento (Meta: 20pts)</h3>
-                            <p class="text-sm text-slate-300">Proatividade de solicitar feedback. A meta é que 80% de todas as OS executadas recebam avaliação.</p>
-                        </div>
-                    </div>
-                    <div class="flex bg-emerald-900/30 rounded-xl overflow-hidden border border-emerald-500/40">
-                        <div class="bg-emerald-500 w-3 md:w-4 flex-shrink-0"></div>
-                        <div class="p-5">
-                            <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2 mb-2"><i class="fas fa-box-open"></i> Bônus: Retiradas (+ Pontos extras)</h3>
-                            <p class="text-sm text-emerald-100/80">Recuperação de equipamentos. Cada item gera 5 pontos, com peso de 50% somados ao resultado global.</p>
+                    <div class="flex flex-col bg-slate-700/40 rounded-xl overflow-hidden border border-slate-600 h-full">
+                        <div class="bg-purple-500 h-2 w-full"></div>
+                        <div class="p-6 flex-1">
+                            <h3 class="text-xl font-bold text-white flex items-center gap-2 mb-3"><i class="fas fa-comments text-purple-400"></i> Engajamento (25%)</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed">Força a proatividade. O atendente é obrigado a criar o hábito de solicitar avaliação. Notas altas não se sustentam sem volume de amostragem.</p>
                         </div>
                     </div>
                 </div>
@@ -152,7 +175,7 @@
 
             <div class="slide hidden flex-col p-6 md:p-12 h-full overflow-y-auto hide-scrollbar slide-fade">
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 flex items-center gap-3">
-                    <i class="fas fa-calculator text-blue-400"></i> Simulação de Desempenho (Equipe de Campo)
+                    <i class="fas fa-calculator text-brand-400"></i> Simulação de Desempenho (Suporte)
                 </h2>
                 <p class="text-sm md:text-base text-slate-400 mb-6">Insira os dados brutos e veja detalhadamente <span class="text-emerald-400 font-medium">o que superou</span> ou <span class="text-amber-400 font-medium">o que faltou</span> nas metas.</p>
                 
@@ -160,40 +183,36 @@
                     <div class="lg:col-span-7 bg-slate-700/30 p-5 md:p-6 rounded-xl border border-slate-600">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Total de OS do Departamento</label>
-                                <input type="number" id="simTotalOS" value="116" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1" title="Para calcular a meta exata de forma dinâmica">Total Atendimentos do Depto</label>
+                                <input type="number" id="simTotalAtend" value="800" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">OS Executadas pela Equipe</label>
-                                <input type="number" id="simRealOS" value="22" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Atendimentos do Colaborador</label>
+                                <input type="number" id="simRealAtend" value="180" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Média de Avaliação (Meta: 4.7)</label>
-                                <input type="number" step="0.1" id="simNota" value="5" max="5" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                                <input type="number" step="0.1" id="simNota" value="4.8" max="5" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Qtd. Avaliações (Meta: 80% das OS)</label>
-                                <input type="number" id="simAval" value="4" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
-                            </div>
-                            <div class="sm:col-span-2">
-                                <label class="block text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-1">Quantidade de Retiradas (Bônus)</label>
-                                <input type="number" id="simRetiradas" value="1" class="w-full bg-slate-800 border border-emerald-600/50 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-shadow">
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Qtd. Avaliações (Meta: 80%)</label>
+                                <input type="number" id="simAval" value="120" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow">
                             </div>
                         </div>
-                        <button onclick="calcularSimulacao()" class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-blue-500/25 active:scale-[0.98]">
+                        <button onclick="calcularSimulacao()" class="w-full mt-6 bg-brand-600 hover:bg-brand-500 text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-brand-500/25 active:scale-[0.98]">
                             <i class="fas fa-sync-alt mr-2"></i> Calcular e Diagnosticar
                         </button>
                     </div>
 
                     <div class="lg:col-span-5 flex flex-col justify-center">
                         <div id="resultadoBox" class="bg-slate-800 rounded-xl border border-slate-600 p-6 shadow-xl hidden relative overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-1 bg-blue-500"></div>
+                            <div class="absolute top-0 left-0 w-full h-1 bg-brand-500"></div>
                             <h3 class="text-lg font-semibold text-white mb-4 border-b border-slate-700 pb-2">Composição da Nota</h3>
                             
                             <div class="space-y-4">
                                 <div class="flex flex-col border-b border-slate-700/50 pb-2">
                                     <div class="flex justify-between items-center">
-                                        <span class="text-slate-400 text-sm">Qualidade <span class="text-xs opacity-60">(Meta 45)</span></span>
+                                        <span class="text-slate-400 text-sm">Qualidade <span class="text-xs opacity-60">(Meta 40)</span></span>
                                         <span class="font-bold text-red-400" id="resQual">0.00</span>
                                     </div>
                                     <span id="gapQual" class="text-xs text-right mt-1"></span>
@@ -207,20 +226,12 @@
                                     <span id="gapProd" class="text-xs text-right mt-1"></span>
                                 </div>
 
-                                <div class="flex flex-col border-b border-slate-700/50 pb-2">
+                                <div class="flex flex-col pb-1">
                                     <div class="flex justify-between items-center">
-                                        <span class="text-slate-400 text-sm">Engajamento <span class="text-xs opacity-60">(Meta 20)</span></span>
+                                        <span class="text-slate-400 text-sm">Engajamento <span class="text-xs opacity-60">(Meta 25)</span></span>
                                         <span class="font-bold text-purple-400" id="resEngaj">0.00</span>
                                     </div>
                                     <span id="gapEngaj" class="text-xs text-right mt-1"></span>
-                                </div>
-
-                                <div class="flex flex-col pt-1">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-emerald-400/80 text-sm">Bônus Retiradas</span>
-                                        <span class="font-bold text-emerald-400" id="resBonus">+0.00</span>
-                                    </div>
-                                    <span class="text-xs text-emerald-500/80 text-right mt-1"><i class="fas fa-gift"></i> Pontos livres garantidos</span>
                                 </div>
                             </div>
 
@@ -232,7 +243,7 @@
                         
                         <div id="placeholderBox" class="bg-slate-800/50 rounded-xl border border-dashed border-slate-600 p-6 flex flex-col items-center justify-center text-center h-full min-h-[250px]">
                             <i class="fas fa-search-chart text-4xl text-slate-500 mb-3"></i>
-                            <p class="text-slate-400 text-sm">Insira os dados brutos para gerar o diagnóstico de faltas e acertos da equipe.</p>
+                            <p class="text-slate-400 text-sm">Insira os dados brutos para gerar o diagnóstico do atendente.</p>
                         </div>
                     </div>
                 </div>
@@ -240,33 +251,33 @@
 
             <div class="slide hidden flex-col p-6 md:p-12 h-full overflow-y-auto hide-scrollbar slide-fade">
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                    <i class="fas fa-flag-checkered text-blue-400"></i> Conclusão e Governança
+                    <i class="fas fa-flag-checkered text-brand-400"></i> Conclusão e Governança
                 </h2>
                 <div class="bg-gradient-to-br from-slate-800 to-slate-800 border border-slate-600 rounded-2xl p-6 md:p-8 shadow-xl">
                     <p class="text-base md:text-lg text-slate-300 mb-6 leading-relaxed">
-                        Mais do que gerar um ranking, esta estrutura nos entrega um <strong class="text-white">diagnóstico comportamental e técnico contínuo</strong>.
+                        A estruturação deste novo painel transforma radicalmente a forma como gerenciamos o Suporte Técnico.
                     </p>
                     <ul class="space-y-4 md:space-y-6">
                         <li class="flex gap-4 items-start">
-                            <div class="bg-blue-500/20 text-blue-400 p-2 rounded-lg shrink-0 mt-1"><i class="fas fa-chart-network"></i></div>
+                            <div class="bg-blue-500/20 text-blue-400 p-2 rounded-lg shrink-0 mt-1"><i class="fas fa-eye"></i></div>
                             <div>
-                                <h4 class="text-white font-semibold text-lg mb-1">Gestão Baseada em Dados</h4>
-                                <p class="text-slate-400 text-sm md:text-base">Mapeamento claro de quem possui a melhor abordagem com o cliente, quem entrega mais volume e qual equipe é engajada nas retiradas.</p>
+                                <h4 class="text-white font-semibold text-lg mb-1">Fim da Intuição</h4>
+                                <p class="text-slate-400 text-sm md:text-base">A gestão sabe exatamente quem é mais ágil, quem entrega o atendimento mais empático, quem possui faro comercial e quem tem dificuldade em reter o problema remotamente.</p>
                             </div>
                         </li>
                         <li class="flex gap-4 items-start">
-                            <div class="bg-emerald-500/20 text-emerald-400 p-2 rounded-lg shrink-0 mt-1"><i class="fas fa-level-up-alt"></i></div>
+                            <div class="bg-amber-500/20 text-amber-400 p-2 rounded-lg shrink-0 mt-1"><i class="fas fa-crown"></i></div>
                             <div>
-                                <h4 class="text-white font-semibold text-lg mb-1">Nivelamento Estratégico</h4>
-                                <p class="text-slate-400 text-sm md:text-base">Permite atuar de forma cirúrgica no desenvolvimento de cada dupla, garantindo que o esforço na rua reflita na saúde financeira da empresa.</p>
+                                <h4 class="text-white font-semibold text-lg mb-1">O Estado da Arte do Suporte</h4>
+                                <p class="text-slate-400 text-sm md:text-base">O Líder do Período reflete o colaborador completo: atende bem, atende no volume certo e engaja o cliente. Isso permite feedbacks cirúrgicos e treinamentos direcionados.</p>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="mt-auto text-center pt-8">
-                    <div class="inline-flex items-center justify-center gap-3 px-6 py-3 bg-blue-600/20 text-blue-400 rounded-full border border-blue-500/30">
+                    <div class="inline-flex items-center justify-center gap-3 px-6 py-3 bg-brand-600/20 text-brand-400 rounded-full border border-brand-500/30">
                         <i class="fas fa-rocket"></i>
-                        <span class="font-medium tracking-wide">Hora de elevar o nosso nível operacional</span>
+                        <span class="font-medium tracking-wide">Garantindo excelência no primeiro contato!</span>
                     </div>
                 </div>
             </div>
@@ -278,7 +289,7 @@
                 <i class="fas fa-chevron-left"></i> <span class="hidden sm:inline">Anterior</span>
             </button>
             <div class="text-slate-500 font-medium tracking-widest text-sm"><span id="slideCounter">1</span> / 6</div>
-            <button id="btnNext" onclick="mudarSlide(1)" class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 text-white font-medium transition-all hover:bg-blue-500 shadow-lg hover:shadow-blue-500/20 disabled:opacity-30 disabled:hover:bg-blue-600 disabled:cursor-not-allowed">
+            <button id="btnNext" onclick="mudarSlide(1)" class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-600 text-white font-medium transition-all hover:bg-brand-500 shadow-lg hover:shadow-brand-500/20 disabled:opacity-30 disabled:hover:bg-brand-600 disabled:cursor-not-allowed">
                 <span class="hidden sm:inline">Próximo</span> <i class="fas fa-chevron-right"></i>
             </button>
         </div>
@@ -302,12 +313,12 @@
             
             if(slideAtual === slides.length - 1) {
                 btnNext.innerHTML = '<span class="hidden sm:inline">Finalizar</span> <i class="fas fa-check"></i>';
-                btnNext.classList.replace('bg-blue-600', 'bg-emerald-600');
-                btnNext.classList.replace('hover:bg-blue-500', 'hover:bg-emerald-500');
+                btnNext.classList.replace('bg-brand-600', 'bg-emerald-600');
+                btnNext.classList.replace('hover:bg-brand-500', 'hover:bg-emerald-500');
             } else {
                 btnNext.innerHTML = '<span class="hidden sm:inline">Próximo</span> <i class="fas fa-chevron-right"></i>';
-                btnNext.classList.replace('bg-emerald-600', 'bg-blue-600');
-                btnNext.classList.replace('hover:bg-emerald-500', 'hover:bg-blue-500');
+                btnNext.classList.replace('bg-emerald-600', 'bg-brand-600');
+                btnNext.classList.replace('hover:bg-emerald-500', 'hover:bg-brand-500');
             }
             progressBar.style.width = (((slideAtual + 1) / slides.length) * 100) + '%';
             slideCounter.innerText = slideAtual + 1;
@@ -321,30 +332,26 @@
         }
 
         function calcularSimulacao() {
-            const totalOS = parseFloat(document.getElementById('simTotalOS').value) || 0;
-            const realOS = parseFloat(document.getElementById('simRealOS').value) || 0;
+            const totalAtend = parseFloat(document.getElementById('simTotalAtend').value) || 0;
+            const realAtend = parseFloat(document.getElementById('simRealAtend').value) || 0;
             const nota = parseFloat(document.getElementById('simNota').value) || 0;
             const avaliacoes = parseFloat(document.getElementById('simAval').value) || 0;
-            const retiradas = parseFloat(document.getElementById('simRetiradas').value) || 0;
 
-            // 1. Produtividade (6 equipes)
-            const metaOS = (totalOS / 6) * 0.85;
+            // 1. Produtividade (Suporte tem 4 atendentes)
+            const metaAtend = (totalAtend / 4) * 0.85;
             let calcProd = 0;
-            if (metaOS > 0) calcProd = (realOS / metaOS) * 35;
+            if (metaAtend > 0) calcProd = (realAtend / metaAtend) * 35;
 
-            // 2. Qualidade (Peso 45 para Campo)
-            const calcQual = (nota / 4.7) * 45;
+            // 2. Qualidade (Peso 40 para Suporte)
+            const calcQual = (nota / 4.7) * 40;
 
-            // 3. Engajamento (Peso 20 para Campo)
-            const metaConv = realOS * 0.80;
+            // 3. Engajamento (Peso 25 para Suporte)
+            const metaConv = realAtend * 0.80;
             let calcEngaj = 0;
-            if (metaConv > 0) calcEngaj = (avaliacoes / metaConv) * 20;
-
-            // 4. Bônus
-            const calcBonus = retiradas * 5 * 0.5;
+            if (metaConv > 0) calcEngaj = (avaliacoes / metaConv) * 25;
 
             // Nota Final
-            const notaFinal = calcProd + calcQual + calcEngaj + calcBonus;
+            const notaFinal = calcProd + calcQual + calcEngaj;
 
             // LÓGICA DE GAPS E EXCEDENTES COMPLETOS
             
@@ -359,16 +366,16 @@
             }
 
             // Produtividade Gap
-            document.getElementById('lblProd').innerHTML = `Produtividade <span class="text-xs opacity-60">(Meta: ${metaOS.toFixed(1)} OS)</span>`;
+            document.getElementById('lblProd').innerHTML = `Produtividade <span class="text-xs opacity-60">(Meta: ${metaAtend.toFixed(1)})</span>`;
             const gapProdEl = document.getElementById('gapProd');
-            if (realOS > metaOS) {
-                const extraOS = realOS - metaOS;
-                gapProdEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500 mr-1"></i> <span class="text-emerald-400">Meta superada! (+${extraOS.toFixed(1)} OS)</span>`;
-            } else if (realOS === metaOS) {
+            if (realAtend > metaAtend) {
+                const extraAtend = realAtend - metaAtend;
+                gapProdEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500 mr-1"></i> <span class="text-emerald-400">Meta superada! (+${extraAtend.toFixed(1)} atendimentos)</span>`;
+            } else if (realAtend === metaAtend) {
                 gapProdEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500 mr-1"></i> <span class="text-emerald-400">Meta atingida exatamente!</span>`;
             } else {
-                const faltamOS = Math.ceil(metaOS - realOS);
-                gapProdEl.innerHTML = `<span class="text-amber-400/90"><i class="fas fa-exclamation-triangle mr-1"></i> Faltaram ${faltamOS} OS</span>`;
+                const faltamAtend = Math.ceil(metaAtend - realAtend);
+                gapProdEl.innerHTML = `<span class="text-amber-400/90"><i class="fas fa-exclamation-triangle mr-1"></i> Faltaram ${faltamAtend} atendimentos</span>`;
             }
 
             // Engajamento Gap
@@ -388,14 +395,13 @@
             animarNumero('resQual', calcQual, 2);
             animarNumero('resProd', calcProd, 2);
             animarNumero('resEngaj', calcEngaj, 2);
-            document.getElementById('resBonus').innerText = "+" + calcBonus.toFixed(2);
             animarNumero('resTotal', notaFinal, 2);
 
-            // Trocar view do placeholder pro resultado
+            // Trocar view
             document.getElementById('placeholderBox').style.display = 'none';
             document.getElementById('resultadoBox').style.display = 'block';
             document.getElementById('resultadoBox').classList.remove('slide-fade');
-            void document.getElementById('resultadoBox').offsetWidth; // Trigger reflow
+            void document.getElementById('resultadoBox').offsetWidth; 
             document.getElementById('resultadoBox').classList.add('slide-fade');
             
             // Destacar se passou de 100

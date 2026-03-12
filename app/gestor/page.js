@@ -68,7 +68,8 @@ const database = [
       {
         departamento: "Ranking",
         relatorios: [
-            { nome: "Ranking Equipe Técnica", url: "/slides/RankingTecnicos.html" }
+            { nome: "Ranking Equipe Técnica", url: "/slides/RankingTecnicos.html" },
+            { nome: "Ranking Suporte Técnico", url: "/slides/RankingSuporte.html" }
         ]
       }
     ] 
