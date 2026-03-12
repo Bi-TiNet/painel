@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação: Ranking de Desempenho Operacional</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Ocultar barra de rolagem mas manter funcionalidade */
+        .hide-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .hide-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #475569; /* slate-600 */
+            border-radius: 20px;
+        }
+
+        /* Animação suave para os slides */
+        .slide-fade {
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 h-screen w-screen flex flex-col items-center justify-center overflow-hidden antialiased selection:bg-blue-500 selection:text-white">
+
+    <div class="w-full max-w-6xl h-[95vh] md:h-[85vh] bg-slate-800 rounded-2xl shadow-2xl flex flex-col relative overflow-hidden border border-slate-700 mx-2 md:mx-4">
+        
+        <div class="w-full h-1.5 bg-slate-700">
+            <div id="progressBar" class="h-full bg-blue-500 transition-all duration-500 ease-out w-0"></div>
+        </div>
+
+        <div id="slides-container" class="flex-1 relative overflow-hidden flex flex-col">
+            
+            <div class="slide flex flex-col items-center justify-center text-center p-6 md:p-12 h-full slide-fade">
+                <div class="bg-blue-500/10 p-6 rounded-full mb-8 ring-1 ring-blue-500/30">
+                    <i class="fas fa-chart-line text-6xl md:text-7xl text-blue-400"></i>
+                </div>
+                <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight max-w-4xl">
+                    Relatório de Atualização: <br>
+                    <span class="text-blue-400">Painel e Ranking de Desempenho Operacional</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-400 max-w-3xl leading-relaxed font-light">
+                    O novo dashboard funciona como um raio-x do departamento, refletindo com precisão a produtividade das equipes, a excelência no atendimento e a eficiência na recuperação de ativos.
+                </p>
+            </div>
+
+            <div class="slide hidden flex-col p-6 md:p-12 h-full overflow-y-auto hide-scrollbar slide-fade">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
+                    <i class="fas fa-bullseye text-blue-400"></i> Objetivos Principais
+                </h2>
+                <p class="text-base md:text-lg text-slate-400 mb-8">Nossos três pilares para elevar o nível da gestão operacional:</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div class="bg-slate-700/40 p-6 md:p-8 rounded-xl border-l-4 border-blue-500 hover:bg-slate-700/60 transition duration-300">
+                        <i class="fas fa-eye text-3xl text-blue-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-white mb-2">Visibilidade Estratégica</h3>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed">Acompanhamento detalhado e individualizado do desempenho das nossas 6 equipes de campo, com uma visão consolidada de todo o departamento.</p>
+                    </div>
+                    
+                    <div class="bg-slate-700/40 p-6 md:p-8 rounded-xl border-l-4 border-emerald-500 hover:bg-slate-700/60 transition duration-300">
+                        <i class="fas fa-filter text-3xl text-emerald-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-white mb-2">Qualificação da Demanda</h3>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed">Segmentar visualmente a natureza dos chamados, diferenciando os esforços de suporte (manutenção) das demandas de expansão (instalação).</p>
+                    </div>
+                    
+                    <div class="bg-slate-700/40 p-6 md:p-8 rounded-xl border-l-4 border-amber-500 hover:bg-slate-700/60 transition duration-300 md:col-span-2">
+                        <div class="flex flex-col md:flex-row gap-6 items-start md:items-center">
+                            <i class="fas fa-balance-scale text-4xl text-amber-400"></i>
+                            <div>
+                                <h3 class="text-xl font-semibold text-white mb-2">Atuação Balanceada</h3>
+                                <p class="text-slate-300 text-sm md:text-base leading-relaxed">Implementar um sistema de metas que exija uma postura completa, equilibrando volume de entregas, alta qualidade de atendimento e o cumprimento de processos internos cruciais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide hidden flex-col p-6 md:p-12 h-full overflow-y-auto hide-scrollbar slide-fade">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
+                    <i class="fas fa-columns text-blue-400"></i> Alterações e Implementações Visuais
+                </h2>
+                <p class="text-base md:text-lg text-slate-400 mb-8">Para proporcionar uma leitura ágil e fundamentada na tomada de decisão:</p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-1 flex flex-col gap-6">
+                        <div class="bg-slate-700/30 p-5 rounded-xl border border-slate-600">
+                            <i class="fas fa-tachometer-alt text-2xl text-blue-400 mb-3"></i>
+                            <h3 class="text-lg font-semibold text-white mb-2">Novos KPIs</h3>
+                            <p class="text-sm text-slate-300">Totalizadores de Manutenções, Retiradas e Indicações (Upgrades), oferecendo visão imediata do fluxo diário.</p>
+                        </div>
+                        <div class="bg-slate-700/30 p-5 rounded-xl border border-slate-600">
+                            <i class="fas fa-layer-group text-2xl text-indigo-400 mb-3"></i>
+                            <h3 class="text-lg font-semibold text-white mb-2">Segmentação de OS</h3>
+                            <p class="text-sm text-slate-300 mb-2"><span class="text-indigo-300 font-medium">Suporte:</span> Instabilidade, Sem Conexão, Análises.</p>
+                            <p class="text-sm text-slate-300"><span class="text-emerald-300 font-medium">Instalação:</span> GPON, Upgrade, Mudança de Endereço.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-2 bg-gradient-to-br from-slate-800 to-slate-700 p-8 rounded-xl border border-amber-500/30 shadow-lg relative overflow-hidden flex flex-col justify-center">
+                        <div class="absolute -right-10 -top-10 opacity-10">
+                            <i class="fas fa-star text-9xl text-amber-400"></i>
+                        </div>
+                        <i class="fas fa-id-card text-4xl text-amber-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-3">Cartões de Avaliação por Equipe</h3>
+                        <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-4">
+                            Cada equipe possui agora um cartão exclusivo exibindo sua <strong class="text-amber-300">Média de Avaliação geral</strong>, complementado por um ranking detalhado que mostra a distribuição exata das notas recebidas (de 1 a 5 estrelas).
+                        </p>
+                        <div class="inline-flex bg-amber-500/20 text-amber-300 px-4 py-2 rounded-lg text-sm font-medium border border-amber-500/30 w-fit">
+                            <i class="fas fa-check-circle mr-2 mt-0.5"></i> Isso garante total transparência sobre a percepção do cliente!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide hidden flex-col p-6 md:p-12 h-full overflow-y-auto hide-scrollbar slide-fade">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
+                    <i class="fas fa-balance-scale-right text-blue-400"></i> A Nova Metodologia de Pontuação
+                </h2>
+                <p class="text-base md:text-lg text-slate-400 mb-8">A nota final é calculada por meio de uma média ponderada estratégica, onde 100 pontos é a meta, mas não o limite:</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex bg-slate-700/40 rounded-xl overflow-hidden border border-slate-600">
+                        <div class="bg-red-500 w-3 md:w-4 flex-shrink-0"></div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2 mb-2">
+                                <i class="fas fa-heart text-red-400"></i> Qualidade (Meta: 45pts)
+                            </h3>
+                            <p class="text-sm text-slate-300">O atendimento de excelência é a nossa prioridade absoluta. Compara a média obtida a uma nota de excelência predefinida (4.7).</p>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-slate-700/40 rounded-xl overflow-hidden border border-slate-600">
+                        <div class="bg-blue-500 w-3 md:w-4 flex-shrink-0"></div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2 mb-2">
+                                <i class="fas fa-stopwatch text-blue-400"></i> Produtividade (Meta: 35pts)
+                            </h3>
+                            <p class="text-sm text-slate-300">Avalia o volume de OS. O sistema calcula a meta decimal exata: (Total de OS do Depto / 6 equipes) com desconto de 15%.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-slate-700/40 rounded-xl overflow-hidden border border-slate-600">
+                        <div class="bg-purple-500 w-3 md:w-4 flex-shrink-0"></div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2 mb-2">
+                                <i class="fas fa-comments text-purple-400"></i> Engajamento (Meta: 20pts)
+                            </h3>
+                            <p class="text-sm text-slate-300">Proatividade de solicitar feedback. A meta é que 80% de todas as OS executadas pela equipe recebam avaliação no sistema.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex bg-emerald-900/30 rounded-xl overflow-hidden border border-emerald-500/40">
+                        <div class="bg-emerald-500 w-3 md:w-4 flex-shrink-0"></div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2 mb-2">
+                                <i class="fas fa-box-open"></i> Bônus: Retiradas (+ Pontos extras)
+                            </h3>
+                            <p class="text-sm text-emerald-100/80">Recuperação ágil de equipamentos de contratos cancelados. Cada item gera 5 pontos, com peso de 50% (Fator 0.5) somados ao resultado global.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide hidden flex-col p-6 md:p-12 h-full overflow-y-auto hide-scrollbar slide-fade">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                    <i class="fas fa-calculator text-blue-400"></i> Simulação de Desempenho (Motor do Power BI)
+                </h2>
+                <p class="text-sm md:text-base text-slate-400 mb-6">Insira os dados brutos para verificar a conversão na nota final (cálculo exato em tempo real).</p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+                    <div class="lg:col-span-7 bg-slate-700/30 p-5 md:p-6 rounded-xl border border-slate-600">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1" title="Para calcular a meta exata de forma dinâmica">Total de OS do Departamento</label>
+                                <input type="number" id="simTotalOS" value="116" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">OS Executadas pela Equipe</label>
+                                <input type="number" id="simRealOS" value="22" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Média de Avaliação (Meta: 4.7)</label>
+                                <input type="number" step="0.1" id="simNota" value="5" max="5" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Qtd. Avaliações (Meta: 80% das OS)</label>
+                                <input type="number" id="simAval" value="4" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-1">Quantidade de Retiradas (Bônus)</label>
+                                <input type="number" id="simRetiradas" value="1" class="w-full bg-slate-800 border border-emerald-600/50 rounded-lg px-4 py-2.5 text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-shadow">
+                            </div>
+                        </div>
+                        <button onclick="calcularSimulacao()" class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-blue-500/25 active:scale-[0.98]">
+                            <i class="fas fa-sync-alt mr-2"></i> Calcular Nota da Equipe
+                        </button>
+                    </div>
+
+                    <div class="lg:col-span-5 flex flex-col justify-center">
+                        <div id="resultadoBox" class="bg-slate-800 rounded-xl border border-slate-600 p-6 shadow-xl hidden relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-blue-500"></div>
+                            <h3 class="text-lg font-semibold text-white mb-4 border-b border-slate-700 pb-2">Composição da Nota</h3>
+                            
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400 text-sm">Qualidade (Meta 45)</span>
+                                    <span class="font-bold text-red-400" id="resQual">0.00</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400 text-sm" id="lblProd">Produtividade (Meta 35)</span>
+                                    <span class="font-bold text-blue-400" id="resProd">0.00</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400 text-sm">Engajamento (Meta 20)</span>
+                                    <span class="font-bold text-purple-400" id="resEngaj">0.00</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-emerald-400/80 text-sm">Bônus Retiradas</span>
+                                    <span class="font-bold text-emerald-400" id="resBonus">+0.00</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 pt-4 border-t border-slate-700 text-center bg-slate-900/50 -mx-6 -mb-6 p-4">
+                                <span class="block text-xs text-slate-400 uppercase tracking-widest mb-1">Nota Final</span>
+                                <div class="text-4xl font-extrabold text-white" id="resTotal">0.00</div>
+                            </div>
+                        </div>
+                        
+                        <div id="placeholderBox" class="bg-slate-800/50 rounded-xl border border-dashed border-slate-600 p-6 flex flex-col items-center justify-center text-center h-full min-h-[250px]">
+                            <i class="fas fa-chart-pie text-4xl text-slate-500 mb-3"></i>
+                            <p class="text-slate-400 text-sm">Insira os dados brutos e clique em calcular para visualizar a matemática exata.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide hidden flex-col p-6 md:p-12 h-full overflow-y-auto hide-scrollbar slide-fade">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                    <i class="fas fa-flag-checkered text-blue-400"></i> Conclusão e Governança
+                </h2>
+                
+                <div class="bg-gradient-to-br from-slate-800 to-slate-800 border border-slate-600 rounded-2xl p-6 md:p-8 shadow-xl">
+                    <p class="text-base md:text-lg text-slate-300 mb-6 leading-relaxed">
+                        Mais do que gerar um ranking, esta estrutura nos entrega um <strong class="text-white">diagnóstico comportamental e técnico contínuo</strong>.
+                    </p>
+                    
+                    <ul class="space-y-4 md:space-y-6">
+                        <li class="flex gap-4 items-start">
+                            <div class="bg-blue-500/20 text-blue-400 p-2 rounded-lg shrink-0 mt-1">
+                                <i class="fas fa-chart-network"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-lg mb-1">Gestão Baseada em Dados</h4>
+                                <p class="text-slate-400 text-sm md:text-base">Mapeamento claro de quem possui a melhor abordagem com o cliente, quem entrega mais volume de OS e qual equipe é mais engajada nas retiradas. Saímos da intuição para os fatos.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4 items-start">
+                            <div class="bg-emerald-500/20 text-emerald-400 p-2 rounded-lg shrink-0 mt-1">
+                                <i class="fas fa-level-up-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-lg mb-1">Nivelamento Estratégico</h4>
+                                <p class="text-slate-400 text-sm md:text-base">Permite atuar de forma cirúrgica no desenvolvimento de cada dupla, nivelando o atendimento por cima e garantindo que o esforço na rua reflita na saúde financeira da empresa.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mt-auto text-center pt-8">
+                    <div class="inline-flex items-center justify-center gap-3 px-6 py-3 bg-blue-600/20 text-blue-400 rounded-full border border-blue-500/30">
+                        <i class="fas fa-rocket"></i>
+                        <span class="font-medium tracking-wide">Hora de elevar o nosso nível operacional</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="h-20 bg-slate-900/80 backdrop-blur-md border-t border-slate-700 flex justify-between items-center px-6 md:px-12 flex-shrink-0">
+            <button id="btnPrev" onclick="mudarSlide(-1)" class="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-400 font-medium transition-colors hover:text-white hover:bg-slate-800 disabled:opacity-30 disabled:hover:bg-transparent disabled:cursor-not-allowed">
+                <i class="fas fa-chevron-left"></i> <span class="hidden sm:inline">Anterior</span>
+            </button>
+            
+            <div class="text-slate-500 font-medium tracking-widest text-sm">
+                <span id="slideCounter">1</span> / 6
+            </div>
+            
+            <button id="btnNext" onclick="mudarSlide(1)" class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 text-white font-medium transition-all hover:bg-blue-500 shadow-lg hover:shadow-blue-500/20 disabled:opacity-30 disabled:hover:bg-blue-600 disabled:cursor-not-allowed">
+                <span class="hidden sm:inline">Próximo</span> <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let slideAtual = 0;
+        const slides = document.querySelectorAll('.slide');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const progressBar = document.getElementById('progressBar');
+        const slideCounter = document.getElementById('slideCounter');
+
+        function atualizarControles() {
+            slides.forEach((slide, index) => {
+                if (index === slideAtual) {
+                    slide.classList.remove('hidden');
+                    slide.classList.add('flex');
+                } else {
+                    slide.classList.add('hidden');
+                    slide.classList.remove('flex');
+                }
+            });
+
+            btnPrev.disabled = slideAtual === 0;
+            btnNext.disabled = slideAtual === slides.length - 1;
+            
+            if(slideAtual === slides.length - 1) {
+                btnNext.innerHTML = '<span class="hidden sm:inline">Finalizar</span> <i class="fas fa-check"></i>';
+                btnNext.classList.replace('bg-blue-600', 'bg-emerald-600');
+                btnNext.classList.replace('hover:bg-blue-500', 'hover:bg-emerald-500');
+            } else {
+                btnNext.innerHTML = '<span class="hidden sm:inline">Próximo</span> <i class="fas fa-chevron-right"></i>';
+                btnNext.classList.replace('bg-emerald-600', 'bg-blue-600');
+                btnNext.classList.replace('hover:bg-emerald-500', 'hover:bg-blue-500');
+            }
+
+            const progresso = ((slideAtual + 1) / slides.length) * 100;
+            progressBar.style.width = progresso + '%';
+            slideCounter.innerText = slideAtual + 1;
+        }
+
+        function mudarSlide(direcao) {
+            slideAtual += direcao;
+            if (slideAtual < 0) slideAtual = 0;
+            if (slideAtual >= slides.length) slideAtual = slides.length - 1;
+            atualizarControles();
+        }
+
+        // Lógica Exata Espelhada do Power BI (DAX)
+        function calcularSimulacao() {
+            const totalOS = parseFloat(document.getElementById('simTotalOS').value) || 0;
+            const realOS = parseFloat(document.getElementById('simRealOS').value) || 0;
+            const nota = parseFloat(document.getElementById('simNota').value) || 0;
+            const avaliacoes = parseFloat(document.getElementById('simAval').value) || 0;
+            const retiradas = parseFloat(document.getElementById('simRetiradas').value) || 0;
+
+            // 1. Produtividade (Peso 35%)
+            // DAX: Meta = (Equipe/6 - 15%) => (Total / 6) * 0.85
+            const metaOS = (totalOS / 6) * 0.85;
+            let calcProd = 0;
+            if (metaOS > 0) {
+                calcProd = (realOS / metaOS) * 35;
+            }
+
+            // 2. Qualidade (Peso 45%)
+            // DAX: DIVIDE(MediaNota, 4.7) * 100 * 0.45
+            const calcQual = (nota / 4.7) * 45;
+
+            // 3. Engajamento (Peso 20%)
+            // DAX: MetaConv = RealOS * 0.80 -> DIVIDE(Avaliacoes, MetaConv) * 100 * 0.20
+            const metaConv = realOS * 0.80;
+            let calcEngaj = 0;
+            if (metaConv > 0) {
+                calcEngaj = (avaliacoes / metaConv) * 20;
+            }
+
+            // 4. Bônus Retiradas (5 pts por unidade * Fator 0.5)
+            // DAX: Retiradas * 5 * 0.5
+            const calcBonus = retiradas * 5 * 0.5;
+
+            // Nota Final
+            const notaFinal = calcProd + calcQual + calcEngaj + calcBonus;
+
+            // Atualiza Label da Meta no painel dinamicamente
+            document.getElementById('lblProd').innerText = `Produtividade (Meta ${metaOS.toFixed(1)} OS)`;
+
+            // Animação de números (2 casas decimais para ser exato igual PBI)
+            animarNumero('resQual', calcQual, 2);
+            animarNumero('resProd', calcProd, 2);
+            animarNumero('resEngaj', calcEngaj, 2);
+            document.getElementById('resBonus').innerText = "+" + calcBonus.toFixed(2);
+            animarNumero('resTotal', notaFinal, 2);
+
+            // Trocar view do placeholder pro resultado
+            document.getElementById('placeholderBox').style.display = 'none';
+            document.getElementById('resultadoBox').style.display = 'block';
+            document.getElementById('resultadoBox').classList.add('slide-fade');
+            
+            // Destacar se passou de 100
+            const finalScoreEl = document.getElementById('resTotal');
+            if (notaFinal > 100) {
+                finalScoreEl.classList.remove('text-white');
+                finalScoreEl.classList.add('text-emerald-400');
+            } else {
+                finalScoreEl.classList.add('text-white');
+                finalScoreEl.classList.remove('text-emerald-400');
+            }
+        }
+
+        function animarNumero(id, finalValue, decimals) {
+            let startValue = 0;
+            const duration = 1000;
+            const stepTime = 20;
+            const steps = duration / stepTime;
+            const increment = finalValue / steps;
+            const el = document.getElementById(id);
+            
+            let currentStep = 0;
+            const interval = setInterval(() => {
+                startValue += increment;
+                currentStep++;
+                if (currentStep >= steps) {
+                    startValue = finalValue;
+                    clearInterval(interval);
+                }
+                el.innerText = startValue.toFixed(decimals);
+            }, stepTime);
+        }
+
+        // Inicializar
+        atualizarControles();
+    </script>
+</body>
+</html>

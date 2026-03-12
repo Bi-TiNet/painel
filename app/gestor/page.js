@@ -62,7 +62,18 @@ const database = [
     ] 
   },
 
-  { menu: "Menu 4 (em breve)", departamentos: [] },
+  {
+  menu: "Slides", 
+    departamentos: [
+      {
+        departamento: "Ranking",
+        relatorios: [
+            { nome: "Ranking Equipe Técnica", url: "/slides/RankingTecnicos.html" }
+        ]
+      }
+    ] 
+  },
+
   { menu: "Menu 5 (em breve)", departamentos: [] }
 ];
 
