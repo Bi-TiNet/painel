@@ -1,10 +1,11 @@
+// app/page.js
 'use client';
 import styled, { ThemeProvider } from 'styled-components';
 import { useState, useEffect } from 'react';
 import { theme } from '@/app/theme';
 import { db } from '@/app/firebaseConfig';
 import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
-import SecurityGate from "@/app/components/SecurityGate";
+// O SecurityGate foi removido das importações
 
 import Header from "@/app/components/Header";
 import DashboardRotator from "@/app/components/DashboardRotator";
@@ -15,11 +16,8 @@ import { links, funcionarios } from '@/app/data';
 
 const MainContainer = styled.main`
   display: grid;
-  grid-template-columns: 1fr 35%; /* Coluna principal flexível, barra lateral com 35% */
-  
-  /* A MÁGICA ACONTECE AQUI: Mudamos de 100vh para 1fr */
+  grid-template-columns: 1fr 35%; 
   grid-template-rows: 1fr; 
-  
   width: 100vw;
   height: 100vh;
   padding: 1rem;
@@ -44,19 +42,14 @@ const MainColumn = styled.div`
   gap: 1rem;
   box-sizing: border-box;
   min-width: 0;
-  min-height: 0; /* Essencial para o flexbox funcionar corretamente em altura */
+  min-height: 0; 
 `;
 
 const DashboardWrapper = styled.div`
   width: 100%;
-  height: 100%; /* Garante que ele preencha a altura da coluna */
-  flex: 1; /* Se a sua MainColumn for um display: flex */
-  overflow: hidden; /* Evita que crie barra de rolagem no site */
-`;
-
-const KpiWrapper = styled.div`
-  width: 100%;
-  height: 25%; /* Altura fixa para a seção de KPIs */
+  height: 100%; 
+  flex: 1; 
+  overflow: hidden; 
 `;
 
 const Sidebar = styled.div`
@@ -88,15 +81,12 @@ export default function Home() {
   const [showAdmin, setShowAdmin] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
   
-  // --- NOVO ESTADO PARA CONTROLE ---
-  // Guarda o dia e se já tocou de manhã ou à tarde
   const [playTracker, setPlayTracker] = useState({
     dia: new Date().getDate(),
     manha: false,
     tarde: false,
   });
 
-  // Efeito para login persistente
   useEffect(() => {
     const user = localStorage.getItem('loggedInUser');
     if (user) {
@@ -158,7 +148,6 @@ export default function Home() {
     return () => clearInterval(rotationTimer);
   }, [aniversariantesHoje, isPaused, links.length]);
 
-// --- LÓGICA DE ANIVERSÁRIO CORRIGIDA E ROBUSTA ---
   useEffect(() => {
     const checkBirthday = () => {
       const agora = new Date();
@@ -167,52 +156,44 @@ export default function Home() {
       const hora = agora.getHours();
       const minuto = agora.getMinutes();
 
-      // 1. Reinicia o rastreador se for um novo dia
       if (diaAtual !== playTracker.dia) {
         setPlayTracker({ dia: diaAtual, manha: false, tarde: false });
         return; 
       }
 
-      // 2. Procura pelos aniversariantes (AGORA USA FILTER PARA PEGAR TODOS)
       const aniversariantesDoDia = funcionarios.filter(
         (f) => f.dia === diaAtual && f.mes === mesAtual
       );
 
-      // Se não tem ninguém fazendo aniversário hoje, não faz nada
       if (aniversariantesDoDia.length === 0) {
         return;
       }
       
-      // Se a tela de festa já estiver aberta, não faz nada
       if (aniversariantesHoje) {
         return;
       }
 
-      // 3. Define as janelas de horário
       const eJanelaManha = (hora === 8 && minuto >= 30);
       const eJanelaTarde = (hora === 17 && minuto >= 30);
 
-      // 4. Aciona a tela e a música (apenas uma vez por janela)
       if (eJanelaManha && !playTracker.manha) {
         setPlayTracker((prev) => ({ ...prev, manha: true }));
-        setAniversariantesHoje(aniversariantesDoDia); // <-- Mudei aqui
+        setAniversariantesHoje(aniversariantesDoDia); 
       } else if (eJanelaTarde && !playTracker.tarde) {
         setPlayTracker((prev) => ({ ...prev, tarde: true }));
-        setAniversariantesHoje(aniversariantesDoDia); // <-- Mudei aqui
+        setAniversariantesHoje(aniversariantesDoDia); 
       }
     };
 
     const interval = setInterval(checkBirthday, 30000); 
     return () => clearInterval(interval);
     
-  }, [playTracker, aniversariantesHoje]); // <-- Mudei aqui
-  // --- FIM DA LÓGICA DE ANIVERSÁRIO ---
+  }, [playTracker, aniversariantesHoje]); 
 
   const currentDashboard = links[currentIndex];
   const tituloPainel = currentDashboard ? currentDashboard.nome : "Carregando...";
 
   return (
-    <SecurityGate>
     <ThemeProvider theme={theme}>
       <MainContainer>
         <MainColumn>
@@ -253,6 +234,5 @@ export default function Home() {
         />
       </MainContainer>
     </ThemeProvider>
-    </SecurityGate>
   );
 }
