@@ -17,6 +17,7 @@ export const funcionarios = [
     { nome: "Vagner Garcia", dia: 11, mes: 3, foto: "/fotos/vagner.jpg" },
     { nome: "Rafael Santos", dia: 26, mes: 3, foto: "/fotos/rafael.jpg" },
     { nome: "Luana Almeida", dia: 9, mes: 4, foto: "/fotos/luana.jpg" },
+    { nome: "Eunice", dia: 9, mes: 4, foto: "/fotos/eunice.png" },
     { nome: "Edmilson Rocha", dia: 12, mes: 4, foto: "/fotos/edmilson_rocha.jpg" },
     { nome: "Joyce Pinna", dia: 23, mes: 5, foto: "/fotos/joyce.jpg" },
     { nome: "Dalila Meira", dia: 9, mes: 6, foto: "/fotos/dalila.jpg" },
