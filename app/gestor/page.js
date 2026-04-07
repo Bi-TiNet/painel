@@ -15,10 +15,10 @@ const database = [
       {
         departamento: "Comercial & Financeiro",
         relatorios: [
-            { nome: "Vendas Geral", url: " "},
-            { nome: "Reduzidos", url: "https://app.powerbi.com/view?r=eyJrIjoiZWNhODJiZTItNjQ5Mi00NGYzLTlkNzQtYmFhOTU1ODcxMzk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
-            { nome: "Bloqueados", url: "https://app.powerbi.com/view?r=eyJrIjoiODA1ODg5NDMtYzBjNy00NTZiLThiOGUtNDZlYTgyM2M3MmZiIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
-          ]
+            { nome: "Vendas Geral", url: "https://app.powerbi.com/reportEmbed?reportId=ad2043da-a311-407f-901b-33e6ad172b4e&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&pageView=fitToPage"},
+            { nome: "Reduzidos", url: "https://app.powerbi.com/reportEmbed?reportId=a1fda1e7-0c1b-4469-8fee-32e283f10455&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&pageView=fitToPage" },
+            { nome: "Bloqueados", url: "https://app.powerbi.com/reportEmbed?reportId=83cc61f3-2d44-4339-9716-678a9458493a&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&pageView=fitToPage" },
+            ]
       },
       {
         departamento: "Técnico & Suporte",

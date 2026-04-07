@@ -1,9 +1,9 @@
 // app/data.js
 
 export const links = [
-    { nome: "Comercial", url: "https://app.powerbi.com/view?r=eyJrIjoiZmY5N2IzZTQtZjA4NS00ZWY2LTllOTItNTg1ZTgyZTE4NmViIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
-    { nome: "Reduzidos", url: "https://app.powerbi.com/view?r=eyJrIjoiZWNhODJiZTItNjQ5Mi00NGYzLTlkNzQtYmFhOTU1ODcxMzk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
-    { nome: "Bloqueados", url: "https://app.powerbi.com/view?r=eyJrIjoiODA1ODg5NDMtYzBjNy00NTZiLThiOGUtNDZlYTgyM2M3MmZiIiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
+    { nome: "Comercial", url: "https://app.powerbi.com/reportEmbed?reportId=ad2043da-a311-407f-901b-33e6ad172b4e&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&pageView=fitToPage" },
+    { nome: "Reduzidos", url: "https://app.powerbi.com/reportEmbed?reportId=a1fda1e7-0c1b-4469-8fee-32e283f10455&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&pageView=fitToPage" },
+    { nome: "Bloqueados", url: "https://app.powerbi.com/reportEmbed?reportId=83cc61f3-2d44-4339-9716-678a9458493a&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&pageView=fitToPage" },
     { nome: "Técnicos", url: "https://app.powerbi.com/reportEmbed?reportId=0bdcd5ff-d7ca-485b-8835-25f76df41ca5&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&pageView=fitToPage" },
     { nome: "Suporte Técnico", url: "https://app.powerbi.com/reportEmbed?reportId=df01705b-a8f5-4857-a5b2-94bd60236654&autoAuth=true&ctid=51e25658-c82f-4bfc-b491-2f350e67fe2c&navContentPaneEnabled=false&filterPaneEnabled=false&pageView=fitToPage" },
     { nome: "Pesquisa de Satisfação", url: "https://app.powerbi.com/view?r=eyJrIjoiNzdkZWQyM2EtZTljOC00NjI5LTllYmQtOTkwOTgzZGYyNTk1IiwidCI6IjUxZTI1NjU4LWM4MmYtNGJmYy1iNDkxLTJmMzUwZTY3ZmUyYyJ9" },
