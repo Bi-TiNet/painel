@@ -359,7 +359,7 @@ export default function BirthdayOverlay({ aniversariantes, onClose }) {
           ))}
         </PeopleContainer>
 
-        <Subtitle>A equipa Ti.Net deseja muitas felicidades e sucesso! 🚀</Subtitle>
+        <Subtitle>A equipe Ti.Net deseja muitas felicidades e sucesso! 🚀</Subtitle>
 
         {audioBlocked && (
           <PlayButton onClick={handleManualPlay}>
