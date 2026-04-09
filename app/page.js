@@ -173,8 +173,8 @@ export default function Home() {
         return;
       }
 
-      const eJanelaManha = (hora === 8 && minuto >= 30);
-      const eJanelaTarde = (hora === 17 && minuto >= 30);
+      const eJanelaManha = (hora === 10 && minuto >= 0);
+      const eJanelaTarde = (hora === 16 && minuto >= 30);
 
       if (eJanelaManha && !playTracker.manha) {
         setPlayTracker((prev) => ({ ...prev, manha: true }));
