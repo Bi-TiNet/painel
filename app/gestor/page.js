@@ -55,7 +55,8 @@ const database = [
       {
         departamento: "Demandas e Tarefas",
         relatorios: [
-            { nome: "Quadro Ti.Task", url: "/titask.html" }
+            { nome: "Quadro Ti.Task", url: "/titask.html" },
+            { nome: "Calculadora Upgrade ISP", url: "/calculadora-upgrade-isp.html" }
         ]
       }
     ] 
