@@ -58,6 +58,13 @@ const database = [
             { nome: "Quadro Ti.Task", url: "/titask.html" },
             { nome: "Calculadora Upgrade ISP", url: "/calculadora-upgrade-isp.html" }
         ]
+      },
+
+      {
+        departamento: "Manuais e Procedimentos",
+        relatorios: [
+            { nome: "Comercial", url: "/comercial/menu_comercial.html" }
+        ]
       }
     ] 
   },
@@ -75,7 +82,9 @@ const database = [
     ] 
   },
 
-  { menu: "Menu 5 (em breve)", departamentos: [] }
+  { menu: "Em breve", departamentos: [
+    
+  ] }
 ];
 
 export default function GestorPage() {

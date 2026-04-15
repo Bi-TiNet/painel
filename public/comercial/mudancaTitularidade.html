@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Comercial - Mudança de Titularidade | Ti.Net</title>
+  <link rel="stylesheet" href="css/global.css" />
+</head>
+<body>
+  <div class="manual-layout">
+    
+    <aside class="sidebar">
+      <div class="manual-title">MANUAL COMERCIAL</div>
+      <div class="manual-subtitle">Mudança de Titularidade</div>
+
+      <div class="nav-group">
+        <h3>Navegação</h3>
+        <a href="#visao-geral">Visão Geral</a>
+        <a href="#validacoes">Validações obrigatórias</a>
+        <a href="#financeiro">Validação com financeiro</a>
+        <a href="#novo-titular">Análise do novo titular</a>
+        <a href="#processo">Processo no Sales</a>
+        <a href="#wizard">Vencemos Wizard</a>
+        <a href="#noc-estoque">NOC e Estoque</a>
+        <a href="#finalizacao">Finalização</a>
+        <a href="#erros">Erros críticos</a>
+        <a href="#resumo">Resumo</a>
+      </div>
+
+      <div class="sidebar-note">
+        Este manual deve ser usado como guia de consulta rápida e também como material de treinamento para novos colaboradores.
+      </div>
+
+      <a class="back-link" href="/COMERCIAL/menu_comercial.html">← Voltar</a>
+    </aside>
+
+    <main class="content">
+      <div class="content-inner">
+
+        <section class="hero section-anchor" id="visao-geral">
+          <h1>Mudança de Titularidade</h1>
+          <p>
+            Processo utilizado quando um cliente deseja transferir a responsabilidade
+            do contrato para outra pessoa.
+          </p>
+
+          <div class="hero-summary">
+            <div class="summary-card">
+              <strong>Objetivo</strong>
+              <span>Transferir contrato, login e responsabilidade para outro titular</span>
+            </div>
+            <div class="summary-card">
+              <strong>Ponto crítico</strong>
+              <span>Verificação financeira e histórico do novo titular</span>
+            </div>
+            <div class="summary-card">
+              <strong>Regra</strong>
+              <span>Nunca prosseguir com pendência financeira</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- VALIDAÇÕES -->
+        <section class="card section-anchor" id="validacoes">
+          <h2>1. Validações obrigatórias</h2>
+
+          <div class="danger-box">
+            <strong>Regra crítica:</strong> A mudança de titularidade só pode acontecer
+            após validação completa de ambos os lados.
+          </div>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag warn">TITULAR ATUAL</div>
+              <ul class="checklist">
+                <li>Verificar débitos em aberto</li>
+                <li>Confirmar situação do contrato</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag warn">NOVO TITULAR</div>
+              <ul class="checklist">
+                <li>Verificar se já é cliente</li>
+                <li>Consultar histórico</li>
+                <li>Verificar débitos antigos</li>
+                <li>Verificar equipamentos não devolvidos</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- FINANCEIRO -->
+        <section class="card section-anchor" id="financeiro">
+          <h2>2. Validação com o financeiro</h2>
+
+          <ol class="step-list">
+            <li>Consultar débitos do titular atual</li>
+            <li>Se houver débito → não prosseguir</li>
+            <li>Consultar situação do novo titular</li>
+            <li>Verificar pendências financeiras antigas</li>
+          </ol>
+
+          <div class="danger-box">
+            <strong>Bloqueio obrigatório:</strong>
+            Se existir débito ou equipamento não devolvido,
+            o processo só continua após regularização.
+          </div>
+
+          <div class="script-box">
+Perfeito, vou verificar aqui a situação do contrato e já retorno para dar continuidade com segurança.
+          </div>
+        </section>
+
+        <!-- NOVO TITULAR -->
+        <section class="card section-anchor" id="novo-titular">
+          <h2>3. Análise do novo titular</h2>
+
+          <h3>Passos</h3>
+          <ol class="step-list">
+            <li>Buscar o novo titular no IXC</li>
+            <li>Se existir cadastro → validar histórico</li>
+            <li>Se não existir → seguir como novo cliente</li>
+          </ol>
+
+          <div class="warning-box">
+            Mesmo que o novo titular já exista no sistema,
+            ele deve passar pela mesma validação financeira.
+          </div>
+        </section>
+
+        <!-- PROCESSO -->
+        <section class="card section-anchor" id="processo">
+          <h2>4. Processo no Sales</h2>
+
+          <p>
+            Após validação, o processo segue igual ao <strong>Novo Contrato</strong>.
+          </p>
+
+          <ol class="step-list">
+            <li>Criar lead</li>
+            <li>Preencher dados</li>
+            <li>Fazer viabilidade</li>
+            <li>Confirmar endereço</li>
+            <li>Gerar negociação</li>
+          </ol>
+        </section>
+
+        <!-- WIZARD -->
+        <section class="card section-anchor" id="wizard">
+          <h2>5. Vencemos Wizard</h2>
+
+          <div class="danger-box">
+            <strong>Ponto crítico:</strong>
+            Atendimento correto → ID 50 - MUDANÇA DE TITULARIDADE
+          </div>
+
+          <ul class="checklist">
+            <li>Contrato: novo contrato</li>
+            <li>Produto: plano escolhido</li>
+            <li>Acesso: conforme padrão</li>
+            <li>Atendimento: ID 50</li>
+          </ul>
+        </section>
+
+        <!-- NOC -->
+        <section class="card section-anchor" id="noc-estoque">
+          <h2>6. NOC e Estoque</h2>
+
+          <h3>NOC</h3>
+          <ul class="checklist">
+            <li>Solicitar transferência do login</li>
+            <li>Do titular antigo → novo titular</li>
+          </ul>
+
+          <h3>Estoque</h3>
+          <ul class="checklist">
+            <li>Solicitar transferência do comodato</li>
+            <li>Garantir vínculo correto do equipamento</li>
+          </ul>
+
+          <div class="danger-box">
+            <strong>Erro crítico:</strong>
+            Não transferir login ou comodato corretamente pode gerar inconsistência grave no sistema.
+          </div>
+        </section>
+
+        <!-- FINAL -->
+        <section class="card section-anchor" id="finalizacao">
+          <h2>7. Finalização</h2>
+
+          <ol class="step-list">
+            <li>Gerar contrato</li>
+            <li>Enviar assinatura</li>
+            <li>Agendar (se necessário)</li>
+            <li>Confirmar ativação</li>
+            <li>Cancelar contrato antigo</li>
+            <li>Inativar titular antigo</li>
+          </ol>
+
+          <div class="warning-box">
+            <strong>Obrigatório:</strong>
+            O contrato antigo deve ser cancelado após conclusão.
+          </div>
+        </section>
+
+        <!-- ERROS -->
+        <section class="card section-anchor" id="erros">
+          <h2>8. Erros que não podem acontecer</h2>
+
+          <ul class="checklist">
+            <li>Não validar débitos</li>
+            <li>Ignorar histórico do novo titular</li>
+            <li>Não transferir login</li>
+            <li>Não transferir comodato</li>
+            <li>Manter contrato antigo ativo</li>
+            <li>Executar processo com pendências financeiras</li>
+          </ul>
+        </section>
+
+        <!-- RESUMO -->
+        <section class="card section-anchor" id="resumo">
+          <h2>9. Resumo rápido</h2>
+
+          <ol class="step-list">
+            <li>Cliente solicita mudança</li>
+            <li>Validar financeiro (ambos)</li>
+            <li>Validar novo titular</li>
+            <li>Criar lead</li>
+            <li>Fazer viabilidade</li>
+            <li>Vencer Wizard (ID 50)</li>
+            <li>Transferir login (NOC)</li>
+            <li>Transferir comodato (estoque)</li>
+            <li>Gerar contrato e assinatura</li>
+            <li>Cancelar contrato antigo</li>
+          </ol>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/global.js"></script>
+</body>
+</html>

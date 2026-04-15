@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Comercial - Ponto Adicional | Ti.Net</title>
+  <link rel="stylesheet" href="css/global.css" />
+</head>
+<body>
+  <div class="manual-layout">
+    <aside class="sidebar">
+      <div class="logo-box">
+        <img src="imagens/logo.png" alt="Ti.Net" onerror="this.style.display='none'">
+      </div>
+
+      <div class="manual-title">MANUAL COMERCIAL</div>
+      <div class="manual-subtitle">Ponto Adicional</div>
+
+      <div class="nav-group">
+        <h3>Navegação</h3>
+        <a href="#visao-geral">Visão Geral</a>
+        <a href="#quando-usar">Quando usar este processo</a>
+        <a href="#triagem-inicial">Triagem inicial da necessidade</a>
+        <a href="#mesma-residencia">Quando for na mesma residência</a>
+        <a href="#outro-local">Quando for em outro local</a>
+        <a href="#kanban">Negociação no Kanban</a>
+        <a href="#plano">Definição do plano</a>
+        <a href="#dados">Conferência dos dados e endereço</a>
+        <a href="#wizard">Vencemos Wizard</a>
+        <a href="#contrato-login">Contrato, login e endereço manual</a>
+        <a href="#os">OS e continuidade do processo</a>
+        <a href="#opa">Uso do OPA! Suite</a>
+        <a href="#erros">Erros críticos</a>
+        <a href="#resumo">Resumo do fluxo</a>
+      </div>
+
+      <div class="sidebar-note">
+        Este manual deve ser usado como guia de consulta rápida e também como material de treinamento para novos colaboradores.
+      </div>
+
+      <a class="back-link" href="/COMERCIAL/menu_comercial.html">← Voltar</a>
+    </aside>
+
+    <main class="content">
+      <div class="content-inner">
+        <section class="hero section-anchor" id="visao-geral">
+          <div class="badge">PROCESSO OPERACIONAL</div>
+          <h1>Ponto Adicional</h1>
+          <p>
+            Este manual foi criado para orientar o colaborador no processo de contratação de
+            <strong>Ponto Adicional</strong>, desde a identificação correta da necessidade do cliente
+            até a finalização do Wizard, ajustes no contrato, login, endereço manual e continuidade operacional.
+            Este é um processo que costuma gerar muitos erros, por isso cada etapa deve ser seguida com atenção.
+          </p>
+
+          <div class="hero-summary">
+            <div class="summary-card">
+              <strong>Objetivo</strong>
+              <span>Atender corretamente a necessidade do cliente sem vender errado e sem abrir processo incorreto.</span>
+            </div>
+            <div class="summary-card">
+              <strong>Ponto crítico</strong>
+              <span>Confirmar se o cliente precisa mesmo de um Ponto Adicional ou se o caso correto é Upgrade.</span>
+            </div>
+            <div class="summary-card">
+              <strong>Onde começa</strong>
+              <span>No quadro Kanban, já a partir da aba de Negociação.</span>
+            </div>
+          </div>
+
+          <div class="quick-nav">
+            <a href="#triagem-inicial">Triar a necessidade</a>
+            <a href="#kanban">Criar negociação</a>
+            <a href="#wizard">Vencemos Wizard</a>
+            <a href="#contrato-login">Ajustar contrato e login</a>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="quando-usar">
+          <h2>1. Quando usar este processo</h2>
+          <p class="section-intro">
+            Este processo deve ser usado quando o cliente já possui serviço ativo e deseja contratar
+            um <strong>novo ponto em outro local</strong>, vinculado ao mesmo cliente.
+          </p>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag ok">USAR</div>
+              <ul class="checklist">
+                <li>Quando o cliente solicita internet em outro local diferente da residência já atendida.</li>
+                <li>Quando a contratação deve ficar vinculada ao mesmo cliente já existente na base.</li>
+                <li>Quando o processo correto for um novo ponto adicional e não uma melhoria dentro do mesmo endereço.</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag danger">NÃO USAR</div>
+              <ul class="checklist">
+                <li>Quando o cliente quer melhorar o sinal ou ter mais equipamentos na mesma residência.</li>
+                <li>Quando o caso correto for <strong>Upgrade</strong>.</li>
+                <li>Quando o cliente precisa apenas de suporte, troca de equipamento, mudança de endereço ou outro processo interno.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <strong>Regra principal:</strong> a política da empresa não é vender o serviço mais caro.
+            A orientação é vender o serviço <strong>mais adequado para atender a necessidade real do cliente</strong>.
+            Por isso, antes de abrir a negociação de Ponto Adicional, o consultor deve confirmar se essa é mesmo a solução correta.
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="triagem-inicial">
+          <h2>2. Triagem inicial da necessidade</h2>
+          <p class="section-intro">
+            O cliente entra em contato pelo OPA solicitando um ponto adicional.
+            Antes de abrir a negociação, o consultor deve entender claramente o que o cliente precisa.
+          </p>
+
+          <div class="two-column-content">
+            <div>
+              <h3>O que o consultor deve descobrir</h3>
+              <ol class="step-list">
+                <li>Se o novo ponto será na mesma residência ou em outro local.</li>
+                <li>Se o cliente quer apenas mais cobertura ou mais equipamentos dentro do mesmo endereço.</li>
+                <li>Se a necessidade real pode ser atendida com um upgrade de plano.</li>
+                <li>Se realmente existe necessidade de um ponto separado em outro endereço.</li>
+              </ol>
+
+              <div class="highlight">
+                <strong>Objetivo desta etapa:</strong> garantir que o cliente entre no processo certo.
+                Um erro aqui faz o consultor abrir Ponto Adicional quando na verdade o caso era Upgrade.
+              </div>
+            </div>
+
+            <div class="checklist-box">
+              <h4>Perguntas que o consultor deve responder</h4>
+              <ul class="checklist">
+                <li>O novo ponto é no mesmo endereço?</li>
+                <li>É a mesma residência?</li>
+                <li>O cliente precisa de mais cobertura ou de outro ponto em outro local?</li>
+                <li>O serviço ideal é mesmo Ponto Adicional?</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Script sugerido para entender a necessidade</h3>
+          <div class="script-box">Perfeito, [Nome do Cliente]. Antes de eu seguir com o processo, preciso confirmar uma informação:
+
+Esse ponto que você deseja contratar será no mesmo endereço onde você já usa nosso serviço
+ou será em outro local diferente?
+
+Te pergunto isso porque, dependendo da sua necessidade, a melhor solução pode ser um upgrade
+ou um ponto adicional. Quero te orientar da forma correta.</div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 1 - Atendimento inicial no OPA</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar o atendimento inicial onde o cliente solicita o ponto adicional.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-1">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="mesma-residencia">
+          <h2>3. Quando for na mesma residência</h2>
+          <p class="section-intro">
+            Se o cliente informar que deseja mais cobertura, mais equipamentos ou um ponto dentro da mesma residência,
+            o processo correto não será Ponto Adicional.
+          </p>
+
+          <div class="danger-box">
+            <strong>Se for no mesmo endereço, geralmente o processo correto é Upgrade.</strong>
+            Nessa situação, o consultor não deve seguir com Ponto Adicional.
+          </div>
+
+          <h3>Como interpretar corretamente</h3>
+          <ul class="checklist">
+            <li>Se o cliente quer melhorar o sinal no mesmo imóvel, o caso tende a ser Upgrade.</li>
+            <li>Se o cliente quer mais equipamentos no mesmo local, o caso tende a ser Upgrade.</li>
+            <li>Se o cliente quer ampliar atendimento dentro da mesma residência, normalmente não é Ponto Adicional.</li>
+          </ul>
+
+          <div class="warning-box">
+            <strong>Conduta esperada:</strong> o consultor deve orientar o cliente para a melhor solução.
+            O objetivo não é vender qualquer serviço, mas sim o serviço certo.
+          </div>
+
+          <h3>Script sugerido</h3>
+          <div class="script-box">Entendi, [Nome do Cliente]. Como essa necessidade é para o mesmo endereço onde você já possui o serviço,
+o mais indicado não é um ponto adicional.
+
+Nesse caso, a melhor solução é verificar uma opção de upgrade para atender melhor sua necessidade.
+Vou te orientar pelo processo correto para isso.</div>
+        </section>
+
+        <section class="card section-anchor" id="outro-local">
+          <h2>4. Quando for em outro local</h2>
+          <p class="section-intro">
+            Se o cliente informar que o ponto será em outro local diferente da residência atual,
+            aí sim o processo deve seguir como <strong>Ponto Adicional</strong>.
+          </p>
+
+          <div class="highlight">
+            <strong>Quando prosseguir:</strong> o processo segue como Ponto Adicional somente quando o novo atendimento
+            será em outro local e continuará vinculado ao mesmo cliente.
+          </div>
+
+          <h3>O que confirmar antes de seguir</h3>
+          <ul class="checklist">
+            <li>Endereço do novo ponto</li>
+            <li>Cidade do novo ponto</li>
+            <li>Se o atendimento ficará vinculado ao mesmo cliente</li>
+            <li>Se a necessidade já foi corretamente classificada como Ponto Adicional</li>
+          </ul>
+
+          <h3>Script sugerido</h3>
+          <div class="script-box">Perfeito, [Nome do Cliente]. Como esse novo ponto será em outro local,
+vamos seguir com o processo de Ponto Adicional.
+
+Agora preciso confirmar os dados do novo endereço para prosseguirmos corretamente.</div>
+        </section>
+
+        <section class="card section-anchor" id="kanban">
+          <h2>5. Negociação no quadro Kanban</h2>
+          <p class="section-intro">
+            No processo de Ponto Adicional, a operação parte do quadro Kanban já da aba de <strong>Negociação</strong>.
+          </p>
+
+          <div class="grid-3">
+            <div class="mini-card">
+              <h4>Onde começa</h4>
+              <p>No quadro Kanban, na aba de Negociação.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Funil correto</h4>
+              <p>Funil: <strong>Ponto Adicional</strong>.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Vinculação obrigatória</h4>
+              <p>A negociação deve ser vinculada ao cliente correto.</p>
+            </div>
+          </div>
+
+          <h3>Passo a passo</h3>
+          <ol class="step-list">
+            <li>Acesse o quadro Kanban.</li>
+            <li>Vá para a aba de <strong>Negociação</strong>.</li>
+            <li>Crie uma nova negociação.</li>
+            <li>Escolha o funil <strong>Ponto Adicional</strong>.</li>
+            <li>Vincule a negociação ao cliente correto.</li>
+            <li>Confirme que a negociação está associada ao cadastro já existente.</li>
+          </ol>
+
+          <div class="warning-box">
+            <strong>Atenção:</strong> não abra essa negociação como Novo Contrato.
+            O cliente já existe na base e o processo é específico de Ponto Adicional.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 2 - Negociação no Kanban</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde criar a negociação no funil Ponto Adicional.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-2">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="plano">
+          <h2>6. Definição do plano</h2>
+          <p class="section-intro">
+            O ponto adicional possui regra própria de plano e essa etapa costuma gerar erros.
+          </p>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag ok">REGRA PADRÃO</div>
+              <ul class="checklist">
+                <li>O ponto adicional utiliza o <strong>mesmo plano</strong> do cliente.</li>
+                <li>Se for seguir a regra padrão, o consultor deve preencher com o plano já existente do cliente.</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag warn">EXCEÇÃO</div>
+              <ul class="checklist">
+                <li>Se o cliente quiser plano diferente, o consultor deve falar com <strong>Daniele</strong>.</li>
+                <li>Ela irá analisar a situação e decidir se libera ou não a criação do ponto adicional com plano diferente.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="danger-box">
+            <strong>Não decidir sozinho.</strong>
+            Se o cliente quiser um plano diferente do plano atual, o consultor não deve seguir por conta própria.
+            A situação precisa ser analisada e liberada pela Daniele.
+          </div>
+
+          <h3>Fluxo correto da decisão</h3>
+          <ol class="step-list">
+            <li>Verifique qual é o plano atual do cliente.</li>
+            <li>Pergunte se ele deseja manter o mesmo plano no ponto adicional.</li>
+            <li>Se for o mesmo plano, siga normalmente.</li>
+            <li>Se for diferente, entre em contato com a Daniele.</li>
+            <li>Somente após a liberação, siga com o plano diferente.</li>
+          </ol>
+
+          <h3>Mensagem interna sugerida para a Daniele</h3>
+          <div class="script-box">Olá, Daniele. Estou com um caso de Ponto Adicional do cliente [NOME DO CLIENTE].
+
+O cliente deseja contratar o ponto adicional com um plano diferente do plano atual.
+Poderia avaliar o caso e me informar se a criação pode ser liberada?</div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 3 - Definição do plano do ponto adicional</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde conferir o plano atual e registrar a decisão.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-3">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="dados">
+          <h2>7. Conferência dos dados e preenchimento do novo endereço</h2>
+          <p class="section-intro">
+            Se for o mesmo plano, o consultor deve preencher com o plano existente do cliente,
+            conferir as informações e preencher o <strong>novo endereço</strong> na aba <strong>Endereço</strong>.
+            Essa etapa é igual à lógica de Reativação e Novo Contrato.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>O que conferir</h3>
+              <ul class="checklist">
+                <li>Dados cadastrais do cliente</li>
+                <li>Plano atual do cliente</li>
+                <li>Telefone e e-mail</li>
+                <li>Novo endereço do ponto adicional</li>
+                <li>Cidade, bairro, rua, número e referência</li>
+              </ul>
+            </div>
+
+            <div class="checklist-box">
+              <h4>Resultado esperado</h4>
+              <ul class="checklist">
+                <li>Cliente vinculado corretamente</li>
+                <li>Plano definido corretamente</li>
+                <li>Novo endereço preenchido</li>
+                <li>Dados revisados antes do Wizard</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <strong>Atenção:</strong> o endereço do ponto adicional não deve ser confundido com o endereço principal do cliente.
+            O novo ponto precisa ter o endereço correto desde essa etapa.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 4 - Aba Endereço do ponto adicional</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde preencher o novo endereço do ponto adicional.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-4">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="wizard">
+          <h2>8. Vencemos Wizard</h2>
+          <p class="section-intro">
+            Essa é a etapa que mais gera erro no processo de Ponto Adicional.
+            O consultor deve seguir exatamente a configuração correta.
+          </p>
+
+          <div class="danger-box">
+            <strong>Ponto crítico:</strong>
+            no Vencemos Wizard do Ponto Adicional, as escolhas não são as mesmas de Novo Contrato.
+            O consultor deve prestar atenção principalmente nas abas <strong>Contratos</strong>, <strong>Produto</strong>,
+            <strong>Acesso</strong> e <strong>Atendimento</strong>.
+          </div>
+
+          <div class="step-blocks">
+            <div class="step-block">
+              <h4>8.1 Aba Contratos</h4>
+              <ol class="step-list compact">
+                <li>No campo de contrato, clicar em <strong>utilizar existente</strong>.</li>
+                <li>Confirmar que o contrato usado é o contrato correto do cliente.</li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>8.2 Aba Produto - Quando for o mesmo plano</h4>
+              <ol class="step-list compact">
+                <li>Na aba <strong>Produto</strong>, adicionar <strong>2 produtos do mesmo plano</strong>.</li>
+                <li>Conferir se o plano escolhido corresponde ao plano atual do cliente.</li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>8.3 Aba Produto - Quando for plano diferente autorizado</h4>
+              <ol class="step-list compact">
+                <li>Se a Daniele tiver liberado plano diferente, fazer o mesmo processo do Wizard.</li>
+                <li>Na aba <strong>Produto</strong>, escolher <strong>1 produto do plano definido</strong>.</li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>8.4 Aba Acesso</h4>
+              <ol class="step-list compact">
+                <li>Na aba <strong>Acesso</strong>, marcar a opção <strong>SIM</strong>.</li>
+                <li>Preencher as informações solicitadas corretamente.</li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>8.5 Aba Atendimento</h4>
+              <ol class="step-list compact">
+                <li>Na aba <strong>Atendimento</strong>, escolher o assunto <strong>ID 54 - PONTO ADICIONAL</strong>.</li>
+                <li>Conferir se o atendimento está classificado corretamente antes de finalizar.</li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>8.6 Finalização</h4>
+              <ol class="step-list compact">
+                <li>Depois de revisar todas as abas, vencer a negociação no Wizard.</li>
+                <li>Confirmar que a negociação foi concluída sem inconsistências.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <strong>Resumo operacional:</strong><br>
+            Contrato: <strong>utilizar existente</strong><br>
+            Produto: <strong>2 produtos do mesmo plano</strong> quando for regra padrão<br>
+            Produto: <strong>1 produto</strong> quando houver liberação para plano diferente<br>
+            Acesso: <strong>SIM</strong><br>
+            Atendimento: <strong>ID 54 - PONTO ADICIONAL</strong>
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 5 - Vencemos Wizard do Ponto Adicional</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a configuração correta do Wizard para Ponto Adicional.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-5">
+              Visualizar imagem
+            </button>
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 6 - Aba Produto com mesmo plano</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar como lançar 2 produtos do mesmo plano.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-6">
+              Visualizar imagem
+            </button>
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 7 - Aba Atendimento ID 54</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a seleção correta do atendimento ID 54 - PONTO ADICIONAL.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-7">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="contrato-login">
+          <h2>9. Contrato, login e endereço manual após o Wizard</h2>
+          <p class="section-intro">
+            Após finalizar o Wizard, o consultor ainda precisa fazer ajustes importantes no contrato do cliente.
+            Essa etapa também gera erro com frequência.
+          </p>
+
+          <h3>Passo a passo completo</h3>
+          <ol class="step-list">
+            <li>Vá até o <strong>contrato do cliente</strong>.</li>
+            <li>Acesse a aba <strong>Login</strong>.</li>
+            <li>Selecione o <strong>novo login criado</strong>.</li>
+            <li>Desmarque a opção de <strong>utilizar endereço do cliente</strong>.</li>
+            <li>Preencha o endereço do novo ponto de forma <strong>manual</strong>.</li>
+            <li>Revise o endereço cuidadosamente.</li>
+            <li>Clique em <strong>Salvar</strong>.</li>
+            <li>Depois disso, vá para as <strong>OS</strong>.</li>
+          </ol>
+
+          <div class="danger-box">
+            <strong>Erro muito comum:</strong>
+            esquecer de desmarcar a opção de utilizar o endereço do cliente.
+            Se isso acontecer, o ponto adicional pode ficar com endereço incorreto.
+          </div>
+
+          <div class="warning-box">
+            <strong>Regra obrigatória:</strong>
+            o endereço do ponto adicional precisa ser inserido manualmente no login correto, após o Wizard.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 8 - Seleção do novo login</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde selecionar o novo login criado no contrato.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-8">
+              Visualizar imagem
+            </button>
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 9 - Endereço manual do ponto adicional</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde desmarcar o endereço automático e preencher o novo endereço manualmente.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-9">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="os">
+          <h2>10. OS e continuidade do processo</h2>
+          <p class="section-intro">
+            Depois do ajuste de contrato, login e endereço, o restante do fluxo segue igual ao processo de
+            Novo Contrato e Reativação.
+          </p>
+
+          <div class="highlight">
+            <strong>A partir daqui:</strong> o restante do processo é o mesmo dos outros fluxos já documentados,
+            incluindo continuidade operacional, assinatura, OS e instalação conforme a rotina da empresa.
+          </div>
+
+          <h3>O que o consultor deve fazer</h3>
+          <ol class="step-list">
+            <li>Ir para as OS geradas no processo.</li>
+            <li>Confirmar que os dados estão corretos.</li>
+            <li>Dar andamento nas etapas operacionais conforme o padrão já usado em Novo Contrato e Reativação.</li>
+            <li>Acompanhar até a conclusão correta da contratação.</li>
+          </ol>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 10 - Continuidade nas OS</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a sequência operacional depois do ajuste do contrato e login.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-10">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="opa">
+          <h2>11. Uso do OPA! Suite durante o processo</h2>
+          <p class="section-intro">
+            O OPA! Suite deve ser usado como ferramenta de apoio ao atendimento, registro da necessidade do cliente
+            e continuidade da conversa.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>Quando usar</h3>
+              <ul class="checklist">
+                <li>Para receber a solicitação inicial do cliente.</li>
+                <li>Para entender se a necessidade é Ponto Adicional ou Upgrade.</li>
+                <li>Para manter o histórico da negociação.</li>
+                <li>Para acompanhar o cliente nas etapas seguintes.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>Boas práticas</h3>
+              <ul class="checklist">
+                <li>Registrar claramente que se trata de solicitação de ponto adicional.</li>
+                <li>Registrar quando o caso foi redirecionado para Upgrade.</li>
+                <li>Manter o histórico organizado para continuidade do atendimento.</li>
+                <li>Usar etiquetas e motivo do atendimento, quando aplicável.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="erros">
+          <h2>12. Erros que não podem acontecer</h2>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag danger">ERROS CRÍTICOS</div>
+              <ul class="checklist">
+                <li>Seguir como Ponto Adicional quando o caso correto era Upgrade.</li>
+                <li>Não confirmar se o novo ponto é em outro local.</li>
+                <li>Não vincular corretamente a negociação ao cliente.</li>
+                <li>Usar plano diferente sem autorização da Daniele.</li>
+                <li>Preencher errado a aba Produto no Wizard.</li>
+                <li>Não selecionar o atendimento ID 54 - PONTO ADICIONAL.</li>
+                <li>Esquecer de selecionar o novo login no contrato.</li>
+                <li>Não desmarcar a opção de utilizar o endereço do cliente.</li>
+                <li>Salvar o ponto adicional com endereço incorreto.</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag ok">COMPORTAMENTO ESPERADO</div>
+              <ul class="checklist">
+                <li>Entender a necessidade real antes de vender.</li>
+                <li>Orientar corretamente quando o caso for Upgrade.</li>
+                <li>Registrar a negociação no funil certo.</li>
+                <li>Seguir o Wizard exatamente como definido para Ponto Adicional.</li>
+                <li>Conferir login e endereço manual antes de avançar.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="resumo">
+          <h2>13. Resumo rápido do fluxo</h2>
+          <ol class="step-list">
+            <li>Receber a solicitação do cliente no OPA.</li>
+            <li>Confirmar se a necessidade é realmente de Ponto Adicional.</li>
+            <li>Se for na mesma residência, redirecionar para Upgrade.</li>
+            <li>Se for em outro local, seguir com Ponto Adicional.</li>
+            <li>Criar negociação no Kanban, na aba Negociação, no funil Ponto Adicional.</li>
+            <li>Vincular a negociação ao cliente.</li>
+            <li>Definir o plano:
+              <ul class="checklist">
+                <li>Mesmo plano: seguir normalmente</li>
+                <li>Plano diferente: falar com a Daniele e aguardar liberação</li>
+              </ul>
+            </li>
+            <li>Conferir informações e preencher o novo endereço na aba Endereço.</li>
+            <li>Vencer a negociação no Wizard.</li>
+            <li>Na aba Contratos: utilizar existente.</li>
+            <li>Na aba Produto:
+              <ul class="checklist">
+                <li>Mesmo plano: 2 produtos do mesmo plano</li>
+                <li>Plano diferente liberado: 1 produto do plano definido</li>
+              </ul>
+            </li>
+            <li>Na aba Acesso: marcar SIM e preencher as informações.</li>
+            <li>Na aba Atendimento: usar ID 54 - PONTO ADICIONAL.</li>
+            <li>Após o Wizard: ir no contrato do cliente, selecionar o novo login criado, desmarcar utilizar endereço do cliente e preencher o endereço manual.</li>
+            <li>Salvar e seguir para as OS.</li>
+            <li>O restante do processo segue igual a Novo Contrato e Reativação.</li>
+          </ol>
+        </section>
+
+        <p class="footer-note">
+          Manual Comercial Ti.Net - Ponto Adicional
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-1" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-1-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-1-titulo">IMAGEM 1 - Atendimento inicial no OPA</h3>
+          <p>Solicitação inicial do cliente pedindo ponto adicional.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/pontoAdicional/01-atendimento-inicial-opa.png" alt="Atendimento inicial no OPA">
+        <div class="image-modal-caption">Use esta imagem para identificar a entrada do atendimento e a necessidade informada pelo cliente.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-2" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-2-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-2-titulo">IMAGEM 2 - Negociação no Kanban</h3>
+          <p>Criação da negociação no funil Ponto Adicional.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/pontoAdicional/02-negociacao-kanban.png" alt="Negociação no Kanban">
+        <div class="image-modal-caption">Confirme que o funil escolhido é o de Ponto Adicional e que o cliente está corretamente vinculado.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-3" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-3-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-3-titulo">IMAGEM 3 - Definição do plano do ponto adicional</h3>
+          <p>Conferência do plano atual e decisão sobre mesmo plano ou exceção.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/pontoAdicional/03-definicao-plano.png" alt="Definição do plano do ponto adicional">
+        <div class="image-modal-caption">Use esta etapa para conferir se o ponto adicional seguirá a regra padrão ou exigirá análise da Daniele.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-4" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-4-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-4-titulo">IMAGEM 4 - Aba Endereço do ponto adicional</h3>
+          <p>Preenchimento do novo endereço na negociação.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/pontoAdicional/04-aba-endereco.png" alt="Aba Endereço do ponto adicional">
+        <div class="image-modal-caption">Confirme o novo endereço com atenção, pois ele será usado nas etapas seguintes.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-5" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-5-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-5-titulo">IMAGEM 5 - Vencemos Wizard do Ponto Adicional</h3>
+          <p>Configuração geral do Wizard para esse processo.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/pontoAdicional/05-vencemos-wizard.png" alt="Vencemos Wizard do Ponto Adicional">
+        <div class="image-modal-caption">Essa é a etapa mais crítica do processo e deve ser revisada com muita atenção.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-6" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-6-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-6-titulo">IMAGEM 6 - Aba Produto com mesmo plano</h3>
+          <p>Lançamento de 2 produtos do mesmo plano.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/pontoAdicional/06-aba-produto-mesmo-plano.png" alt="Aba Produto com mesmo plano">
+        <div class="image-modal-caption">Use esta configuração quando o ponto adicional seguir o mesmo plano do cliente.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-7" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-7-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-7-titulo">IMAGEM 7 - Aba Atendimento ID 54</h3>
+          <p>Seleção correta do atendimento Ponto Adicional.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/pontoAdicional/07-atendimento-id-54.png" alt="Aba Atendimento ID 54">
+        <div class="image-modal-caption">Confirme se o atendimento escolhido é o ID 54 - PONTO ADICIONAL.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-8" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-8-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-8-titulo">IMAGEM 8 - Seleção do novo login</h3>
+          <p>Escolha do novo login criado dentro do contrato.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/pontoAdicional/08-selecao-login.png" alt="Seleção do novo login">
+        <div class="image-modal-caption">Garanta que o login correto esteja selecionado antes de ajustar o endereço.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-9" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-9-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-9-titulo">IMAGEM 9 - Endereço manual do ponto adicional</h3>
+          <p>Desmarcar endereço automático e preencher manualmente.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/pontoAdicional/09-endereco-manual.png" alt="Endereço manual do ponto adicional">
+        <div class="image-modal-caption">Essa etapa evita que o novo ponto fique com o endereço errado do cliente principal.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-10" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-10-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-10-titulo">IMAGEM 10 - Continuidade nas OS</h3>
+          <p>Etapa de continuidade do processo após contrato e login.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/pontoAdicional/10-continuidade-os.png" alt="Continuidade nas OS">
+        <div class="image-modal-caption">A partir daqui, o fluxo segue o mesmo padrão dos outros processos já documentados.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/global.js"></script>
+</body>
+</html>

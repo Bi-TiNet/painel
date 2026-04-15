@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Comercial - Reativação | Ti.Net</title>
+  <link rel="stylesheet" href="css/global.css" />
+</head>
+<body>
+  <div class="manual-layout">
+    <aside class="sidebar">
+      <div class="logo-box">
+        <img src="imagens/logo.png" alt="Ti.Net" onerror="this.style.display='none'">
+      </div>
+
+      <div class="manual-title">MANUAL COMERCIAL</div>
+      <div class="manual-subtitle">Reativação</div>
+
+      <div class="nav-group">
+        <h3>Navegação</h3>
+        <a href="#visao-geral">Visão Geral</a>
+        <a href="#quando-usar">Quando usar este processo</a>
+        <a href="#identificacao">Identificação do cliente</a>
+        <a href="#financeiro">Validação com o Financeiro</a>
+        <a href="#cenario-a">Cenário A - Cliente abordou</a>
+        <a href="#cenario-b">Cenário B - Abordagem ativa</a>
+        <a href="#triagem">Triagem inicial</a>
+        <a href="#lead-inmap">Lead no Inmap Sales</a>
+        <a href="#viabilidade">Viabilidade</a>
+        <a href="#planos">Apresentação de planos</a>
+        <a href="#dados">Coleta de dados</a>
+        <a href="#contrato">Contrato e assinatura</a>
+        <a href="#agendamento">Agendamento da instalação</a>
+        <a href="#opa">Uso do OPA! Suite</a>
+        <a href="#erros">Erros críticos</a>
+        <a href="#resumo">Resumo do fluxo</a>
+      </div>
+
+      <div class="sidebar-note">
+        Este manual deve ser usado como guia de consulta rápida e também como material de treinamento para novos colaboradores.
+      </div>
+
+      <a class="back-link" href="/COMERCIAL/menu_comercial.html">← Voltar</a>
+    </aside>
+
+    <main class="content">
+      <div class="content-inner">
+        <section class="hero section-anchor" id="visao-geral">
+          <div class="badge">PROCESSO OPERACIONAL</div>
+          <h1>Reativação</h1>
+          <p>
+            Este manual foi criado para orientar o colaborador no processo de reativação de cliente,
+            desde a identificação da base existente até a definição correta no Vencemos Wizard,
+            sabendo quando reaproveitar contrato e login e quando criar um novo contrato.
+          </p>
+
+          <div class="hero-summary">
+            <div class="summary-card">
+              <strong>Objetivo</strong>
+              <span>Reativar clientes com segurança operacional, aproveitando contrato quando possível.</span>
+            </div>
+            <div class="summary-card">
+              <strong>Sistemas usados</strong>
+              <span>Inmap Sales, IXC Soft, OPA! Suite e apoio do Financeiro.</span>
+            </div>
+            <div class="summary-card">
+              <strong>Ponto crítico</strong>
+              <span>Validar débitos e definir corretamente se usa contrato existente ou cria novo.</span>
+            </div>
+          </div>
+
+          <div class="quick-nav">
+            <a href="#identificacao">Identificar cliente</a>
+            <a href="#financeiro">Falar com o Financeiro</a>
+            <a href="#contrato">Vencemos Wizard</a>
+            <a href="#agendamento">Agendar instalação</a>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="quando-usar">
+          <h2>1. Quando usar este processo</h2>
+          <p class="section-intro">
+            Use este fluxo quando o cliente já possui ou já possuiu cadastro na base e deseja voltar a utilizar o serviço.
+          </p>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag ok">USAR</div>
+              <ul class="checklist">
+                <li>Quando o cliente já existe no IXC e deseja voltar a contratar o serviço.</li>
+                <li>Quando houver possibilidade de reaproveitar contrato e/ou login.</li>
+                <li>Quando o atendimento se tratar de retorno de cliente da base.</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag danger">NÃO USAR</div>
+              <ul class="checklist">
+                <li>Quando o cliente nunca teve cadastro ativo e se trata de primeira contratação.</li>
+                <li>Quando o atendimento for suporte, financeiro, mudança de endereço, titularidade ou upgrade.</li>
+                <li>Quando a demanda pertencer a outro processo ou departamento interno.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <strong>Regra de ouro:</strong> no processo de <strong>Reativação</strong>, o primeiro ponto crítico é confirmar se o cliente já existe na base.
+            Essa conferência deve ser feita no IXC antes de avançar.
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="identificacao">
+          <h2>2. Identificação do cliente na base</h2>
+          <p class="section-intro">
+            Em muitos casos, o cliente não se identifica como cliente antigo. Por isso, a verificação na base é obrigatória.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>O que fazer</h3>
+              <ol class="step-list">
+                <li>Pesquisar o cliente no IXC pelo nome, CPF, CNPJ, telefone ou outro dado disponível.</li>
+                <li>Confirmar se já existe cadastro anterior.</li>
+                <li>Verificar se existe contrato antigo vinculado.</li>
+                <li>Verificar se existe login anterior.</li>
+                <li>Somente depois dessa análise decidir se o fluxo segue como Reativação.</li>
+              </ol>
+            </div>
+
+            <div class="checklist-box">
+              <h4>Resultado esperado</h4>
+              <ul class="checklist">
+                <li>Cliente identificado na base</li>
+                <li>Status anterior conhecido</li>
+                <li>Contrato e login localizados, quando existirem</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="danger-box">
+            <strong>Nunca avance sem pesquisar o cliente no IXC.</strong>
+            Esse é o ponto que define se o atendimento será Reativação ou Novo Contrato.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 1 - Busca do cliente no IXC</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde pesquisar o cliente e identificar cadastro existente na base.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-1">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="financeiro">
+          <h2>3. Validação com o Financeiro</h2>
+          <p class="section-intro">
+            Depois de identificar que o cliente já existe na base, o consultor deve validar com o Financeiro se existem débitos em aberto e se o contrato pode ser reaproveitado.
+          </p>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag warn">OBRIGATÓRIO</div>
+              <ul class="checklist">
+                <li>Entrar em contato com o Financeiro antes de prosseguir.</li>
+                <li>Confirmar se há débitos em aberto.</li>
+                <li>Verificar se o contrato pode ser liberado para reaproveitamento.</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag ok">DECISÃO DA ETAPA</div>
+              <ul class="checklist">
+                <li>Se o Financeiro liberar, usar contrato existente.</li>
+                <li>Se o Financeiro não liberar, criar novo contrato.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <strong>Resumo da regra:</strong> se o contrato puder ser aproveitado, o Financeiro realiza a liberação e o consultor segue utilizando o contrato existente.
+            Se o Financeiro não conseguir liberar, será necessário criar um novo contrato.
+          </div>
+
+          <h3>Mensagem interna sugerida ao Financeiro</h3>
+          <div class="script-box">Olá! Poderiam verificar, por gentileza, se o cliente [NOME DO CLIENTE] possui débitos em aberto
+e se o contrato pode ser liberado para reaproveitamento no processo de reativação?</div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 2 - Validação financeira / débitos em aberto</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde verificar ou registrar a tratativa com o Financeiro.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-2">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="cenario-a">
+          <h2>4. Cenário A - Quando o cliente abordou a empresa</h2>
+          <p class="section-intro">
+            Use este fluxo quando o cliente entra em contato demonstrando interesse em voltar a utilizar o serviço.
+          </p>
+
+          <div class="two-column-content">
+            <div>
+              <h3>O que fazer</h3>
+              <ol class="step-list">
+                <li>Abra o atendimento e identifique o nome do cliente.</li>
+                <li>Pesquise imediatamente no IXC para verificar se ele já existe na base.</li>
+                <li>Se existir cadastro anterior, siga com o fluxo de Reativação.</li>
+                <li>Verifique etiquetas, cidade e tipo de pessoa.</li>
+                <li>Valide a situação com o Financeiro antes de avançar para contrato.</li>
+                <li>Confirme se o lead já existe no Inmap Sales.</li>
+                <li>Se não existir, crie o lead antes de continuar.</li>
+              </ol>
+
+              <div class="highlight">
+                <strong>Objetivo desta etapa:</strong> identificar corretamente que o cliente já pertence à base e garantir que a reativação seja tratada no fluxo certo.
+              </div>
+            </div>
+
+            <div class="checklist-box">
+              <h4>Resultado esperado da etapa</h4>
+              <ul class="checklist">
+                <li>Cliente identificado na base</li>
+                <li>Situação inicial confirmada</li>
+                <li>Financeiro acionado</li>
+                <li>Lead localizado ou criado no Inmap Sales</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Script inicial sugerido</h3>
+          <div class="script-box">Olá! Aqui é a/o [Nome do Atendente] da Ti.Net, tudo bem?
+Vi que você tem interesse em contratar novamente nossos serviços.
+
+Antes de continuarmos, poderia me confirmar seu nome completo e a localização da instalação?
+Assim eu consigo verificar seu cadastro e as opções disponíveis para você.</div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 3 - Atendimento inicial de reativação</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a entrada do atendimento e os dados iniciais do cliente.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-3">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="cenario-b">
+          <h2>5. Cenário B - Quando o atendente vai abordar o cliente</h2>
+          <p class="section-intro">
+            Use este fluxo quando a equipe vai iniciar contato ativo com um cliente da base com potencial de reativação.
+          </p>
+
+          <div class="two-column-content">
+            <div>
+              <h3>O que fazer</h3>
+              <ol class="step-list">
+                <li>Abra o registro do cliente ou lead no sistema.</li>
+                <li>Confirme os dados mínimos e pesquise o cadastro no IXC.</li>
+                <li>Verifique cidade, classificação PF/PJ e histórico.</li>
+                <li>Confirme com o Financeiro se o contrato pode ser reaproveitado.</li>
+                <li>Realize a abordagem com foco em retomada do serviço.</li>
+              </ol>
+            </div>
+
+            <div class="checklist-box">
+              <h4>Antes de enviar a mensagem</h4>
+              <ul class="checklist">
+                <li>Cadastro localizado</li>
+                <li>Cliente confirmado na base</li>
+                <li>Contrato localizado, se houver</li>
+                <li>Validação financeira solicitada</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Script de abordagem ativa</h3>
+          <div class="script-box">Olá! Aqui é a/o [Nome do Atendente] da Ti.Net, tudo bem?
+Estamos entrando em contato porque identificamos a possibilidade de reativar seu atendimento conosco.
+
+Para eu verificar a melhor forma de seguir, poderia me confirmar o endereço da instalação e alguns dados do cadastro?</div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 4 - Reativação antes da abordagem</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar o cadastro/lead antes do primeiro contato ativo.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-4">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="triagem">
+          <h2>6. Triagem inicial obrigatória</h2>
+          <p class="section-intro">
+            Antes de continuar, o atendente deve confirmar se a demanda realmente se trata de reativação.
+          </p>
+
+          <div class="decision-flow">
+            <div class="decision-step">
+              <span class="number">1</span>
+              <strong>Pesquisar o cliente no IXC</strong>
+              <p>Confirmar se ele já possui ou já possuiu cadastro na base.</p>
+            </div>
+
+            <div class="decision-step">
+              <span class="number">2</span>
+              <strong>Verificar se é PF ou PJ</strong>
+              <p>Identifique corretamente o perfil do cliente para evitar cadastro errado e retrabalho.</p>
+            </div>
+
+            <div class="decision-step">
+              <span class="number">3</span>
+              <strong>Verificar a cidade</strong>
+              <p>Confirme a cidade da instalação para avaliar viabilidade, plano e equipe operacional.</p>
+            </div>
+
+            <div class="decision-step">
+              <span class="number">4</span>
+              <strong>Acionar o Financeiro</strong>
+              <p>Confirmar se existem débitos em aberto e se o contrato pode ser reaproveitado.</p>
+            </div>
+          </div>
+
+          <div class="danger-box">
+            <strong>Nunca avance para o Vencemos Wizard sem concluir essa triagem.</strong>
+            A definição errada nessa etapa impacta diretamente na escolha entre contrato novo e contrato existente.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 5 - Triagem da reativação</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a conferência inicial de base, cidade e situação do cliente.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-5">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="lead-inmap">
+          <h2>7. Lead no Inmap Sales</h2>
+          <p class="section-intro">
+            O Inmap Sales continua sendo o sistema principal para organização do fluxo comercial.
+            Mesmo em reativação, a oportunidade deve estar corretamente registrada.
+          </p>
+
+          <div class="grid-3">
+            <div class="mini-card">
+              <h4>Onde olhar</h4>
+              <p>Quadro Kanban do Sales.</p>
+            </div>
+            <div class="mini-card">
+              <h4>O que conferir</h4>
+              <p>Nome, telefone, cidade, PF/PJ e status da reativação.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Meta da etapa</h4>
+              <p>Lead criado ou localizado na etapa correta do funil.</p>
+            </div>
+          </div>
+
+          <h3>Passo a passo</h3>
+          <ol class="step-list">
+            <li>Acesse o quadro Kanban do Sales.</li>
+            <li>Localize o lead pelo nome, telefone ou origem.</li>
+            <li>Se já existir, continue no registro correto.</li>
+            <li>Se não existir, crie um novo lead.</li>
+            <li>Identifique que o atendimento se trata de reativação.</li>
+            <li>Mova o lead para a etapa correta do funil.</li>
+          </ol>
+
+          <div class="highlight">
+            <strong>Preenchimento mínimo recomendado:</strong>
+            nome, telefone, cidade, tipo de cliente (PF/PJ), canal de vendas e observação indicando que se trata de reativação.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 6 - Lead de reativação no Inmap Sales</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a organização da reativação no Kanban.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-6">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="viabilidade">
+          <h2>8. Como fazer a viabilidade</h2>
+          <p class="section-intro">
+            A etapa de viabilidade é igual à de Novo Contrato e deve ser realizada normalmente.
+          </p>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag warn">ANTES DE COMEÇAR</div>
+              <ul class="checklist">
+                <li>Nome do cliente</li>
+                <li>Cidade</li>
+                <li>Rua e número</li>
+                <li>Bairro</li>
+                <li>Ponto de referência</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag ok">RESULTADO ESPERADO</div>
+              <ul class="checklist">
+                <li>Viabilidade definida</li>
+                <li>Lead atualizado no funil</li>
+                <li>Próxima ação definida</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Passo a passo</h3>
+          <ol class="step-list">
+            <li>Abra o lead no Inmap Sales.</li>
+            <li>Confirme o endereço com o cliente.</li>
+            <li>Clique no botão de Localização.</li>
+            <li>Posicione o mapa no endereço correto.</li>
+            <li>Salve as alterações.</li>
+            <li>Clique no botão de Viabilidade.</li>
+            <li>Escolha o tipo de rede: <strong>Rede Própria</strong>.</li>
+            <li>Escolha a CTO mais próxima, se houver.</li>
+            <li>Atualize o lead com o resultado da viabilidade.</li>
+            <li>Se houver viabilidade, avance para a oferta de planos.</li>
+            <li>Se não houver viabilidade, registre corretamente no funil e informe o cliente.</li>
+          </ol>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 7 - Consulta de viabilidade na reativação</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a etapa de localização e viabilidade.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-7">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="planos">
+          <h2>9. Apresentação de planos</h2>
+          <p class="section-intro">
+            A apresentação dos planos segue a mesma regra de Novo Contrato.
+          </p>
+
+          <div class="warning-box">
+            <strong>Regra obrigatória:</strong> apresentar no máximo 3 planos.
+          </div>
+
+          <ol class="step-list">
+            <li>Apresente apenas planos compatíveis com o endereço.</li>
+            <li>Explique cada plano pelo benefício, não apenas pela velocidade.</li>
+            <li>Conduza o cliente para a decisão.</li>
+            <li>Sempre finalize perguntando qual plano ele vai escolher.</li>
+          </ol>
+
+          <h3>Modelo de script</h3>
+          <div class="script-box">Ótimo, [Nome do Cliente]. Temos disponibilidade para sua localização.
+
+Hoje temos disponíveis os seguintes planos:
+
+250 Mega - ideal para 1 a 3 moradores, uso básico, trabalho e streamings em Full HD.
+500 Mega Wi-Fi 6 - ideal para famílias com mais dispositivos conectados e uso mais intenso.
+500 Mega Wi-Fi 6 (2 equipamentos) - ideal para residências grandes, com alto consumo, múltiplas telas e melhor desempenho geral.
+
+Qual plano você vai escolher para a sua reativação?</div>
+        </section>
+
+        <section class="card section-anchor" id="dados">
+          <h2>10. Coleta de dados obrigatórios</h2>
+          <p class="section-intro">
+            Mesmo com cadastro anterior, o consultor deve revisar e atualizar os dados necessários antes de avançar.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>Objetivo</h3>
+              <p>Garantir que os dados estejam atualizados e corretos para a reativação.</p>
+
+              <h3>Checklist sugerido</h3>
+              <ul class="checklist">
+                <li>Nome completo</li>
+                <li>CPF ou CNPJ</li>
+                <li>Telefone principal</li>
+                <li>E-mail</li>
+                <li>Endereço completo da instalação</li>
+                <li>Dados de cobrança</li>
+                <li>Confirmação de dados antigos que precisem ser atualizados</li>
+              </ul>
+            </div>
+
+            <div class="checklist-box">
+              <h4>Conferência antes de avançar</h4>
+              <ul class="checklist">
+                <li>Cadastro revisado</li>
+                <li>Dados atualizados</li>
+                <li>Plano escolhido</li>
+                <li>Definição financeira concluída</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 8 - Atualização de dados do cliente</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a tela de revisão e atualização cadastral.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-8">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="contrato">
+          <h2>11. Gerar contrato e enviar link de assinatura</h2>
+          <p class="section-intro">
+            Esta é a etapa em que a reativação difere do Novo Contrato. No Vencemos Wizard, o consultor deve decidir entre usar contrato existente ou criar novo contrato.
+          </p>
+
+          <div class="danger-box">
+            <strong>Ponto crítico da reativação:</strong>
+            a decisão no Vencemos Wizard depende da validação do Financeiro.
+          </div>
+
+          <div class="step-blocks">
+            <div class="step-block">
+              <h4>11.1 Se o contrato puder ser aproveitado</h4>
+              <ol class="step-list compact">
+                <li>No <strong>Vencemos Wizard</strong>, escolher a opção de <strong>utilizar existente</strong> para o <strong>Contrato</strong>.</li>
+                <li>Na parte de <strong>Login</strong>, escolher <strong>não inserir</strong>.</li>
+                <li>Na aba <strong>Atendimento</strong>, selecionar o processo <strong>ID 46 - REATIVAÇÃO CONTRATO</strong>.</li>
+                <li>Continuar o restante do processo normalmente.</li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>11.2 Se o contrato não puder ser aproveitado</h4>
+              <ol class="step-list compact">
+                <li>No <strong>Vencemos Wizard</strong>, seguir criando um <strong>novo contrato</strong>.</li>
+                <li>Preencher as etapas conforme o fluxo de Novo Contrato.</li>
+                <li>Seguir normalmente até geração de assinatura, OS e instalação.</li>
+              </ol>
+            </div>
+
+            <div class="warning-box">
+              <strong>Regra operacional:</strong><br>
+              A diferença principal da reativação está exatamente nesta definição.<br>
+              O restante do processo é idêntico ao Novo Contrato.
+            </div>
+
+            <div class="step-block">
+              <h4>11.3 Atendimento correto no Wizard</h4>
+              <ol class="step-list compact">
+                <li>Se for reativação com aproveitamento, usar <strong>ID 46 - REATIVAÇÃO CONTRATO</strong>.</li>
+                <li>Conferir cuidadosamente se a escolha está correta antes de finalizar.</li>
+              </ol>
+            </div>
+          </div>
+
+          <h3>Mensagem ao cliente após gerar o link</h3>
+          <div class="script-box">[Nome do Cliente], obrigado pelo retorno.
+
+Pronto, este é o link para assinatura do seu contrato:
+[COLAR LINK AQUI]
+
+Siga o passo a passo para concluir a assinatura.
+Assim que finalizar, me avise para eu avançar com a confirmação da instalação.</div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 9 - Vencemos Wizard na reativação</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a escolha entre contrato existente e novo contrato.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-9">
+              Visualizar imagem
+            </button>
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 10 - Uso de contrato existente / login existente</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar como selecionar contrato existente e não inserir login.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-10">
+              Visualizar imagem
+            </button>
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 11 - Atendimento ID 46 - Reativação Contrato</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a seleção correta do processo de atendimento.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-11">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="agendamento">
+          <h2>12. Agendar a instalação</h2>
+          <p class="section-intro">
+            Depois da assinatura concluída, o restante do processo segue igual ao Novo Contrato.
+          </p>
+
+          <ol class="step-list">
+            <li>Confirme que o contrato foi assinado.</li>
+            <li>Valide no sistema se a assinatura já consta como concluída.</li>
+            <li>Finalize a OS correspondente.</li>
+            <li>Selecione a data disponível conforme a agenda operacional.</li>
+            <li>Confirme dia e período com o cliente.</li>
+            <li>Encaminhe corretamente para a equipe responsável.</li>
+          </ol>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 12 - Agendamento da instalação</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde selecionar data, período e responsável.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-12">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="opa">
+          <h2>13. Uso do OPA! Suite durante o processo</h2>
+          <p class="section-intro">
+            O OPA! Suite deve ser usado como ferramenta de apoio ao atendimento e ao histórico da conversa durante toda a reativação.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>Quando usar</h3>
+              <ul class="checklist">
+                <li>Para responder o cliente no canal de atendimento.</li>
+                <li>Para consultar histórico anterior.</li>
+                <li>Para registrar a continuidade da reativação.</li>
+                <li>Para acompanhar retorno após envio de contrato.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>Boas práticas</h3>
+              <ul class="checklist">
+                <li>Manter a conversa organizada e coerente com a etapa do funil.</li>
+                <li>Registrar que se trata de reativação.</li>
+                <li>Usar etiquetas que ajudem a identificar o processo.</li>
+                <li>Permitir que outro colaborador continue o atendimento sem se perder.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="erros">
+          <h2>14. Erros que não podem acontecer</h2>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag danger">ERROS CRÍTICOS</div>
+              <ul class="checklist">
+                <li>Não pesquisar o cliente no IXC antes de começar.</li>
+                <li>Não acionar o Financeiro para validar débitos e liberação.</li>
+                <li>Escolher errado no Vencemos Wizard entre contrato novo e contrato existente.</li>
+                <li>Inserir login novo quando deveria usar o existente, ou o contrário.</li>
+                <li>Selecionar o atendimento errado em vez do ID 46 - REATIVAÇÃO CONTRATO.</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag ok">COMPORTAMENTO ESPERADO</div>
+              <ul class="checklist">
+                <li>Confirmar base existente antes de avançar.</li>
+                <li>Alinhar corretamente com o Financeiro.</li>
+                <li>Definir com segurança se reaproveita contrato ou cria novo.</li>
+                <li>Seguir o restante do processo igual ao Novo Contrato.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="resumo">
+          <h2>15. Resumo rápido do fluxo</h2>
+          <ol class="step-list">
+            <li>Receber ou iniciar o contato.</li>
+            <li>Pesquisar o cliente no IXC para confirmar se já existe na base.</li>
+            <li>Fazer triagem: PF/PJ, cidade e histórico.</li>
+            <li>Acionar o Financeiro para verificar débitos e liberação do contrato.</li>
+            <li>Registrar ou localizar o lead no Inmap Sales.</li>
+            <li>Fazer a viabilidade.</li>
+            <li>Apresentar os planos.</li>
+            <li>Revisar e atualizar dados.</li>
+            <li>No Vencemos Wizard, decidir entre contrato existente ou novo contrato.</li>
+            <li>Se reaproveitar, usar contrato existente, não inserir login e selecionar ID 46 - REATIVAÇÃO CONTRATO.</li>
+            <li>Seguir o restante do processo igual ao Novo Contrato.</li>
+          </ol>
+        </section>
+
+        <p class="footer-note">
+          Manual Comercial Ti.Net - Reativação
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-1" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-1-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-1-titulo">IMAGEM 1 - Busca do cliente no IXC</h3>
+          <p>Local onde o consultor identifica se o cliente já existe na base.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/01-busca-cliente-ixc.png" alt="Busca do cliente no IXC">
+        <div class="image-modal-caption">Use esta tela para confirmar se o atendimento é reativação ou novo contrato.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-2" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-2-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-2-titulo">IMAGEM 2 - Validação financeira</h3>
+          <p>Verificação de débitos em aberto e possibilidade de liberação do contrato.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/02-validacao-financeiro.png" alt="Validação financeira">
+        <div class="image-modal-caption">Essa etapa define se será possível reaproveitar o contrato existente.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-3" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-3-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-3-titulo">IMAGEM 3 - Atendimento inicial de reativação</h3>
+          <p>Print do atendimento recebido no canal de entrada.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/03-atendimento-inicial.png" alt="Atendimento inicial de reativação">
+        <div class="image-modal-caption">Aqui começa a identificação do cliente e da necessidade de reativação.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-4" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-4-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-4-titulo">IMAGEM 4 - Reativação antes da abordagem</h3>
+          <p>Cadastro ou lead antes do primeiro contato ativo.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/04-antes-abordagem.png" alt="Reativação antes da abordagem">
+        <div class="image-modal-caption">Confirme se a base foi localizada antes de iniciar a abordagem.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-5" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-5-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-5-titulo">IMAGEM 5 - Triagem da reativação</h3>
+          <p>Conferência inicial do cliente, cidade e situação na base.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/05-triagem.png" alt="Triagem da reativação">
+        <div class="image-modal-caption">Use esta etapa para confirmar que o processo correto é reativação.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-6" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-6-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-6-titulo">IMAGEM 6 - Lead de reativação no Inmap Sales</h3>
+          <p>Organização da oportunidade no Kanban.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/06-lead-inmap-sales.png" alt="Lead de reativação no Inmap Sales">
+        <div class="image-modal-caption">Mantenha a oportunidade registrada corretamente no funil comercial.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-7" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-7-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-7-titulo">IMAGEM 7 - Consulta de viabilidade na reativação</h3>
+          <p>Etapa de localização e viabilidade do endereço.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/07-viabilidade.png" alt="Consulta de viabilidade na reativação">
+        <div class="image-modal-caption">A viabilidade segue o mesmo processo do Novo Contrato.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-8" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-8-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-8-titulo">IMAGEM 8 - Atualização de dados do cliente</h3>
+          <p>Revisão e atualização cadastral antes de avançar.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/08-atualizacao-dados.png" alt="Atualização de dados do cliente">
+        <div class="image-modal-caption">Revise tudo antes de seguir para contrato e assinatura.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-9" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-9-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-9-titulo">IMAGEM 9 - Vencemos Wizard na reativação</h3>
+          <p>Escolha entre contrato existente e novo contrato.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/09-vencemos-wizard.png" alt="Vencemos Wizard na reativação">
+        <div class="image-modal-caption">Essa escolha depende diretamente da validação do Financeiro.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-10" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-10-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-10-titulo">IMAGEM 10 - Uso de contrato existente / login existente</h3>
+          <p>Configuração correta quando o contrato pode ser reaproveitado.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/10-contrato-existente.png" alt="Uso de contrato existente">
+        <div class="image-modal-caption">Selecione contrato existente e não inserir login quando essa for a decisão correta.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-11" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-11-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-11-titulo">IMAGEM 11 - Atendimento ID 46 - Reativação Contrato</h3>
+          <p>Seleção correta do atendimento dentro do processo.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/11-atendimento-id-46.png" alt="Atendimento ID 46 - Reativação Contrato">
+        <div class="image-modal-caption">Confirme se o processo escolhido é o de reativação contrato.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-12" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-12-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-12-titulo">IMAGEM 12 - Agendamento da instalação</h3>
+          <p>Etapa de agendamento após assinatura concluída.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/reativacao/12-agendamento-instalacao.png" alt="Agendamento da instalação">
+        <div class="image-modal-caption">O restante do processo segue igual ao Novo Contrato.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/global.js"></script>
+</body>
+</html>

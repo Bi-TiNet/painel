@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treinamento Interativo - Comercial Ti.Net</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #101831;
+      --card: #121933;
+      --card-2: #182244;
+      --text: #eaf1ff;
+      --muted: #b6c2e1;
+      --primary: #4da3ff;
+      --primary-2: #79b8ff;
+      --accent: #00d084;
+      --warning: #ffb020;
+      --danger: #ff5d73;
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+      --radius: 18px;
+      --radius-sm: 14px;
+      --success: #22c55e;
+      --success-bg: rgba(34,197,94,0.15);
+      --error-bg: rgba(255,93,115,0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(77,163,255,0.18), transparent 30%),
+        radial-gradient(circle at top left, rgba(0,208,132,0.10), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(77,163,255,0.16), rgba(0,208,132,0.08));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(77,163,255,0.16);
+      color: var(--primary-2);
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 900px;
+      margin-bottom: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .summary-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .summary-card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .summary-card span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .highlight,
+    .warning-box,
+    .danger-box,
+    .success-box {
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin: 16px 0;
+    }
+
+    .highlight {
+      border-left: 4px solid var(--primary);
+      background: rgba(77,163,255,0.10);
+    }
+
+    .warning-box {
+      border-left: 4px solid var(--warning);
+      background: rgba(255,176,32,0.10);
+    }
+
+    .danger-box {
+      border-left: 4px solid var(--danger);
+      background: rgba(255,93,115,0.10);
+    }
+
+    .success-box {
+      border-left: 4px solid var(--success);
+      background: var(--success-bg);
+    }
+
+    .question-card {
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .question-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(77,163,255,0.18);
+      color: var(--primary-2);
+      font-weight: 700;
+    }
+
+    .question-text {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .answers {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .answer-btn {
+      width: 100%;
+      text-align: left;
+      background: #0f1730;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    .answer-btn:hover:not(:disabled) {
+      border-color: rgba(121,184,255,0.45);
+      transform: translateY(-1px);
+    }
+
+    .answer-btn.correct {
+      background: var(--success-bg);
+      border-color: rgba(34,197,94,0.5);
+    }
+
+    .answer-btn.incorrect {
+      background: var(--error-bg);
+      border-color: rgba(255,93,115,0.45);
+    }
+
+    .answer-btn.reveal-correct {
+      background: rgba(34,197,94,0.10);
+      border-color: rgba(34,197,94,0.32);
+    }
+
+    .feedback {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      display: none;
+      font-size: 0.94rem;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct {
+      background: var(--success-bg);
+      border: 1px solid rgba(34,197,94,0.35);
+    }
+
+    .feedback.incorrect {
+      background: var(--error-bg);
+      border: 1px solid rgba(255,93,115,0.35);
+    }
+
+    .sim-stage {
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .sim-client {
+      background: #0f1730;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .sim-client strong {
+      color: var(--primary-2);
+    }
+
+    .sim-progress {
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .score-panel {
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+      background: rgba(11,16,32,0.86);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .score-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: var(--muted);
+    }
+
+    .score-metrics strong {
+      color: var(--text);
+    }
+
+    .progress-wrap {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.3s ease;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255,255,255,0.10);
+    }
+
+    .btn-primary {
+      background: rgba(77,163,255,0.14);
+      border-color: rgba(77,163,255,0.35);
+    }
+
+    .btn-primary:hover {
+      background: rgba(77,163,255,0.24);
+    }
+
+    .certificate-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 8, 20, 0.82);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 9999;
+    }
+
+    .certificate-modal.active {
+      display: flex;
+    }
+
+    .certificate-dialog {
+      width: min(980px, 100%);
+      max-height: 94vh;
+      overflow: auto;
+      background: #0f1730;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+      padding: 20px;
+    }
+
+    .certificate-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .certificate-sheet {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
+        #121933;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 40px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .certificate-sheet::before,
+    .certificate-sheet::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(77,163,255,0.10);
+      filter: blur(10px);
+    }
+
+    .certificate-sheet::before {
+      top: -110px;
+      left: -70px;
+    }
+
+    .certificate-sheet::after {
+      bottom: -120px;
+      right: -80px;
+      background: rgba(0,208,132,0.08);
+    }
+
+    .certificate-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .certificate-label {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(77,163,255,0.16);
+      color: var(--primary-2);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .certificate-title {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .certificate-name {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 22px 0;
+      word-break: break-word;
+    }
+
+    .certificate-meta {
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    .certificate-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .certificate-stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .certificate-stat strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .question-counter {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: -4px;
+      margin-bottom: 14px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page > *:not(.certificate-print-wrapper),
+      .certificate-actions {
+        display: none !important;
+      }
+
+      .certificate-print-wrapper {
+        display: block !important;
+      }
+
+      .certificate-sheet {
+        border: 1px solid #ccc;
+        box-shadow: none;
+        background: white;
+        color: black;
+      }
+
+      .certificate-content,
+      .certificate-sheet * {
+        color: black !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .grid-3,
+      .certificate-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 1.65rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="badge">TREINAMENTO INTERATIVO</div>
+      <h1>Formação Comercial - Ti.Net</h1>
+      <p>
+        Este treinamento foi criado para reforçar a lógica dos processos comerciais, a forma correta de atender,
+        a tomada de decisão diante de situações reais e a importância de seguir o fluxo certo em cada caso.
+      </p>
+
+      <div class="grid-3">
+        <div class="summary-card">
+          <strong>Parte 1</strong>
+          <span>Questionário com 10 perguntas de situação.</span>
+        </div>
+        <div class="summary-card">
+          <strong>Parte 2</strong>
+          <span>Simulação prática com decisões reais de atendimento.</span>
+        </div>
+        <div class="summary-card">
+          <strong>Conclusão</strong>
+          <span>Pontuação final e certificado de conclusão.</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="score-panel">
+      <div class="score-metrics">
+        <span><strong>Pontuação:</strong> <span id="scoreValue">0</span></span>
+        <span><strong>Respondidas:</strong> <span id="answeredValue">0</span>/<span id="totalValue">15</span></span>
+        <span><strong>Aproveitamento:</strong> <span id="percentValue">0%</span></span>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="back-link" type="button" onclick="window.location.href='/COMERCIAL/menu_comercial.html'">← Voltar ao menu</button>
+        <button class="btn" id="resetTrainingBtn" type="button">Reiniciar treinamento</button>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="card">
+      <h2>Orientação antes de começar</h2>
+      <p class="section-intro">
+        Leia cada situação com atenção. O objetivo não é decorar, e sim mostrar que você entendeu
+        como a operação trabalha: vender a solução correta, seguir o processo certo, evitar retrabalho
+        e tomar decisões que realmente atendam o cliente.
+      </p>
+
+      <div class="highlight">
+        <strong>Lembretes importantes:</strong><br>
+        Não focamos em vender o mais caro. Focamos em entregar o que o cliente realmente precisa.<br>
+        Em caso de dúvida, o consultor deve parar, confirmar o processo e tirar a dúvida antes de errar.
+      </div>
+    </section>
+
+    <section class="card" id="quizSection">
+      <h2>Parte 1 - Questionário Situacional</h2>
+      <p class="question-counter">São 10 perguntas baseadas nos processos reais da operação.</p>
+
+      <div class="question-card" data-question data-points="10">
+        <div class="question-header">
+          <span class="question-number">1</span>
+          <p class="question-text">Cliente entrou em contato solicitando um ponto adicional na mesma residência. Qual processo deve ser usado?</p>
+        </div>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Ponto Adicional</button>
+          <button class="answer-btn" data-correct="true">Upgrade</button>
+          <button class="answer-btn" data-correct="false">Novo Contrato</button>
+          <button class="answer-btn" data-correct="false">Mudança de Endereço</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Se for na mesma residência, normalmente o processo correto é Upgrade, não Ponto Adicional." data-feedback-wrong="Errado. Quando o cliente quer ampliar atendimento dentro da mesma residência, o processo normalmente é Upgrade."></div>
+      </div>
+
+      <div class="question-card" data-question data-points="10">
+        <div class="question-header">
+          <span class="question-number">2</span>
+          <p class="question-text">Qual informação é obrigatória para realizar a viabilidade?</p>
+        </div>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Somente o nome do cliente</button>
+          <button class="answer-btn" data-correct="true">Endereço completo do local</button>
+          <button class="answer-btn" data-correct="false">Apenas o CPF</button>
+          <button class="answer-btn" data-correct="false">Somente o plano escolhido</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. A viabilidade depende do endereço correto, incluindo rua, número, cidade e, quando necessário, bairro e referência." data-feedback-wrong="Errado. Sem o endereço correto não é possível fazer a viabilidade com segurança."></div>
+      </div>
+
+      <div class="question-card" data-question data-points="10">
+        <div class="question-header">
+          <span class="question-number">3</span>
+          <p class="question-text">Cliente já existia na base e quer voltar a contratar o serviço. Qual processo deve ser usado?</p>
+        </div>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Novo Contrato</button>
+          <button class="answer-btn" data-correct="true">Reativação</button>
+          <button class="answer-btn" data-correct="false">Ponto Adicional</button>
+          <button class="answer-btn" data-correct="false">Mudança de Endereço</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Quando o cliente já existe na base e quer retornar, o fluxo certo é Reativação." data-feedback-wrong="Errado. O fluxo correto para cliente que já existia e quer voltar é Reativação."></div>
+      </div>
+
+      <div class="question-card" data-question data-points="10">
+        <div class="question-header">
+          <span class="question-number">4</span>
+          <p class="question-text">Na Reativação, antes de decidir se vai usar contrato existente ou criar novo, com qual setor o consultor deve falar?</p>
+        </div>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Suporte Técnico</button>
+          <button class="answer-btn" data-correct="true">Financeiro</button>
+          <button class="answer-btn" data-correct="false">Estoque</button>
+          <button class="answer-btn" data-correct="false">Infraestrutura</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. O Financeiro valida débitos em aberto e informa se o contrato pode ser liberado para reaproveitamento." data-feedback-wrong="Errado. A validação para reaproveitamento do contrato na Reativação depende do Financeiro."></div>
+      </div>
+
+      <div class="question-card" data-question data-points="10">
+        <div class="question-header">
+          <span class="question-number">5</span>
+          <p class="question-text">No processo de Mudança de Endereço, o que deve ser usado no Vencemos Wizard?</p>
+        </div>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Novo contrato, novo produto e novo acesso</button>
+          <button class="answer-btn" data-correct="true">Contrato existente, sem adicionar serviço, produto e acesso</button>
+          <button class="answer-btn" data-correct="false">Novo contrato, sem atendimento</button>
+          <button class="answer-btn" data-correct="false">Contrato existente com assinatura digital</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Na Mudança de Endereço utiliza-se contrato existente e não se adiciona serviço, produto nem acesso." data-feedback-wrong="Errado. Na Mudança de Endereço o Wizard usa contrato existente e não adiciona serviço, produto nem acesso."></div>
+      </div>
+
+      <div class="question-card" data-question data-points="10">
+        <div class="question-header">
+          <span class="question-number">6</span>
+          <p class="question-text">Se o cliente quiser um plano diferente no Ponto Adicional, qual é o procedimento correto?</p>
+        </div>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Escolher o plano que o consultor achar melhor</button>
+          <button class="answer-btn" data-correct="false">Abrir Novo Contrato</button>
+          <button class="answer-btn" data-correct="true">Falar com Daniele para ela analisar e liberar ou não</button>
+          <button class="answer-btn" data-correct="false">Seguir normalmente sem informar ninguém</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Plano diferente no Ponto Adicional exige análise e liberação da Daniele." data-feedback-wrong="Errado. Quando o cliente quer plano diferente no Ponto Adicional, o consultor deve acionar a Daniele."></div>
+      </div>
+
+      <div class="question-card" data-question data-points="10">
+        <div class="question-header">
+          <span class="question-number">7</span>
+          <p class="question-text">Antes de prometer uma data de instalação ao cliente, o que o consultor precisa fazer?</p>
+        </div>
+        <div class="answers">
+          <button class="answer-btn" data-correct="true">Verificar a agenda dos técnicos no IXC</button>
+          <button class="answer-btn" data-correct="false">Escolher uma data aproximada e depois ajustar</button>
+          <button class="answer-btn" data-correct="false">Perguntar primeiro ao cliente qual dia ele prefere e confirmar depois</button>
+          <button class="answer-btn" data-correct="false">Consultar apenas o OPA</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Nunca se deve prometer data sem verificar a agenda técnica no IXC." data-feedback-wrong="Errado. A data precisa ser confirmada com base na agenda dos técnicos no IXC."></div>
+      </div>
+
+      <div class="question-card" data-question data-points="10">
+        <div class="question-header">
+          <span class="question-number">8</span>
+          <p class="question-text">Na Reativação com reaproveitamento, qual atendimento deve ser selecionado no Wizard?</p>
+        </div>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">ID 35 - Novo Contrato</button>
+          <button class="answer-btn" data-correct="true">ID 46 - Reativação Contrato</button>
+          <button class="answer-btn" data-correct="false">ID 54 - Ponto Adicional</button>
+          <button class="answer-btn" data-correct="false">ID 37 - Solicitação Mudança de Endereço</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Na Reativação com reaproveitamento de contrato, o atendimento correto é o ID 46 - Reativação Contrato." data-feedback-wrong="Errado. O atendimento correto nesse caso é ID 46 - Reativação Contrato."></div>
+      </div>
+
+      <div class="question-card" data-question data-points="10">
+        <div class="question-header">
+          <span class="question-number">9</span>
+          <p class="question-text">Na Mudança de Endereço, quando existe etapa de assinatura digital?</p>
+        </div>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Sempre</button>
+          <button class="answer-btn" data-correct="true">Quando houver renovação contratual</button>
+          <button class="answer-btn" data-correct="false">Somente quando a filial for Cachoeira</button>
+          <button class="answer-btn" data-correct="false">Nunca</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Em regra a Mudança de Endereço não tem assinatura, mas passa a ter quando houver renovação contratual." data-feedback-wrong="Errado. A assinatura só entra na Mudança de Endereço quando houver renovação contratual."></div>
+      </div>
+
+      <div class="question-card" data-question data-points="10">
+        <div class="question-header">
+          <span class="question-number">10</span>
+          <p class="question-text">Qual é a mentalidade comercial correta da empresa?</p>
+        </div>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Sempre vender o plano mais caro</button>
+          <button class="answer-btn" data-correct="true">Entender a necessidade e vender a solução correta</button>
+          <button class="answer-btn" data-correct="false">Concluir a venda o mais rápido possível, mesmo com dúvidas</button>
+          <button class="answer-btn" data-correct="false">Evitar aprofundar a necessidade do cliente</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. A empresa não foca em vender o mais caro, e sim o que realmente atende a necessidade do cliente." data-feedback-wrong="Errado. A lógica correta é vender a melhor solução para a necessidade real do cliente."></div>
+      </div>
+    </section>
+
+    <section class="card" id="simulationSection">
+      <h2>Parte 2 - Simulação Prática</h2>
+      <p class="section-intro">
+        Agora você vai tomar decisões em situações mais próximas do atendimento real. Leia, escolha e veja o impacto.
+      </p>
+
+      <div class="sim-stage" data-question data-points="15">
+        <div class="sim-progress">Simulação 1 de 5</div>
+        <div class="sim-client">
+          <strong>Cliente:</strong> “Quero colocar mais um ponto de internet no quarto do meu filho. É na mesma casa onde já tenho internet com vocês.”
+        </div>
+
+        <p class="question-text">Qual é a decisão correta do consultor?</p>
+        <div class="answers">
+          <button class="answer-btn" data-correct="true">Explicar que o caso tende a ser Upgrade, não Ponto Adicional</button>
+          <button class="answer-btn" data-correct="false">Abrir Ponto Adicional imediatamente</button>
+          <button class="answer-btn" data-correct="false">Abrir Novo Contrato</button>
+          <button class="answer-btn" data-correct="false">Agendar instalação sem validar a necessidade</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Como a necessidade é dentro da mesma residência, o processo tende a ser Upgrade." data-feedback-wrong="Errado. Quando é no mesmo endereço, normalmente o caso não é Ponto Adicional, e sim Upgrade."></div>
+      </div>
+
+      <div class="sim-stage" data-question data-points="15">
+        <div class="sim-progress">Simulação 2 de 5</div>
+        <div class="sim-client">
+          <strong>Cliente:</strong> “Eu já fui cliente de vocês e quero voltar. Posso usar meu contrato antigo?”
+        </div>
+
+        <p class="question-text">Qual é o passo correto antes de responder isso no processo?</p>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Responder que sim, sem validar nada</button>
+          <button class="answer-btn" data-correct="true">Pesquisar no IXC e validar com o Financeiro se o contrato pode ser reaproveitado</button>
+          <button class="answer-btn" data-correct="false">Criar novo contrato direto</button>
+          <button class="answer-btn" data-correct="false">Abrir Ponto Adicional</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Antes de decidir no Wizard, é obrigatório validar no IXC e com o Financeiro." data-feedback-wrong="Errado. A possibilidade de reaproveitar contrato depende de validação da base e do Financeiro."></div>
+      </div>
+
+      <div class="sim-stage" data-question data-points="15">
+        <div class="sim-progress">Simulação 3 de 5</div>
+        <div class="sim-client">
+          <strong>Cliente:</strong> “Vou mudar de casa e quero levar minha internet comigo. Sou de Saubara e não quero pagar a taxa, senão vou desistir.”
+        </div>
+
+        <p class="question-text">Qual é a condução correta do consultor nesse caso?</p>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Isentar a taxa sem nenhuma condição e seguir normalmente</button>
+          <button class="answer-btn" data-correct="true">Informar a isenção com renovação contratual e seguir com assinatura</button>
+          <button class="answer-btn" data-correct="false">Cancelar o atendimento</button>
+          <button class="answer-btn" data-correct="false">Cobrar R$ 0,00 porque toda Mudança de Endereço é gratuita</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Em Saubara, se o cliente insistir muito em não pagar e quiser desistir, o consultor pode informar a isenção com renovação contratual, e nesse caso haverá assinatura." data-feedback-wrong="Errado. Em Saubara existe exceção com isenção vinculada à renovação contratual, o que inclui etapa de assinatura."></div>
+      </div>
+
+      <div class="sim-stage" data-question data-points="15">
+        <div class="sim-progress">Simulação 4 de 5</div>
+        <div class="sim-client">
+          <strong>Cliente:</strong> “Quero um ponto adicional em outro local, mas com um plano diferente do meu atual.”
+        </div>
+
+        <p class="question-text">Qual é a conduta correta?</p>
+        <div class="answers">
+          <button class="answer-btn" data-correct="false">Escolher o plano diferente no Wizard e seguir</button>
+          <button class="answer-btn" data-correct="true">Acionar a Daniele para ela avaliar e liberar ou não</button>
+          <button class="answer-btn" data-correct="false">Transformar em Novo Contrato automaticamente</button>
+          <button class="answer-btn" data-correct="false">Cancelar o atendimento</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. Plano diferente em Ponto Adicional exige análise e autorização da Daniele." data-feedback-wrong="Errado. O consultor não deve decidir sozinho quando o Ponto Adicional fugir da regra padrão de plano."></div>
+      </div>
+
+      <div class="sim-stage" data-question data-points="15">
+        <div class="sim-progress">Simulação 5 de 5</div>
+        <div class="sim-client">
+          <strong>Situação:</strong> Você já concluiu o processo, e o cliente quer agendar instalação para amanhã às 8h.
+        </div>
+
+        <p class="question-text">Qual é a decisão correta antes de confirmar ao cliente?</p>
+        <div class="answers">
+          <button class="answer-btn" data-correct="true">Verificar no IXC se existe disponibilidade real da agenda técnica</button>
+          <button class="answer-btn" data-correct="false">Confirmar com o cliente e depois ver internamente</button>
+          <button class="answer-btn" data-correct="false">Agendar mesmo sem consultar a agenda</button>
+          <button class="answer-btn" data-correct="false">Pedir que o cliente escolha qualquer horário e prometer retorno depois</button>
+        </div>
+        <div class="feedback" data-feedback-correct="Correto. A agenda técnica no IXC deve ser validada antes de prometer data ou horário ao cliente." data-feedback-wrong="Errado. O consultor nunca deve prometer agenda sem consultar a disponibilidade real no IXC."></div>
+      </div>
+    </section>
+
+    <section class="card" id="completionSection">
+      <h2>Conclusão do treinamento</h2>
+      <p class="section-intro">
+        Responda tudo para liberar sua pontuação final e o certificado.
+      </p>
+
+      <div class="success-box hidden" id="trainingCompletedBox">
+        <strong>Treinamento concluído.</strong><br>
+        Sua pontuação final já está disponível. Preencha seu nome para gerar o certificado.
+      </div>
+
+      <div class="controls">
+        <input
+          id="studentName"
+          type="text"
+          placeholder="Digite o nome completo do consultor"
+          style="flex:1; min-width:260px; border:1px solid rgba(255,255,255,0.12); background:#0f1730; color:#fff; border-radius:12px; padding:12px 14px;"
+        />
+        <button class="btn btn-primary" id="generateCertificateBtn" type="button">Gerar certificado</button>
+      </div>
+
+      <div class="warning-box">
+        <strong>Critério sugerido:</strong> use 70% como aprovação mínima no treinamento.
+      </div>
+    </section>
+
+    <div class="certificate-print-wrapper hidden" id="certificatePrintWrapper">
+      <div class="certificate-sheet" id="certificateSheet">
+        <div class="certificate-content">
+          <div class="certificate-label">Certificado de conclusão</div>
+          <div class="certificate-title">Treinamento Comercial Ti.Net</div>
+          <p>Certificamos que</p>
+          <div class="certificate-name" id="certificateName">Nome do Colaborador</div>
+          <p>
+            concluiu o treinamento de integração comercial com aproveitamento no conteúdo de
+            atendimento, identificação de processos, tomada de decisão operacional e condução correta do cliente.
+          </p>
+
+          <div class="certificate-grid">
+            <div class="certificate-stat">
+              <strong id="certificateScore">0 pontos</strong>
+              <span>Pontuação final</span>
+            </div>
+            <div class="certificate-stat">
+              <strong id="certificatePercent">0%</strong>
+              <span>Aproveitamento</span>
+            </div>
+            <div class="certificate-stat">
+              <strong id="certificateStatus">Em análise</strong>
+              <span>Status</span>
+            </div>
+          </div>
+
+          <div class="certificate-meta" id="certificateDate">
+            Emitido em --
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="certificate-modal" id="certificateModal" aria-hidden="true">
+    <div class="certificate-dialog">
+      <div class="certificate-actions">
+        <button class="btn" id="closeCertificateBtn" type="button">Fechar</button>
+        <button class="btn btn-primary" id="printCertificateBtn" type="button">Imprimir / Salvar em PDF</button>
+      </div>
+
+      <div class="certificate-sheet">
+        <div class="certificate-content">
+          <div class="certificate-label">Certificado de conclusão</div>
+          <div class="certificate-title">Treinamento Comercial Ti.Net</div>
+          <p>Certificamos que</p>
+          <div class="certificate-name" id="certificateNameModal">Nome do Colaborador</div>
+          <p>
+            concluiu o treinamento de integração comercial com aproveitamento no conteúdo de
+            atendimento, identificação de processos, tomada de decisão operacional e condução correta do cliente.
+          </p>
+
+          <div class="certificate-grid">
+            <div class="certificate-stat">
+              <strong id="certificateScoreModal">0 pontos</strong>
+              <span>Pontuação final</span>
+            </div>
+            <div class="certificate-stat">
+              <strong id="certificatePercentModal">0%</strong>
+              <span>Aproveitamento</span>
+            </div>
+            <div class="certificate-stat">
+              <strong id="certificateStatusModal">Em análise</strong>
+              <span>Status</span>
+            </div>
+          </div>
+
+          <div class="certificate-meta" id="certificateDateModal">
+            Emitido em --
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const questionBlocks = Array.from(document.querySelectorAll("[data-question]"));
+      const totalQuestions = questionBlocks.length;
+      const totalPoints = questionBlocks.reduce((sum, block) => sum + Number(block.dataset.points || 0), 0);
+
+      const scoreValue = document.getElementById("scoreValue");
+      const answeredValue = document.getElementById("answeredValue");
+      const totalValue = document.getElementById("totalValue");
+      const percentValue = document.getElementById("percentValue");
+      const progressBarFill = document.getElementById("progressBarFill");
+      const resetTrainingBtn = document.getElementById("resetTrainingBtn");
+      const trainingCompletedBox = document.getElementById("trainingCompletedBox");
+      const generateCertificateBtn = document.getElementById("generateCertificateBtn");
+      const studentNameInput = document.getElementById("studentName");
+      const certificateModal = document.getElementById("certificateModal");
+      const closeCertificateBtn = document.getElementById("closeCertificateBtn");
+      const printCertificateBtn = document.getElementById("printCertificateBtn");
+
+      totalValue.textContent = String(totalQuestions);
+
+      let state = {
+        answered: 0,
+        score: 0,
+        completed: false
+      };
+
+      function updateScoreboard() {
+        const percent = Math.round((state.score / totalPoints) * 100) || 0;
+        scoreValue.textContent = String(state.score);
+        answeredValue.textContent = String(state.answered);
+        percentValue.textContent = percent + "%";
+        progressBarFill.style.width = ((state.answered / totalQuestions) * 100) + "%";
+
+        if (state.answered === totalQuestions) {
+          state.completed = true;
+          trainingCompletedBox.classList.remove("hidden");
+        } else {
+          state.completed = false;
+          trainingCompletedBox.classList.add("hidden");
+        }
+      }
+
+      function lockAnswers(block) {
+        block.querySelectorAll(".answer-btn").forEach((btn) => {
+          btn.disabled = true;
+        });
+      }
+
+      function revealCorrect(block) {
+        block.querySelectorAll(".answer-btn").forEach((btn) => {
+          if (btn.dataset.correct === "true") {
+            btn.classList.add("reveal-correct");
+          }
+        });
+      }
+
+      questionBlocks.forEach((block) => {
+        const buttons = block.querySelectorAll(".answer-btn");
+        const feedback = block.querySelector(".feedback");
+        const points = Number(block.dataset.points || 0);
+
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            if (block.dataset.answered === "true") return;
+
+            const isCorrect = button.dataset.correct === "true";
+            block.dataset.answered = "true";
+
+            state.answered += 1;
+            if (isCorrect) {
+              state.score += points;
+              button.classList.add("correct");
+              feedback.classList.add("show", "correct");
+              feedback.textContent = feedback.dataset.feedbackCorrect;
+            } else {
+              button.classList.add("incorrect");
+              feedback.classList.add("show", "incorrect");
+              feedback.textContent = feedback.dataset.feedbackWrong;
+              revealCorrect(block);
+            }
+
+            lockAnswers(block);
+            updateScoreboard();
+          });
+        });
+      });
+
+      resetTrainingBtn.addEventListener("click", () => {
+        if (!confirm("Deseja reiniciar todo o treinamento?")) return;
+
+        state = { answered: 0, score: 0, completed: false };
+
+        questionBlocks.forEach((block) => {
+          block.dataset.answered = "false";
+          const feedback = block.querySelector(".feedback");
+          feedback.className = "feedback";
+          feedback.textContent = "";
+
+          block.querySelectorAll(".answer-btn").forEach((btn) => {
+            btn.disabled = false;
+            btn.classList.remove("correct", "incorrect", "reveal-correct");
+          });
+        });
+
+        trainingCompletedBox.classList.add("hidden");
+        updateScoreboard();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      function fillCertificate(name) {
+        const percent = Math.round((state.score / totalPoints) * 100) || 0;
+        const status = percent >= 70 ? "Aprovado" : "Revisar treinamento";
+        const now = new Date();
+        const dateText = now.toLocaleDateString("pt-BR");
+
+        document.getElementById("certificateName").textContent = name;
+        document.getElementById("certificateNameModal").textContent = name;
+
+        document.getElementById("certificateScore").textContent = `${state.score} pontos`;
+        document.getElementById("certificateScoreModal").textContent = `${state.score} pontos`;
+
+        document.getElementById("certificatePercent").textContent = `${percent}%`;
+        document.getElementById("certificatePercentModal").textContent = `${percent}%`;
+
+        document.getElementById("certificateStatus").textContent = status;
+        document.getElementById("certificateStatusModal").textContent = status;
+
+        document.getElementById("certificateDate").textContent = `Emitido em ${dateText}`;
+        document.getElementById("certificateDateModal").textContent = `Emitido em ${dateText}`;
+      }
+
+      generateCertificateBtn.addEventListener("click", () => {
+        const name = studentNameInput.value.trim();
+
+        if (!state.completed) {
+          alert("Conclua todas as perguntas e simulações antes de gerar o certificado.");
+          return;
+        }
+
+        if (!name) {
+          alert("Digite o nome completo do consultor para gerar o certificado.");
+          studentNameInput.focus();
+          return;
+        }
+
+        fillCertificate(name);
+        certificateModal.classList.add("active");
+        certificateModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+
+      closeCertificateBtn.addEventListener("click", () => {
+        certificateModal.classList.remove("active");
+        certificateModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      });
+
+      certificateModal.addEventListener("click", (event) => {
+        if (event.target === certificateModal) {
+          certificateModal.classList.remove("active");
+          certificateModal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }
+      });
+
+      printCertificateBtn.addEventListener("click", () => {
+        const name = studentNameInput.value.trim();
+        if (!name) return;
+        fillCertificate(name);
+        window.print();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && certificateModal.classList.contains("active")) {
+          certificateModal.classList.remove("active");
+          certificateModal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }
+      });
+
+      updateScoreboard();
+    })();
+  </script>
+</body>
+</html>

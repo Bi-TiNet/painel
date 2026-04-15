@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Comercial | Menu Principal</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #101831;
+      --card: #121933;
+      --card-2: #182244;
+      --text: #eaf1ff;
+      --muted: #b6c2e1;
+      --primary: #4da3ff;
+      --primary-2: #79b8ff;
+      --accent: #00d084;
+      --warning: #ffb020;
+      --danger: #ff5d73;
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+      --radius: 18px;
+      --radius-sm: 14px;
+      --max-width: 1240px;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(77,163,255,0.18), transparent 30%),
+        radial-gradient(circle at top left, rgba(0,208,132,0.10), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(77,163,255,0.16), rgba(0,208,132,0.08));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(77,163,255,0.16);
+      color: var(--primary-2);
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 920px;
+    }
+
+    .hero-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .summary-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .summary-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .summary-card span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .section-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 22px;
+    }
+
+    .section-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    .section-card > p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .menu-item {
+      display: block;
+      background: linear-gradient(135deg, rgba(77,163,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      transition: 0.22s ease;
+      min-height: 190px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(121,184,255,0.45);
+      box-shadow: 0 16px 34px rgba(0,0,0,0.22);
+    }
+
+    .menu-item::after {
+      content: "";
+      position: absolute;
+      inset: auto -30px -30px auto;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: rgba(77,163,255,0.08);
+      filter: blur(4px);
+    }
+
+    .item-badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .item-badge.processo {
+      background: rgba(77,163,255,0.15);
+      color: var(--primary-2);
+    }
+
+    .item-badge.treinamento {
+      background: rgba(0,208,132,0.14);
+      color: #7df0bc;
+    }
+
+    .item-badge.base {
+      background: rgba(255,176,32,0.14);
+      color: #ffd180;
+    }
+
+    .menu-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.18rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .menu-item p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .item-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meta-tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      font-size: 0.82rem;
+    }
+
+    .notice {
+      padding: 14px 16px;
+      border-radius: 12px;
+      border-left: 4px solid var(--primary);
+      background: rgba(77,163,255,0.10);
+      color: var(--text);
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+      padding: 12px 0 8px;
+    }
+
+    @media (max-width: 920px) {
+      .menu-grid,
+      .hero-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="badge">MANUAL COMERCIAL</div>
+      <h1>Menu Principal do Comercial</h1>
+      <p>
+        Este é o ponto de entrada do setor Comercial. A partir deste menu, o consultor pode acessar
+        os processos operacionais, os materiais de integração e o treinamento interativo.
+      </p>
+
+      <div class="hero-summary">
+        <div class="summary-card">
+          <strong>Objetivo</strong>
+          <span>Centralizar o acesso rápido a todos os materiais do Comercial.</span>
+        </div>
+        <div class="summary-card">
+          <strong>Uso recomendado</strong>
+          <span>Consultar antes de executar processos e durante o treinamento de novos consultores.</span>
+        </div>
+        <div class="summary-card">
+          <strong>Importante</strong>
+          <span>Ao se deparar com qualquer dificuldade, pare o processo e busque assistência.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2>Processos operacionais</h2>
+      <p>Use estes materiais durante o atendimento e sempre que houver dúvida sobre o fluxo correto.</p>
+
+      <div class="menu-grid">
+        <a class="menu-item" href="novoContrato.html">
+          <span class="item-badge processo">Processo</span>
+          <h3>Novo Contrato</h3>
+          <p>Fluxo completo para clientes novos, desde a entrada do lead até o agendamento da instalação.</p>
+          <div class="item-meta">
+            <span class="meta-tag">Lead</span>
+            <span class="meta-tag">Viabilidade</span>
+            <span class="meta-tag">Contrato</span>
+          </div>
+        </a>
+
+        <a class="menu-item" href="reativacao.html">
+          <span class="item-badge processo">Processo</span>
+          <h3>Reativação</h3>
+          <p>Fluxo para clientes que já existiam na base e desejam voltar, com validação financeira e decisão de contrato.</p>
+          <div class="item-meta">
+            <span class="meta-tag">IXC</span>
+            <span class="meta-tag">Financeiro</span>
+            <span class="meta-tag">Wizard</span>
+          </div>
+        </a>
+
+        <a class="menu-item" href="pontoAdicional.html">
+          <span class="item-badge processo">Processo</span>
+          <h3>Ponto Adicional</h3>
+          <p>Fluxo para contratação em outro local vinculado ao mesmo cliente, com atenção total à necessidade real.</p>
+          <div class="item-meta">
+            <span class="meta-tag">Outro local</span>
+            <span class="meta-tag">Mesmo cliente</span>
+            <span class="meta-tag">Plano</span>
+          </div>
+        </a>
+
+        <a class="menu-item" href="mudancaEndereco.html">
+          <span class="item-badge processo">Processo</span>
+          <h3>Mudança de Endereço</h3>
+          <p>Fluxo para transferência do serviço para novo endereço, com taxa por filial e assinatura quando houver renovação.</p>
+          <div class="item-meta">
+            <span class="meta-tag">Transferência</span>
+            <span class="meta-tag">Taxa</span>
+            <span class="meta-tag">OS</span>
+          </div>
+        </a>
+
+        <a class="menu-item" href="mudancaTitularidade.html">
+          <span class="item-badge processo">Processo</span>
+          <h3>Mudança de Titularidade</h3>
+          <p>Fluxo para transferência do serviço para novo titular, com validação financeira e decisão de contrato.</p>
+          <div class="item-meta">
+            <span class="meta-tag">Transferência</span>
+            <span class="meta-tag">Validação Financeiro</span>
+            <span class="meta-tag">OS</span>
+          </div>
+        </a>
+
+        <a class="menu-item" href="upgradeDowngrade.html">
+          <span class="item-badge processo">Processo</span>
+          <h3>Upgrade/Downgrade</h3>
+          <p>Fluxo para alteração do plano do cliente, com validação financeira e decisão de contrato.</p>
+          <div class="item-meta">
+            <span class="meta-tag">Validação Financeiro</span>
+            <span class="meta-tag">Retenção</span>
+            <span class="meta-tag">Planos</span>
+          </div>
+        </a>
+
+
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2>Treinamento e integração</h2>
+      <p>Use estes materiais para integração, revisão de cultura e preparação de novos consultores.</p>
+
+      <div class="menu-grid">
+        <a class="menu-item" href="integracao.html">
+          <span class="item-badge base">Base</span>
+          <h3>Integração Comercial</h3>
+          <p>Resumo geral do funcionamento do Comercial, mentalidade da empresa, atendimento ao cliente e visão dos processos.</p>
+          <div class="item-meta">
+            <span class="meta-tag">Cultura</span>
+            <span class="meta-tag">Atendimento</span>
+            <span class="meta-tag">Processos</span>
+          </div>
+        </a>
+
+        <a class="menu-item" href="treinamento.html">
+          <span class="item-badge treinamento">Treinamento</span>
+          <h3>Treinamento Interativo</h3>
+          <p>Material com perguntas, simulações, pontuação e certificado para avaliação e desenvolvimento dos consultores.</p>
+          <div class="item-meta">
+            <span class="meta-tag">Simulação</span>
+            <span class="meta-tag">Pontuação</span>
+            <span class="meta-tag">Certificado</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2>Ferramentas</h2>
+      <a class="menu-item" href="calculadoraUpgrade.html">
+          <span class="item-badge treinamento">Calculadora Upgrade</span>
+          <h3>Calculadora de Upgrade</h3>
+          <p>Ferramenta para cálculo e comparação entre planos.</p>
+          <div class="item-meta">
+            <span class="meta-tag">Calculo</span>
+            <span class="meta-tag">Comparação entre Planos</span>
+            <span class="meta-tag">Scripts de mensagens de validação de upgrade</span>
+          </div>
+        </a>
+    </section>
+
+    <p class="footer-note">Menu principal do setor Comercial - Ti.Net</p>
+  </div>
+</body>
+</html>

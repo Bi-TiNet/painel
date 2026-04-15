@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Comercial - Mudança de Endereço | Ti.Net</title>
+  <link rel="stylesheet" href="css/global.css" />
+</head>
+<body>
+  <div class="manual-layout">
+    <aside class="sidebar">
+      <div class="logo-box">
+        <img src="imagens/logo.png" alt="Ti.Net" onerror="this.style.display='none'">
+      </div>
+
+      <div class="manual-title">MANUAL COMERCIAL</div>
+      <div class="manual-subtitle">Mudança de Endereço</div>
+
+      <div class="nav-group">
+        <h3>Navegação</h3>
+        <a href="#visao-geral">Visão Geral</a>
+        <a href="#quando-usar">Quando usar este processo</a>
+        <a href="#taxa">Taxa por filial</a>
+        <a href="#atendimento-inicial">Atendimento inicial</a>
+        <a href="#lead">Abertura do lead</a>
+        <a href="#dados">Confirmação dos dados</a>
+        <a href="#novo-endereco">Novo endereço e viabilidade</a>
+        <a href="#negociacao">Vincular cliente e gerar negociação</a>
+        <a href="#wizard">Vencemos Wizard</a>
+        <a href="#cadastro">Alteração do endereço no cadastro</a>
+        <a href="#contrato">Conferência do contrato</a>
+        <a href="#os">OS e continuidade do processo</a>
+        <a href="#opa">Uso do OPA! Suite</a>
+        <a href="#erros">Erros críticos</a>
+        <a href="#resumo">Resumo do fluxo</a>
+      </div>
+
+      <div class="sidebar-note">
+        Este manual deve ser usado como guia de consulta rápida e também como material de treinamento para novos colaboradores.
+      </div>
+
+      <a class="back-link" href="/COMERCIAL/menu_comercial.html">← Voltar</a>
+    </aside>
+
+    <main class="content">
+      <div class="content-inner">
+        <section class="hero section-anchor" id="visao-geral">
+          <div class="badge">PROCESSO OPERACIONAL</div>
+          <h1>Mudança de Endereço</h1>
+          <p>
+            Este manual foi criado para orientar o colaborador no processo de
+            <strong>Mudança de Endereço</strong>, desde o primeiro contato do cliente
+            até a finalização das OS. Neste fluxo, o cliente já existe na base e
+            poderá manter o mesmo contrato ou passar por renovação, dependendo da situação da filial e da negociação da taxa.
+          </p>
+
+          <div class="hero-summary">
+            <div class="summary-card">
+              <strong>Objetivo</strong>
+              <span>Transferir corretamente o serviço do cliente para um novo endereço.</span>
+            </div>
+            <div class="summary-card">
+              <strong>Ponto crítico</strong>
+              <span>Atualizar o endereço certo no lead, no cadastro e no contrato.</span>
+            </div>
+            <div class="summary-card">
+              <strong>Diferença principal</strong>
+              <span>Pode haver cobrança de taxa e, em alguns casos, renovação contratual com assinatura.</span>
+            </div>
+          </div>
+
+          <div class="quick-nav">
+            <a href="#lead">Abrir lead</a>
+            <a href="#novo-endereco">Fazer viabilidade</a>
+            <a href="#wizard">Vencemos Wizard</a>
+            <a href="#cadastro">Alterar endereço</a>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="quando-usar">
+          <h2>1. Quando usar este processo</h2>
+          <p class="section-intro">
+            Use este fluxo quando o cliente já possui serviço ativo e deseja transferir
+            o atendimento para outro endereço.
+          </p>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag ok">USAR</div>
+              <ul class="checklist">
+                <li>Quando o cliente já existe na base e deseja levar o serviço para um novo endereço.</li>
+                <li>Quando o contrato continuará sendo o mesmo.</li>
+                <li>Quando o processo correto for transferência do serviço para outro local.</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag danger">NÃO USAR</div>
+              <ul class="checklist">
+                <li>Quando o cliente quer um novo ponto em outro local, mas manter o atual ativo.</li>
+                <li>Quando o processo correto for Ponto Adicional.</li>
+                <li>Quando o atendimento for Novo Contrato, Reativação, Upgrade ou outro fluxo interno.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <strong>Regra de ouro:</strong> em Mudança de Endereço, o serviço atual será transferido
+            para um novo local. Não se trata de novo contrato e nem de ponto adicional.
+          </div>
+        </section>
+
+
+        <section class="card section-anchor" id="taxa">
+          <h2>2. Taxa de mudança de endereço por filial</h2>
+          <p class="section-intro">
+            A Mudança de Endereço pode ter cobrança de taxa, dependendo da filial do cliente.
+            Essa informação deve ser tratada com clareza no atendimento e precisa ser confirmada antes de avançar no processo.
+          </p>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag ok">VALORES POR FILIAL</div>
+              <ul class="checklist">
+                <li><strong>Santo Amaro:</strong> R$ 60,00</li>
+                <li><strong>Saubara:</strong> R$ 60,00</li>
+                <li><strong>Cachoeira:</strong> R$ 0,00 por enquanto</li>
+                <li><strong>São Francisco:</strong> R$ 60,00</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag warn">ATENÇÃO ESPECIAL</div>
+              <ul class="checklist">
+                <li>Em <strong>Saubara</strong>, se o cliente insistir muito em não pagar e disser que quer desistir, o consultor pode informar que conseguiu com o supervisor a <strong>isenção da taxa</strong>.</li>
+                <li>Nesse caso, o cliente deverá passar por <strong>renovação contratual</strong>.</li>
+                <li>Quando houver renovação, o processo passa a ter <strong>etapa de assinatura</strong>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="danger-box">
+            <strong>Regra crítica:</strong> não prometa isenção livremente.
+            A exceção descrita para Saubara deve ser usada somente quando o cliente insistir muito em não pagar
+            e informar que deseja desistir por causa da taxa.
+          </div>
+
+          <h3>Como informar a taxa ao cliente</h3>
+          <div class="script-box">Perfeito, [Nome do Cliente]. Para a mudança de endereço da sua filial/cidade,
+há uma taxa de mudança no valor de [VALOR].
+
+Vou seguir com a verificação do novo endereço e da viabilidade para te orientar corretamente em todo o processo.</div>
+
+          <h3>Como conduzir a exceção de Saubara</h3>
+          <div class="script-box">Entendo, [Nome do Cliente]. Consegui verificar uma exceção com o supervisor
+para isentar a taxa da mudança de endereço.
+
+Para isso, será necessário fazer a renovação do contrato, e nessa situação haverá a etapa de assinatura.
+Se estiver de acordo, eu sigo com o processo para você.</div>
+        </section>
+
+        <section class="card section-anchor" id="atendimento-inicial">
+          <h2>3. Atendimento inicial</h2>
+          <p class="section-intro">
+            O cliente entra em contato solicitando mudança de endereço. A partir daí,
+            o atendente deve conduzir a conversa de forma objetiva e confirmar os dados
+            antes de abrir o processo.
+          </p>
+
+          <div class="two-column-content">
+            <div>
+              <h3>O que fazer</h3>
+              <ol class="step-list">
+                <li>Receber a solicitação do cliente.</li>
+                <li>Confirmar nome do cliente e dados principais.</li>
+                <li>Entender qual será o novo endereço.</li>
+                <li>Confirmar que o processo desejado é realmente Mudança de Endereço.</li>
+                <li>Seguir com a abertura do lead.</li>
+              </ol>
+
+              <div class="highlight">
+                <strong>Objetivo desta etapa:</strong> garantir que a solicitação foi entendida corretamente
+                antes de iniciar o processo no sistema.
+              </div>
+            </div>
+
+            <div class="checklist-box">
+              <h4>Resultado esperado</h4>
+              <ul class="checklist">
+                <li>Cliente identificado</li>
+                <li>Solicitação confirmada</li>
+                <li>Novo endereço informado</li>
+                <li>Processo corretamente classificado</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Script sugerido</h3>
+          <div class="script-box">Perfeito, [Nome do Cliente]. Vou te ajudar com a mudança de endereço.
+
+Antes de seguir, preciso confirmar alguns dados do seu cadastro e também o novo endereço
+onde o serviço será instalado, para verificar a viabilidade e prosseguir corretamente.</div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 1 - Atendimento inicial de mudança de endereço</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar o atendimento inicial do cliente no canal de entrada.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-1">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="lead">
+          <h2>4. Abertura do lead</h2>
+          <p class="section-intro">
+            Após confirmar a solicitação, o atendente deve abrir um novo lead para registrar o processo.
+          </p>
+
+          <div class="grid-3">
+            <div class="mini-card">
+              <h4>Onde começa</h4>
+              <p>No processo comercial, com abertura de um novo lead.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Objetivo</h4>
+              <p>Registrar a oportunidade corretamente no fluxo de Mudança de Endereço.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Atenção</h4>
+              <p>O lead deve ser vinculado ao cliente certo antes de gerar a negociação.</p>
+            </div>
+          </div>
+
+          <h3>Passo a passo</h3>
+          <ol class="step-list">
+            <li>Abrir um novo lead.</li>
+            <li>Confirmar que os dados principais do cliente estão corretos.</li>
+            <li>Preencher as informações iniciais do atendimento.</li>
+            <li>Indicar que o processo se trata de Mudança de Endereço.</li>
+          </ol>
+
+          <div class="warning-box">
+            <strong>Atenção:</strong> mesmo sendo cliente já existente, o processo começa com um novo lead
+            para organizar a demanda e registrar a solicitação corretamente.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 2 - Abertura do lead</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde abrir o novo lead para Mudança de Endereço.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-2">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="dados">
+          <h2>5. Confirmação dos dados com o cliente</h2>
+          <p class="section-intro">
+            Depois da abertura do lead, o atendente deve confirmar os dados do cliente
+            antes de prosseguir para o novo endereço e viabilidade.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>O que conferir</h3>
+              <ul class="checklist">
+                <li>Nome completo</li>
+                <li>CPF ou CNPJ</li>
+                <li>Telefone principal</li>
+                <li>E-mail, se aplicável</li>
+                <li>Endereço atual, para conferência</li>
+                <li>Novo endereço informado</li>
+              </ul>
+            </div>
+
+            <div class="checklist-box">
+              <h4>Resultado esperado</h4>
+              <ul class="checklist">
+                <li>Dados cadastrais conferidos</li>
+                <li>Novo endereço confirmado</li>
+                <li>Informações corretas antes da viabilidade</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <strong>Objetivo desta etapa:</strong> evitar erro de endereço e garantir que a viabilidade
+            será feita no local correto.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 3 - Conferência dos dados do cliente</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde revisar os dados antes de seguir com a mudança.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-3">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="novo-endereco">
+          <h2>6. Novo endereço e viabilidade</h2>
+          <p class="section-intro">
+            Com os dados confirmados, o atendente deve colocar o novo endereço no lead e fazer a viabilidade.
+          </p>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag warn">ANTES DE COMEÇAR</div>
+              <ul class="checklist">
+                <li>Nome do cliente</li>
+                <li>Novo endereço completo</li>
+                <li>Cidade</li>
+                <li>Bairro</li>
+                <li>Ponto de referência</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag ok">RESULTADO ESPERADO</div>
+              <ul class="checklist">
+                <li>Novo endereço preenchido no lead</li>
+                <li>Viabilidade definida</li>
+                <li>Lead pronto para geração da negociação</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Passo a passo</h3>
+          <ol class="step-list">
+            <li>Coloque o novo endereço no lead.</li>
+            <li>Confirme o endereço com o cliente.</li>
+            <li>Clique no botão de Localização.</li>
+            <li>Posicione o mapa no endereço correto.</li>
+            <li>Salve as alterações.</li>
+            <li>Clique no botão de Viabilidade.</li>
+            <li>Escolha o tipo de rede conforme o padrão da empresa.</li>
+            <li>Escolha a CTO mais próxima, se houver.</li>
+            <li>Atualize o lead com o resultado da viabilidade.</li>
+          </ol>
+
+          <div class="danger-box">
+            <strong>Nunca faça a viabilidade no endereço antigo.</strong>
+            A viabilidade precisa ser realizada no novo local solicitado pelo cliente.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 4 - Novo endereço e viabilidade</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde preencher o novo endereço e realizar a viabilidade.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-4">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="negociacao">
+          <h2>7. Vincular o lead ao cliente e gerar a negociação</h2>
+          <p class="section-intro">
+            Depois da viabilidade, o atendente deve vincular o lead ao cliente e gerar a negociação.
+          </p>
+
+          <h3>Passo a passo</h3>
+          <ol class="step-list">
+            <li>Vincule o lead ao cliente correto.</li>
+            <li>Gere a negociação a partir do lead.</li>
+            <li>Confirme que a negociação está vinculada ao cadastro certo.</li>
+            <li>Mantenha o mesmo plano do cliente.</li>
+          </ol>
+
+          <div class="highlight">
+            <strong>Regra do processo:</strong> na Mudança de Endereço, o consultor deve utilizar
+            o mesmo plano do cliente.
+          </div>
+
+          <div class="warning-box">
+            <strong>Atenção:</strong> antes de vencer o Wizard, confirme se o cliente correto foi vinculado
+            e se a negociação foi criada no fluxo certo.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 5 - Vincular cliente e gerar negociação</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde vincular o cliente e transformar o lead em negociação.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-5">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="wizard">
+          <h2>8. Vencemos Wizard</h2>
+          <p class="section-intro">
+            Depois de gerar a negociação, o consultor deve vencer o Wizard utilizando a configuração correta
+            para Mudança de Endereço.
+          </p>
+
+          <div class="danger-box">
+            <strong>Ponto crítico:</strong> neste processo o consultor utiliza contrato existente
+            e não adiciona serviço, produto ou acesso. Porém, quando houver renovação contratual por causa da tratativa da taxa,
+            a etapa de assinatura passa a existir.
+          </div>
+
+          <div class="step-blocks">
+            <div class="step-block">
+              <h4>7.1 Contrato existente</h4>
+              <ol class="step-list compact">
+                <li>No Wizard, escolher <strong>utilizar contrato existente</strong>.</li>
+                <li>Se houver mais de um contrato, escolher corretamente qual será a mudança.</li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>7.2 Aba Serviço</h4>
+              <ol class="step-list compact">
+                <li><strong>Não adicionar serviço.</strong></li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>7.3 Aba Produto</h4>
+              <ol class="step-list compact">
+                <li><strong>Não adicionar produto.</strong></li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>7.4 Aba Acesso</h4>
+              <ol class="step-list compact">
+                <li><strong>Não adicionar acesso.</strong></li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>7.5 Aba Atendimento</h4>
+              <ol class="step-list compact">
+                <li>Selecionar o assunto <strong>ID 37 - SOLICITAÇÃO MUDANÇA DE ENDEREÇO</strong>.</li>
+              </ol>
+            </div>
+
+            <div class="step-block">
+              <h4>8.6 Finalização do Wizard</h4>
+              <ol class="step-list compact">
+                <li>Conferir todas as informações.</li>
+                <li>Vencer o Wizard da negociação.</li>
+                <li>Se o caso envolver <strong>renovação contratual</strong>, preparar o fluxo para assinatura.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <strong>Resumo operacional:</strong><br>
+            Contrato: <strong>utilizar existente</strong><br>
+            Serviço: <strong>não adicionar</strong><br>
+            Produto: <strong>não adicionar</strong><br>
+            Acesso: <strong>não adicionar</strong><br>
+            Atendimento: <strong>ID 37 - SOLICITAÇÃO MUDANÇA DE ENDEREÇO</strong>
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 6 - Vencemos Wizard da mudança de endereço</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a configuração correta do Wizard nesse processo.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-6">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="cadastro">
+          <h2>9. Alteração do endereço no cadastro do cliente</h2>
+          <p class="section-intro">
+            Depois de vencer o Wizard, o atendente deve ir no cadastro do cliente e alterar o endereço.
+          </p>
+
+          <h3>Passo a passo</h3>
+          <ol class="step-list">
+            <li>Acesse o cadastro do cliente.</li>
+            <li>Vá até a aba <strong>Endereço</strong>.</li>
+            <li>Altere para o novo endereço informado.</li>
+            <li>Revise o endereço completo.</li>
+            <li>Clique em <strong>Salvar</strong>.</li>
+          </ol>
+
+          <div class="danger-box">
+            <strong>Erro muito comum:</strong> fazer a viabilidade no novo endereço, mas esquecer de alterar
+            o cadastro do cliente depois. As duas etapas precisam acontecer.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 7 - Alteração do endereço no cadastro</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde alterar o endereço do cliente no cadastro.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-7">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="contrato">
+          <h2>10. Conferência do contrato</h2>
+          <p class="section-intro">
+            Depois de alterar o cadastro do cliente, o atendente deve ir ao contrato e verificar se o endereço foi atualizado corretamente.
+          </p>
+
+          <h3>Passo a passo</h3>
+          <ol class="step-list">
+            <li>Vá até o contrato do cliente.</li>
+            <li>Confirme se o endereço foi alterado corretamente.</li>
+            <li>Revise as informações antes de seguir para a aba de OS.</li>
+          </ol>
+
+          <div class="highlight">
+            <strong>Objetivo desta etapa:</strong> garantir que o contrato também reflita o novo endereço,
+            evitando inconsistência no processo operacional.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 8 - Conferência do contrato com novo endereço</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar onde confirmar se o contrato foi atualizado corretamente.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-8">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="os">
+          <h2>11. OS e continuidade do processo</h2>
+          <p class="section-intro">
+            Depois da conferência do contrato, o atendente deve ir para a aba de OS e seguir a continuidade do processo.
+          </p>
+
+          <div class="warning-box">
+            <strong>Importante:</strong> neste processo, em regra, <strong>não precisa de assinatura</strong>.
+            Porém, se houver <strong>renovação contratual</strong>, a Mudança de Endereço passará pela etapa de assinatura.
+          </div>
+
+          <h3>Passo a passo</h3>
+          <ol class="step-list">
+            <li>Vá para a aba de <strong>OS</strong>.</li>
+            <li>Confirme se a OS gerada corresponde à Mudança de Endereço.</li>
+            <li>Se <strong>não houver renovação contratual</strong>, finalize as OS seguindo o processo operacional padrão da empresa.</li>
+            <li>Se <strong>houver renovação contratual</strong>, siga a etapa de assinatura antes de concluir a continuidade operacional.</li>
+            <li>Acompanhe até a conclusão correta da transferência.</li>
+          </ol>
+
+          <div class="danger-box">
+            <strong>Não inverter a lógica do processo.</strong>
+            Em regra a Mudança de Endereço não tem assinatura. Mas, quando houver renovação contratual,
+            a assinatura passa a ser obrigatória antes da continuidade final.
+          </div>
+
+          <div class="image-trigger">
+            <div class="image-trigger-content">
+              <span class="image-trigger-label">Imagem de apoio</span>
+              <h4 class="image-trigger-title">IMAGEM 9 - Aba de OS da mudança de endereço</h4>
+              <p class="image-trigger-description">
+                Clique para visualizar a continuidade do processo após a conferência do contrato.
+              </p>
+            </div>
+            <button type="button" class="image-trigger-button" data-modal-target="modal-imagem-9">
+              Visualizar imagem
+            </button>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="opa">
+          <h2>12. Uso do OPA! Suite durante o processo</h2>
+          <p class="section-intro">
+            O OPA! Suite deve ser usado como apoio para o atendimento inicial, histórico da solicitação
+            e continuidade da comunicação com o cliente.
+          </p>
+
+          <div class="grid-2">
+            <div>
+              <h3>Quando usar</h3>
+              <ul class="checklist">
+                <li>Para receber a solicitação do cliente.</li>
+                <li>Para confirmar dados e novo endereço.</li>
+                <li>Para acompanhar retorno e andamento do processo.</li>
+                <li>Para manter histórico organizado do atendimento.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>Boas práticas</h3>
+              <ul class="checklist">
+                <li>Registrar claramente que se trata de Mudança de Endereço.</li>
+                <li>Manter o histórico coerente com a etapa atual.</li>
+                <li>Usar etiquetas e motivo do atendimento, quando aplicável.</li>
+                <li>Permitir que outro colaborador entenda facilmente o que já foi feito.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="erros">
+          <h2>13. Erros que não podem acontecer</h2>
+
+          <div class="grid-2">
+            <div class="info-box">
+              <div class="tag danger">ERROS CRÍTICOS</div>
+              <ul class="checklist">
+                <li>Classificar errado o processo e não tratar como Mudança de Endereço.</li>
+                <li>Abrir negociação sem confirmar os dados com o cliente.</li>
+                <li>Fazer viabilidade no endereço antigo.</li>
+                <li>Não vincular o lead ao cliente correto.</li>
+                <li>Escolher contrato errado no Wizard quando houver mais de um contrato.</li>
+                <li>Adicionar serviço, produto ou acesso no Wizard quando não deveria.</li>
+                <li>Selecionar atendimento diferente do ID 37 - SOLICITAÇÃO MUDANÇA DE ENDEREÇO.</li>
+                <li>Alterar o endereço no cadastro, mas não conferir no contrato.</li>
+                <li>Esquecer de cobrar a taxa quando a filial exigir cobrança.</li>
+                <li>Não tratar corretamente a exceção de Saubara.</li>
+                <li>Deixar de gerar assinatura quando houver renovação contratual.</li>
+                <li>Tentar pular assinatura em caso de renovação.</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <div class="tag ok">COMPORTAMENTO ESPERADO</div>
+              <ul class="checklist">
+                <li>Confirmar o processo correto desde o início.</li>
+                <li>Atualizar o novo endereço com atenção em todas as etapas.</li>
+                <li>Usar contrato existente corretamente.</li>
+                <li>Seguir o Wizard exatamente como definido.</li>
+                <li>Finalizar as OS conforme o padrão da empresa.</li>
+                <li>Entender que a assinatura só entra no fluxo quando houver renovação contratual.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section-anchor" id="resumo">
+          <h2>14. Resumo rápido do fluxo</h2>
+          <ol class="step-list">
+            <li>Receber a solicitação do cliente.</li>
+            <li>Abrir um novo lead.</li>
+            <li>Confirmar os dados com o cliente.</li>
+            <li>Colocar o novo endereço no lead.</li>
+            <li>Fazer a viabilidade do novo endereço.</li>
+            <li>Vincular o lead ao cliente.</li>
+            <li>Gerar a negociação.</li>
+            <li>Utilizar o mesmo plano do cliente.</li>
+            <li>Informar a taxa conforme a filial:
+              <ul class="checklist">
+                <li>Santo Amaro: R$ 60,00</li>
+                <li>Saubara: R$ 60,00</li>
+                <li>Cachoeira: R$ 0,00 por enquanto</li>
+                <li>São Francisco: R$ 60,00</li>
+              </ul>
+            </li>
+            <li>Em Saubara, se houver insistência forte do cliente para não pagar e risco de desistência, oferecer isenção com renovação contratual.</li>
+            <li>Vencer o Wizard.</li>
+            <li>No Wizard:
+              <ul class="checklist">
+                <li>Utilizar contrato existente</li>
+                <li>Escolher qual contrato será a mudança, se houver mais de um</li>
+                <li>Não adicionar serviço</li>
+                <li>Não adicionar produto</li>
+                <li>Não adicionar acesso</li>
+                <li>Selecionar ID 37 - SOLICITAÇÃO MUDANÇA DE ENDEREÇO</li>
+              </ul>
+            </li>
+            <li>Ir ao cadastro do cliente e alterar o endereço na aba Endereço.</li>
+            <li>Salvar.</li>
+            <li>Ir ao contrato e verificar se o endereço foi alterado.</li>
+            <li>Ir para a aba de OS.</li>
+            <li>Finalizar as OS seguindo o processo.</li>
+            <li>Lembrar que, em regra, não existe etapa de assinatura.</li>
+            <li>Se houver renovação contratual, incluir a etapa de assinatura antes da continuidade final.</li>
+          </ol>
+        </section>
+
+        <p class="footer-note">
+          Manual Comercial Ti.Net - Mudança de Endereço
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-1" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-1-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-1-titulo">IMAGEM 1 - Atendimento inicial de mudança de endereço</h3>
+          <p>Solicitação inicial do cliente no canal de atendimento.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/mudancaEndereco/01-atendimento-inicial.png" alt="Atendimento inicial de mudança de endereço">
+        <div class="image-modal-caption">Use esta imagem para identificar o início da solicitação e o contexto do atendimento.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-2" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-2-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-2-titulo">IMAGEM 2 - Abertura do lead</h3>
+          <p>Criação do novo lead para o processo.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/mudancaEndereco/02-abertura-lead.png" alt="Abertura do lead">
+        <div class="image-modal-caption">O processo começa com um novo lead para registrar corretamente a demanda.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-3" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-3-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-3-titulo">IMAGEM 3 - Conferência dos dados do cliente</h3>
+          <p>Revisão dos dados antes da mudança.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/mudancaEndereco/03-conferencia-dados.png" alt="Conferência dos dados do cliente">
+        <div class="image-modal-caption">Confirme todas as informações antes de seguir para o novo endereço e viabilidade.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-4" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-4-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-4-titulo">IMAGEM 4 - Novo endereço e viabilidade</h3>
+          <p>Preenchimento do novo endereço e consulta de viabilidade.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/mudancaEndereco/04-novo-endereco-viabilidade.png" alt="Novo endereço e viabilidade">
+        <div class="image-modal-caption">Use esta etapa para garantir que a viabilidade foi feita no endereço correto.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-5" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-5-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-5-titulo">IMAGEM 5 - Vincular cliente e gerar negociação</h3>
+          <p>Transformação do lead em negociação vinculada ao cliente.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/mudancaEndereco/05-gerar-negociacao.png" alt="Vincular cliente e gerar negociação">
+        <div class="image-modal-caption">Confirme que o cliente correto está vinculado antes de seguir para o Wizard.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-6" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-6-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-6-titulo">IMAGEM 6 - Vencemos Wizard da mudança de endereço</h3>
+          <p>Configuração correta do Wizard para esse fluxo.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/mudancaEndereco/06-vencemos-wizard.png" alt="Vencemos Wizard da mudança de endereço">
+        <div class="image-modal-caption">Use esta tela para revisar contrato existente, ausência de produto/serviço/acesso e atendimento correto.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-7" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-7-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-7-titulo">IMAGEM 7 - Alteração do endereço no cadastro</h3>
+          <p>Atualização do endereço na aba Endereço do cadastro do cliente.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/mudancaEndereco/07-cadastro-endereco.png" alt="Alteração do endereço no cadastro">
+        <div class="image-modal-caption">O novo endereço precisa ser salvo corretamente no cadastro do cliente.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-8" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-8-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-8-titulo">IMAGEM 8 - Conferência do contrato com novo endereço</h3>
+          <p>Validação do endereço atualizado dentro do contrato.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/mudancaEndereco/08-contrato-endereco.png" alt="Conferência do contrato com novo endereço">
+        <div class="image-modal-caption">Antes de seguir para as OS, confirme se o contrato também refletiu o novo endereço.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="image-modal" id="modal-imagem-9" aria-hidden="true">
+    <div class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-imagem-9-titulo">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrap">
+          <h3 id="modal-imagem-9-titulo">IMAGEM 9 - Aba de OS da mudança de endereço</h3>
+          <p>Continuidade do processo operacional após a atualização do contrato.</p>
+        </div>
+        <button type="button" class="image-modal-close" data-close-modal aria-label="Fechar modal">×</button>
+      </div>
+      <div class="image-modal-body">
+        <img src="imagens/mudancaEndereco/09-aba-os.png" alt="Aba de OS da mudança de endereço">
+        <div class="image-modal-caption">O processo segue pela OS, sem etapa de assinatura.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/global.js"></script>
+</body>
+</html>
