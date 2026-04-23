@@ -1444,6 +1444,156 @@
         });
 
         document.getElementById('logout-btn')?.addEventListener('click', () => signOut(auth));
+
+        document.getElementById('admin-signup-btn')?.addEventListener('click', async () => {
+            const name = document.getElementById('admin-signup-name').value;
+            const email = document.getElementById('admin-signup-email').value;
+            const password = document.getElementById('admin-signup-password').value;
+            const role = document.getElementById('admin-signup-role').value;
+            const dept = document.getElementById('admin-signup-dept').value;
+            const feedback = document.getElementById('admin-signup-feedback');
+
+            // Validação para garantir que nenhum campo ficou em branco
+            if (!name || !email || !password || !dept) {
+                feedback.textContent = 'Preencha todos os campos.';
+                feedback.className = 'mt-2 text-sm text-red-400 font-medium';
+                return;
+            }
+
+            feedback.textContent = 'Criando colaborador no Firebase...';
+            feedback.className = 'mt-2 text-sm text-blue-400 font-medium';
+
+            try {
+                console.log("Tentando criar colaborador:", email, "com o perfil:", role);
+                
+                // 1. Cria a conta no Firebase Authentication
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const newUserId = userCredential.user.uid;
+
+                // 2. Salva o perfil completo da pessoa no Firestore
+                // Obs: Certifique-se de que 'setDoc' e 'doc' estão importados do firebase-firestore lá no topo do seu HTML
+                await setDoc(doc(db, 'users', newUserId), {
+                    name: name,
+                    email: email,
+                    role: role,
+                    department: dept,
+                    createdAt: Date.now()
+                });
+                
+                feedback.textContent = 'Colaborador(a) registrado com sucesso!';
+                feedback.className = 'mt-2 text-sm text-green-400 font-medium';
+                
+                // Limpa os campos após o sucesso
+                document.getElementById('admin-signup-name').value = '';
+                document.getElementById('admin-signup-email').value = '';
+                document.getElementById('admin-signup-password').value = '';
+                
+            } catch (error) {
+                console.error("Erro no cadastro:", error);
+                
+                // Traduzindo alguns erros comuns do Firebase para ficar mais fácil
+                if (error.code === 'auth/email-already-in-use') {
+                    feedback.textContent = 'Este e-mail já está cadastrado no sistema.';
+                } else if (error.code === 'auth/weak-password') {
+                    feedback.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+                } else {
+                    feedback.textContent = 'Falha ao registrar: ' + error.message;
+                }
+                feedback.className = 'mt-2 text-sm text-red-400 font-medium';
+            }
+        });
+        // ATUALIZAR NOME
+        document.getElementById('update-profile-btn')?.addEventListener('click', async () => {
+            const novoNome = document.getElementById('edit-profile-name').value;
+            const feedbackNome = document.getElementById('feedback-nome'); // Se não existir no HTML, o JS apenas ignora sem dar erro
+
+            if (!novoNome) {
+                if(feedbackNome) {
+                    feedbackNome.textContent = 'O nome não pode ficar vazio.';
+                    feedbackNome.className = 'text-red-500 text-sm mt-2';
+                }
+                return;
+            }
+
+            try {
+                if(feedbackNome) {
+                    feedbackNome.textContent = 'Atualizando...';
+                    feedbackNome.className = 'text-blue-500 text-sm mt-2';
+                }
+                
+                // 1. Atualiza no banco de dados Firestore
+                const userRef = doc(db, 'users', auth.currentUser.uid);
+                await updateDoc(userRef, { 
+                    name: novoNome,
+                    displayName: novoNome // Garante que o nome atualize em todas as telas
+                });
+
+                // 2. Atualiza no perfil do Firebase Auth
+                await updateProfile(auth.currentUser, { displayName: novoNome });
+
+                // Atualiza o texto na interface instantaneamente
+                document.getElementById('current-user-display').textContent = novoNome;
+                
+                if(feedbackNome) {
+                    feedbackNome.textContent = 'Nome atualizado com sucesso!';
+                    feedbackNome.className = 'text-green-500 text-sm mt-2';
+                }
+            } catch (error) {
+                console.error("Erro ao atualizar nome:", error);
+                if(feedbackNome) {
+                    feedbackNome.textContent = 'Erro ao atualizar: ' + error.message;
+                    feedbackNome.className = 'text-red-500 text-sm mt-2';
+                }
+            }
+        });
+
+        // ATUALIZAR SENHA
+        document.getElementById('change-password-btn')?.addEventListener('click', async () => {
+            const novaSenha = document.getElementById('edit-profile-password').value;
+            const feedbackSenha = document.getElementById('feedback-senha');
+
+            if (!novaSenha || novaSenha.length < 6) {
+                if(feedbackSenha) {
+                    feedbackSenha.textContent = 'A nova senha deve ter no mínimo 6 caracteres.';
+                    feedbackSenha.className = 'text-red-500 text-sm mt-2';
+                }
+                return;
+            }
+
+            try {
+                if(feedbackSenha) {
+                    feedbackSenha.textContent = 'Atualizando senha...';
+                    feedbackSenha.className = 'text-blue-500 text-sm mt-2';
+                }
+
+                await updatePassword(auth.currentUser, novaSenha);
+                
+                if(feedbackSenha) {
+                    feedbackSenha.textContent = 'Senha atualizada com sucesso!';
+                    feedbackSenha.className = 'text-green-500 text-sm mt-2';
+                }
+                
+                // Limpa o campo de senha após o sucesso
+                document.getElementById('edit-profile-password').value = '';
+
+            } catch (error) {
+                console.error("Erro ao atualizar senha:", error);
+                
+                // Tratamento da trava de segurança do Firebase
+                if (error.code === 'auth/requires-recent-login') {
+                    if(feedbackSenha) {
+                        feedbackSenha.textContent = 'Por segurança, faça logout e login novamente para trocar sua senha.';
+                        feedbackSenha.className = 'text-red-500 text-sm mt-2';
+                    }
+                } else {
+                    if(feedbackSenha) {
+                        feedbackSenha.textContent = 'Erro ao atualizar: ' + error.message;
+                        feedbackSenha.className = 'text-red-500 text-sm mt-2';
+                    }
+                }
+            }
+        });
+
     </script>
 </body>
 </html>
